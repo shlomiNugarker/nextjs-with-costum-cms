@@ -2,20 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  direction: rtl;
+  font-size: 24px;
+}
+
+/* עיצוב גלילה מותאם אישית לכל האתר */
+::-webkit-scrollbar {
+  width: 8px; /* רוחב הגלילה */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #ffdbb6; /* רקע הגלילה */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #313760; /* צבע הגלילה */
+  border-radius: 6px; /* רדיוס עגלגל */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #272b52; /* צבע כהה יותר כשמעבירים מעל */
 }
