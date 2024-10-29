@@ -14,7 +14,7 @@ export default function Home() {
         }}
       ></div>
 
-      <section className="h-[100vh] w-full flex flex-col md:flex-row justify-center items-center  text-customNavy px-4">
+      <section className="mt-5 h-[100vh] w-full flex flex-col md:flex-row justify-center items-center  text-customNavy px-4">
         <div className="max-w-[500px] text-center md:text-right">
           <h1 className="text-4xl md:text-[70px] font-bold leading-tight">
             הגינה בפרדס - חווה אורגנית ומשתלה
