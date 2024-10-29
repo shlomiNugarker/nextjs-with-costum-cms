@@ -14,7 +14,7 @@ export default function Home() {
         }}
       ></div>
 
-      <section className="w-full flex flex-col md:flex-row justify-center items-center mt-[90px] text-customNavy px-4">
+      <section className="h-[100vh] w-full flex flex-col md:flex-row justify-center items-center  text-customNavy px-4">
         <div className="max-w-[500px] text-center md:text-right">
           <h1 className="text-4xl md:text-[70px] font-bold leading-tight">
             הגינה בפרדס - חווה אורגנית ומשתלה
@@ -26,7 +26,7 @@ export default function Home() {
             חומרי הדברה (ביולוגי)🐞
           </p>
         </div>
-        <div className="mt-8 md:mt-0 md:ml-8 flex justify-center">
+        <div className="mt-8 md:mt-0 md:ml-8 flex justify-center w-[450px]">
           <HeroImg />
         </div>
       </section>
@@ -38,7 +38,7 @@ export default function Home() {
               המוצרים שלנו
             </h2>
           </div>
-          <div className="mx-auto grid max-w-screen-lg  grid-cols-1 gap-6 p-4 sm:grid-cols-2 md:grid-cols-3 lg:gap-10 justify-center">
+          <div className="mx-auto grid max-w-screen-lg  grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:gap-10 justify-center">
             <ProductCard />
             <ProductCard />
             <ProductCard />
