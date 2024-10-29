@@ -6,7 +6,7 @@ export const ProductCard = () => {
     <article className="w-full bg-white col-span-1 m-auto min-h-full cursor-pointer overflow-hidden rounded-lg pb-2 shadow-lg transition-transform duration-200 ">
       <div className="aspect-square overflow-hidden">
         <Image
-          className="object-contain transition-all duration-300 group-hover:scale-105"
+          className="w-full object-contain transition-all duration-300 group-hover:scale-105"
           src="https://images.unsplash.com/photo-1525607551316-4a8e16d1f9ba?q=80&w=2020&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt=""
           width={300}
