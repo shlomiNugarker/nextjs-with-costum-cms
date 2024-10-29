@@ -26,7 +26,7 @@ export default function Home() {
             חומרי הדברה (ביולוגי)🐞
           </p>
         </div>
-        <div className="mt-8 md:mt-0 md:ml-8 flex justify-center w-[450px]">
+        <div className="mt-8 md:mt-0 md:ml-8 flex justify-center ">
           <HeroImg />
         </div>
       </section>
