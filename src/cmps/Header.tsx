@@ -33,7 +33,7 @@ export const Header = () => {
       </label>
       <nav
         aria-label="Header Navigation"
-        className="peer-checked:pt-8 peer-checked:max-h-60 flex max-h-0 w-full flex-col items-center overflow-hidden transition-all lg:ml-24 lg:max-h-full lg:flex-row"
+        className="peer-checked:max-h-60 flex max-h-0 w-full flex-col items-center overflow-hidden transition-all lg:ml-24 lg:max-h-full lg:flex-row"
       >
         <ul className="flex w-full flex-col items-center space-y-2 lg:flex-row lg:justify-center lg:space-y-0">
           <li className="lg:ml-12">
@@ -66,6 +66,14 @@ export const Header = () => {
               href="/blog"
             >
               הבלוג
+            </Link>
+          </li>
+          <li className="lg:ml-12">
+            <Link
+              className="rounded text-customNavy transition focus:outline-none focus:ring-1 focus:ring-customGreen focus:ring-offset-2"
+              href="/blog"
+            >
+              המשתלה
             </Link>
           </li>
         </ul>
