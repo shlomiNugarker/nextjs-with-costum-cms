@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const BlogCard = () => {
   return (
-    <article className="col-span-1 m-auto min-h-full cursor-pointer overflow-hidden rounded-lg pb-2 shadow-lg transition-transform duration-200 hover:translate-y-2">
+    <article className="col-span-1 m-auto min-h-full cursor-pointer overflow-hidden rounded-lg pb-2 shadow-lg transition-transform duration-200 ">
       <Link href="blog/123" className="block h-full w-full">
         <Image
           width={300}
