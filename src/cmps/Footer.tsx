@@ -82,7 +82,7 @@ export const Footer = () => {
             <div className="mb-4">
               <input
                 type="email"
-                className="focus:outline mb-2 block h-14 w-full rounded-xl bg-gray-200 px-4 sm:w-80 focus:outline-none focus:ring-1 focus:ring-customGreen"
+                className="focus:outline mb-2 block h-14 w-full rounded-xl bg-white px-4 sm:w-80 focus:outline-none focus:ring-1 focus:ring-customGreen"
                 placeholder="הכנס את האימייל שלך"
               />
               <button className="block rounded-xl bg-customGreen px-6 py-3 font-medium text-white">

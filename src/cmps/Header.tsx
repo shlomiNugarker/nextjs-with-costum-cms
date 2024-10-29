@@ -1,17 +1,15 @@
 import Link from "next/link";
-// import Image from "next/image";
 
 export const Header = () => {
   return (
     <header className="text-customNavy container relative mx-auto flex flex-col overflow-hidden px-4 py-4 lg:flex-row lg:items-center">
       <Link
         href="/"
-        className="flex items-center justify-center whitespace-nowrap text-2xl font-black text-customGreen"
+        className="flex items-center justify-center whitespace-nowrap text-2xl text-[40px]  font-black text-customGreen"
       >
-        <span className="mr-2 w-8">
-          {/* <Image src="" alt="לןגו - הגינה בפרדס" width={300} height={300} /> */}
+        <span className="text-2xl font-bold text-customNavy">
+          הגינה<span className="text-customGreen">בפרדס</span>.
         </span>
-        הגינה בפרדס
       </Link>
       <input type="checkbox" className="peer hidden" id="navbar-open" />
       <label
@@ -43,7 +41,7 @@ export const Header = () => {
               className="rounded text-customNavy transition focus:outline-none focus:ring-1 focus:ring-customGreen focus:ring-offset-2"
               href="/"
             >
-              עליי
+              אודות{" "}
             </Link>
           </li>
           <li className="lg:ml-12">
@@ -57,7 +55,7 @@ export const Header = () => {
           <li className="lg:ml-12">
             <Link
               className="rounded text-customNavy transition focus:outline-none focus:ring-1 focus:ring-customGreen focus:ring-offset-2"
-              href="/contact"
+              href="#contact"
             >
               דברו איתנו
             </Link>
@@ -72,22 +70,6 @@ export const Header = () => {
           </li>
         </ul>
         <hr className="mt-4 w-full border-customPeach lg:hidden" />
-        {/* <div className="my-4 flex items-center space-x-6 space-y-2 lg:my-0 lg:ml-auto lg:space-x-8 lg:space-y-0">
-          <Link
-            href="/login"
-            title=""
-            className="whitespace-nowrap rounded font-medium text-customNavy transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-customGreen focus:ring-offset-2 hover:text-opacity-50"
-          >
-            Log in
-          </Link>
-          <Link
-            href="/"
-            title=""
-            className="whitespace-nowrap rounded-xl bg-customGreen px-5 py-3 font-medium text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-customGreen focus:ring-offset-2 hover:bg-opacity-90"
-          >
-            Get free trial
-          </Link>
-        </div> */}
       </nav>
     </header>
   );
