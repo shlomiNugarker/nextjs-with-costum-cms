@@ -15,10 +15,10 @@ export const ProductCard = () => {
       </div>
 
       <div className="my-4 mx-auto flex w-10/12 flex-col items-start justify-between">
-        <div className="mb-2 flex">
+        {/* <div className="mb-2 flex">
           <p className="mr-3 font-semibold text-customNavy">$99.00</p>
           <del className="text-gray-400"> $79.00 </del>
-        </div>
+        </div> */}
         <h3 className="mb-2  text-customNavy">פלפל</h3>
       </div>
     </article>
