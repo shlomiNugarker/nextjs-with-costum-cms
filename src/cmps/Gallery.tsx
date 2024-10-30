@@ -17,7 +17,7 @@ const images = [
 
 export const Gallery = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <div className="mx-auto pb-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-screen-lg  p-4  lg:gap-10 justify-center">
       {images.map((src, index) => (
         <div
           key={index}

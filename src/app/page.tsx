@@ -1,4 +1,5 @@
 import { BlogCard } from "@/cmps/BlogCard";
+import { Gallery } from "@/cmps/Gallery";
 import { HeroImg } from "@/cmps/HeroImg";
 
 export default function Home() {
@@ -32,6 +33,10 @@ export default function Home() {
           <BlogCard />
           <BlogCard />
         </div>
+      </section>
+
+      <section>
+        <Gallery />
       </section>
     </main>
   );
