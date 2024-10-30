@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
       "images.unsplash.com",
       "tecdn.b-cdn.net",
       "plus.unsplash.com",
+      "recipe-cpsa.com",
     ],
   },
 };
