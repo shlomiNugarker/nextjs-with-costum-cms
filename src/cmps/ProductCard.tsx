@@ -1,26 +1,31 @@
 import Image from "next/image";
 import React from "react";
 
-export const ProductCard = () => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const ProductCard = ({ product }: any) => {
   return (
-    <article className="w-full bg-white col-span-1 m-auto min-h-full cursor-pointer overflow-hidden rounded-lg pb-2 shadow-lg transition-transform duration-200 ">
-      <div className="aspect-square overflow-hidden">
-        <Image
-          className="w-full object-contain transition-all duration-300 group-hover:scale-105"
-          src="https://images.unsplash.com/photo-1525607551316-4a8e16d1f9ba?q=80&w=2020&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt=""
-          width={300}
-          height={150}
-        />
+    <div className="border rounded-lg overflow-hidden shadow-md bg-white">
+      <Image
+        src={product.image}
+        alt={product.name}
+        className="w-full h-48 object-cover"
+        width={300}
+        height={150}
+      />
+      <div className="flex flex-col justify-between">
+        <div>
+          <h2 className="text-xl font-semibold text-customNavy">
+            {product.name}
+          </h2>
+          <p className="text-gray-600 mt-2">{product.description}</p>
+          <p className="text-customGreen font-bold mt-4 text-center">
+            {product.price}
+          </p>
+        </div>
+        <button className="mt-4 w-full bg-customGreen text-white py-2 rounded">
+          הוסף לסל
+        </button>
       </div>
-
-      <div className="my-4 mx-auto flex w-10/12 flex-col justify-between items-center">
-        {/* <div className="mb-2 flex">
-          <p className="mr-3 font-semibold text-customNavy">$99.00</p>
-          <del className="text-gray-400"> $79.00 </del>
-        </div> */}
-        <h3 className="text-customNavy">פלפל</h3>
-      </div>
-    </article>
+    </div>
   );
 };

@@ -1,6 +1,5 @@
 import { BlogCard } from "@/cmps/BlogCard";
 import { HeroImg } from "@/cmps/HeroImg";
-import { ProductCard } from "@/cmps/ProductCard";
 
 export default function Home() {
   return (
@@ -29,24 +28,6 @@ export default function Home() {
           <HeroImg />
         </div>
       </section>
-
-      <section className="py-12 sm:py-16 lg:py-20">
-        <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-md text-center mb-8">
-            <h2 className="text-3xl sm:text-4xl lg:text-[50px] font-bold text-customNavy">
-              המוצרים שלנו
-            </h2>
-          </div>
-          <div className="mx-auto grid max-w-screen-lg  grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:gap-10 justify-center">
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-          </div>
-        </div>
-      </section>
-
-      {/*  */}
 
       <section className="py-12 sm:py-16 lg:py-20">
         <h1 className="mb-8 text-center font-sans text-3xl sm:text-4xl lg:text-5xl font-bold text-customNavy">

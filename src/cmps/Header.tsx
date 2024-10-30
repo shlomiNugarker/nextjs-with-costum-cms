@@ -44,13 +44,12 @@ export const Header = () => {
               המשתלה
             </Link>
           </li>
-
           <li className="lg:ml-12">
             <Link
               className="rounded text-customNavy transition "
-              href="/delivery"
+              href="/weeklyProduce"
             >
-              משלוחים
+              התוצרת שבועית
             </Link>
           </li>
           <li className="lg:ml-12">
@@ -64,6 +63,14 @@ export const Header = () => {
           <li className="lg:ml-12">
             <Link className="rounded text-customNavy transition" href="/blog">
               הבלוג
+            </Link>
+          </li>
+          <li className="lg:ml-12">
+            <Link
+              className="rounded text-customNavy transition "
+              href="/delivery"
+            >
+              משלוחים
             </Link>
           </li>
           <li className="lg:ml-12">

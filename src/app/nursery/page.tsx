@@ -2,7 +2,6 @@ import React from "react";
 import Image from "next/image";
 
 export default function Page() {
-  // מערך של קישורים לתמונות
   const images = [
     "https://images.unsplash.com/photo-1486328228599-85db4443971f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3",
     "https://plus.unsplash.com/premium_photo-1679428402040-e3c93439ec13?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3",

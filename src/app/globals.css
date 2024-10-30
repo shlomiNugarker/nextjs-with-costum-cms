@@ -12,6 +12,11 @@ body {
   font-size: 24px;
 }
 
+::selection {
+  background-color: #0f7a58;
+  color: #ffffff;
+}
+
 /* עיצוב גלילה מותאם אישית לכל האתר */
 ::-webkit-scrollbar {
   width: 8px; /* רוחב הגלילה */
@@ -53,8 +58,6 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center;
-  /* box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.15),
-    0 6px 20px rgba(0, 0, 0, 0.7); */
 }
 
 @media screen and (max-width: 400px) {
