@@ -81,7 +81,7 @@ export default function WeeklyProduce() {
       <h1 className="text-4xl font-bold text-center mb-6 text-customNavy">
         תוצרת שבועית
       </h1>
-      <p className="text-lg text-center text-gray-600 mb-8">
+      <p className="text-center text-gray-600 mb-12">
         תוצרת אורגנית טרייה, ישר מהשדה שלנו אליכם הביתה. כאן תוכלו למצוא את כל
         מה שטרי השבוע ולהזמין תוצרת איכותית ובריאה.
       </p>

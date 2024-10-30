@@ -5,7 +5,7 @@ export const Contact = () => {
         <h2 className="text-4xl font-bold text-center mb-6 text-customNavy">
           צרו קשר
         </h2>
-        <p className="mb-1 lg:mb-5 font-light text-center text-gray-600 sm:text-xl">
+        <p className="text-center text-gray-600 mb-12">
           השאירו פרטים ונחזור אליכם בהקדם
         </p>
         <form action="#" className="space-y-8">
