@@ -1,8 +1,10 @@
+"use client";
 import { BlogCard } from "@/cmps/BlogCard";
 import { Gallery } from "@/cmps/Gallery";
 import { HeroImg } from "@/cmps/HeroImg";
 
 export default function Home() {
+  
   return (
     <main>
       <section className="mt-5 h-[100vh] w-full flex flex-col md:flex-row justify-center items-center  text-customNavy px-4">

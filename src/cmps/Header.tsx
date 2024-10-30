@@ -3,11 +3,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRef, useState, useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi"; // ייבוא אייקון הסגירה
+import { CiShoppingCart } from "react-icons/ci";
+import { Cart } from "./Cart";
 
 export const Header = () => {
   const currentPath = usePathname();
   const checkboxRef = useRef<HTMLInputElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCartShown, setisCartShown] = useState(false);
 
   const isActive = (path: string) =>
     currentPath === path ? "text-customGreen font-bold" : "text-customNavy";
@@ -117,6 +120,19 @@ export const Header = () => {
             </Link>
           </li>
         </ul>
+
+        <div
+          onClick={() => {
+            setisCartShown((prev) => !prev);
+          }}
+          className="flex items-center space-x-2 text-customGreen"
+        >
+          <span className="bg-customPeach text-white font-semibold text-xs w-5 h-5 flex items-center justify-center rounded-full">
+            3
+          </span>
+          <CiShoppingCart className="w-9 h-9" />
+        </div>
+        {isCartShown && <Cart></Cart>}
       </nav>
     </header>
   );
