@@ -1,12 +1,13 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useRef } from "react";
-import { FiMenu } from "react-icons/fi";
+import { useRef, useState, useEffect } from "react";
+import { FiMenu, FiX } from "react-icons/fi"; // ייבוא אייקון הסגירה
 
 export const Header = () => {
   const currentPath = usePathname();
   const checkboxRef = useRef<HTMLInputElement>(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const isActive = (path: string) =>
     currentPath === path ? "text-customGreen font-bold" : "text-customNavy";
@@ -14,8 +15,21 @@ export const Header = () => {
   const handleCloseMenu = () => {
     if (checkboxRef.current) {
       checkboxRef.current.checked = false;
+      setIsMenuOpen(false);
     }
   };
+
+  useEffect(() => {
+    const checkbox = checkboxRef.current;
+    if (checkbox) {
+      const handleToggleMenu = () => setIsMenuOpen(checkbox.checked);
+      checkbox.addEventListener("change", handleToggleMenu);
+
+      return () => {
+        checkbox.removeEventListener("change", handleToggleMenu);
+      };
+    }
+  }, []);
 
   return (
     <header className="z-10 bg-white text-customNavy w-full fixed top-0 mx-auto flex flex-col px-4 py-4 lg:flex-row lg:items-center border-b border-b-customNavy">
@@ -37,7 +51,11 @@ export const Header = () => {
         className="absolute top-5 right-5 cursor-pointer lg:hidden text-customNavy"
         htmlFor="navbar-open"
       >
-        <FiMenu className="h-7 w-7" />
+        {isMenuOpen ? (
+          <FiX className="h-7 w-7" />
+        ) : (
+          <FiMenu className="h-7 w-7" />
+        )}
       </label>
       <nav
         aria-label="Header Navigation"
