@@ -1,12 +1,20 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useRef } from "react";
 
 export const Header = () => {
   const currentPath = usePathname();
+  const checkboxRef = useRef<HTMLInputElement>(null);
 
   const isActive = (path: string) =>
     currentPath === path ? "text-customGreen font-bold" : "text-customNavy";
+
+  const handleCloseMenu = () => {
+    if (checkboxRef.current) {
+      checkboxRef.current.checked = false;
+    }
+  };
 
   return (
     <header className="z-10 bg-white text-customNavy w-full fixed top-0 mx-auto flex flex-col px-4 py-4 lg:flex-row lg:items-center">
@@ -18,7 +26,12 @@ export const Header = () => {
           הגינה<span className="text-customGreen">בפרדס</span>.
         </span>
       </Link>
-      <input type="checkbox" className="peer hidden" id="navbar-open" />
+      <input
+        type="checkbox"
+        className="peer hidden"
+        id="navbar-open"
+        ref={checkboxRef}
+      />
       <label
         className="absolute top-5 right-5 cursor-pointer lg:hidden text-customNavy"
         htmlFor="navbar-open"
@@ -47,6 +60,7 @@ export const Header = () => {
             <Link
               href="/nursery"
               className={`rounded transition ${isActive("/nursery")}`}
+              onClick={handleCloseMenu}
             >
               המשתלה
             </Link>
@@ -55,6 +69,7 @@ export const Header = () => {
             <Link
               href="/weekly-produce"
               className={`rounded transition ${isActive("/weekly-produce")}`}
+              onClick={handleCloseMenu}
             >
               התוצרת שבועית
             </Link>
@@ -63,6 +78,7 @@ export const Header = () => {
             <Link
               href="/contact"
               className={`rounded transition ${isActive("/contact")}`}
+              onClick={handleCloseMenu}
             >
               דברו איתנו
             </Link>
@@ -71,6 +87,7 @@ export const Header = () => {
             <Link
               href="/blog"
               className={`rounded transition ${isActive("/blog")}`}
+              onClick={handleCloseMenu}
             >
               הבלוג
             </Link>
@@ -79,6 +96,7 @@ export const Header = () => {
             <Link
               href="/delivery"
               className={`rounded transition ${isActive("/delivery")}`}
+              onClick={handleCloseMenu}
             >
               משלוחים
             </Link>
@@ -87,6 +105,7 @@ export const Header = () => {
             <Link
               href="/about"
               className={`rounded transition ${isActive("/about")}`}
+              onClick={handleCloseMenu}
             >
               אודות
             </Link>
