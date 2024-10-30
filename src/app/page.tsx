@@ -1,5 +1,4 @@
 import { BlogCard } from "@/cmps/BlogCard";
-import { Contact } from "@/cmps/Contact";
 import { HeroImg } from "@/cmps/HeroImg";
 import { ProductCard } from "@/cmps/ProductCard";
 
@@ -60,10 +59,6 @@ export default function Home() {
           <BlogCard />
           <BlogCard />
         </div>
-      </section>
-
-      <section>
-        <Contact />
       </section>
     </main>
   );
