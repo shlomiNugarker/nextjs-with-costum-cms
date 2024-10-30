@@ -4,7 +4,7 @@ export default function Page() {
       <h1 className="text-4xl font-bold text-center mb-6 text-customNavy">
         משלוחים
       </h1>
-      <p className="text-center text-gray-600 mb-12">
+      <p className="text-center text-gray-600 mb-12 text-2xl">
         אנו מציעים שירות משלוחים מהיר ואמין. המשלוחים מתבצעים בתנאים מוקפדים,
         ומבטיחים לכם את התוצרת הטרייה והאיכותית ביותר, עד הבית.
       </p>

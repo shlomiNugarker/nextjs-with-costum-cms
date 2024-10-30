@@ -4,7 +4,6 @@ import { Gallery } from "@/cmps/Gallery";
 import { HeroImg } from "@/cmps/HeroImg";
 
 export default function Home() {
-  
   return (
     <main>
       <section className="mt-5 h-[100vh] w-full flex flex-col md:flex-row justify-center items-center  text-customNavy px-4">
@@ -13,7 +12,7 @@ export default function Home() {
             הגינה בפרדס - חווה אורגנית ומשתלה
           </h1>
           <br />
-          <p className="">
+          <p className="text-2xl">
             בשדה חקלאי קטן בפרדס חנה - מגדלים פירות יער 🍓 עלים 🌿 ירקות שורש
             🍠🌶️ ומשתלה קטנה של צמחי פרי/תבלין ונוי 🪴 - תוצרת אורגנית וללא
             חומרי הדברה (ביולוגי)🐞

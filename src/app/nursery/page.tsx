@@ -95,18 +95,18 @@ export default function Page() {
           <h1 className="text-4xl font-bold text-center mb-6 text-customNavy">
             המשתלה של הגינה בפרדס
           </h1>
-          <p className="text-center text-gray-600 mb-12">
+          <p className="text-center text-gray-600 mb-12 text-2xl">
             ברוכים הבאים למשתלה שלנו! כאן תוכלו להתרשם ממגוון הצמחים, הפרחים,
             והעשבייה שאנחנו מגדלים. המשתלה מתמחה בגידול צמחי נוי ותבלין שנבחרים
             בקפידה. כל צמח מיוצר בגידול אורגני, מתוך דגש על שימור הטבע והסביבה.
           </p>
-          <p className="text-center text-gray-600 mb-8">
+          <p className="text-center text-gray-600 mb-8 text-2xl">
             מבקרים במשתלה ייהנו מחוויה של טבע ורוגע, יוכלו ללמוד על הצמחים
             השונים ולבחור לעצמם את הצמחים המתאימים לבית או לגינה. המומחים שלנו
             עומדים לרשותכם לכל שאלה ומייעצים לכם איך לגדל את הצמחים בצורה הטובה
             ביותר.
           </p>
-          <p className="text-center text-gray-600 mb-12">
+          <p className="text-center text-gray-600 mb-12 text-2xl">
             בין הצמחים שתמצאו אצלנו: עצי פרי אורגניים, צמחי תבלין טריים, ועשבי
             נוי ייחודיים המתאימים לכל גינה. בואו לחוות את היופי של הטבע ולהתרשם
             מהמבחר הייחודי שלנו.

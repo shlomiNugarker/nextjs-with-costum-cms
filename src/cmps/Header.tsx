@@ -40,7 +40,7 @@ export const Header = () => {
         href="/"
         className="flex items-center justify-center whitespace-nowrap text-2xl text-[40px] font-black text-customGreen"
       >
-        <span className="text-2xl font-bold text-customNavy">
+        <span className="text-3xl font-bold text-customNavy">
           הגינה<span className="text-customGreen">בפרדס</span>.
         </span>
       </Link>
@@ -64,7 +64,7 @@ export const Header = () => {
         aria-label="Header Navigation"
         className="peer-checked:min-h-fit flex max-h-0 w-full flex-col items-center overflow-hidden transition-all lg:ml-24 lg:max-h-full lg:flex-row"
       >
-        <ul className="flex w-full flex-col items-center space-y-2 lg:flex-row lg:justify-center lg:space-y-0 sm:min-h-0.5">
+        <ul className="flex text-2xl  sm:mt-5 xl:mt-0 text-center w-full flex-col items-center space-y-2 lg:flex-row lg:justify-center lg:space-y-0 sm:min-h-0.5">
           <li className="lg:ml-12">
             <Link
               href="/nursery"
@@ -127,7 +127,7 @@ export const Header = () => {
           }}
           className="flex items-center space-x-2 text-customGreen"
         >
-          <span className="bg-customPeach text-white font-semibold text-xs w-5 h-5 flex items-center justify-center rounded-full">
+          <span className="bg-customPeach p-3 text-customNavy font-semibold  w-5 h-5 flex items-center justify-center rounded-full">
             3
           </span>
           <CiShoppingCart className="w-9 h-9" />
