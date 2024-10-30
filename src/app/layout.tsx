@@ -32,6 +32,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <div
+          className="h-screen bg-cover bg-center fixed z-[-2]  left-0 top-0 right-0 bottom-0 blur"
+          style={{
+            backgroundImage:
+              "url('https://tzahile.co.il/wp-content/uploads/2021/06/new-bg-1920x1074.jpg')",
+          }}
+        ></div>
         <Header />
         {children}
         <WhatsAppButton />
