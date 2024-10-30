@@ -38,7 +38,7 @@ export const Header = () => {
         <ul className="flex w-full flex-col items-center space-y-2 lg:flex-row lg:justify-center lg:space-y-0">
           <li className="lg:ml-12">
             <Link
-              className="rounded text-customNavy transition focus:outline-none focus:ring-1 focus:ring-offset-2"
+              className="rounded text-customNavy transition "
               href="/nursery"
             >
               המשתלה
@@ -47,7 +47,7 @@ export const Header = () => {
 
           <li className="lg:ml-12">
             <Link
-              className="rounded text-customNavy transition focus:outline-none focus:ring-1 focus:ring-offset-2"
+              className="rounded text-customNavy transition "
               href="/delivery"
             >
               משלוחים
@@ -55,25 +55,19 @@ export const Header = () => {
           </li>
           <li className="lg:ml-12">
             <Link
-              className="rounded text-customNavy transition focus:outline-none focus:ring-1 focus:ring-offset-2"
+              className="rounded text-customNavy transition"
               href="/contact"
             >
               דברו איתנו
             </Link>
           </li>
           <li className="lg:ml-12">
-            <Link
-              className="rounded text-customNavy transition focus:outline-none focus:ring-1 focus:ring-offset-2"
-              href="/blog"
-            >
+            <Link className="rounded text-customNavy transition" href="/blog">
               הבלוג
             </Link>
           </li>
           <li className="lg:ml-12">
-            <Link
-              className="rounded text-customNavy transition focus:outline-none focus:ring-1 focus:ring-offset-2"
-              href="/about"
-            >
+            <Link className="rounded text-customNavy transition" href="/about">
               אודות
             </Link>
           </li>

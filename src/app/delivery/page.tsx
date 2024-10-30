@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function Page() {
   return (
     <section className="py-12 px-4 max-w-screen-lg mx-auto mt-9">
@@ -7,19 +5,9 @@ export default function Page() {
         משלוחים
       </h1>
       <p className="text-lg text-center text-gray-600 mb-8">
-        אנו מציעים שירות משלוחים מהיר ואמין. המשלוחים מתבצעים
-        בתנאים מוקפדים, ומבטיחים לכם את התוצרת הטרייה והאיכותית ביותר, עד הבית.
+        אנו מציעים שירות משלוחים מהיר ואמין. המשלוחים מתבצעים בתנאים מוקפדים,
+        ומבטיחים לכם את התוצרת הטרייה והאיכותית ביותר, עד הבית.
       </p>
-
-      <div className="flex justify-center mb-8">
-        <Image
-          src="https://images.unsplash.com/photo-1711349172701-51e7f22cef1a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="משלוחים של תוצרת טרייה"
-          className="rounded-lg shadow-md w-full max-w-md"
-          width={200}
-          height={200}
-        />
-      </div>
 
       <div className="mt-8">
         <h2 className="font-semibold text-customNavy mb-4">אזורי משלוח</h2>

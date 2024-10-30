@@ -2,9 +2,9 @@ import React from "react";
 
 export const Contact = () => {
   return (
-    <section className="" id="contact">
+    <section className="mt-10" id="contact">
       <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
-        <h2 className="mb-8 text-center font-sans text-3xl sm:text-4xl lg:text-5xl font-bold text-customNavy">
+        <h2 className="mb-8 text-center font-sans text-2xl sm:text-4xl lg:text-5xl font-bold text-customNavy">
           צרו קשר
         </h2>
         <p className="mb-1 lg:mb-16 font-light text-center text-gray-600 sm:text-xl">

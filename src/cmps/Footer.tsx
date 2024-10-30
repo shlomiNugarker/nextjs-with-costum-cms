@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
 
 export const Footer = () => {
   return (
@@ -90,6 +91,33 @@ export const Footer = () => {
                 הרשמה
               </button>
             </div>
+          </div>
+
+          <div className="flex gap-4 mt-4 ">
+            <Link
+              href="https://www.facebook.com/profile.php?id=61560831838203"
+              target="_blank"
+              aria-label="Facebook"
+              className="flex justify-center items-center"
+            >
+              <FaFacebook className="text-customNavy hover:text-customGreen text-4xl" />
+            </Link>
+            <Link
+              href="https://instagram.com"
+              target="_blank"
+              aria-label="Instagram"
+              className="flex justify-center items-center"
+            >
+              <FaInstagram className="text-customNavy hover:text-customGreen text-4xl" />
+            </Link>
+            <Link
+              href="https://wa.me/972529526762"
+              target="_blank"
+              aria-label="WhatsApp"
+              className="flex justify-center items-center"
+            >
+              <FaWhatsapp className="text-customNavy hover:text-customGreen text-4xl" />
+            </Link>
           </div>
         </div>
       </div>
