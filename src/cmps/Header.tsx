@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const Header = () => {
   return (
-    <header className="z-10 bg-white text-customNavy w-full fixed top-0 mx-auto flex flex-col overflow-hidden px-4 py-4 lg:flex-row lg:items-center">
+    <header className="z-10 bg-white text-customNavy w-full fixed top-0 mx-auto flex flex-col  px-4 py-4 lg:flex-row lg:items-center">
       <Link
         href="/"
         className="flex items-center justify-center whitespace-nowrap text-2xl text-[40px]  font-black text-customGreen"
@@ -33,9 +33,9 @@ export const Header = () => {
       </label>
       <nav
         aria-label="Header Navigation"
-        className="peer-checked:max-h-60 flex max-h-0 w-full flex-col items-center overflow-hidden transition-all lg:ml-24 lg:max-h-full lg:flex-row"
+        className="peer-checked:min-h-fit flex max-h-0 w-full flex-col items-center overflow-hidden  transition-all lg:ml-24 lg:max-h-full lg:flex-row "
       >
-        <ul className="flex w-full flex-col items-center space-y-2 lg:flex-row lg:justify-center lg:space-y-0">
+        <ul className="flex w-full flex-col items-center space-y-2 lg:flex-row lg:justify-center lg:space-y-0 sm:min-h-0.5">
           <li className="lg:ml-12">
             <Link
               className="rounded text-customNavy transition "
@@ -47,7 +47,7 @@ export const Header = () => {
           <li className="lg:ml-12">
             <Link
               className="rounded text-customNavy transition "
-              href="/weeklyProduce"
+              href="/weekly-produce"
             >
               התוצרת שבועית
             </Link>
