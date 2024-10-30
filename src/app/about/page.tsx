@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Page() {
   return (
     <section className="pb-12 pt-24 px-4 max-w-screen-lg mx-auto mt-2 min-h-screen">
@@ -56,7 +58,14 @@ export default function Page() {
           והפירות שלנו.
         </p>
         <p className="text-gray-600">
-          כתובת: רחוב השדה 10, פרדס חנה-כרכור, ישראל
+          <Link
+            href="https://www.google.com/maps/search/?api=1&query=רחוב+השדה+10,+פרדס+חנה-כרכור,+ישראל"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-customGreen hover:underline"
+          >
+            כתובת: רחוב השדה 10, פרדס חנה-כרכור, ישראל
+          </Link>
         </p>
       </div>
     </section>

@@ -7,9 +7,11 @@ export const Footer = () => {
       <div className="mx-auto grid max-w-screen-xl gap-y-8 gap-x-12 px-4 py-10 md:grid-cols-2 xl:grid-cols-4 xl:px-10">
         <div className="max-w-sm">
           <div className="mt-2 mb-2  flex h-12 items-center space-x-2">
-            <span className="text-2xl font-bold text-customNavy">
-              הגינה<span className="text-customGreen"> בפרדס</span>.
-            </span>
+            <Link href="/" className="hover:text-customGreen hover:underline">
+              <span className="text-2xl font-bold text-customNavy">
+                הגינה<span className="text-customGreen"> בפרדס</span>.
+              </span>
+            </Link>
           </div>
           <div className="text-gray-600">
             הגינה בפרדס - חווה אורגנית ומשתלה הממוקמת בפרדס חנה, מציעה מגוון רחב
