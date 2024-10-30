@@ -23,7 +23,7 @@ export const NurseryCard = ({ product }: any) => {
             <p className="text-gray-500 mt-1">גודל עציץ: {product.potSize}</p>
           </div>
         </div>
-        <p className="text-customGreen font-bold mt-4 text-center">
+        <p className="text-customGreen text-2xl font-bold mt-4 text-center">
           {product.price}
         </p>
         <button className="mt-4 w-full bg-customGreen text-white py-2 rounded">

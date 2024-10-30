@@ -25,7 +25,7 @@ export const ProductCard = ({ product }: any) => {
         </div>
       </div>
       <div>
-        <p className="text-customGreen font-bold text-lg text-center">
+        <p className="text-customGreen font-bold text-2xl  text-center">
           {product.price}
         </p>
         <button className="mt-4 w-full bg-customGreen text-white py-2 rounded">
