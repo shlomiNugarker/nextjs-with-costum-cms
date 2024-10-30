@@ -39,11 +39,12 @@ export const Header = () => {
           <li className="lg:ml-12">
             <Link
               className="rounded text-customNavy transition focus:outline-none focus:ring-1 focus:ring-offset-2"
-              href="/about"
+              href="/nursery"
             >
-              אודות
+              המשתלה
             </Link>
           </li>
+
           <li className="lg:ml-12">
             <Link
               className="rounded text-customNavy transition focus:outline-none focus:ring-1 focus:ring-offset-2"
@@ -71,9 +72,9 @@ export const Header = () => {
           <li className="lg:ml-12">
             <Link
               className="rounded text-customNavy transition focus:outline-none focus:ring-1 focus:ring-offset-2"
-              href="/nursery"
+              href="/about"
             >
-              המשתלה
+              אודות
             </Link>
           </li>
         </ul>

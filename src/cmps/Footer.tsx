@@ -7,12 +7,13 @@ export const Footer = () => {
         <div className="max-w-sm">
           <div className="mb-6 flex h-12 items-center space-x-2">
             <span className="text-2xl font-bold text-customNavy">
-              הגינה<span className="text-customGreen">בפרדס</span>.
+              הגינה<span className="text-customGreen"> בפרדס</span>.
             </span>
           </div>
           <div className="text-gray-600">
-            לורם איפסום דולור סיט אמט, קונסקטורר אדיפיסינג אליט. נוביס אד א
-            אופיסיה אה אקספדיטה!
+            הגינה בפרדס - חווה אורגנית ומשתלה הממוקמת בפרדס חנה, מציעה מגוון רחב
+            של צמחי תבלין, עצי פרי ותוצרת חקלאית טרייה, באיכות הגבוהה ביותר וללא
+            חומרי הדברה.
           </div>
         </div>
         <div>
@@ -20,9 +21,9 @@ export const Footer = () => {
             כתובת
           </div>
           <div className="text-gray-600">
-            35 רחוב רמידה הייטס, <br />
-            45 רחוב, <br />
-            קרוליינה הדרומית, ארה&quot;ב
+            רחוב השדה 10, <br />
+            פרדס חנה-כרכור, <br />
+            ישראל
           </div>
         </div>
         <div>
@@ -34,7 +35,7 @@ export const Footer = () => {
               <li>
                 <Link
                   className="hover:text-customGreen hover:underline"
-                  href="#"
+                  href="/pricing"
                 >
                   תמחור
                 </Link>
@@ -42,7 +43,7 @@ export const Footer = () => {
               <li>
                 <Link
                   className="hover:text-customGreen hover:underline"
-                  href="#"
+                  href="/demo"
                 >
                   הדגמה
                 </Link>
@@ -50,7 +51,7 @@ export const Footer = () => {
               <li>
                 <Link
                   className="hover:text-customGreen hover:underline"
-                  href="#"
+                  href="/contact"
                 >
                   תקשורת
                 </Link>
@@ -58,7 +59,7 @@ export const Footer = () => {
               <li>
                 <Link
                   className="hover:text-customGreen hover:underline"
-                  href="#"
+                  href="/support"
                 >
                   מרכז תמיכה
                 </Link>
@@ -66,7 +67,7 @@ export const Footer = () => {
               <li>
                 <Link
                   className="hover:text-customGreen hover:underline"
-                  href="#"
+                  href="/contact"
                 >
                   צור קשר
                 </Link>
@@ -96,11 +97,11 @@ export const Footer = () => {
         <div className="mx-auto flex max-w-screen-xl flex-col gap-y-4 px-4 py-3 text-center text-customPeach sm:flex-row sm:justify-between sm:text-left">
           <div>© 2024 הגינה בפרדס | כל הזכויות שמורות</div>
           <div>
-            <Link className="hover:text-customGreen" href="#">
+            <Link className="hover:text-customGreen" href="/privacy-policy">
               מדיניות פרטיות
             </Link>
             <span className="mx-2">|</span>
-            <Link className="hover:text-customGreen" href="#">
+            <Link className="hover:text-customGreen" href="/terms-of-service">
               תנאי שירות
             </Link>
           </div>
