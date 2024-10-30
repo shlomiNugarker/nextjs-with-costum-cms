@@ -19,7 +19,7 @@ export const Contact = () => {
             <input
               type="text"
               id="name"
-              className="shadow-sm bg-gray-50 border outline-customPeach border-gray-300 text-customNavy rounded-lg focus:ring-customGreen focus:border-customGreen block w-full p-2.5"
+              className="shadow-sm  bg-gray-50 border outline-customPeach border-gray-300 text-customNavy rounded-lg focus:ring-customGreen focus:border-customGreen block w-full p-2.5"
               placeholder="ישראל ישראלי"
               required
             />
