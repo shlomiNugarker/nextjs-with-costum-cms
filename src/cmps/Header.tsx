@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRef } from "react";
+import { FiMenu } from "react-icons/fi";
 
 export const Header = () => {
   const currentPath = usePathname();
@@ -36,20 +37,7 @@ export const Header = () => {
         className="absolute top-5 right-5 cursor-pointer lg:hidden text-customNavy"
         htmlFor="navbar-open"
       >
-        <svg
-          className="h-7 w-7"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="1.5"
-            d="M4 6h16M4 12h16M4 18h16"
-          ></path>
-        </svg>
+        <FiMenu className="h-7 w-7" />
       </label>
       <nav
         aria-label="Header Navigation"
@@ -111,7 +99,6 @@ export const Header = () => {
             </Link>
           </li>
         </ul>
-        <hr className="mt-4 w-full border-customPeach lg:hidden" />
       </nav>
     </header>
   );
