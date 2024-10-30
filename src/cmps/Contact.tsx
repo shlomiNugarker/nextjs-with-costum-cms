@@ -12,7 +12,7 @@ export const Contact = () => {
           <div>
             <label
               htmlFor="name"
-              className="block mb-2 font-medium text-customNavy"
+              className="text-3xl font-semibold text-customNavy mb-4"
             >
               שם{" "}
             </label>
@@ -27,7 +27,7 @@ export const Contact = () => {
           <div>
             <label
               htmlFor="phone"
-              className="block mb-2 font-medium text-customNavy"
+              className="text-3xl font-semibold text-customNavy mb-4"
             >
               טלפון
             </label>
@@ -42,7 +42,7 @@ export const Contact = () => {
           <div>
             <label
               htmlFor="email"
-              className="block mb-2 font-medium text-customNavy"
+              className="text-3xl font-semibold text-customNavy mb-4"
             >
               האימייל שלך
             </label>
@@ -56,7 +56,7 @@ export const Contact = () => {
           <div className="sm:col-span-2">
             <label
               htmlFor="message"
-              className="block mb-2 font-medium text-customNavy"
+              className="text-3xl font-semibold text-customNavy mb-4"
             >
               ההודעה שלך
             </label>
