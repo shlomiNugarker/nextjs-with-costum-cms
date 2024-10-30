@@ -4,14 +4,6 @@ import { HeroImg } from "@/cmps/HeroImg";
 export default function Home() {
   return (
     <main>
-      <div
-        className="h-screen bg-cover bg-center fixed z-[-2]  left-0 top-0 right-0 bottom-0 blur"
-        style={{
-          backgroundImage:
-            "url('https://tzahile.co.il/wp-content/uploads/2021/06/new-bg-1920x1074.jpg')",
-        }}
-      ></div>
-
       <section className="mt-5 h-[100vh] w-full flex flex-col md:flex-row justify-center items-center  text-customNavy px-4">
         <div className="max-w-[500px] text-center md:text-right">
           <h1 className="text-4xl md:text-[70px] font-bold leading-tight">
