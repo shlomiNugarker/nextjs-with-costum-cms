@@ -1,11 +1,18 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export const Header = () => {
+  const currentPath = usePathname();
+
+  const isActive = (path: string) =>
+    currentPath === path ? "text-customGreen font-bold" : "text-customNavy";
+
   return (
-    <header className="z-10 bg-white text-customNavy w-full fixed top-0 mx-auto flex flex-col  px-4 py-4 lg:flex-row lg:items-center">
+    <header className="z-10 bg-white text-customNavy w-full fixed top-0 mx-auto flex flex-col px-4 py-4 lg:flex-row lg:items-center">
       <Link
         href="/"
-        className="flex items-center justify-center whitespace-nowrap text-2xl text-[40px]  font-black text-customGreen"
+        className="flex items-center justify-center whitespace-nowrap text-2xl text-[40px] font-black text-customGreen"
       >
         <span className="text-2xl font-bold text-customNavy">
           הגינה<span className="text-customGreen">בפרדס</span>.
@@ -33,48 +40,54 @@ export const Header = () => {
       </label>
       <nav
         aria-label="Header Navigation"
-        className="peer-checked:min-h-fit flex max-h-0 w-full flex-col items-center overflow-hidden  transition-all lg:ml-24 lg:max-h-full lg:flex-row "
+        className="peer-checked:min-h-fit flex max-h-0 w-full flex-col items-center overflow-hidden transition-all lg:ml-24 lg:max-h-full lg:flex-row"
       >
         <ul className="flex w-full flex-col items-center space-y-2 lg:flex-row lg:justify-center lg:space-y-0 sm:min-h-0.5">
           <li className="lg:ml-12">
             <Link
-              className="rounded text-customNavy transition "
               href="/nursery"
+              className={`rounded transition ${isActive("/nursery")}`}
             >
               המשתלה
             </Link>
           </li>
           <li className="lg:ml-12">
             <Link
-              className="rounded text-customNavy transition "
               href="/weekly-produce"
+              className={`rounded transition ${isActive("/weekly-produce")}`}
             >
               התוצרת שבועית
             </Link>
           </li>
           <li className="lg:ml-12">
             <Link
-              className="rounded text-customNavy transition"
               href="/contact"
+              className={`rounded transition ${isActive("/contact")}`}
             >
               דברו איתנו
             </Link>
           </li>
           <li className="lg:ml-12">
-            <Link className="rounded text-customNavy transition" href="/blog">
+            <Link
+              href="/blog"
+              className={`rounded transition ${isActive("/blog")}`}
+            >
               הבלוג
             </Link>
           </li>
           <li className="lg:ml-12">
             <Link
-              className="rounded text-customNavy transition "
               href="/delivery"
+              className={`rounded transition ${isActive("/delivery")}`}
             >
               משלוחים
             </Link>
           </li>
           <li className="lg:ml-12">
-            <Link className="rounded text-customNavy transition" href="/about">
+            <Link
+              href="/about"
+              className={`rounded transition ${isActive("/about")}`}
+            >
               אודות
             </Link>
           </li>
