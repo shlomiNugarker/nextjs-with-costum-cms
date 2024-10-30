@@ -6,7 +6,7 @@ export const Footer = () => {
     <footer className="bg-customPeach">
       <div className="mx-auto grid max-w-screen-xl gap-y-8 gap-x-12 px-4 py-10 md:grid-cols-2 xl:grid-cols-4 xl:px-10">
         <div className="max-w-sm">
-          <div className="mb-6 flex h-12 items-center space-x-2">
+          <div className="mt-2 mb-2  flex h-12 items-center space-x-2">
             <span className="text-2xl font-bold text-customNavy">
               הגינה<span className="text-customGreen"> בפרדס</span>.
             </span>
@@ -19,50 +19,49 @@ export const Footer = () => {
         </div>
         <div>
           <div className="mt-4 mb-2 font-medium text-customNavy xl:mb-4">
-            כתובת
+            כתובת:
           </div>
           <div className="text-gray-600">
-            רחוב השדה 10, <br />
-            פרדס חנה-כרכור, <br />
-            ישראל
+            <Link
+              href="https://www.google.com/maps/search/?api=1&query=רחוב+השדה+10,+פרדס+חנה-כרכור,+ישראל"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-customGreen hover:underline"
+            >
+              רחוב השדה 10, <br />
+              פרדס חנה-כרכור, <br />
+              ישראל
+            </Link>
           </div>
         </div>
         <div>
-          <div className="mt-4 mb-2 font-medium text-customNavy xl:mb-4">
-            קישורים
+          <div className="mt-4 mb-2 font-medium text-customNavy xl:mb-4 ">
+            עמודים:
           </div>
           <nav aria-label="Footer Navigation" className="text-gray-600">
             <ul className="space-y-3">
               <li>
                 <Link
                   className="hover:text-customGreen hover:underline"
-                  href="/pricing"
+                  href="/"
                 >
-                  תמחור
+                  דף הבית
                 </Link>
               </li>
               <li>
                 <Link
                   className="hover:text-customGreen hover:underline"
-                  href="/demo"
+                  href="/nursery"
                 >
-                  הדגמה
+                  המשתלה
                 </Link>
               </li>
               <li>
                 <Link
                   className="hover:text-customGreen hover:underline"
-                  href="/contact"
+                  href="/weekly-produce"
                 >
-                  תקשורת
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="hover:text-customGreen hover:underline"
-                  href="/support"
-                >
-                  מרכז תמיכה
+                  התוצרת השבועית
                 </Link>
               </li>
               <li>
@@ -70,7 +69,31 @@ export const Footer = () => {
                   className="hover:text-customGreen hover:underline"
                   href="/contact"
                 >
-                  צור קשר
+                  דברו איתנו
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="hover:text-customGreen hover:underline"
+                  href="/blog"
+                >
+                  הבלוג{" "}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="hover:text-customGreen hover:underline"
+                  href="/delivery"
+                >
+                  משלוחים{" "}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  className="hover:text-customGreen hover:underline"
+                  href="/about"
+                >
+                  אודות{" "}
                 </Link>
               </li>
             </ul>
@@ -78,7 +101,7 @@ export const Footer = () => {
         </div>
         <div>
           <div className="mt-4 mb-2 font-medium text-customNavy xl:mb-4">
-            הרשמו לניוזלטר שלנו
+            הרשמו לניוזלטר שלנו:
           </div>
           <div className="flex flex-col">
             <div className="mb-4">
