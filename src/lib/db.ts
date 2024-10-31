@@ -1,4 +1,3 @@
-// app/lib/db.ts
 import postgres from "postgres";
 import { drizzle, PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import { integer, pgTable, serial, text, varchar } from "drizzle-orm/pg-core";
@@ -9,6 +8,8 @@ let db: PostgresJsDatabase<Record<string, unknown>>;
 
 export async function initialize() {
   try {
+    console.log("init");
+
     await connectToDatabase();
     ensureAllTablesExists();
   } catch (error) {
@@ -29,7 +30,7 @@ async function connectToDatabase() {
 
 async function ensureAllTablesExists() {
   await ensureUsersTableExists();
-  await ensureProduceTableExists();
+  await ensureWeeklyProductsTableExists();
   await ensureNurseryProductsTableExists();
 }
 
@@ -67,17 +68,17 @@ async function ensureNurseryProductsTableExists() {
   return nurseryProductsTable;
 }
 
-async function ensureProduceTableExists() {
+async function ensureWeeklyProductsTableExists() {
   const result = await client`
     SELECT EXISTS (
       SELECT FROM information_schema.tables 
       WHERE table_schema = 'public' 
-      AND table_name = 'produce'
+      AND table_name = 'weekly_products'
     );`;
 
   if (!result[0].exists) {
     await client`
-      CREATE TABLE "produce" (
+      CREATE TABLE "weekly_products" (
         id SERIAL PRIMARY KEY,
         name VARCHAR(100) NOT NULL,
         description TEXT,
@@ -88,7 +89,7 @@ async function ensureProduceTableExists() {
       );`;
   }
 
-  const produceTable = pgTable("produce", {
+  const produceTable = pgTable("weekly_products", {
     id: serial("id").primaryKey(),
     name: varchar("name", { length: 100 }).notNull(),
     description: text("description"),
