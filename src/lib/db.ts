@@ -2,7 +2,7 @@ import postgres from "postgres";
 import { drizzle, PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import { integer, pgTable, serial, text, varchar } from "drizzle-orm/pg-core";
 
-let client: postgres.Sql;
+export let client: postgres.Sql | null = null;
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 let db: PostgresJsDatabase<Record<string, unknown>>;
 
@@ -35,6 +35,8 @@ async function ensureAllTablesExists() {
 }
 
 async function ensureNurseryProductsTableExists() {
+  if (!client) return;
+
   const result = await client`
     SELECT EXISTS (
       SELECT FROM information_schema.tables 
@@ -153,11 +155,14 @@ async function seedInitialNurseryProducts() {
     },
   ];
 
-  const insertPromises = initialProducts.map(
-    (product) =>
-      client`
+  if (!client) return;
+
+  const insertPromises = initialProducts.map((product) =>
+    client
+      ? client`
         INSERT INTO nursery_products (name, description, category, pot_size, price, image_url) 
         VALUES (${product.name}, ${product.description}, ${product.category}, ${product.pot_size}, ${product.price}, ${product.image_url});`
+      : null
   );
 
   await Promise.all(insertPromises);
@@ -166,6 +171,8 @@ async function seedInitialNurseryProducts() {
 }
 
 async function ensureWeeklyProductsTableExists() {
+  if (!client) return;
+
   const result = await client`
     SELECT EXISTS (
       SELECT FROM information_schema.tables 
@@ -279,11 +286,12 @@ async function seedInitialWeeklyProducts() {
     },
   ];
 
-  const insertPromises = initialProducts.map(
-    (product) =>
-      client`
+  const insertPromises = initialProducts.map((product) =>
+    client
+      ? client`
         INSERT INTO weekly_products (name, description, weight, category, price, image_url) 
         VALUES (${product.name}, ${product.description}, ${product.weight}, ${product.category}, ${product.price}, ${product.image_url});`
+      : null
   );
 
   await Promise.all(insertPromises);
@@ -292,6 +300,8 @@ async function seedInitialWeeklyProducts() {
 }
 
 async function ensureUsersTableExists() {
+  if (!client) return;
+
   const result = await client`
     SELECT EXISTS (
       SELECT FROM information_schema.tables 
@@ -349,11 +359,12 @@ async function seedInitialUsers() {
     },
   ];
 
-  const insertPromises = initialUsers.map(
-    (user) =>
-      client`
+  const insertPromises = initialUsers.map((user) =>
+    client
+      ? client`
       INSERT INTO users (username, email, password, profile_image_url) 
       VALUES (${user.username}, ${user.email}, ${user.password}, ${user.profile_image_url});`
+      : null
   );
 
   await Promise.all(insertPromises);
