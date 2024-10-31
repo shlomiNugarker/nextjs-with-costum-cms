@@ -87,6 +87,10 @@ async function ensureWeeklyProductsTableExists() {
         price INTEGER NOT NULL,
         image_url TEXT
       );`;
+
+    console.log("Created weekly_products table, seeding initial products...");
+
+    await seedInitialWeeklyProducts();
   }
 
   const produceTable = pgTable("weekly_products", {
@@ -100,6 +104,94 @@ async function ensureWeeklyProductsTableExists() {
   });
 
   return produceTable;
+}
+
+async function seedInitialWeeklyProducts() {
+  const initialProducts = [
+    {
+      name: "תפוחי עץ",
+      description: "תפוחי עץ אורגניים טריים ופריכים.",
+      weight: '1 ק"ג',
+      category: "פירות",
+      price: "15",
+      image_url: "https://example.com/apple.jpg",
+    },
+    {
+      name: "מיקס עלי בטטה סגולה, אמרנט, תרד הודי אדום, ריג'לה ותרד ניו זילנדי",
+      description: "מיקס עלים אידאלי לאידוי או להקפצה",
+      weight: "350 גרם",
+      category: "עלי ירק",
+      price: "25",
+      image_url:
+        "https://images.unsplash.com/photo-1495758874721-e9da827a0581?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      name: "רוקט",
+      description: "עלים טריים ורעננים בשקית",
+      weight: "120 גרם",
+      category: "עלי ירק",
+      price: "12",
+      image_url:
+        "https://images.unsplash.com/photo-1534940519139-f860fb3c6e38?q=80&w=2067&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      name: "צרור קייל",
+      description: "עלים ירוקים ובריאים",
+      weight: "100 גרם",
+      category: "עלי ירק",
+      price: "10",
+      image_url:
+        "https://plus.unsplash.com/premium_photo-1702313776770-e6f6fb5163bf?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      name: "3 צרורות תבלין לבחירה",
+      description:
+        "מבחר תבלינים לבחירה: נענע, מרווה, אורגנו, זעתר, מלוח קיפח, רוזמרין, בזיליקום מתוק, תאילנדי או לימוני",
+      weight: "צרור אחד לכל תבלין",
+      category: "תבלינים",
+      price: "15",
+      image_url:
+        "https://images.unsplash.com/photo-1486548730767-5c679e8eda6b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      name: "צרור מורינגה",
+      description: "עלים עשירים בערכים תזונתיים, טריים ומזינים",
+      weight: "120 גרם",
+      category: "עלי ירק",
+      price: "20",
+      image_url:
+        "https://images.unsplash.com/photo-1667928729816-0ed8c59cd3c9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      name: "כורכום טרי",
+      description: "שורש כורכום טרי ואיכותי, מתאים לתיבול ולשימושים בריאותיים",
+      weight: "כ-200 גרם",
+      category: "שורשים",
+      price: "18",
+      image_url:
+        "https://images.unsplash.com/photo-1666818398897-381dd5eb9139?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      name: "גולדן ברי",
+      description: "פרי מתוק ועסיסי, עשיר בויטמינים ונוגדי חמצון",
+      weight: "כ-120 גרם",
+      category: "פירות",
+      price: "22",
+      image_url:
+        "https://recipe-cpsa.com/wp-content/uploads/2022/12/Dizajn-bez-naslova-49.png",
+    },
+  ];
+
+  const insertPromises = initialProducts.map(
+    (product) =>
+      client`
+        INSERT INTO weekly_products (name, description, weight, category, price, image_url) 
+        VALUES (${product.name}, ${product.description}, ${product.weight}, ${product.category}, ${product.price}, ${product.image_url});`
+  );
+
+  await Promise.all(insertPromises);
+
+  console.log("Initial products added to weekly_products table.");
 }
 
 async function ensureUsersTableExists() {
