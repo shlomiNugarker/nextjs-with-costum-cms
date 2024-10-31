@@ -1,6 +1,6 @@
 import postgres from "postgres";
 import { drizzle, PostgresJsDatabase } from "drizzle-orm/postgres-js";
-import { pgTable, serial, varchar } from "drizzle-orm/pg-core";
+import { integer, pgTable, serial, text, varchar } from "drizzle-orm/pg-core";
 
 let client: postgres.Sql;
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -28,6 +28,41 @@ async function connectToDatabase() {
 
 async function ensureAllTablesExists() {
   await ensureUsersTableExists();
+  await ensureProduceTableExists();
+}
+
+async function ensureProduceTableExists() {
+  const result = await client`
+    SELECT EXISTS (
+      SELECT FROM information_schema.tables 
+      WHERE table_schema = 'public' 
+      AND table_name = 'produce'
+    );`;
+
+  if (!result[0].exists) {
+    await client`
+          CREATE TABLE "produce" (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(100) NOT NULL,
+            description TEXT,
+            weight VARCHAR(50),
+            category VARCHAR(50),
+            price INTEGER NOT NULL,
+            image_url TEXT
+          );`;
+  }
+
+  const produceTable = pgTable("produce", {
+    id: serial("id").primaryKey(),
+    name: varchar("name", { length: 100 }).notNull(),
+    description: text("description"),
+    weight: varchar("weight", { length: 50 }),
+    category: varchar("category", { length: 50 }),
+    price: integer("price").notNull(),
+    image_url: text("image_url"),
+  });
+
+  return produceTable;
 }
 
 async function ensureUsersTableExists() {
