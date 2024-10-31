@@ -53,6 +53,10 @@ async function ensureNurseryProductsTableExists() {
         price INTEGER NOT NULL,
         image_url TEXT
       );`;
+
+    console.log("Created nursery_products table, seeding initial products...");
+
+    await seedInitialNurseryProducts();
   }
 
   const nurseryProductsTable = pgTable("nursery_products", {
@@ -66,6 +70,99 @@ async function ensureNurseryProductsTableExists() {
   });
 
   return nurseryProductsTable;
+}
+
+async function seedInitialNurseryProducts() {
+  const initialProducts = [
+    {
+      name: "רוזמרין",
+      description: "צמח תבלין ארומטי, אידיאלי לתיבול מנות בשר, מרקים וסלטים.",
+      pot_size: "15 ס״מ",
+      category: "תבלינים",
+      price: 15,
+      image_url:
+        "https://images.unsplash.com/photo-1523738914649-b0d2753887a1?q=80&w=1030&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      name: "נענע",
+      description: "צמח רב שנתי בעל עלים רעננים, נהדר לתה, משקאות ותבשילים.",
+      pot_size: "15 ס״מ",
+      category: "תבלינים",
+      price: 12,
+      image_url:
+        "https://images.unsplash.com/photo-1708481480624-f27f9c1cc891?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      name: "בזיליקום מתוק",
+      description:
+        "צמח תבלין עם עלים גדולים וריחניים, מתאים לפסטה, סלטים ועוד.",
+      pot_size: "15 ס״מ",
+      category: "תבלינים",
+      price: 18,
+      image_url:
+        "https://images.unsplash.com/photo-1515542647469-5f9a6b25ef5b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      name: "עץ לימון",
+      description:
+        "עץ פרי קטן לגידול בגינה או בעציץ, מניב פירות טריים כל השנה.",
+      pot_size: "25 ס״מ",
+      category: "עצים",
+      price: 75,
+      image_url:
+        "https://images.unsplash.com/photo-1605185189315-fc269c231e41?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      name: "עץ זית",
+      description:
+        "עץ חזק ועמיד, מתאים לגידול בגינה או בעציץ גדול, מניב זיתים איכותיים.",
+      pot_size: "30 ס״מ",
+      category: "עצים",
+      price: 120,
+      image_url:
+        "https://images.unsplash.com/photo-1541259418332-97b56947904f?q=80&w=989&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      name: "לבנדר",
+      description:
+        "צמח נוי ותבלין עם פריחה סגולה מרהיבה, מתאים להרחיק מזיקים ולהשרות ריח נעים.",
+      pot_size: "15 ס״מ",
+      category: "נוי",
+      price: 20,
+      image_url:
+        "https://images.unsplash.com/photo-1531112606622-e8174567b048?q=80&w=994&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      name: "מרווה",
+      description:
+        "צמח תבלין רב שנתי עם עלים ריחניים, מצוין לתיבול ולרפואה טבעית.",
+      pot_size: "15 ס״מ",
+      category: "תבלינים",
+      price: 15,
+      image_url:
+        "https://images.unsplash.com/photo-1632346265081-eb7e5c507721?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      name: "פטרוזיליה",
+      description: "צמח תבלין עשיר בויטמינים, מושלם לסלטים ולתבשילים.",
+      pot_size: "15 ס״מ",
+      category: "תבלינים",
+      price: 12,
+      image_url:
+        "https://images.unsplash.com/photo-1528796940112-4979b4a98424?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+  ];
+
+  const insertPromises = initialProducts.map(
+    (product) =>
+      client`
+        INSERT INTO nursery_products (name, description, category, pot_size, price, image_url) 
+        VALUES (${product.name}, ${product.description}, ${product.category}, ${product.pot_size}, ${product.price}, ${product.image_url});`
+  );
+
+  await Promise.all(insertPromises);
+
+  console.log("Initial products added to nursery_products table.");
 }
 
 async function ensureWeeklyProductsTableExists() {
