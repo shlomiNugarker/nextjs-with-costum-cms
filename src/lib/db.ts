@@ -34,6 +34,8 @@ async function ensureAllTablesExists() {
   await ensureNurseryProductsTableExists();
 }
 
+// Nursery Products
+
 async function ensureNurseryProductsTableExists() {
   if (!client) return;
 
@@ -170,6 +172,8 @@ async function seedInitialNurseryProducts() {
   console.log("Initial products added to nursery_products table.");
 }
 
+// WeeklyProducts
+
 async function ensureWeeklyProductsTableExists() {
   if (!client) return;
 
@@ -298,6 +302,8 @@ async function seedInitialWeeklyProducts() {
 
   console.log("Initial products added to weekly_products table.");
 }
+
+// Users
 
 async function ensureUsersTableExists() {
   if (!client) return;
