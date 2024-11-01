@@ -1,6 +1,6 @@
 import { auth, signOut } from "@/lib/auth";
 
-export default async function ProtectedPage() {
+export default async function AdminPage() {
   const session = await auth();
 
   return (

@@ -13,7 +13,7 @@ export const authConfig = {
       const isLoggedIn = !!auth?.user;
       console.log("auth?.user: ", auth?.user);
 
-      const isOnDashboard = nextUrl.pathname.startsWith("/protected");
+      const isOnDashboard = nextUrl.pathname.startsWith("/admin");
 
       if (isOnDashboard && !isLoggedIn) {
         // המשתמש לא מחובר ורוצה להיכנס לדף מוגן
@@ -24,7 +24,7 @@ export const authConfig = {
         if (isLoggedIn) return true;
         return Response.redirect(new URL("/login", nextUrl));
       } else if (isLoggedIn) {
-        return Response.redirect(new URL("/protected", nextUrl));
+        return Response.redirect(new URL("/admin", nextUrl));
       }
 
       return true;
