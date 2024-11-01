@@ -2,7 +2,7 @@ import React from "react";
 import { ProductCard } from "@/cmps/ProductCard";
 import { getWeeklyProducts } from "@/lib/queries";
 
-export const revalidate = 86400; // 24 שעות
+export const revalidate = 1000 * 60 * 3;
 
 export default async function WeeklyProduce() {
   const weeklyProducts = await getWeeklyProducts();
