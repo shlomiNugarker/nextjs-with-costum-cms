@@ -6,12 +6,29 @@ module.exports = {
     includePaths: [path.join(__dirname, "styles")],
   },
   images: {
-    domains: [
-      "tzahile.co.il",
-      "images.unsplash.com",
-      "tecdn.b-cdn.net",
-      "plus.unsplash.com",
-      "recipe-cpsa.com",
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "localhost",
+        port: "1337",
+        pathname: "/uploads/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "tzahile.co.il",
+      },
+      {
+        protocol: "https",
+        hostname: "plus.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "recipe-cpsa.com",
+      },
     ],
   },
 };
