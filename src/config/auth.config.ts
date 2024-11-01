@@ -11,20 +11,16 @@ export const authConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
-      console.log("auth?.user: ", auth?.user);
 
-      const isOnDashboard = nextUrl.pathname.startsWith("/admin");
+      const isOnAdmin = nextUrl.pathname.startsWith("/admin");
 
-      if (isOnDashboard && !isLoggedIn) {
-        // המשתמש לא מחובר ורוצה להיכנס לדף מוגן
+      if (isOnAdmin && !isLoggedIn) {
         return false;
       }
 
-      if (isOnDashboard) {
+      if (isOnAdmin) {
         if (isLoggedIn) return true;
         return Response.redirect(new URL("/login", nextUrl));
-      } else if (isLoggedIn) {
-        return Response.redirect(new URL("/admin", nextUrl));
       }
 
       return true;
