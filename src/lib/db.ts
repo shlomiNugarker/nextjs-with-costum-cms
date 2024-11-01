@@ -1,10 +1,14 @@
 import postgres from "postgres";
 import { drizzle, PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import { integer, pgTable, serial, text, varchar } from "drizzle-orm/pg-core";
+import { eq } from "drizzle-orm";
+import { genSaltSync, hashSync } from "bcrypt-ts";
 
-export let client: postgres.Sql | null = null;
+export let client: postgres.Sql;
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 let db: PostgresJsDatabase<Record<string, unknown>>;
+
+await initialize();
 
 export async function initialize() {
   try {
@@ -37,8 +41,6 @@ async function ensureAllTablesExists() {
 // Nursery Products
 
 async function ensureNurseryProductsTableExists() {
-  if (!client) return;
-
   const result = await client`
     SELECT EXISTS (
       SELECT FROM information_schema.tables 
@@ -157,8 +159,6 @@ async function seedInitialNurseryProducts() {
     },
   ];
 
-  if (!client) return;
-
   const insertPromises = initialProducts.map((product) =>
     client
       ? client`
@@ -175,8 +175,6 @@ async function seedInitialNurseryProducts() {
 // WeeklyProducts
 
 async function ensureWeeklyProductsTableExists() {
-  if (!client) return;
-
   const result = await client`
     SELECT EXISTS (
       SELECT FROM information_schema.tables 
@@ -306,8 +304,6 @@ async function seedInitialWeeklyProducts() {
 // Users
 
 async function ensureUsersTableExists() {
-  if (!client) return;
-
   const result = await client`
     SELECT EXISTS (
       SELECT FROM information_schema.tables 
@@ -376,4 +372,32 @@ async function seedInitialUsers() {
   await Promise.all(insertPromises);
 
   console.log("Initial users added to users table.");
+}
+
+export async function getUser(email: string) {
+  try {
+    const users = await ensureUsersTableExists();
+    return await db.select().from(users).where(eq(users.email, email));
+  } catch (error) {
+    console.error("Error getting user:", error);
+  }
+}
+
+export async function createUser(
+  email: string,
+  password: string,
+  username: string,
+  profile_image_url: string = "https://example.com"
+) {
+  try {
+    const users = await ensureUsersTableExists();
+    const salt = genSaltSync(10);
+    const hash = hashSync(password, salt);
+
+    return await db
+      .insert(users)
+      .values({ email, password: hash, username, profile_image_url });
+  } catch (error) {
+    console.error("Error creating user:", error);
+  }
 }

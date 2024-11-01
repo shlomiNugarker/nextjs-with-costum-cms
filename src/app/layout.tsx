@@ -4,7 +4,6 @@ import "./globals.css";
 import { Footer } from "@/cmps/Footer";
 import { Header } from "@/cmps/Header";
 import { WhatsAppButton } from "@/cmps/WhatsAppButton";
-import { initialize } from "@/lib/db";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,7 +27,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  await initialize();
   return (
     <html lang="he">
       <body
