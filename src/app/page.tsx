@@ -1,4 +1,3 @@
-"use client";
 import { BlogCard } from "@/cmps/BlogCard";
 import { Gallery } from "@/cmps/Gallery";
 import { HeroImg } from "@/cmps/HeroImg";

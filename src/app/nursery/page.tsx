@@ -2,7 +2,7 @@ import React from "react";
 import { NurseryCard } from "@/cmps/NurseryCard";
 import { getNurseryProducts } from "@/lib/queries";
 
-export default async function Page() {
+export default async function NurseryPage() {
   const nurseryProducts = await getNurseryProducts();
   return (
     <>

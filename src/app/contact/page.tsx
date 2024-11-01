@@ -1,6 +1,6 @@
 import { Contact } from "@/cmps/Contact";
 
-export default function Page() {
+export default function ContactPage() {
   return (
     <div className="min-h-screen">
       <Contact />;

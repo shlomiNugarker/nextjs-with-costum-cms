@@ -26,5 +26,6 @@ export const users = pgTable("users", {
   email: varchar("email", { length: 64 }).notNull().unique(),
   password: varchar("password", { length: 64 }).notNull(),
   profile_image_url: text("profile_image_url"),
+  role: varchar("role", { length: 20 }).default("User"),
   created_at: varchar("created_at", { length: 255 }).default("now()"),
 });

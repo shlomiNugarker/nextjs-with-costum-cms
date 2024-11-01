@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function Page() {
+export default function About() {
   return (
     <section className="pb-12 pt-24 px-4 max-w-screen-lg mx-auto mt-2 min-h-screen">
       <h1 className="text-4xl font-bold text-center mb-6 text-customNavy">
