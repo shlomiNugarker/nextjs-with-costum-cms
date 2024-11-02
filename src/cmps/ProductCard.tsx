@@ -7,7 +7,7 @@ export const ProductCard = ({ product }: any) => {
       <div>
         <div>
           <Image
-            src={product.image_url}
+            src={product.image_url || ""}
             alt={product.name}
             className="w-full h-48 object-cover"
             width={300}

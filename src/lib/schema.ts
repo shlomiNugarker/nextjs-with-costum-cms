@@ -1,4 +1,12 @@
-import { pgTable, serial, varchar, text, integer } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
+import {
+  pgTable,
+  serial,
+  varchar,
+  text,
+  integer,
+  timestamp,
+} from "drizzle-orm/pg-core";
 
 export const weeklyProductsTable = pgTable("weekly_products", {
   id: serial("id").primaryKey(),
@@ -8,6 +16,9 @@ export const weeklyProductsTable = pgTable("weekly_products", {
   category: varchar("category", { length: 50 }),
   price: integer("price").notNull(),
   image_url: text("image_url"),
+  created_at: timestamp("created_at").default(sql`NOW()`),
+  updated_at: timestamp("updated_at").default(sql`NOW()`),
+  published_at: timestamp("published_at"),
 });
 
 export const nurseryProductsTable = pgTable("nursery_products", {
@@ -18,6 +29,9 @@ export const nurseryProductsTable = pgTable("nursery_products", {
   category: varchar("category", { length: 50 }),
   price: integer("price").notNull(),
   image_url: text("image_url"),
+  created_at: timestamp("created_at").default(sql`NOW()`),
+  updated_at: timestamp("updated_at").default(sql`NOW()`),
+  published_at: timestamp("published_at"),
 });
 
 export const users = pgTable("users", {

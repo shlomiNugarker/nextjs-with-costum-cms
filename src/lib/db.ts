@@ -8,12 +8,9 @@ export let client: postgres.Sql;
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 let db: PostgresJsDatabase<Record<string, unknown>>;
 
-await initialize();
-
 export async function initialize() {
   try {
-    console.log("init");
-
+    console.log("Initializing database...");
     await connectToDatabase();
     ensureAllTablesExists();
   } catch (error) {
@@ -50,15 +47,23 @@ async function ensureNurseryProductsTableExists() {
 
   if (!result[0].exists) {
     await client`
-      CREATE TABLE "nursery_products" (
+        CREATE TABLE "nursery_products" (
         id SERIAL PRIMARY KEY,
+        document_id UUID DEFAULT gen_random_uuid(),
         name VARCHAR(100) NOT NULL,
         description TEXT,
         category VARCHAR(50),
         pot_size VARCHAR(50),
         price INTEGER NOT NULL,
-        image_url TEXT
-      );`;
+        image_url TEXT,
+        created_at TIMESTAMPTZ DEFAULT NOW(),
+        updated_at TIMESTAMPTZ DEFAULT NOW(),
+        published_at TIMESTAMPTZ,
+        locale VARCHAR(10),
+        created_by_id INTEGER,  
+        updated_by_id INTEGER   
+      );
+      `;
 
     console.log("Created nursery_products table, seeding initial products...");
 
@@ -89,80 +94,12 @@ async function seedInitialNurseryProducts() {
       image_url:
         "https://images.unsplash.com/photo-1523738914649-b0d2753887a1?q=80&w=1030&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
-    {
-      name: "נענע",
-      description: "צמח רב שנתי בעל עלים רעננים, נהדר לתה, משקאות ותבשילים.",
-      pot_size: "15 ס״מ",
-      category: "תבלינים",
-      price: 12,
-      image_url:
-        "https://images.unsplash.com/photo-1708481480624-f27f9c1cc891?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      name: "בזיליקום מתוק",
-      description:
-        "צמח תבלין עם עלים גדולים וריחניים, מתאים לפסטה, סלטים ועוד.",
-      pot_size: "15 ס״מ",
-      category: "תבלינים",
-      price: 18,
-      image_url:
-        "https://images.unsplash.com/photo-1515542647469-5f9a6b25ef5b?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      name: "עץ לימון",
-      description:
-        "עץ פרי קטן לגידול בגינה או בעציץ, מניב פירות טריים כל השנה.",
-      pot_size: "25 ס״מ",
-      category: "עצים",
-      price: 75,
-      image_url:
-        "https://images.unsplash.com/photo-1605185189315-fc269c231e41?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      name: "עץ זית",
-      description:
-        "עץ חזק ועמיד, מתאים לגידול בגינה או בעציץ גדול, מניב זיתים איכותיים.",
-      pot_size: "30 ס״מ",
-      category: "עצים",
-      price: 120,
-      image_url:
-        "https://images.unsplash.com/photo-1541259418332-97b56947904f?q=80&w=989&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      name: "לבנדר",
-      description:
-        "צמח נוי ותבלין עם פריחה סגולה מרהיבה, מתאים להרחיק מזיקים ולהשרות ריח נעים.",
-      pot_size: "15 ס״מ",
-      category: "נוי",
-      price: 20,
-      image_url:
-        "https://images.unsplash.com/photo-1531112606622-e8174567b048?q=80&w=994&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      name: "מרווה",
-      description:
-        "צמח תבלין רב שנתי עם עלים ריחניים, מצוין לתיבול ולרפואה טבעית.",
-      pot_size: "15 ס״מ",
-      category: "תבלינים",
-      price: 15,
-      image_url:
-        "https://images.unsplash.com/photo-1632346265081-eb7e5c507721?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      name: "פטרוזיליה",
-      description: "צמח תבלין עשיר בויטמינים, מושלם לסלטים ולתבשילים.",
-      pot_size: "15 ס״מ",
-      category: "תבלינים",
-      price: 12,
-      image_url:
-        "https://images.unsplash.com/photo-1528796940112-4979b4a98424?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
   ];
 
   const insertPromises = initialProducts.map((product) =>
     client
       ? client`
-        INSERT INTO nursery_products (name, description, category, pot_size, price, image_url) 
+        INSERT INTO nursery_products (name, description, category, pot_size, price, image_url)
         VALUES (${product.name}, ${product.description}, ${product.category}, ${product.pot_size}, ${product.price}, ${product.image_url});`
       : null
   );
@@ -186,13 +123,21 @@ async function ensureWeeklyProductsTableExists() {
     await client`
       CREATE TABLE "weekly_products" (
         id SERIAL PRIMARY KEY,
+        document_id UUID DEFAULT gen_random_uuid(), 
         name VARCHAR(100) NOT NULL,
         description TEXT,
         weight VARCHAR(50),
         category VARCHAR(50),
         price INTEGER NOT NULL,
-        image_url TEXT
-      );`;
+        image_url TEXT,
+        created_at TIMESTAMPTZ DEFAULT NOW(),
+        updated_at TIMESTAMPTZ DEFAULT NOW(),
+        published_at TIMESTAMPTZ,
+        locale VARCHAR(10),
+        created_by_id INTEGER,  
+        updated_by_id INTEGER   
+      );
+    `;
 
     console.log("Created weekly_products table, seeding initial products...");
 
@@ -207,6 +152,8 @@ async function ensureWeeklyProductsTableExists() {
     category: varchar("category", { length: 50 }),
     price: integer("price").notNull(),
     image_url: text("image_url"),
+    created_by_id: integer("created_by_id"),
+    updated_by_id: integer("updated_by_id"),
   });
 
   return produceTable;
@@ -214,14 +161,6 @@ async function ensureWeeklyProductsTableExists() {
 
 async function seedInitialWeeklyProducts() {
   const initialProducts = [
-    {
-      name: "תפוחי עץ",
-      description: "תפוחי עץ אורגניים טריים ופריכים.",
-      weight: '1 ק"ג',
-      category: "פירות",
-      price: "15",
-      image_url: "https://example.com/apple.jpg",
-    },
     {
       name: "מיקס עלי בטטה סגולה, אמרנט, תרד הודי אדום, ריג'לה ותרד ניו זילנדי",
       description: "מיקס עלים אידאלי לאידוי או להקפצה",
@@ -231,67 +170,12 @@ async function seedInitialWeeklyProducts() {
       image_url:
         "https://images.unsplash.com/photo-1495758874721-e9da827a0581?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
-    {
-      name: "רוקט",
-      description: "עלים טריים ורעננים בשקית",
-      weight: "120 גרם",
-      category: "עלי ירק",
-      price: "12",
-      image_url:
-        "https://images.unsplash.com/photo-1534940519139-f860fb3c6e38?q=80&w=2067&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      name: "צרור קייל",
-      description: "עלים ירוקים ובריאים",
-      weight: "100 גרם",
-      category: "עלי ירק",
-      price: "10",
-      image_url:
-        "https://plus.unsplash.com/premium_photo-1702313776770-e6f6fb5163bf?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      name: "3 צרורות תבלין לבחירה",
-      description:
-        "מבחר תבלינים לבחירה: נענע, מרווה, אורגנו, זעתר, מלוח קיפח, רוזמרין, בזיליקום מתוק, תאילנדי או לימוני",
-      weight: "צרור אחד לכל תבלין",
-      category: "תבלינים",
-      price: "15",
-      image_url:
-        "https://images.unsplash.com/photo-1486548730767-5c679e8eda6b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      name: "צרור מורינגה",
-      description: "עלים עשירים בערכים תזונתיים, טריים ומזינים",
-      weight: "120 גרם",
-      category: "עלי ירק",
-      price: "20",
-      image_url:
-        "https://images.unsplash.com/photo-1667928729816-0ed8c59cd3c9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      name: "כורכום טרי",
-      description: "שורש כורכום טרי ואיכותי, מתאים לתיבול ולשימושים בריאותיים",
-      weight: "כ-200 גרם",
-      category: "שורשים",
-      price: "18",
-      image_url:
-        "https://images.unsplash.com/photo-1666818398897-381dd5eb9139?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    },
-    {
-      name: "גולדן ברי",
-      description: "פרי מתוק ועסיסי, עשיר בויטמינים ונוגדי חמצון",
-      weight: "כ-120 גרם",
-      category: "פירות",
-      price: "22",
-      image_url:
-        "https://recipe-cpsa.com/wp-content/uploads/2022/12/Dizajn-bez-naslova-49.png",
-    },
   ];
 
   const insertPromises = initialProducts.map((product) =>
     client
       ? client`
-        INSERT INTO weekly_products (name, description, weight, category, price, image_url) 
+        INSERT INTO weekly_products (name, description, weight, category, price, image_url)
         VALUES (${product.name}, ${product.description}, ${product.weight}, ${product.category}, ${product.price}, ${product.image_url});`
       : null
   );
@@ -366,7 +250,7 @@ async function seedInitialUsers() {
   const insertPromises = initialUsers.map((user) =>
     client
       ? client`
-      INSERT INTO users (username, email, password, profile_image_url) 
+      INSERT INTO users (username, email, password, profile_image_url)
       VALUES (${user.username}, ${user.email}, ${user.password}, ${user.profile_image_url});`
       : null
   );

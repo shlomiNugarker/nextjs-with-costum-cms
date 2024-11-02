@@ -4,6 +4,7 @@ import "./globals.css";
 import { Footer } from "@/cmps/Footer";
 import { Header } from "@/cmps/Header";
 import { WhatsAppButton } from "@/cmps/WhatsAppButton";
+import { initialize } from "@/lib/db";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -21,6 +22,8 @@ export const metadata: Metadata = {
   description:
     "הגינה בפרדס - חווה אורגנית ומשתלה בפרדס חנה שמציעה מגוון ירקות, פירות, וצמחי נוי ותבלין אורגניים. חוויה טבעית וירוקה לכל המשפחה.",
 };
+
+await initialize();
 
 export default async function RootLayout({
   children,
