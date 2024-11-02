@@ -19,6 +19,9 @@ export const weeklyProductsTable = pgTable("weekly_products", {
   created_at: timestamp("created_at").default(sql`NOW()`),
   updated_at: timestamp("updated_at").default(sql`NOW()`),
   published_at: timestamp("published_at"),
+  document_id: varchar("document_id", { length: 36 }).default(
+    sql`gen_random_uuid()::text`
+  ),
 });
 
 export const nurseryProductsTable = pgTable("nursery_products", {
@@ -32,6 +35,9 @@ export const nurseryProductsTable = pgTable("nursery_products", {
   created_at: timestamp("created_at").default(sql`NOW()`),
   updated_at: timestamp("updated_at").default(sql`NOW()`),
   published_at: timestamp("published_at"),
+  document_id: varchar("document_id", { length: 36 }).default(
+    sql`gen_random_uuid()::text`
+  ),
 });
 
 export const users = pgTable("users", {

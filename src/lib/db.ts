@@ -12,7 +12,7 @@ export async function initialize() {
   try {
     console.log("Initializing database...");
     await connectToDatabase();
-    ensureAllTablesExists();
+    await ensureAllTablesExists();
   } catch (error) {
     console.error("Error during initialization:", error);
   }
@@ -47,9 +47,8 @@ async function ensureNurseryProductsTableExists() {
 
   if (!result[0].exists) {
     await client`
-        CREATE TABLE "nursery_products" (
+      CREATE TABLE "nursery_products" (
         id SERIAL PRIMARY KEY,
-        document_id UUID DEFAULT gen_random_uuid(),
         name VARCHAR(100) NOT NULL,
         description TEXT,
         category VARCHAR(50),
@@ -61,12 +60,12 @@ async function ensureNurseryProductsTableExists() {
         published_at TIMESTAMPTZ,
         locale VARCHAR(10),
         created_by_id INTEGER,  
-        updated_by_id INTEGER   
-      );
-      `;
+        updated_by_id INTEGER,
+        document_id VARCHAR(36)        
+        );
+        `;
 
     console.log("Created nursery_products table, seeding initial products...");
-
     await seedInitialNurseryProducts();
   }
 
@@ -123,7 +122,6 @@ async function ensureWeeklyProductsTableExists() {
     await client`
       CREATE TABLE "weekly_products" (
         id SERIAL PRIMARY KEY,
-        document_id UUID DEFAULT gen_random_uuid(), 
         name VARCHAR(100) NOT NULL,
         description TEXT,
         weight VARCHAR(50),
@@ -135,12 +133,12 @@ async function ensureWeeklyProductsTableExists() {
         published_at TIMESTAMPTZ,
         locale VARCHAR(10),
         created_by_id INTEGER,  
-        updated_by_id INTEGER   
-      );
+        updated_by_id INTEGER,
+        document_id VARCHAR(36)        
+        );
     `;
 
     console.log("Created weekly_products table, seeding initial products...");
-
     await seedInitialWeeklyProducts();
   }
 
