@@ -2,6 +2,7 @@
 "use client";
 
 import { useState } from "react";
+// import { ImageUploader } from "./ImageUploader";
 
 export const NurseryProductsForm = ({
   initialProduct,
@@ -139,6 +140,11 @@ export const NurseryProductsForm = ({
         placeholder="כתובת תמונה"
         className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
       />
+      {/* <ImageUploader
+        onUpload={(url) => {
+          console.log(url);
+        }}
+      ></ImageUploader> */}
       <button
         type="submit"
         className="w-full py-3 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition"

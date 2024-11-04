@@ -2,6 +2,8 @@ import { NurseryCard } from "@/cmps/NurseryCard";
 import { getNurseryProducts } from "@/lib/queries";
 import Link from "next/link";
 
+export const revalidate = 1;
+
 export default async function page() {
   const nurseryProducts = await getNurseryProducts();
   return (

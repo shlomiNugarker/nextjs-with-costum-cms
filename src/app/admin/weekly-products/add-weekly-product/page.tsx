@@ -1,5 +1,7 @@
 import { WeeklyProductsForm } from "@/cmps/WeeklyProductsForm";
 
+export const revalidate = 1;
+
 export default async function AddWeeklyProduct() {
   return (
     <>
