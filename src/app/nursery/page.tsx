@@ -2,6 +2,8 @@ import React from "react";
 import { NurseryCard } from "@/cmps/NurseryCard";
 import { getNurseryProducts } from "@/lib/queries";
 
+export const revalidate = 60;
+
 export default async function NurseryPage() {
   const nurseryProducts = await getNurseryProducts();
   return (
