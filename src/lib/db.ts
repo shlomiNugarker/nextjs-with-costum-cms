@@ -55,13 +55,7 @@ async function ensureNurseryProductsTableExists() {
         pot_size VARCHAR(50),
         price INTEGER NOT NULL,
         image_url TEXT,
-        created_at TIMESTAMPTZ DEFAULT NOW(),
-        updated_at TIMESTAMPTZ DEFAULT NOW(),
-        published_at TIMESTAMPTZ,
-        locale VARCHAR(10),
-        created_by_id INTEGER,  
-        updated_by_id INTEGER,
-        document_id VARCHAR(36)        
+        created_at TIMESTAMPTZ DEFAULT NOW()     
         );
         `;
 
@@ -128,13 +122,7 @@ async function ensureWeeklyProductsTableExists() {
         category VARCHAR(50),
         price INTEGER NOT NULL,
         image_url TEXT,
-        created_at TIMESTAMPTZ DEFAULT NOW(),
-        updated_at TIMESTAMPTZ DEFAULT NOW(),
-        published_at TIMESTAMPTZ,
-        locale VARCHAR(10),
-        created_by_id INTEGER,  
-        updated_by_id INTEGER,
-        document_id VARCHAR(36)        
+        created_at TIMESTAMPTZ DEFAULT NOW()    
         );
     `;
 
@@ -150,8 +138,6 @@ async function ensureWeeklyProductsTableExists() {
     category: varchar("category", { length: 50 }),
     price: integer("price").notNull(),
     image_url: text("image_url"),
-    created_by_id: integer("created_by_id"),
-    updated_by_id: integer("updated_by_id"),
   });
 
   return produceTable;
