@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRef, useState, useEffect } from "react";
-import { FiMenu, FiX } from "react-icons/fi"; // ייבוא אייקון הסגירה
+import { FiMenu, FiX } from "react-icons/fi";
 import { CiShoppingCart } from "react-icons/ci";
 import { Cart } from "./Cart";
 

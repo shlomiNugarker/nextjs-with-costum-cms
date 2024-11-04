@@ -37,8 +37,6 @@ export const NurseryProductsForm = ({
 
   const handleNurseryProductSubmit = async (product: any) => {
     try {
-      console.log({ product });
-
       const isUpdate = Boolean(product.id);
       const response = await fetch("/api/nursery-products", {
         method: isUpdate ? "PUT" : "POST",
