@@ -29,7 +29,7 @@ export default async function NurseryPage() {
           </p>
         </div>
         <div className="py-1 px-4 max-w-screen-lg mx-auto mt-8 min-h-screen">
-          <div className="pb-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-center">
             {nurseryProducts.map((product) => (
               <NurseryCard key={product.id} product={product} />
             ))}
