@@ -28,9 +28,9 @@ export const ProductCard = ({ product }: any) => {
         <p className="text-customGreen font-bold text-2xl  text-center">
           {product.price}
         </p>
-        <button className="mt-4 w-full bg-customGreen text-white py-2 rounded">
+        {/* <button className="mt-4 w-full bg-customGreen text-white py-2 rounded">
           הוסף לסל
-        </button>
+        </button> */}
       </div>
     </div>
   );

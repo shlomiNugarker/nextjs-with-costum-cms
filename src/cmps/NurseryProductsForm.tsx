@@ -59,19 +59,15 @@ export const NurseryProductsForm = ({
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(
-        `/api/nursery-products/delete/${product.id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`/api/nursery-products/${product.id}`, {
+        method: "DELETE",
+      });
 
       if (!response.ok) throw new Error("Failed to delete product");
 
-      const result = await response.json(); // פענוח JSON מהתגובה
+      const result = await response.json();
       alert(result.message || "המוצר נמחק בהצלחה");
 
-      // איפוס הטופס לאחר מחיקה
       setProduct({
         name: "",
         description: "",

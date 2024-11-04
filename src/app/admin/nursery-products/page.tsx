@@ -10,7 +10,7 @@ export default async function page() {
         {nurseryProducts.map((product) => (
           <Link href={`edit-nursery-product/${product.id}`} key={product.id}>
             <NurseryCard product={product} />
-            <button>ערוך מוצר</button>
+            <button>ערוך</button>
           </Link>
         ))}
       </div>

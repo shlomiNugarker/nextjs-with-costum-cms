@@ -10,6 +10,7 @@ export default async function AdminPage() {
       <SignOut />
       <br />
       <Link href={"/admin/nursery-products"}> מוצרים במשתלה</Link>
+      <Link href={"/admin/weekly-products"}> תוצרת שבועית</Link>
     </div>
   );
 }

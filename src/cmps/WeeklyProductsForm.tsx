@@ -4,10 +4,8 @@
 import { useState } from "react";
 
 export const WeeklyProductsForm = ({
-  onSubmit,
   initialProduct,
 }: {
-  onSubmit: (product: any) => void;
   initialProduct?: any;
 }) => {
   const [product, setProduct] = useState<any>(
@@ -31,13 +29,61 @@ export const WeeklyProductsForm = ({
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(product);
+    await handleWeeklyProductSubmit(product);
+  };
+
+  const handleWeeklyProductSubmit = async (product: any) => {
+    try {
+      const isUpdate = Boolean(product.id);
+      const response = await fetch("/api/weekly-products", {
+        method: isUpdate ? "PUT" : "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(product),
+      });
+
+      if (!response.ok) throw new Error("Failed to save product");
+
+      alert(`מוצר התוצרת השבועית ${isUpdate ? "עודכן" : "נוסף"} בהצלחה`);
+    } catch (err) {
+      console.error("Error saving product:", err);
+      alert("שגיאה בהוספה/עדכון מוצר התוצרת השבועית");
+    }
+  };
+
+  const deleteProduct = async () => {
+    if (!product.id) return;
+
+    const confirmDelete = confirm("האם אתה בטוח שברצונך למחוק את המוצר?");
+    if (!confirmDelete) return;
+
+    try {
+      const response = await fetch(`/api/weekly-products/${product.id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) throw new Error("Failed to delete product");
+
+      const result = await response.json();
+      alert(result.message || "המוצר נמחק בהצלחה");
+
+      setProduct({
+        name: "",
+        description: "",
+        weight: "",
+        category: "",
+        price: 0,
+        image_url: "",
+      });
+    } catch (err) {
+      console.error("Error deleting product:", err);
+      alert("שגיאה במחיקת המוצר");
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4 flex flex-col">
       <input
         type="text"
         name="name"
@@ -91,6 +137,15 @@ export const WeeklyProductsForm = ({
       <button type="submit" className="btn-save">
         שמור מוצר
       </button>
+      {product.id && (
+        <button
+          type="button"
+          onClick={deleteProduct}
+          className="btn-delete mt-4 text-red-600"
+        >
+          מחק מוצר
+        </button>
+      )}
     </form>
   );
 };
