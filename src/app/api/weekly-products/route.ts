@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
 import { weeklyProductsTable } from "@/lib/schema";
 import { eq } from "drizzle-orm";
+import { connectToDatabase } from "@/lib/db";
 
 export async function GET() {
   try {
+    const db = await connectToDatabase();
+
     const products = await db.select().from(weeklyProductsTable);
     return NextResponse.json(products);
   } catch (error) {
@@ -18,6 +20,8 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
+    const db = await connectToDatabase();
+
     const data = await request.json();
     const { name, description, weight, category, price, image_url } = data;
 
@@ -52,6 +56,8 @@ export async function POST(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   try {
+    const db = await connectToDatabase();
+
     const data = await request.json();
     const { id, name, description, weight, category, price, image_url } = data;
 

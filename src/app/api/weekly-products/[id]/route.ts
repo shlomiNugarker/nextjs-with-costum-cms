@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
 import { weeklyProductsTable } from "@/lib/schema";
 import { eq } from "drizzle-orm";
+import { connectToDatabase } from "@/lib/db";
 
-// מחיקת מוצר לפי ID (DELETE)
 export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
@@ -15,6 +14,8 @@ export async function DELETE(
   }
 
   try {
+    const db = await connectToDatabase();
+
     await db
       .delete(weeklyProductsTable)
       .where(eq(weeklyProductsTable.id, productId));

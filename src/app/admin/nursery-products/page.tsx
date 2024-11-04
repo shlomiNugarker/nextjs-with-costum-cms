@@ -6,6 +6,11 @@ export default async function page() {
   const nurseryProducts = await getNurseryProducts();
   return (
     <div className="min-h-screen pt-[200px] px-4">
+      <div className="flex justify-center mt-8">
+        <Link href={"weekly-products/"}>
+          <p> מוצרים במשתלה</p>
+        </Link>
+      </div>
       <div className="pb-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
         {nurseryProducts.map((product) => (
           <div key={product.id} className="relative">

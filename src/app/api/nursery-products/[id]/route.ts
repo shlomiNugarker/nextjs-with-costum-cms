@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { nurseryProductsTable } from "@/lib/schema";
 import { eq } from "drizzle-orm";
-import { db } from "@/lib/db";
+import { connectToDatabase } from "@/lib/db";
 
 export async function DELETE(
   request: NextRequest,
@@ -14,6 +14,8 @@ export async function DELETE(
   }
 
   try {
+    const db = await connectToDatabase();
+
     await db
       .delete(nurseryProductsTable)
       .where(eq(nurseryProductsTable.id, productId));

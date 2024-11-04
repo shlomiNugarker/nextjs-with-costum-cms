@@ -6,7 +6,7 @@ import { genSaltSync, hashSync } from "bcrypt-ts";
 
 export let client: postgres.Sql;
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export let db: PostgresJsDatabase<Record<string, unknown>>;
+let db: PostgresJsDatabase<Record<string, unknown>>;
 
 export async function initialize() {
   try {
@@ -18,11 +18,13 @@ export async function initialize() {
   }
 }
 
-async function connectToDatabase() {
+export async function connectToDatabase() {
   try {
+    if (db) return db;
     client = postgres(`${process.env.POSTGRES_URL!}?sslmode=disable`);
     db = drizzle(client);
     console.log("Connected to the database.");
+    return db;
   } catch (error) {
     console.error("Failed to connect to the database:", error);
     throw new Error("Unable to connect to the database");
