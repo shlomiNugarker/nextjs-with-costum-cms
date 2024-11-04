@@ -5,19 +5,27 @@ import Link from "next/link";
 export default async function page() {
   const nurseryProducts = await getNurseryProducts();
   return (
-    <div className="min-h-screen pt-20">
-      <div className="pb-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center">
+    <div className="min-h-screen pt-[200px] px-4">
+      <div className="pb-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
         {nurseryProducts.map((product) => (
-          <Link href={`edit-nursery-product/${product.id}`} key={product.id}>
-            <NurseryCard product={product} />
-            <button>ערוך</button>
-          </Link>
+          <div key={product.id} className="relative">
+            <Link href={`edit-nursery-product/${product.id}`}>
+              <NurseryCard product={product} />
+              <button className="w-full py-2 px-4 bg-customGreen text-white font-semibold rounded-lg hover:bg-opacity-90 transition">
+                ערוך
+              </button>
+            </Link>
+          </div>
         ))}
       </div>
 
-      <Link href={"add-nursery-product"}>
-        <button>הוסף מוצר</button>
-      </Link>
+      <div className="flex justify-center mt-8">
+        <Link href={"add-nursery-product"}>
+          <button className="py-3 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition shadow-lg">
+            הוסף מוצר
+          </button>
+        </Link>
+      </div>
     </div>
   );
 }

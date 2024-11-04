@@ -5,12 +5,25 @@ export default async function AdminPage() {
   const session = await auth();
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center">
-      You are logged in as {session?.user?.email}
+    <div className="min-h-screen flex flex-col items-center justify-center space-y-6 bg-gray-100 py-10">
+      <h1 className="text-2xl font-semibold text-customNavy">
+        אתה מחובר בתור {session?.user?.email}
+      </h1>
+
       <SignOut />
-      <br />
-      <Link href={"/admin/nursery-products"}> מוצרים במשתלה</Link>
-      <Link href={"/admin/weekly-products"}> תוצרת שבועית</Link>
+
+      <div className="mt-6 space-y-4">
+        <Link href={"/admin/nursery-products"}>
+          <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
+            מוצרים במשתלה
+          </button>
+        </Link>
+        <Link href={"/admin/weekly-products"}>
+          <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
+            תוצרת שבועית
+          </button>
+        </Link>
+      </div>
     </div>
   );
 }
@@ -23,7 +36,12 @@ function SignOut() {
         await signOut();
       }}
     >
-      <button type="submit">Sign out</button>
+      <button
+        type="submit"
+        className="py-2 px-6 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 transition"
+      >
+        התנתק
+      </button>
     </form>
   );
 }

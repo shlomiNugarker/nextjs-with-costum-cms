@@ -83,7 +83,10 @@ export const WeeklyProductsForm = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 flex flex-col">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-6 flex flex-col p-6 bg-white shadow-md rounded-lg w-full mx-auto"
+    >
       <input
         type="text"
         name="name"
@@ -91,7 +94,7 @@ export const WeeklyProductsForm = ({
         onChange={handleChange}
         placeholder="שם המוצר"
         required
-        className="input-style"
+        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
       />
       <textarea
         name="description"
@@ -99,7 +102,7 @@ export const WeeklyProductsForm = ({
         onChange={handleChange}
         placeholder="תיאור"
         required
-        className="textarea-style"
+        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
       />
       <input
         type="text"
@@ -107,7 +110,7 @@ export const WeeklyProductsForm = ({
         value={product.weight}
         onChange={handleChange}
         placeholder="משקל"
-        className="input-style"
+        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
       />
       <input
         type="text"
@@ -115,7 +118,7 @@ export const WeeklyProductsForm = ({
         value={product.category}
         onChange={handleChange}
         placeholder="קטגוריה"
-        className="input-style"
+        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
       />
       <input
         type="number"
@@ -124,7 +127,7 @@ export const WeeklyProductsForm = ({
         onChange={handleChange}
         placeholder="מחיר"
         required
-        className="input-style"
+        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
       />
       <input
         type="text"
@@ -132,16 +135,19 @@ export const WeeklyProductsForm = ({
         value={product.image_url}
         onChange={handleChange}
         placeholder="כתובת תמונה"
-        className="input-style"
+        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
       />
-      <button type="submit" className="btn-save">
+      <button
+        type="submit"
+        className="w-full py-3 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition"
+      >
         שמור מוצר
       </button>
       {product.id && (
         <button
           type="button"
           onClick={deleteProduct}
-          className="btn-delete mt-4 text-red-600"
+          className="w-full py-3 mt-2 bg-red-600 text-white font-bold rounded-lg hover:bg-opacity-90 transition"
         >
           מחק מוצר
         </button>

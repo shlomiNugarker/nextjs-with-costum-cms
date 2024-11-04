@@ -34,7 +34,7 @@ export default function Login() {
           <p className="text-center text-sm">
             {"Already have an account? "}
             <Link href="/login" className="font-semibold ">
-              Sign in
+              היכנס
             </Link>
             {" instead."}
           </p>

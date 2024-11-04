@@ -9,11 +9,14 @@ export function Form({
   return (
     <form
       action={action}
-      className="flex flex-col space-y-4  py-8 sm:px-16 bg-theme-light dark:bg-darkmode-theme-light"
+      className="flex text-customNavy flex-col space-y-6 py-8 px-6 sm:px-12 bg-white shadow-lg rounded-lg max-w-md mx-auto"
     >
       <div>
-        <label htmlFor="email" className="block text-xs  uppercase">
-          Email Address
+        <label
+          htmlFor="email"
+          className="block text-xs font-bold uppercase text-gray-600"
+        >
+          דואר אלקטורוני{" "}
         </label>
         <input
           id="email"
@@ -22,32 +25,38 @@ export function Form({
           placeholder="user@acme.com"
           autoComplete="email"
           required
-          className="mt-1 block w-full appearance-none rounded-md border px-3 py-2 shadow-sm focus:outline-none  sm:text-sm"
+          className="mt-2 block w-full rounded-md border border-gray-300 px-4 py-3 shadow-sm focus:border-customGreen focus:ring-customGreen focus:outline-none sm:text-sm"
         />
       </div>
-      <div>
-        <label htmlFor="username" className="block text-xs  uppercase">
-          Full Name
+      {/* <div>
+        <label
+          htmlFor="username"
+          className="block text-xs font-bold uppercase text-gray-600"
+        >
+          שם מלא{" "}
         </label>
         <input
           id="username"
           name="username"
-          type="username"
+          type="text"
           placeholder="Israel Israeli"
           required
-          className="mt-1 block w-full appearance-none rounded-md border  px-3 py-2  shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+          className="mt-2 block w-full rounded-md border border-gray-300 px-4 py-3 shadow-sm focus:border-customGreen focus:ring-customGreen focus:outline-none sm:text-sm"
         />
-      </div>
+      </div> */}
       <div>
-        <label htmlFor="password" className="block text-xs uppercase">
-          Password
+        <label
+          htmlFor="password"
+          className="block text-xs font-bold uppercase text-gray-600"
+        >
+          סיסמא
         </label>
         <input
           id="password"
           name="password"
           type="password"
           required
-          className="mt-1 block w-full appearance-none rounded-md border px-3 py-2 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+          className="mt-2 block w-full rounded-md border border-gray-300 px-4 py-3 shadow-sm focus:border-customGreen focus:ring-customGreen focus:outline-none sm:text-sm"
         />
       </div>
       {children}

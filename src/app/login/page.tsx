@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { SubmitButton } from "@/cmps/submit-button";
 import { signIn } from "@/lib/auth";
 import { Form } from "@/cmps/Form";
@@ -6,10 +5,12 @@ import { Form } from "@/cmps/Form";
 export default function Login() {
   return (
     <div className="flex items-center justify-center bg-theme-light dark:bg-darkmode-theme-light min-h-screen">
-      <div className="z-10 w-full max-w-md overflow-hidden rounded-2xl border  shadow-xl">
-        <div className="flex flex-col items-center justify-center space-y-3 border-b px-4 py-6 pt-8 text-center sm:px-16">
-          <h3 className="text-xl font-semibold">Sign In</h3>
-          <p className="text-sm">Use your email and password to sign in</p>
+      <div className="z-10 w-full max-w-md overflow-hidden rounded-2xl border border-gray-300 shadow-xl bg-white">
+        <div className="flex flex-col items-center justify-center space-y-3 border-b px-6 py-8 text-center sm:px-12">
+          <h3 className="text-2xl font-bold text-customNavy">התחברות</h3>
+          <p className="text-sm text-gray-600">
+            השתמש באימייל ובסיסמה שלך כדי להיכנס{" "}
+          </p>
         </div>
         <Form
           action={async (formData: FormData) => {
@@ -21,14 +22,9 @@ export default function Login() {
             });
           }}
         >
-          <SubmitButton>Sign in</SubmitButton>
-          <p className="text-center text-sms">
-            {"Don't have an account? "}
-            <Link href="/register" className="font-semibold">
-              Sign up
-            </Link>
-            {" for free."}
-          </p>
+          <div className="p-6 sm:px-12">
+            <SubmitButton>היכנס</SubmitButton>
+          </div>
         </Form>
       </div>
     </div>
