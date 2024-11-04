@@ -6,7 +6,7 @@ import { genSaltSync, hashSync } from "bcrypt-ts";
 
 export let client: postgres.Sql;
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-let db: PostgresJsDatabase<Record<string, unknown>>;
+export let db: PostgresJsDatabase<Record<string, unknown>>;
 
 export async function initialize() {
   try {
