@@ -12,7 +12,7 @@ export async function initialize() {
   try {
     console.log("Initializing database...");
     await connectToDatabase();
-    await ensureAllTablesExists();
+    // await ensureAllTablesExists();
   } catch (error) {
     console.error("Error during initialization:", error);
   }
@@ -31,11 +31,11 @@ export async function connectToDatabase() {
   }
 }
 
-async function ensureAllTablesExists() {
-  await ensureUsersTableExists();
-  await ensureWeeklyProductsTableExists();
-  await ensureNurseryProductsTableExists();
-}
+// async function ensureAllTablesExists() {
+//   await ensureUsersTableExists();
+//   await ensureWeeklyProductsTableExists();
+//   await ensureNurseryProductsTableExists();
+// }
 
 // Nursery Products:
 
