@@ -6,7 +6,9 @@ export default async function AddWeeklyProduct() {
   return (
     <>
       <section className="min-h-screen mt-10 flex flex-col justify-center items-center">
-        <h2 className="text-xl font-semibold mb-4">הוסף מוצר לתוצרת השבועית</h2>
+        <h2 className="text-4xl font-bold text-center mb-6 text-customNavy">
+          הוסף מוצר לתוצרת השבועית
+        </h2>
         <WeeklyProductsForm />
       </section>
     </>

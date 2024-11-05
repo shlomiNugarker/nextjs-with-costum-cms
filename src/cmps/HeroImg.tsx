@@ -1,7 +1,7 @@
 export const HeroImg = () => {
   return (
     <svg
-      className="h-full w-full"
+      className="h-full w-full animate-fade-in-up"
       viewBox="0 0 200 200"
       xmlns="http://www.w3.org/2000/svg"
     >
