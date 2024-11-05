@@ -2,6 +2,8 @@ import { getAllBlogs } from "@/lib/queries";
 import Link from "next/link";
 import React from "react";
 
+export const revalidate = 60;
+
 export default async function BlogPage() {
   const blogs = await getAllBlogs();
   return (

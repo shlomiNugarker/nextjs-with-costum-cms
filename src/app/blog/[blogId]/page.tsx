@@ -2,6 +2,8 @@ import React from "react";
 import { getBlogById } from "@/lib/queries";
 import ReactMarkdown from "react-markdown";
 
+export const revalidate = 60;
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function Page({ params }: any) {
   const { blogId } = params;
