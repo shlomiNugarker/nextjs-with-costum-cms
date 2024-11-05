@@ -107,7 +107,7 @@ export const WeeklyProductsForm = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6 flex flex-col p-6 bg-white shadow-md rounded-lg w-full mx-auto"
+      className="space-y-6 flex flex-col p-6 bg-white shadow-md rounded-lg w-1/2 mx-auto"
     >
       <input
         type="text"

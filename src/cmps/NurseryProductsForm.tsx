@@ -107,7 +107,7 @@ export const NurseryProductsForm = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6 flex flex-col p-6 bg-white shadow-md rounded-lg min-w-full mx-auto text-customNavy"
+      className="space-y-6 flex max-w-[500px] flex-col p-6 bg-white shadow-md rounded-lg mx-auto text-customNavy"
     >
       <input
         type="text"

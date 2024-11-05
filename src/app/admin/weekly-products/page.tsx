@@ -7,7 +7,7 @@ export const revalidate = 1;
 export default async function page() {
   const weeklyProducts = await getWeeklyProducts();
   return (
-    <div className="min-h-screen pt-[200px]  px-4 text-customNavy">
+    <div className="min-h-screen mt-10  px-4 text-customNavy">
       <div className="flex justify-center mt-8">
         <Link href={"weekly-products/"}>
           <p>תוצרת שבועית</p>

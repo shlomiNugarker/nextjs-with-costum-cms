@@ -7,7 +7,7 @@ export const revalidate = 1;
 export default async function page() {
   const nurseryProducts = await getNurseryProducts();
   return (
-    <div className="min-h-screen pt-[200px] px-4">
+    <div className="min-h-screen pt-10 mt-10 px-4">
       <div className="flex justify-center mt-8">
         <Link href={"nursery-products/weekly-products/"}>
           <p> מוצרים במשתלה</p>

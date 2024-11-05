@@ -5,7 +5,7 @@ export default async function AdminPage() {
   const session = await auth();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center space-y-6 bg-gray-100 py-10">
+    <div className="min-h-screen mt-10 flex flex-col items-center justify-center space-y-6 bg-gray-100 py-10">
       <h1 className="text-2xl font-semibold text-customNavy">
         אתה מחובר בתור {session?.user?.email}
       </h1>

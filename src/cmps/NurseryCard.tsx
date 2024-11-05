@@ -20,7 +20,7 @@ export const NurseryCard = ({ product }: any) => {
               {product.name}
             </h2>
             <p className="text-gray-600 mt-2">{product.description}</p>
-            <p className="text-gray-500 mt-1">גודל עציץ: {product.potSize}</p>
+            <p className="text-gray-500 mt-1">גודל עציץ: {product.pot_size}</p>
           </div>
         </div>
         <p className="mb-4 text-customGreen text-2xl font-bold mt-4 text-center">
