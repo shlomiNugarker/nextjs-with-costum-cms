@@ -3,14 +3,23 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRef, useState, useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
-import { CiShoppingCart } from "react-icons/ci";
-import { Cart } from "./Cart";
+// import { CiShoppingCart } from "react-icons/ci";
+// import { Cart } from "./Cart";
+
+const menuItems = [
+  { href: "/nursery", label: "המשתלה" },
+  { href: "/weekly-produce", label: "התוצרת השבועית" },
+  { href: "/contact", label: "דברו איתנו" },
+  { href: "/blog", label: "הבלוג" },
+  { href: "/delivery", label: "משלוחים" },
+  { href: "/about", label: "אודות" },
+];
 
 export const Header = () => {
   const currentPath = usePathname();
   const checkboxRef = useRef<HTMLInputElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isCartShown, setisCartShown] = useState(false);
+  // const [isCartShown, setisCartShown] = useState(false);
 
   const isActive = (path: string) =>
     currentPath === path ? "text-customGreen font-bold" : "text-customNavy";
@@ -64,76 +73,35 @@ export const Header = () => {
         aria-label="Header Navigation"
         className="peer-checked:min-h-fit flex max-h-0 w-full flex-col items-center overflow-hidden transition-all lg:ml-24 lg:max-h-full lg:flex-row"
       >
-        <ul className="flex text-2xl mt-4 xl:mt-0 text-center w-full flex-col items-center space-y-2 lg:flex-row lg:justify-center lg:space-y-0 sm:min-h-0.5">
-          <li className="lg:ml-12">
-            <Link
-              href="/nursery"
-              className={`rounded transition ${isActive("/nursery")}`}
-              onClick={handleCloseMenu}
-            >
-              המשתלה
-            </Link>
-          </li>
-          <li className="lg:ml-12">
-            <Link
-              href="/weekly-produce"
-              className={`rounded transition ${isActive("/weekly-produce")}`}
-              onClick={handleCloseMenu}
-            >
-              התוצרת השבועית
-            </Link>
-          </li>
-          <li className="lg:ml-12">
-            <Link
-              href="/contact"
-              className={`rounded transition ${isActive("/contact")}`}
-              onClick={handleCloseMenu}
-            >
-              דברו איתנו
-            </Link>
-          </li>
-          <li className="lg:ml-12">
-            <Link
-              href="/blog"
-              className={`rounded transition ${isActive("/blog")}`}
-              onClick={handleCloseMenu}
-            >
-              הבלוג
-            </Link>
-          </li>
-          <li className="lg:ml-12">
-            <Link
-              href="/delivery"
-              className={`rounded transition ${isActive("/delivery")}`}
-              onClick={handleCloseMenu}
-            >
-              משלוחים
-            </Link>
-          </li>
-          <li className="lg:ml-12">
-            <Link
-              href="/about"
-              className={`rounded transition ${isActive("/about")}`}
-              onClick={handleCloseMenu}
-            >
-              אודות
-            </Link>
-          </li>
+        <ul className="flex flex-col items-center w-full space-y-2 text-2xl text-center mt-4 xl:mt-0 lg:flex-row lg:space-y-0 lg:justify-center">
+          {menuItems.map(({ href, label }) => (
+            <li key={href} className="lg:ml-12">
+              <Link
+                href={href}
+                className={`rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105 ${isActive(
+                  href
+                )}`}
+                onClick={handleCloseMenu}
+              >
+                {label}
+              </Link>
+            </li>
+          ))}
         </ul>
-
-        <div
-          onClick={() => {
-            setisCartShown((prev) => !prev);
-          }}
-          className="flex items-center space-x-2 text-customGreen"
-        >
-          <span className="bg-customPeach p-3 text-customNavy font-semibold  w-5 h-5 flex items-center justify-center rounded-full">
-            3
-          </span>
-          <CiShoppingCart className="w-9 h-9" />
-        </div>
-        {isCartShown && <Cart></Cart>}
       </nav>
+
+      {/* <div
+        onClick={() => {
+          setisCartShown((prev) => !prev);
+        }}
+        className="flex items-center space-x-2 text-customGreen"
+      >
+        <span className="bg-customPeach p-3 text-customNavy font-semibold  w-5 h-5 flex items-center justify-center rounded-full">
+          3
+        </span>
+        <CiShoppingCart className="w-9 h-9" />
+      </div>
+      {isCartShown && <Cart></Cart>} */}
     </header>
   );
 };

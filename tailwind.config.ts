@@ -17,6 +17,8 @@ const config: Config = {
       animation: {
         "fade-in-up": "fadeInUp 0.8s ease-out forwards",
         "fade-in": "fadeIn 1s ease-out forwards",
+        heartbeat: "heartbeat 1s ease-in-out infinite",
+        float: "float 4s ease-in-out infinite",
       },
       keyframes: {
         fadeInUp: {
@@ -26,6 +28,16 @@ const config: Config = {
         fadeIn: {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
+        },
+        heartbeat: {
+          "0%, 100%": { transform: "scale(1)" },
+          "25%": { transform: "scale(1.1)" },
+          "50%": { transform: "scale(1.15)" },
+          "75%": { transform: "scale(1.1)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
         },
       },
     },

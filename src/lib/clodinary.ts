@@ -20,9 +20,9 @@ export async function uploadImageToCloudinary(file: File): Promise<string> {
     }
 
     const data = await response.json();
-    return data.secure_url; // החזרת כתובת התמונה שהועלתה
+    return data.secure_url;
   } catch (error) {
     console.error("Error uploading image:", error);
-    throw error; // נזרוק את השגיאה כדי שנוכל לטפל בה מחוץ לפונקציה
+    throw error;
   }
 }

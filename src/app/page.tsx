@@ -5,9 +5,9 @@ import { HeroImg } from "@/cmps/HeroImg";
 export default function Home() {
   return (
     <main>
-      <section className="mt-5 h-[100vh] w-full flex flex-col md:flex-row justify-center items-center text-customNavy px-4">
+      <section className="mt-5 h-[100vh] w-full flex flex-col md:flex-row justify-center items-center text-customNavy px-4 animate-float">
         <div className="max-w-[500px] text-center md:text-right animate-fade-in-up">
-          <h1 className="text-4xl md:text-[70px] font-bold leading-tight">
+          <h1 className="text-4xl md:text-[70px] font-bold leading-tight ">
             הגינה בפרדס - חווה אורגנית ומשתלה
           </h1>
           <br />
