@@ -4,12 +4,15 @@
 import { uploadImageToCloudinary } from "@/lib/clodinary";
 import Image from "next/image";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export const NurseryProductsForm = ({
   initialProduct,
 }: {
   initialProduct?: any;
 }) => {
+  const router = useRouter();
+
   const [product, setProduct] = useState<any>(
     initialProduct || {
       name: "",
@@ -68,6 +71,7 @@ export const NurseryProductsForm = ({
       if (!response.ok) throw new Error("Failed to save product");
 
       alert(`מוצר המשתלה ${isUpdate ? "עודכן" : "נוסף"} בהצלחה`);
+      router.push("/admin/nursery-products");
     } catch (err) {
       console.error("Error saving product:", err);
       alert("שגיאה בהוספה/עדכון מוצר המשתלה");
@@ -98,6 +102,7 @@ export const NurseryProductsForm = ({
         price: 0,
         image_url: "",
       });
+      router.push("/admin/nursery-products");
     } catch (err) {
       console.error("Error deleting product:", err);
       alert("שגיאה במחיקת המוצר");
@@ -152,24 +157,34 @@ export const NurseryProductsForm = ({
         className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
       />
 
-      <label className="block text-sm font-medium text-gray-700">תמונה:</label>
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleImageUpload}
-        disabled={isUploading}
-        className="w-full p-3 border border-gray-300 rounded-lg"
-      />
-      {isUploading && <p>מעלה את התמונה...</p>}
-      {product.image_url && (
-        <Image
-          src={product.image_url}
-          alt="Uploaded"
-          className="w-32 h-32 object-cover rounded-lg mt-4"
-          width={300}
-          height={300}
+      <label className="block text-sm font-semibold text-customNavy mb-2">
+        תמונה:
+      </label>
+      <div className="relative flex flex-col items-center p-4 border border-gray-300 rounded-lg bg-white shadow-sm hover:shadow-md transition duration-150">
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageUpload}
+          disabled={isUploading}
+          className="w-full text-customGreen cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:bg-customPeach file:text-customNavy hover:file:bg-opacity-80"
         />
-      )}
+        {isUploading && (
+          <p className="mt-2 text-customNavy text-sm font-medium animate-pulse">
+            מעלה את התמונה...
+          </p>
+        )}
+        {product.image_url && (
+          <div className="mt-4 w-32 h-32 rounded-lg overflow-hidden shadow-md">
+            <Image
+              src={product.image_url}
+              alt="Uploaded"
+              className="object-cover w-full h-full transition-transform duration-200 hover:scale-105"
+              width={300}
+              height={300}
+            />
+          </div>
+        )}
+      </div>
 
       <button
         type="submit"

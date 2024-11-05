@@ -64,7 +64,7 @@ export const Header = () => {
         aria-label="Header Navigation"
         className="peer-checked:min-h-fit flex max-h-0 w-full flex-col items-center overflow-hidden transition-all lg:ml-24 lg:max-h-full lg:flex-row"
       >
-        <ul className="flex text-2xl  sm:mt-5 xl:mt-0 text-center w-full flex-col items-center space-y-2 lg:flex-row lg:justify-center lg:space-y-0 sm:min-h-0.5">
+        <ul className="flex text-2xl mt-4 xl:mt-0 text-center w-full flex-col items-center space-y-2 lg:flex-row lg:justify-center lg:space-y-0 sm:min-h-0.5">
           <li className="lg:ml-12">
             <Link
               href="/nursery"

@@ -10,7 +10,9 @@ export default async function page() {
     <div className="min-h-screen pt-10 mt-10 px-4">
       <div className="flex justify-center mt-8">
         <Link href={"nursery-products/weekly-products/"}>
-          <p> מוצרים במשתלה</p>
+          <p className="text-4xl font-bold text-center mb-6 text-customNavy ">
+            מוצרים במשתלה
+          </p>
         </Link>
       </div>
       <div className="pb-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
