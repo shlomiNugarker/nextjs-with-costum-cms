@@ -1,5 +1,6 @@
 import React from "react";
 import { getBlogById } from "@/lib/queries";
+import ReactMarkdown from "react-markdown";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function Page({ params }: any) {
@@ -26,10 +27,9 @@ export default async function Page({ params }: any) {
             : null}
         </p>
         <p className="text-gray-700 text-lg mb-6">{blog.description}</p>
-        <div
-          className="prose prose-lg max-w-full text-gray-800"
-          dangerouslySetInnerHTML={{ __html: blog.content }}
-        />
+        <ReactMarkdown className="prose prose-lg max-w-full text-gray-800">
+          {blog.content}
+        </ReactMarkdown>
       </div>
     </div>
   );
