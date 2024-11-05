@@ -24,7 +24,7 @@ export const NurseryCard = ({ product }: any) => {
           </div>
         </div>
         <p className="mb-4 text-customGreen text-2xl font-bold mt-4 text-center">
-          {product.price}
+          {product.price} ש&quot;ח
         </p>
         {/* <button className="mt-4 w-full bg-customGreen text-white py-2 rounded">
           הוסף לסל
