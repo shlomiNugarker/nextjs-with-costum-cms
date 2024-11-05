@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
+import { uploadImageToCloudinary } from "@/lib/clodinary";
+import Image from "next/image";
 import { useState } from "react";
-// import { ImageUploader } from "./ImageUploader";
 
 export const NurseryProductsForm = ({
   initialProduct,
@@ -19,6 +20,7 @@ export const NurseryProductsForm = ({
       image_url: "",
     }
   );
+  const [isUploading, setIsUploading] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -28,6 +30,25 @@ export const NurseryProductsForm = ({
       ...prev,
       [name]: name === "price" ? parseInt(value, 10) : value,
     }));
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setIsUploading(true);
+      try {
+        const imageUrl = await uploadImageToCloudinary(file);
+        setProduct((prev: any) => ({
+          ...prev,
+          image_url: imageUrl,
+        }));
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        alert("שגיאה בהעלאת התמונה");
+      } finally {
+        setIsUploading(false);
+      }
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -130,19 +151,26 @@ export const NurseryProductsForm = ({
         required
         className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
       />
+
+      <label className="block text-sm font-medium text-gray-700">תמונה:</label>
       <input
-        type="text"
-        name="image_url"
-        value={product.image_url}
-        onChange={handleChange}
-        placeholder="כתובת תמונה"
-        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
+        type="file"
+        accept="image/*"
+        onChange={handleImageUpload}
+        disabled={isUploading}
+        className="w-full p-3 border border-gray-300 rounded-lg"
       />
-      {/* <ImageUploader
-        onUpload={(url) => {
-          console.log(url);
-        }}
-      ></ImageUploader> */}
+      {isUploading && <p>מעלה את התמונה...</p>}
+      {product.image_url && (
+        <Image
+          src={product.image_url}
+          alt="Uploaded"
+          className="w-32 h-32 object-cover rounded-lg mt-4"
+          width={300}
+          height={300}
+        />
+      )}
+
       <button
         type="submit"
         className="w-full py-3 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition"
