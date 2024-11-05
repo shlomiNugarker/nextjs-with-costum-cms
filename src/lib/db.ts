@@ -12,7 +12,7 @@ export async function initialize() {
   try {
     console.log("Initializing database...");
     await connectToDatabase();
-    // await ensureAllTablesExists();
+    await ensureAllTablesExists();
   } catch (error) {
     console.error("Error during initialization:", error);
   }
@@ -31,11 +31,12 @@ export async function connectToDatabase() {
   }
 }
 
-// async function ensureAllTablesExists() {
-//   await ensureUsersTableExists();
-//   await ensureWeeklyProductsTableExists();
-//   await ensureNurseryProductsTableExists();
-// }
+async function ensureAllTablesExists() {
+  await ensureUsersTableExists();
+  await ensureWeeklyProductsTableExists();
+  await ensureNurseryProductsTableExists();
+  await ensureBlogsTableExists();
+}
 
 // Nursery Products:
 
@@ -169,6 +170,59 @@ async function seedInitialWeeklyProducts() {
   await Promise.all(insertPromises);
 
   console.log("Initial products added to weekly_products table.");
+}
+
+// Blog
+
+async function ensureBlogsTableExists() {
+  const result = await client`
+    SELECT EXISTS (
+      SELECT FROM information_schema.tables 
+      WHERE table_schema = 'public' 
+      AND table_name = 'blogs'
+    );`;
+
+  if (!result[0].exists) {
+    await client`
+      CREATE TABLE "blogs" (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        description TEXT,
+        content TEXT NOT NULL,
+        created_at TIMESTAMPTZ DEFAULT NOW()
+      );
+    `;
+    console.log("Created blogs table.");
+
+    await seedInitialBlogs();
+  }
+}
+
+async function seedInitialBlogs() {
+  const initialBlogs = [
+    {
+      title: "ברוכים הבאים לבלוג שלנו",
+      description: "הפוסט הראשון בבלוג שלנו עם מידע חשוב על הפרויקט.",
+      content: `## ברוכים הבאים!\n\nזהו הפוסט הראשון בבלוג שלנו. כאן תמצאו עדכונים, מאמרים, ומידע נוסף.`,
+    },
+    {
+      title: "Markdown - איך להוסיף תוכן עשיר לבלוג",
+      description: "הסבר על Markdown ואיך להשתמש בו להוספת תוכן עשיר לפוסטים.",
+      content: `**Markdown** היא שפה לסימון טקסט בצורה פשוטה וקריאה, והיא מאפשרת לנו ליצור פוסטים עשירים בבלוג.`,
+    },
+  ];
+
+  const insertPromises = initialBlogs.map((blog) =>
+    client
+      ? client`
+        INSERT INTO blogs (title, description, content, created_at)
+        VALUES (${blog.title}, ${blog.description}, ${blog.content}, NOW());`
+      : null
+  );
+
+  await Promise.all(insertPromises);
+
+  console.log("Initial blogs added to blogs table.");
 }
 
 // Users:

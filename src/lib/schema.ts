@@ -39,3 +39,11 @@ export const users = pgTable("users", {
   role: varchar("role", { length: 20 }).default("User"),
   created_at: varchar("created_at", { length: 255 }).default("now()"),
 });
+
+export const blogsTable = pgTable("blogs", {
+  id: serial("id").primaryKey(),
+  title: varchar("title", { length: 255 }).notNull(),
+  description: text("description"),
+  content: text("content").notNull(), // שדה לתוכן Markdown
+  created_at: timestamp("created_at").default(sql`NOW()`),
+});
