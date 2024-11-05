@@ -26,7 +26,7 @@ export const ProductCard = ({ product }: any) => {
       </div>
       <div>
         <p className="text-customGreen font-bold text-2xl  text-center">
-          {product.price} ש"ח
+          {product.price} ש&quot;ח
         </p>
         {/* <button className="mt-4 w-full bg-customGreen text-white py-2 rounded">
           הוסף לסל
