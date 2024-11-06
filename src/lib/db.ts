@@ -21,7 +21,7 @@ export async function initialize() {
 export async function connectToDatabase() {
   try {
     if (db) return db;
-    client = postgres(`${process.env.POSTGRES_URL!}?sslmode=disable`);
+    client = postgres(`${process.env.POSTGRES_URL!}?sslmode=require`);
     db = drizzle(client);
     console.log("Connected to the database.");
     return db;
