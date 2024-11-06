@@ -11,6 +11,7 @@ const geistSans = localFont({
   variable: "--font-geist-sans",
   weight: "100 900",
 });
+
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
   variable: "--font-geist-mono",
@@ -18,9 +19,33 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "הגינה בפרדס - חווה אורגנית ומשתלה",
+  title: "הגינה בפרדס - חווה אורגנית ומשתלה | חקלאות | משתלה",
   description:
     "הגינה בפרדס - חווה אורגנית ומשתלה בפרדס חנה שמציעה מגוון ירקות, פירות, וצמחי נוי ותבלין אורגניים. חוויה טבעית וירוקה לכל המשפחה.",
+  keywords: ["חקלאות אורגנית", "משתלה", "צמחי תבלין", "פירות וירקות"],
+  openGraph: {
+    title: "הגינה בפרדס - חווה אורגנית ומשתלה",
+    description: "מבחר ירקות, פירות וצמחים אורגניים, ישירות מהמשתלה בפרדס חנה.",
+    url: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    type: "website",
+    images: [
+      {
+        url: "https://images.unsplash.com/photo-1488459716781-31db52582fe9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        width: 800,
+        height: 600,
+        alt: "תמונה של הגינה בפרדס",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@yourTwitterHandle",
+    title: "הגינה בפרדס - חווה אורגנית ומשתלה",
+    description: "מבחר ירקות, פירות וצמחים אורגניים, ישירות מהמשתלה בפרדס חנה.",
+    images: [
+      "https://images.unsplash.com/photo-1488459716781-31db52582fe9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    ],
+  },
 };
 
 await initialize();
