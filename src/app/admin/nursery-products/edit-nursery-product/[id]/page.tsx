@@ -3,7 +3,7 @@
 import { NurseryProductsForm } from "@/cmps/NurseryProductsForm";
 import { getProductById } from "@/lib/queries";
 
-export const revalidate = 1;
+export const revalidate = 5;
 
 export default async function EditNurseryProduct(props: any) {
   const productId = parseInt(props.params.id, 10);

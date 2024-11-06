@@ -2,7 +2,7 @@ import { ProductCard } from "@/cmps/ProductCard";
 import { getWeeklyProducts } from "@/lib/queries";
 import Link from "next/link";
 
-export const revalidate = 1;
+export const revalidate = 5;
 
 export default async function page() {
   const weeklyProducts = await getWeeklyProducts();

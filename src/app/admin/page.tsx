@@ -1,6 +1,8 @@
 import { auth, signOut } from "@/lib/auth";
 import Link from "next/link";
 
+export const revalidate = 5;
+
 export default async function AdminPage() {
   const session = await auth();
 
@@ -21,6 +23,11 @@ export default async function AdminPage() {
         <Link href={"/admin/weekly-products"}>
           <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
             תוצרת שבועית
+          </button>
+        </Link>
+        <Link href={"/admin/blog"}>
+          <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
+            בלוג{" "}
           </button>
         </Link>
       </div>

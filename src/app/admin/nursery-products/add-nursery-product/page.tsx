@@ -1,6 +1,6 @@
 import { NurseryProductsForm } from "@/cmps/NurseryProductsForm";
 
-export const revalidate = 1;
+export const revalidate = 5;
 
 export default async function AddNurseryProduct() {
   return (

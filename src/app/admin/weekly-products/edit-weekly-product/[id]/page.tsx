@@ -1,7 +1,7 @@
 import { WeeklyProductsForm } from "@/cmps/WeeklyProductsForm";
 import { getProductById } from "@/lib/queries";
 
-export const revalidate = 1;
+export const revalidate = 5;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function EditWeeklyProduct(props: any) {
