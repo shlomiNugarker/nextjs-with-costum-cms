@@ -15,7 +15,7 @@ export default async function EditBlogPage(props: any) {
 
       {post ? (
         <div className="w-[90vw] p-7 text-right">
-          <MdEditor content={post?.content} />
+          <MdEditor initialPost={post} />
         </div>
       ) : (
         <p>לא נמצא פוסט עם מזהה זה</p>
