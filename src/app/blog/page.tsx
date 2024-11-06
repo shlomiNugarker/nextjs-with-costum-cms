@@ -16,9 +16,7 @@ export default async function BlogPage() {
         {posts.map((post) => (
           <div key={post.id}>
             <BlogCard post={post} />
-            <Link href={`/blog/${post.id}`} className="block h-full w-full">
-              קרא עוד
-            </Link>
+            <Link href={`/blog/${post.id}`}>קרא עוד</Link>
           </div>
         ))}
       </div>
