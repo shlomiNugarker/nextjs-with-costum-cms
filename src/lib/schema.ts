@@ -44,6 +44,6 @@ export const blogsTable = pgTable("blogs", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description"),
-  content: text("content").notNull(), // שדה לתוכן Markdown
+  content: text("content").notNull(),
   created_at: timestamp("created_at").default(sql`NOW()`),
 });

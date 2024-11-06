@@ -16,10 +16,10 @@ export async function saveProduct(
     name: string;
     description: string;
     category: string;
-    potSize?: string;
+    pot_size?: string;
     weight?: string;
     price: number;
-    imageUrl: string;
+    image_url: string;
   },
   tableType: "nursery" | "weekly"
 ) {
@@ -35,8 +35,8 @@ export async function saveProduct(
           description: product.description,
           category: product.category,
           price: product.price,
-          image_url: product.imageUrl,
-          ...(tableType === "nursery" && { pot_size: product.potSize }),
+          image_url: product.image_url,
+          ...(tableType === "nursery" && { pot_size: product.pot_size }),
           ...(tableType === "weekly" && { weight: product.weight }),
         })
         .where(eq(table.id, product.id))
@@ -50,8 +50,8 @@ export async function saveProduct(
           description: product.description,
           category: product.category,
           price: product.price,
-          image_url: product.imageUrl,
-          ...(tableType === "nursery" && { pot_size: product.potSize }),
+          image_url: product.image_url,
+          ...(tableType === "nursery" && { pot_size: product.pot_size }),
           ...(tableType === "weekly" && { weight: product.weight }),
         })
         .returning();
