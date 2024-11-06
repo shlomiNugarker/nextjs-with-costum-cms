@@ -25,6 +25,14 @@ export default async function BlogPage() {
           </div>
         ))}
       </div>
+
+      <div className="flex justify-center mt-8">
+        <Link href={"blog/add-post"}>
+          <button className="py-3 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition shadow-lg">
+            הוסף פוסט
+          </button>
+        </Link>
+      </div>
     </section>
   );
 }
