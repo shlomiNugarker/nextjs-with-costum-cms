@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { blogsTable } from "@/services/db/schema";
 import { eq } from "drizzle-orm";
-import { connectToDatabase } from "@/services/db/database";
+import { connectToDatabase } from "@/config/database.config";
 
 export async function POST(request: Request) {
   try {

@@ -4,7 +4,7 @@ import "./globals.css";
 import { Footer } from "@/cmps/Footer";
 import { Header } from "@/cmps/Header";
 import { WhatsAppButton } from "@/cmps/WhatsAppButton";
-import { initialize } from "@/services/db/database";
+import { initialize } from "@/services/db/initializeDatabase";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

@@ -1,5 +1,5 @@
 import { genSaltSync, hashSync } from "bcrypt-ts";
-import { connectToDatabase } from "../database";
+import { connectToDatabase } from "../../../config/database.config";
 import { ensureUsersTableExists } from "../seed/users";
 import { eq } from "drizzle-orm";
 

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { nurseryProductsTable } from "@/services/db/schema";
 import { eq } from "drizzle-orm";
-import { connectToDatabase } from "@/services/db/database";
+import { connectToDatabase } from "@/config/database.config";
 
 export async function DELETE(
   request: NextRequest,

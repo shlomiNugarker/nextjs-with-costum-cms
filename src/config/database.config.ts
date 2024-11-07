@@ -1,24 +1,14 @@
 import postgres from "postgres";
 import { drizzle, PostgresJsDatabase } from "drizzle-orm/postgres-js";
-import { ensureBlogsTableExists } from "./seed/blogs";
-import { ensureContentBlocksTableExists } from "./seed/contentBlocks";
-import { ensureNurseryProductsTableExists } from "./seed/nurseryProducts";
-import { ensurePagesTableExists } from "./seed/pages";
-import { ensureUsersTableExists } from "./seed/users";
-import { ensureWeeklyProductsTableExists } from "./seed/weeklyProducts";
+import { ensureBlogsTableExists } from "../services/db/seed/blogs";
+import { ensureContentBlocksTableExists } from "../services/db/seed/contentBlocks";
+import { ensureNurseryProductsTableExists } from "../services/db/seed/nurseryProducts";
+import { ensurePagesTableExists } from "../services/db/seed/pages";
+import { ensureUsersTableExists } from "../services/db/seed/users";
+import { ensureWeeklyProductsTableExists } from "../services/db/seed/weeklyProducts";
 
 export let client: postgres.Sql;
 let db: PostgresJsDatabase<Record<string, unknown>>;
-
-export async function initialize() {
-  try {
-    console.log("Initializing database...");
-    await connectToDatabase();
-    await ensureAllTablesExists();
-  } catch (error) {
-    console.error("Error during initialization:", error);
-  }
-}
 
 export async function connectToDatabase() {
   try {
