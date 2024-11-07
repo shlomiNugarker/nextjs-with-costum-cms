@@ -4,12 +4,15 @@
 import { useState } from "react";
 import Image from "next/image";
 import { uploadImageToCloudinary } from "@/services/clodinary";
+import { useRouter } from "next/navigation";
 
 export const WeeklyProductsForm = ({
   initialProduct,
 }: {
   initialProduct?: any;
 }) => {
+  const router = useRouter();
+
   const [product, setProduct] = useState<any>(
     initialProduct || {
       name: "",
@@ -54,6 +57,7 @@ export const WeeklyProductsForm = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await handleWeeklyProductSubmit(product);
+    router.push("/admin");
   };
 
   const handleWeeklyProductSubmit = async (product: any) => {
@@ -98,6 +102,7 @@ export const WeeklyProductsForm = ({
         price: 0,
         image_url: "",
       });
+      router.push("/admin");
     } catch (err) {
       console.error("Error deleting product:", err);
       alert("שגיאה במחיקת המוצר");

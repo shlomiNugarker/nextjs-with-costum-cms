@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
+import { saveBlogPost } from "@/services/client-api/blog";
+import { useRouter } from "next/navigation";
 
 const MarkdownEditor = dynamic(() => import("@uiw/react-markdown-editor"), {
   ssr: false,
@@ -8,6 +10,8 @@ const MarkdownEditor = dynamic(() => import("@uiw/react-markdown-editor"), {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const MdEditor = ({ initialPost }: { initialPost?: any }) => {
+  const router = useRouter();
+
   const [editorContent, setEditorContent] = useState(
     initialPost?.content || ""
   );
@@ -28,25 +32,16 @@ const MdEditor = ({ initialPost }: { initialPost?: any }) => {
   const handleSave = async () => {
     setIsSaving(true);
     try {
-      const response = await fetch("/api/blog", {
-        method: initialPost?.id ? "PUT" : "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: initialPost?.id,
-          title,
-          description,
-          content: editorContent,
-        }),
-      });
+      const blogPost = {
+        id: initialPost?.id,
+        title,
+        description,
+        content: editorContent,
+      };
+      const result = await saveBlogPost(blogPost);
 
-      if (!response.ok) {
-        throw new Error("Failed to save blog post");
-      }
-
-      const result = await response.json();
       alert(result.message || "הפוסט נשמר בהצלחה");
+      router.push("/admin");
     } catch (error) {
       console.error("Error saving blog post:", error);
       alert("שגיאה בשמירת הפוסט");
@@ -54,6 +49,36 @@ const MdEditor = ({ initialPost }: { initialPost?: any }) => {
       setIsSaving(false);
     }
   };
+
+  // const handleSave = async () => {
+  //   setIsSaving(true);
+  //   try {
+  //     const response = await fetch("/api/blog", {
+  //       method: initialPost?.id ? "PUT" : "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         id: initialPost?.id,
+  //         title,
+  //         description,
+  //         content: editorContent,
+  //       }),
+  //     });
+
+  //     if (!response.ok) {
+  //       throw new Error("Failed to save blog post");
+  //     }
+
+  //     const result = await response.json();
+  //     alert(result.message || "הפוסט נשמר בהצלחה");
+  //   } catch (error) {
+  //     console.error("Error saving blog post:", error);
+  //     alert("שגיאה בשמירת הפוסט");
+  //   } finally {
+  //     setIsSaving(false);
+  //   }
+  // };
 
   return (
     <div className="flex flex-col items-center space-y-4">

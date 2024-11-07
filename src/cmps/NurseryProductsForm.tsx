@@ -5,6 +5,11 @@ import { uploadImageToCloudinary } from "@/services/clodinary";
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import {
+  addProduct,
+  deleteProductById,
+  updateProduct,
+} from "@/services/client-api/products";
 
 export const NurseryProductsForm = ({
   initialProduct,
@@ -57,21 +62,19 @@ export const NurseryProductsForm = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await handleNurseryProductSubmit(product);
+    router.push("/admin");
   };
 
   const handleNurseryProductSubmit = async (product: any) => {
     try {
       const isUpdate = Boolean(product.id);
-      const response = await fetch("/api/nursery-products", {
-        method: isUpdate ? "PUT" : "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(product),
-      });
+      const response = isUpdate
+        ? await updateProduct(product)
+        : await addProduct(product);
 
       if (!response.ok) throw new Error("Failed to save product");
 
       alert(`מוצר המשתלה ${isUpdate ? "עודכן" : "נוסף"} בהצלחה`);
-      router.push("/admin/nursery-products");
     } catch (err) {
       console.error("Error saving product:", err);
       alert("שגיאה בהוספה/עדכון מוצר המשתלה");
@@ -85,9 +88,7 @@ export const NurseryProductsForm = ({
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`/api/nursery-products/${product.id}`, {
-        method: "DELETE",
-      });
+      const response = await deleteProductById(product.id);
 
       if (!response.ok) throw new Error("Failed to delete product");
 
@@ -102,7 +103,7 @@ export const NurseryProductsForm = ({
         price: 0,
         image_url: "",
       });
-      router.push("/admin/nursery-products");
+      router.push("/admin");
     } catch (err) {
       console.error("Error deleting product:", err);
       alert("שגיאה במחיקת המוצר");

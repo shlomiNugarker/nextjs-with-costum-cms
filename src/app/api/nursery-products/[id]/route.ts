@@ -28,3 +28,41 @@ export async function DELETE(
     );
   }
 }
+
+export async function PUT(request: NextRequest) {
+  try {
+    const db = await connectToDatabase();
+
+    const data = await request.json();
+    const { id, name, description, pot_size, category, price, image_url } =
+      data;
+
+    if (!id || !name || !price) {
+      return NextResponse.json(
+        { error: "ID, name, and price are required" },
+        { status: 400 }
+      );
+    }
+
+    const updatedProduct = await db
+      .update(nurseryProductsTable)
+      .set({
+        name,
+        description,
+        pot_size,
+        category,
+        price,
+        image_url,
+      })
+      .where(eq(nurseryProductsTable.id, id))
+      .returning();
+
+    return NextResponse.json(updatedProduct);
+  } catch (error) {
+    console.error("Error updating nursery product:", error);
+    return NextResponse.json(
+      { error: "Failed to update product" },
+      { status: 500 }
+    );
+  }
+}
