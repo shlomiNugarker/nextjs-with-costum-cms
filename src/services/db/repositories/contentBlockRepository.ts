@@ -19,6 +19,16 @@ export async function getContentBlocksByPageId(pageId: number) {
   }
 }
 
+export async function getContentBlockById(id: number) {
+  const db = await connectToDatabase();
+  const block = await db
+    .select()
+    .from(contentBlocksTable)
+    .where(eq(contentBlocksTable.id, id))
+    .limit(1);
+  return block.length ? block[0] : null;
+}
+
 export async function createContentBlock(block: {
   page_id: number;
   block_type: string;

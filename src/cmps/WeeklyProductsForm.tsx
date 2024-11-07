@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import {
   deleteWeeklyProduct,
   saveWeeklyProduct,
-} from "@/services/client-api/weeklyProducts";
+} from "@/services/client-api/weeklyProductsApi";
 
 export const WeeklyProductsForm = ({
   initialProduct,

@@ -1,4 +1,4 @@
-import { blogsTable } from "@/services/db/schema";
+import { blogsTable, contentBlocksTable } from "@/services/db/schema";
 import { connectToDatabase } from "../../../config/database.config";
 import { eq } from "drizzle-orm";
 
@@ -25,5 +25,22 @@ export async function getBlogById(id: number) {
   } catch (error) {
     console.error(`Error fetching blog with id ${id}:`, error);
     return null;
+  }
+}
+
+export async function updateContentBlock(
+  id: number,
+  updatedContent: { content: string }
+) {
+  try {
+    const db = await connectToDatabase();
+    await db
+      .update(contentBlocksTable)
+      .set(updatedContent)
+      .where(eq(contentBlocksTable.id, id));
+    console.log("Content block updated successfully");
+  } catch (error) {
+    console.error("Error updating content block:", error);
+    throw new Error("Unable to update content block");
   }
 }

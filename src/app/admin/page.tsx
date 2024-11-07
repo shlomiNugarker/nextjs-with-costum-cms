@@ -27,7 +27,12 @@ export default async function AdminPage() {
         </Link>
         <Link href={"/admin/blog"}>
           <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
-            בלוג{" "}
+            בלוג
+          </button>
+        </Link>
+        <Link href={"/admin/about"}>
+          <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
+            אודות
           </button>
         </Link>
       </div>

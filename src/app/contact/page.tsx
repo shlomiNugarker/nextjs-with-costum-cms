@@ -1,9 +1,16 @@
 import { Contact } from "@/cmps/Contact";
+import { getPageByName } from "@/services/db/repositories/pageRepository";
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const page = await getPageByName("contact");
+
+  if (!page) {
+    return <div>דף תוצרת שבועית לא נמצא</div>;
+  }
+
   return (
     <div className="min-h-screen">
-      <Contact />
+      <Contact title={page.title} description={page.description} />
     </div>
   );
 }

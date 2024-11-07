@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { deleteBlogPost, saveBlogPost } from "@/services/client-api/blog";
+import { deleteBlogPost, saveBlogPost } from "@/services/client-api/blogApi";
 import { useRouter } from "next/navigation";
 
 const MarkdownEditor = dynamic(() => import("@uiw/react-markdown-editor"), {

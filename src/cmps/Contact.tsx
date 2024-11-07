@@ -1,12 +1,12 @@
-export const Contact = () => {
+export const Contact = ({ title, description }: any) => {
   return (
     <section className="mt-10" id="contact">
       <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
         <h2 className="text-4xl font-bold text-center mb-6 text-customNavy ">
-          צרו קשר
+          {title}
         </h2>
         <p className="text-center text-gray-600 mb-12 text-2xl">
-          השאירו פרטים ונחזור אליכם בהקדם
+          {description}
         </p>
         <form action="#" className="space-y-8">
           <div>

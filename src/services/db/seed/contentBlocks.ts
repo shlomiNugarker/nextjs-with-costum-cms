@@ -114,6 +114,37 @@ export async function seedInitialContentBlocks() {
       content: JSON.stringify({ url: "about-image.jpg" }),
       position: 2,
     },
+    {
+      page_id: 6,
+      block_type: "text",
+      content:
+        "החזון שלנו הוא לייצר תוצרת איכותית ובריאה בשיטות אורגניות ושמירה על הסביבה",
+      position: 3,
+    },
+    {
+      page_id: 6,
+      block_type: "list",
+      content: JSON.stringify([
+        "גידול אורגני ללא כימיקלים",
+        "מגוון רחב של צמחי תבלין ועצי פרי",
+        "שירות אישי ואיכותי לכל לקוח",
+        "מחויבות לשימור הטבע והסביבה",
+      ]),
+      position: 4,
+    },
+    {
+      page_id: 6,
+      block_type: "text",
+      content:
+        "המומחיות שלנו היא גידול חקלאי אורגני והענקת שירותים ברמה הגבוהה ביותר",
+      position: 5,
+    },
+    {
+      page_id: 6,
+      block_type: "text",
+      content: "בואו לבקר אותנו ולהתרשם מהמגוון הרחב והיופי של הטבע",
+      position: 6,
+    },
   ];
 
   const client = await getClient();

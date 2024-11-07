@@ -1,27 +1,53 @@
+import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
+import { getPageByName } from "@/services/db/repositories/pageRepository";
 import Link from "next/link";
 
-export default function About() {
+export default async function About() {
+  const aboutPage = await getPageByName("about");
+
+  if (!aboutPage) {
+    return <div>דף האודות לא נמצא</div>;
+  }
+
+  const contentBlocks = await getContentBlocksByPageId(aboutPage.id);
+
+  // const introText = contentBlocks.find(
+  //   (block) => block.block_type === "text" && block.position === 1
+  // )?.content;
+
+  const missionText = contentBlocks.find(
+    (block) => block.block_type === "text" && block.position === 2
+  )?.content;
+
+  const uniquenessPoints = contentBlocks.find(
+    (block) => block.block_type === "list"
+  )?.content;
+
+  const expertiseText = contentBlocks.find(
+    (block) => block.block_type === "text" && block.position === 3
+  )?.content;
+
+  const visitInvitation = contentBlocks.find(
+    (block) => block.block_type === "text" && block.position === 4
+  )?.content;
+
   return (
     <section className="pb-12 pt-24 px-4 max-w-screen-lg mx-auto mt-2 min-h-screen">
       <h1 className="text-4xl font-bold text-center mb-6 text-customNavy">
-        אודות הגינה בפרדס
+        {aboutPage.title}
       </h1>
       <p className="text-2xl text-center text-gray-600 mb-8">
-        הגינה בפרדס היא חווה אורגנית ומשתלה הממוקמת בלב פרדס חנה, ומתמחה בגידול
-        צמחי תבלין, עצי פרי, ותוצרת חקלאית טרייה ואיכותית. אנו מאמינים בשימור
-        הטבע והסביבה ולכן כל הצמחים והפירות שלנו מיוצרים בשיטות גידול אורגניות
-        וללא שימוש בחומרי הדברה כימיים.
+        {aboutPage.description}
+      </p>
+      <p className="text-2xl text-center text-gray-600 mb-8">
+        {aboutPage.description}
       </p>
 
       <div className="my-12">
         <h2 className="text-3xl font-semibold text-customNavy mb-4">
           החזון שלנו
         </h2>
-        <p className="text-gray-600 mb-6">
-          החזון שלנו הוא לייצר תוצרת חקלאית איכותית, בריאה ואורגנית, תוך שמירה
-          על אקולוגיה טבעית ואיזון אקולוגי. אנו שואפים להביא לצרכנים שלנו את
-          המיטב מהאדמה הישראלית ולהבטיח תוצרת נקייה ובריאה.
-        </p>
+        <p className="text-gray-600 mb-6">{missionText}</p>
       </div>
 
       <div className="my-12">
@@ -29,10 +55,11 @@ export default function About() {
           מה מייחד אותנו
         </h2>
         <ul className="list-disc list-inside text-gray-600 space-y-3">
-          <li>גידול אורגני וללא שימוש בכימיקלים</li>
-          <li>מגוון רחב של צמחי תבלין, עצי פרי ותוצרת חקלאית טרייה</li>
-          <li>איכות גבוהה ושירות אישי לכל לקוח</li>
-          <li>מחויבות לשימור הטבע ולסביבה</li>
+          {JSON.parse(uniquenessPoints || "[]").map(
+            (point: string, index: number) => (
+              <li key={index}>{point}</li>
+            )
+          )}
         </ul>
       </div>
 
@@ -40,23 +67,14 @@ export default function About() {
         <h2 className="text-3xl font-semibold text-customNavy mb-4">
           המומחיות שלנו
         </h2>
-        <p className="text-gray-600 mb-6">
-          הצוות המקצועי שלנו מורכב מאנשי חקלאות עם ידע וניסיון רב בגידולים
-          אורגניים. אנו מתמחים בשיטות גידול ייחודיות המבטיחות תוצרת באיכות
-          מעולה. החווה מציעה ללקוחותיה חוויה מיוחדת שבה ניתן ללמוד על שיטות
-          הגידול וליהנות מחיי החקלאות האמיתיים.
-        </p>
+        <p className="text-gray-600 mb-6">{expertiseText}</p>
       </div>
 
       <div className="my-12 text-center">
         <h2 className="text-3xl font-semibold text-customNavy mb-4">
           בואו לבקר אותנו!
         </h2>
-        <p className="text-gray-600 mb-6">
-          מוזמנים להגיע ולהתרשם מהחווה ומהמשתלה, ליהנות מהאווירה הירוקה ולראות
-          את התוצרת הטרייה. אנו נשמח לקבל את פניכם ולהדריך אתכם על כל הצמחים
-          והפירות שלנו.
-        </p>
+        <p className="text-gray-600 mb-6">{visitInvitation}</p>
         <p className="text-gray-600">
           <Link
             href="https://www.google.com/maps/search/?api=1&query=רחוב+השדה+10,+פרדס+חנה-כרכור,+ישראל"

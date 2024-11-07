@@ -1,12 +1,42 @@
-export default function Delivery() {
+import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
+import { getPageByName } from "@/services/db/repositories/pageRepository";
+
+export default async function Delivery() {
+  const deliveryPage = await getPageByName("delivery");
+
+  if (!deliveryPage) {
+    return <div>דף המשלוחים לא נמצא</div>;
+  }
+
+  const contentBlocks = await getContentBlocksByPageId(deliveryPage.id);
+
+  // const mainText = contentBlocks.find(
+  //   (block) => block.block_type === "text"
+  // )?.content;
+
+  // const deliveryAreas = contentBlocks.find(
+  //   (block) => block.block_type === "delivery_areas"
+  // )?.content;
+
+  // const deliveryOptions = contentBlocks.find(
+  //   (block) => block.block_type === "delivery_options"
+  // )?.content;
+
+  // const deliveryTimes = contentBlocks.find(
+  //   (block) => block.block_type === "delivery_times"
+  // )?.content;
+
+  // const guidelines = contentBlocks.find(
+  //   (block) => block.block_type === "guidelines"
+  // )?.content;
+
   return (
     <section className="pb-12 pt-24 px-4 max-w-screen-lg mx-auto mt-2 min-h-screen">
       <h1 className="text-4xl font-bold text-center mb-6 text-customNavy">
-        משלוחים
+        {deliveryPage.title || "משלוחים"}
       </h1>
       <p className="text-center text-gray-600 mb-12 text-2xl">
-        אנו מציעים שירות משלוחים מהיר ואמין. המשלוחים מתבצעים בתנאים מוקפדים,
-        ומבטיחים לכם את התוצרת הטרייה והאיכותית ביותר, עד הבית.
+        {deliveryPage.description}
       </p>
 
       <div className="mt-8">

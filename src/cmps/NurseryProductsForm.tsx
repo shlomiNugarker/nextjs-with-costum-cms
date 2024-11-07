@@ -9,7 +9,7 @@ import {
   addProduct,
   deleteProductById,
   updateProduct,
-} from "@/services/client-api/nurseryProducts";
+} from "@/services/client-api/nurseryProductsApi";
 
 export const NurseryProductsForm = ({
   initialProduct,
