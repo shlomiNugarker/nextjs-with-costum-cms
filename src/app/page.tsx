@@ -1,5 +1,7 @@
 import { Gallery } from "@/cmps/Gallery";
 import { HeroImg } from "@/cmps/HeroImg";
+import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
+import { getPageByName } from "@/services/db/repositories/pageRepository";
 
 const images = [
   "https://images.unsplash.com/photo-1486328228599-85db4443971f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3",
@@ -16,20 +18,30 @@ const images = [
   "https://plus.unsplash.com/premium_photo-1663089153028-2d7b5e01d0f8?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3",
 ];
 
-export default function Home() {
+export default async function Home() {
+  const homePage = await getPageByName("home");
+
+  if (!homePage) {
+    return <div>דף הבית לא נמצא</div>;
+  }
+
+  const contentBlocks = await getContentBlocksByPageId(homePage.id);
+
+  const heroText = contentBlocks.find(
+    (block) => block.block_type === "text"
+  )?.content;
+
+  console.log({ heroText });
+
   return (
     <main>
       <section className="mt-5 h-[100vh] w-full flex flex-col md:flex-row justify-center items-center text-customNavy px-4 animate-float">
         <div className="max-w-[500px] text-center md:text-right animate-fade-in-up">
           <h1 className="text-4xl md:text-[70px] font-bold leading-tight ">
-            הגינה בפרדס - חווה אורגנית ומשתלה
+            {homePage.title}
           </h1>
           <br />
-          <p className="text-2xl">
-            בשדה חקלאי קטן בפרדס חנה - מגדלים פירות יער 🍓 עלים 🌿 ירקות שורש
-            🍠🌶️ ומשתלה קטנה של צמחי פרי/תבלין ונוי 🪴 - תוצרת אורגנית וללא
-            חומרי הדברה (ביולוגי)🐞
-          </p>
+          <p className="text-2xl">{homePage.description}</p>
         </div>
         <div className="mt-8 md:mt-0 md:ml-8 flex justify-center animate-fade-in">
           <HeroImg href="https://images.unsplash.com/photo-1575218823251-f9d243b6f720?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" />

@@ -55,8 +55,8 @@ export const pagesTable = pgTable("pages", {
   meta_title: varchar("meta_title", { length: 255 }),
   meta_description: text("meta_description"),
   meta_keywords: varchar("meta_keywords", { length: 255 }),
+  description: text("description"),
   created_at: timestamp("created_at").default(sql`NOW()`),
-  updated_at: timestamp("updated_at").default(sql`NOW()`),
 });
 
 export const contentBlocksTable = pgTable("content_blocks", {
@@ -68,5 +68,4 @@ export const contentBlocksTable = pgTable("content_blocks", {
   content: text("content").notNull(),
   position: integer("position").default(0),
   created_at: timestamp("created_at").default(sql`NOW()`),
-  updated_at: timestamp("updated_at").default(sql`NOW()`),
 });

@@ -18,8 +18,7 @@ export async function ensureContentBlocksTableExists() {
           block_type VARCHAR(50) NOT NULL,
           content TEXT NOT NULL,
           position INTEGER DEFAULT 0,
-          created_at TIMESTAMPTZ DEFAULT NOW(),
-          updated_at TIMESTAMPTZ DEFAULT NOW()
+          created_at TIMESTAMPTZ DEFAULT NOW()
         );
       `;
     console.log("Created content_blocks table, seeding initial blocks...");
@@ -44,34 +43,34 @@ export async function seedInitialContentBlocks() {
     },
     // דף תוצרת שבועית
     {
-      page_id: 2,
+      page_id: 3,
       block_type: "text",
       content: "תוצרת אורגנית טרייה, ישר מהשדה שלנו אליכם הביתה",
       position: 1,
     },
     // דף המשתלה
     {
-      page_id: 3,
+      page_id: 4,
       block_type: "text",
       content:
         "ברוכים הבאים למשתלה של הגינה בפרדס, צמחי תבלין ונוי באיכות גבוהה",
       position: 1,
     },
     {
-      page_id: 3,
+      page_id: 4,
       block_type: "gallery",
       content: JSON.stringify(["nursery-image1.jpg", "nursery-image2.jpg"]),
       position: 2,
     },
     // דף משלוחים
     {
-      page_id: 4,
+      page_id: 2,
       block_type: "text",
       content: "משלוחים מהירים ואמינים של תוצרת אורגנית",
       position: 1,
     },
     {
-      page_id: 4,
+      page_id: 2,
       block_type: "text",
       content: "זמני אספקה הם בימים א'-ה' בין השעות 9:00-17:00.",
       position: 2,
@@ -91,26 +90,26 @@ export async function seedInitialContentBlocks() {
     },
     // דף הבלוג
     {
-      page_id: 6,
+      page_id: 7,
       block_type: "text",
       content: "ברוכים הבאים לבלוג שלנו! כאן תמצאו מאמרים וטיפים מעולם החקלאות",
       position: 1,
     },
     {
-      page_id: 6,
+      page_id: 7,
       block_type: "blog_list",
       content: JSON.stringify(["blog1", "blog2"]),
       position: 2,
     },
     // דף אודות
     {
-      page_id: 7,
+      page_id: 6,
       block_type: "text",
       content: "אודות הגינה בפרדס - חזון וערכים לחקלאות אורגנית ושימור הסביבה",
       position: 1,
     },
     {
-      page_id: 7,
+      page_id: 6,
       block_type: "image",
       content: JSON.stringify({ url: "about-image.jpg" }),
       position: 2,
