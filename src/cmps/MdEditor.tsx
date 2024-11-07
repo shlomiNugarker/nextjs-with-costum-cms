@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { saveBlogPost } from "@/services/client-api/blog";
+import { deleteBlogPost, saveBlogPost } from "@/services/client-api/blog";
 import { useRouter } from "next/navigation";
 
 const MarkdownEditor = dynamic(() => import("@uiw/react-markdown-editor"), {
@@ -50,35 +50,21 @@ const MdEditor = ({ initialPost }: { initialPost?: any }) => {
     }
   };
 
-  // const handleSave = async () => {
-  //   setIsSaving(true);
-  //   try {
-  //     const response = await fetch("/api/blog", {
-  //       method: initialPost?.id ? "PUT" : "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         id: initialPost?.id,
-  //         title,
-  //         description,
-  //         content: editorContent,
-  //       }),
-  //     });
+  const handleDelete = async () => {
+    if (!initialPost?.id) return;
 
-  //     if (!response.ok) {
-  //       throw new Error("Failed to save blog post");
-  //     }
+    const confirmDelete = confirm("האם אתה בטוח שברצונך למחוק את הפוסט?");
+    if (!confirmDelete) return;
 
-  //     const result = await response.json();
-  //     alert(result.message || "הפוסט נשמר בהצלחה");
-  //   } catch (error) {
-  //     console.error("Error saving blog post:", error);
-  //     alert("שגיאה בשמירת הפוסט");
-  //   } finally {
-  //     setIsSaving(false);
-  //   }
-  // };
+    try {
+      await deleteBlogPost(initialPost.id);
+      alert("הפוסט נמחק בהצלחה");
+      router.push("/admin");
+    } catch (error) {
+      console.error("Error deleting blog post:", error);
+      alert("שגיאה במחיקת הפוסט");
+    }
+  };
 
   return (
     <div className="flex flex-col items-center space-y-4">
@@ -113,6 +99,15 @@ const MdEditor = ({ initialPost }: { initialPost?: any }) => {
       >
         {isSaving ? "שומר..." : "שמור פוסט"}
       </button>
+
+      {initialPost?.id && (
+        <button
+          onClick={handleDelete}
+          className="py-2 px-6 bg-red-600 text-white font-bold rounded-lg hover:bg-opacity-90 transition mt-2"
+        >
+          מחק פוסט
+        </button>
+      )}
     </div>
   );
 };

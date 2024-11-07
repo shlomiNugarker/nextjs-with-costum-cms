@@ -9,7 +9,7 @@ import {
   addProduct,
   deleteProductById,
   updateProduct,
-} from "@/services/client-api/products";
+} from "@/services/client-api/nurseryProducts";
 
 export const NurseryProductsForm = ({
   initialProduct,
@@ -72,9 +72,8 @@ export const NurseryProductsForm = ({
         ? await updateProduct(product)
         : await addProduct(product);
 
-      if (!response.ok) throw new Error("Failed to save product");
-
       alert(`מוצר המשתלה ${isUpdate ? "עודכן" : "נוסף"} בהצלחה`);
+      return response;
     } catch (err) {
       console.error("Error saving product:", err);
       alert("שגיאה בהוספה/עדכון מוצר המשתלה");

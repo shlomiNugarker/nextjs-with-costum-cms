@@ -48,6 +48,15 @@ export const metadata: Metadata = {
   },
 };
 
+const menuItems = [
+  { href: "/nursery", label: "המשתלה" },
+  { href: "/weekly-produce", label: "התוצרת השבועית" },
+  { href: "/contact", label: "דברו איתנו" },
+  { href: "/blog", label: "הבלוג" },
+  { href: "/delivery", label: "משלוחים" },
+  { href: "/about", label: "אודות" },
+];
+
 await initialize();
 
 export default async function RootLayout({
@@ -67,7 +76,7 @@ export default async function RootLayout({
               "url('https://tzahile.co.il/wp-content/uploads/2021/06/new-bg-1920x1074.jpg')",
           }}
         ></div>
-        <Header />
+        <Header menuItems={menuItems} />
         {children}
         <WhatsAppButton />
         <Footer />

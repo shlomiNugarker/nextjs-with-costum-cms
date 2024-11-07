@@ -5,6 +5,10 @@ import { useState } from "react";
 import Image from "next/image";
 import { uploadImageToCloudinary } from "@/services/clodinary";
 import { useRouter } from "next/navigation";
+import {
+  deleteWeeklyProduct,
+  saveWeeklyProduct,
+} from "@/services/client-api/weeklyProducts";
 
 export const WeeklyProductsForm = ({
   initialProduct,
@@ -57,21 +61,17 @@ export const WeeklyProductsForm = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await handleWeeklyProductSubmit(product);
-    router.push("/admin");
   };
 
   const handleWeeklyProductSubmit = async (product: any) => {
     try {
       const isUpdate = Boolean(product.id);
-      const response = await fetch("/api/weekly-products", {
-        method: isUpdate ? "PUT" : "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(product),
-      });
+      const response = await saveWeeklyProduct(product);
 
-      if (!response.ok) throw new Error("Failed to save product");
+      console.log({ response });
 
       alert(`מוצר התוצרת השבועית ${isUpdate ? "עודכן" : "נוסף"} בהצלחה`);
+      router.push("/admin");
     } catch (err) {
       console.error("Error saving product:", err);
       alert("שגיאה בהוספה/עדכון מוצר התוצרת השבועית");
@@ -85,11 +85,7 @@ export const WeeklyProductsForm = ({
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`/api/weekly-products/${product.id}`, {
-        method: "DELETE",
-      });
-
-      if (!response.ok) throw new Error("Failed to delete product");
+      const response = await deleteWeeklyProduct(product.id);
 
       const result = await response.json();
       alert(result.message || "המוצר נמחק בהצלחה");

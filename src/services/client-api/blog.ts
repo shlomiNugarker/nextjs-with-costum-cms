@@ -15,3 +15,15 @@ export async function saveBlogPost(blogPost: any) {
 
   return await response.json();
 }
+
+export async function deleteBlogPost(postId: number) {
+  const response = await fetch(`/api/blog/${postId}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to delete blog post");
+  }
+
+  return await response.json();
+}

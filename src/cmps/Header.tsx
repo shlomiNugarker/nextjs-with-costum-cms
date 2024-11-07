@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -6,16 +7,8 @@ import { FiMenu, FiX } from "react-icons/fi";
 // import { CiShoppingCart } from "react-icons/ci";
 // import { Cart } from "./Cart";
 
-const menuItems = [
-  { href: "/nursery", label: "המשתלה" },
-  { href: "/weekly-produce", label: "התוצרת השבועית" },
-  { href: "/contact", label: "דברו איתנו" },
-  { href: "/blog", label: "הבלוג" },
-  { href: "/delivery", label: "משלוחים" },
-  { href: "/about", label: "אודות" },
-];
-
-export const Header = () => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const Header = ({ menuItems }: any) => {
   const currentPath = usePathname();
   const checkboxRef = useRef<HTMLInputElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -74,7 +67,7 @@ export const Header = () => {
         className="peer-checked:min-h-fit flex max-h-0 w-full flex-col items-center overflow-hidden transition-all lg:ml-24 lg:max-h-full lg:flex-row"
       >
         <ul className="flex flex-col items-center w-full space-y-2 text-2xl text-center mt-4 xl:mt-0 lg:flex-row lg:space-y-0 lg:justify-center">
-          {menuItems.map(({ href, label }) => (
+          {menuItems.map(({ href, label }: any) => (
             <li key={href} className="lg:ml-12">
               <Link
                 href={href}

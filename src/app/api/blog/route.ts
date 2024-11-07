@@ -56,25 +56,3 @@ export async function PUT(request: Request) {
   }
 }
 
-export async function DELETE(request: Request) {
-  try {
-    const db = await connectToDatabase();
-
-    const { searchParams } = new URL(request.url);
-    const id = searchParams.get("id");
-
-    if (!id) {
-      return NextResponse.json(
-        { error: "לא סופק מזהה לפוסט למחיקה" },
-        { status: 400 }
-      );
-    }
-
-    await db.delete(blogsTable).where(eq(blogsTable.id, parseInt(id, 10)));
-
-    return NextResponse.json({ message: "הפוסט נמחק בהצלחה" }, { status: 200 });
-  } catch (error) {
-    console.error("Error deleting blog:", error);
-    return NextResponse.json({ error: "שגיאה במחיקת הפוסט" }, { status: 500 });
-  }
-}
