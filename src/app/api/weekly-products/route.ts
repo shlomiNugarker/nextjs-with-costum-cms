@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { weeklyProductsTable } from "@/lib/schema";
+import { weeklyProductsTable } from "@/services/db/schema";
 import { eq } from "drizzle-orm";
-import { connectToDatabase } from "@/lib/db";
+import { connectToDatabase } from "@/services/db/database";
 
 export async function GET() {
   try {

@@ -1,5 +1,5 @@
 import { ProductCard } from "@/cmps/ProductCard";
-import { getWeeklyProducts } from "@/lib/queries";
+import { getWeeklyProducts } from "@/services/db/repositories/productRepository";
 import Link from "next/link";
 
 export const revalidate = 5;

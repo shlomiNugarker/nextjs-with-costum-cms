@@ -1,4 +1,4 @@
-export const HeroImg = () => {
+export const HeroImg = ({ href = "" }) => {
   return (
     <svg
       className="h-full w-full animate-fade-in-up"
@@ -13,7 +13,7 @@ export const HeroImg = () => {
             width="100%"
             height="100%"
             preserveAspectRatio="xMaxYMax slice"
-            href="https://images.unsplash.com/photo-1575218823251-f9d243b6f720?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80"
+            href={href}
           />
         </pattern>
       </defs>

@@ -1,5 +1,5 @@
 import { SubmitButton } from "@/cmps/submit-button";
-import { signIn } from "@/lib/auth";
+import { signIn } from "@/services/auth";
 import { Form } from "@/cmps/Form";
 
 export default function Login() {

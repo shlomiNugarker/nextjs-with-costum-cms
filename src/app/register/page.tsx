@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { createUser, getUser } from "@/lib/db";
 import { SubmitButton } from "@/cmps/submit-button";
 import { Form } from "@/cmps/Form";
+import { createUser, getUser } from "@/services/db/repositories/userRepository";
 
 export default function Login() {
   async function register(formData: FormData) {

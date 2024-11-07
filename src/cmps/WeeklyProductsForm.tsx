@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { uploadImageToCloudinary } from "@/lib/clodinary";
+import { uploadImageToCloudinary } from "@/services/clodinary";
 
 export const WeeklyProductsForm = ({
   initialProduct,

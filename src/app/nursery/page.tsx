@@ -1,6 +1,6 @@
 import React from "react";
 import { NurseryCard } from "@/cmps/NurseryCard";
-import { getNurseryProducts } from "@/lib/queries";
+import { getNurseryProducts } from "@/services/db/repositories/productRepository";
 
 export const revalidate = 60;
 

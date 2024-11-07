@@ -1,5 +1,3 @@
-export const revalidate = 60;
-
 export default function Delivery() {
   return (
     <section className="pb-12 pt-24 px-4 max-w-screen-lg mx-auto mt-2 min-h-screen">

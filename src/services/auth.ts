@@ -3,7 +3,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { compare } from "bcrypt-ts";
 import { authConfig } from "@/config/auth.config";
-import { getUser } from "./db";
+import { getUser } from "./db/repositories/userRepository";
 
 export const {
   handlers: { GET, POST },

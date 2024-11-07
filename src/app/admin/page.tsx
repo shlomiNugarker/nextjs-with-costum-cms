@@ -1,4 +1,4 @@
-import { auth, signOut } from "@/lib/auth";
+import { auth, signOut } from "@/services/auth";
 import Link from "next/link";
 
 export const revalidate = 5;

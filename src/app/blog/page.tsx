@@ -1,5 +1,5 @@
 import { BlogCard } from "@/cmps/BlogCard";
-import { getAllBlogs } from "@/lib/queries";
+import { getAllBlogs } from "@/services/db/repositories/blogRepository";
 import Link from "next/link";
 import React from "react";
 

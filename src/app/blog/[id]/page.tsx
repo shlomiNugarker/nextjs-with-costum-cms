@@ -1,5 +1,5 @@
+import { getBlogById } from "@/services/db/repositories/blogRepository";
 import React from "react";
-import { getBlogById } from "@/lib/queries";
 import ReactMarkdown from "react-markdown";
 
 export const revalidate = 60;

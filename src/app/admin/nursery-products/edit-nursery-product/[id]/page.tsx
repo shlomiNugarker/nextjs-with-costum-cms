@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { NurseryProductsForm } from "@/cmps/NurseryProductsForm";
-import { getProductById } from "@/lib/queries";
+import { getProductById } from "@/services/db/repositories/productRepository";
 
 export const revalidate = 5;
 

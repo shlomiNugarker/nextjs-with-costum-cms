@@ -1,6 +1,6 @@
 import React from "react";
 import { ProductCard } from "@/cmps/ProductCard";
-import { getWeeklyProducts } from "@/lib/queries";
+import { getWeeklyProducts } from "@/services/db/repositories/productRepository";
 
 export const revalidate = 60;
 

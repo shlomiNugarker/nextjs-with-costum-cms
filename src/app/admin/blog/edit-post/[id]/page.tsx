@@ -1,5 +1,5 @@
 import MdEditor from "@/cmps/MdEditor";
-import { getBlogById } from "@/lib/queries";
+import { getBlogById } from "@/services/db/repositories/blogRepository";
 import React from "react";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

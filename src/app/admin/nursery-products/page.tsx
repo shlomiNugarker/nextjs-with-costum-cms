@@ -1,5 +1,5 @@
 import { NurseryCard } from "@/cmps/NurseryCard";
-import { getNurseryProducts } from "@/lib/queries";
+import { getNurseryProducts } from "@/services/db/repositories/productRepository";
 import Link from "next/link";
 
 export const revalidate = 5;

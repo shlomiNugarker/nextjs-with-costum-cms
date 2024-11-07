@@ -1,14 +1,9 @@
-import postgres from "postgres";
-import { drizzle } from "drizzle-orm/postgres-js";
 import {
-  blogsTable,
   nurseryProductsTable,
   weeklyProductsTable,
-} from "./schema";
+} from "@/services/db/schema";
+import { connectToDatabase } from "../database";
 import { eq } from "drizzle-orm";
-
-const client = postgres(process.env.POSTGRES_URL || "");
-const db = drizzle(client);
 
 export async function saveProduct(
   product: {
@@ -28,6 +23,7 @@ export async function saveProduct(
 
   try {
     if (product.id) {
+      const db = await connectToDatabase();
       const updatedProduct = await db
         .update(table)
         .set({
@@ -43,6 +39,7 @@ export async function saveProduct(
         .returning();
       return updatedProduct[0];
     } else {
+      const db = await connectToDatabase();
       const newProduct = await db
         .insert(table)
         .values({
@@ -70,6 +67,9 @@ export async function getProductById(
   try {
     const table =
       tableType === "nursery" ? nurseryProductsTable : weeklyProductsTable;
+
+    const db = await connectToDatabase();
+
     const product = await db
       .select()
       .from(table)
@@ -87,6 +87,7 @@ export async function getProductById(
 
 export async function getWeeklyProducts() {
   try {
+    const db = await connectToDatabase();
     const products = await db.select().from(weeklyProductsTable);
     return products;
   } catch (error) {
@@ -97,32 +98,11 @@ export async function getWeeklyProducts() {
 
 export async function getNurseryProducts() {
   try {
+    const db = await connectToDatabase();
     const products = await db.select().from(nurseryProductsTable);
     return products;
   } catch (error) {
     console.error("Error fetching nursery products:", error);
     return [];
-  }
-}
-
-export async function getAllBlogs() {
-  try {
-    return await db.select().from(blogsTable);
-  } catch (error) {
-    console.error("Error fetching blogs:", error);
-    return [];
-  }
-}
-
-export async function getBlogById(id: number) {
-  try {
-    const blog = await db
-      .select()
-      .from(blogsTable)
-      .where(eq(blogsTable.id, id));
-    return blog.length ? blog[0] : null;
-  } catch (error) {
-    console.error(`Error fetching blog with id ${id}:`, error);
-    return null;
   }
 }
