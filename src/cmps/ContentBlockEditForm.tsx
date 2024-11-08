@@ -2,27 +2,12 @@
 import { updateContentBlock } from "@/services/client-api/contentBlockApi";
 import React, { useState } from "react";
 
-// Interface for a content block
-interface ContentBlock {
-  id: number;
-  block_type: string;
-  content: string;
-  position: number | null;
-}
-
-// Props for the ContentBlockEditForm component
-interface ContentBlockEditFormProps {
-  contentBlocks: ContentBlock[];
-}
-
 // ContentBlockEditForm component to dynamically render and edit content blocks
-export const ContentBlockEditForm: React.FC<ContentBlockEditFormProps> = ({
-  contentBlocks,
-}) => {
+export const ContentBlockEditForm = ({ contentBlocks }: any) => {
   const [blocks, setBlocks] = useState(contentBlocks);
 
   const handleContentChange = (id: number, newContent: string) => {
-    setBlocks((prevBlocks) =>
+    setBlocks((prevBlocks: any[]) =>
       prevBlocks.map((block) =>
         block.id === id ? { ...block, content: newContent } : block
       )
@@ -30,7 +15,7 @@ export const ContentBlockEditForm: React.FC<ContentBlockEditFormProps> = ({
   };
 
   const handleSave = async (id: number) => {
-    const block = blocks.find((b) => b.id === id);
+    const block = blocks.find((b: any) => b.id === id);
     if (!block) return;
 
     try {
@@ -44,7 +29,7 @@ export const ContentBlockEditForm: React.FC<ContentBlockEditFormProps> = ({
 
   return (
     <div className="space-y-6">
-      {blocks.map((block) => (
+      {blocks.map((block: any) => (
         <div
           key={block.id}
           className="p-4 border border-gray-300 rounded-lg mb-4"

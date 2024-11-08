@@ -48,6 +48,22 @@ export async function savePage(page: {
   }
 }
 
+export async function updatePage(id: number, updatedFields: any) {
+  const db = await connectToDatabase();
+
+  try {
+    const updatedPage = await db
+      .update(pagesTable)
+      .set(updatedFields)
+      .where(eq(pagesTable.id, id))
+      .returning();
+    return updatedPage[0];
+  } catch (error) {
+    console.error(`Error updating page with ID ${id}:`, error);
+    throw new Error("Unable to update page");
+  }
+}
+
 export async function getPageById(id: number) {
   try {
     const db = await connectToDatabase();
