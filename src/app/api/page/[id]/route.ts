@@ -32,9 +32,10 @@ export async function PUT(
 ) {
   const id = parseInt(params.id);
   const data = await request.json();
+  const { created_at, ...dataWithoutCreatedAt } = data;
 
   try {
-    const updatedPage = await updatePage(id, data);
+    const updatedPage = await updatePage(id, dataWithoutCreatedAt);
     return NextResponse.json(updatedPage);
   } catch (error) {
     console.error("Error updating page:", error);

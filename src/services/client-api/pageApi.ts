@@ -14,17 +14,9 @@ export async function getAllPages() {
   return await response.json();
 }
 
-export async function savePage(pageData: {
-  id?: number;
-  name: string;
-  title: string;
-  description: string;
-  meta_title: string;
-  meta_description: string;
-  meta_keywords: string;
-}) {
+export async function savePage(pageData: any) {
   const method = pageData.id ? "PUT" : "POST";
-  const url = pageData.id ? `/api/pages/${pageData.id}` : `/api/pages`;
+  const url = pageData.id ? `/api/page/${pageData.id}` : `/api/page`;
 
   const response = await fetch(url, {
     method,

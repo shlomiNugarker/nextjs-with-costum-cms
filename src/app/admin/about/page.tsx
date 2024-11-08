@@ -1,4 +1,5 @@
 import { ContentBlockEditForm } from "@/cmps/ContentBlockEditForm";
+import { PageEditForm } from "@/cmps/PageEditForm";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
 import { getPageByName } from "@/services/db/repositories/pageRepository";
 
@@ -14,6 +15,7 @@ export default async function AdminAboutPage() {
       <h1 className="text-3xl font-semibold text-center mb-6">
         Edit About Page
       </h1>
+      <PageEditForm initialPage={aboutPage} />
       <ContentBlockEditForm contentBlocks={contentBlocks} />
     </div>
   );

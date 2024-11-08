@@ -29,6 +29,7 @@ export const ContentBlockEditForm = ({ contentBlocks }: any) => {
 
   return (
     <div className="space-y-6">
+      <h1 className="text-3xl font-semibold text-center mb-6">Edit Blocks</h1>
       {blocks.map((block: any) => (
         <div
           key={block.id}
