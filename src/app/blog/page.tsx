@@ -19,6 +19,8 @@ export default async function BlogPage() {
 
   const contentBlocks = await getContentBlocksByPageId(blogPage.id);
 
+  console.log({ contentBlocks });
+
   const headerText = contentBlocks.find(
     (block) => block.block_type === "text"
   )?.content;
@@ -28,6 +30,9 @@ export default async function BlogPage() {
       <h1 className="text-4xl font-bold text-center mb-12 text-customNavy">
         {blogPage.title || "הבלוג"}
       </h1>
+      <p className="text-center text-gray-600 mb-8 text-2xl">
+        {blogPage.description}
+      </p>
       <p className="text-center text-gray-600 mb-8 text-2xl">
         {headerText ||
           "כאן תוכלו לקרוא את כל המאמרים שלנו ולהתעדכן בנושאים האחרונים"}

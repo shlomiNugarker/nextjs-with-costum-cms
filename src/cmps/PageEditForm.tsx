@@ -26,92 +26,93 @@ export const PageEditForm = ({ initialPage }: any) => {
   };
 
   return (
-    <div className="space-y-6 p-6 border border-gray-300 rounded-lg">
-      <h2 className="text-2xl font-bold mb-4">Edit Page</h2>
+    <div className="space-y-8 p-8 border border-customPeach bg-white shadow-md rounded-lg ">
+      <h2 className="text-3xl font-bold text-center text-customNavy mb-6">
+        עריכת דף
+      </h2>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Page Name
+      {/* <div>
+        <label className="block text-lg font-medium text-customNavy mb-2">
+          שם הדף
         </label>
         <input
           type="text"
           name="name"
           value={page.name}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded-lg"
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
         />
       </div>
-
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Title
+        <label className="block text-lg font-medium text-customNavy mb-2">
+          כותרת
         </label>
         <input
           type="text"
           name="title"
           value={page.title}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded-lg"
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
         />
-      </div>
+      </div> */}
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Description
+        <label className="block text-lg font-medium text-customNavy mb-2">
+          תיאור
         </label>
         <textarea
           name="description"
           value={page.description}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded-lg"
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
           rows={3}
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Meta Title
+        <label className="block text-lg font-medium text-customNavy mb-2">
+          כותרת מטא
         </label>
         <input
           type="text"
           name="meta_title"
           value={page.meta_title}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded-lg"
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Meta Description
+        <label className="block text-lg font-medium text-customNavy mb-2">
+          תיאור מטא
         </label>
         <textarea
           name="meta_description"
           value={page.meta_description}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded-lg"
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
           rows={3}
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-1">
-          Meta Keywords
+        <label className="block text-lg font-medium text-customNavy mb-2">
+          מילות מפתח
         </label>
         <input
           type="text"
           name="meta_keywords"
           value={page.meta_keywords}
           onChange={handleChange}
-          className="w-full p-2 border border-gray-300 rounded-lg"
+          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
         />
       </div>
 
       <button
         onClick={handleSave}
-        className="mt-4 py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+        className="w-full py-3 bg-customGreen text-white font-semibold rounded-lg hover:bg-opacity-90 transition mt-6"
       >
-        Save Page
+        שמור דף
       </button>
     </div>
   );

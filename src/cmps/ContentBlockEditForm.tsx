@@ -29,22 +29,24 @@ export const ContentBlockEditForm = ({ contentBlocks }: any) => {
   };
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-semibold text-center mb-6">Edit Blocks</h1>
+    <div className="space-y-8">
+      <h1 className="text-4xl font-semibold text-center mb-8 text-customNavy">
+        עריכת בלוקים בעמוד
+      </h1>
       {blocks.map((block: any) => (
         <div
           key={block.id}
-          className="p-4 border border-gray-300 rounded-lg mb-4"
+          className="p-6 border border-customPeach bg-white shadow-md rounded-lg"
         >
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            {`Edit ${block.block_type}`}
+          <label className="block text-lg font-medium text-customNavy mb-4">
+            {`ערוך ${block.block_type}`}
           </label>
 
           {block.block_type === "text" && (
             <textarea
               value={block.content}
               onChange={(e) => handleContentChange(block.id, e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded-lg"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
               rows={4}
             />
           )}
@@ -54,8 +56,8 @@ export const ContentBlockEditForm = ({ contentBlocks }: any) => {
               type="text"
               value={block.content}
               onChange={(e) => handleContentChange(block.id, e.target.value)}
-              placeholder="Image URL"
-              className="w-full p-2 border border-gray-300 rounded-lg"
+              placeholder="כתובת URL של התמונה"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
             />
           )}
 
@@ -63,17 +65,17 @@ export const ContentBlockEditForm = ({ contentBlocks }: any) => {
             <textarea
               value={block.content}
               onChange={(e) => handleContentChange(block.id, e.target.value)}
-              placeholder='Enter list items as JSON array, e.g., ["item1", "item2"]'
-              className="w-full p-2 border border-gray-300 rounded-lg"
+              placeholder='הזן פריטים בפורמט JSON, למשל: ["פריט1", "פריט2"]'
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
               rows={4}
             />
           )}
 
           <button
             onClick={() => handleSave(block.id)}
-            className="mt-4 py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+            className="mt-6 py-2 px-6 bg-customGreen text-white font-semibold rounded-lg shadow hover:bg-opacity-90 transition"
           >
-            Save
+            שמור
           </button>
         </div>
       ))}

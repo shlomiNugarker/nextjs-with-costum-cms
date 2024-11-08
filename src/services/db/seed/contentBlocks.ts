@@ -98,12 +98,6 @@ export async function seedInitialContentBlocks() {
       content: "ברוכים הבאים לבלוג שלנו! כאן תמצאו מאמרים וטיפים מעולם החקלאות",
       position: 1,
     },
-    {
-      page_id: 7,
-      block_type: "blog_list",
-      content: JSON.stringify(["blog1", "blog2"]),
-      position: 2,
-    },
     // דף אודות
     {
       page_id: 6,
