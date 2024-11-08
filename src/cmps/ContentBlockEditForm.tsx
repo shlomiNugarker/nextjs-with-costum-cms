@@ -2,9 +2,10 @@
 import { updateContentBlock } from "@/services/client-api/contentBlockApi";
 import React, { useState } from "react";
 
-// ContentBlockEditForm component to dynamically render and edit content blocks
 export const ContentBlockEditForm = ({ contentBlocks }: any) => {
-  const [blocks, setBlocks] = useState(contentBlocks);
+  const [blocks, setBlocks] = useState(
+    contentBlocks.slice().sort((a: any, b: any) => a.position - b.position)
+  );
 
   const handleContentChange = (id: number, newContent: string) => {
     setBlocks((prevBlocks: any[]) =>
@@ -36,7 +37,7 @@ export const ContentBlockEditForm = ({ contentBlocks }: any) => {
           className="p-4 border border-gray-300 rounded-lg mb-4"
         >
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            {`Edit ${block.block_type} (Position ${block.position})`}
+            {`Edit ${block.block_type}`}
           </label>
 
           {block.block_type === "text" && (

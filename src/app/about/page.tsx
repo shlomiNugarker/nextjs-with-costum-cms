@@ -11,9 +11,9 @@ export default async function About() {
 
   const contentBlocks = await getContentBlocksByPageId(aboutPage.id);
 
-  // const introText = contentBlocks.find(
-  //   (block) => block.block_type === "text" && block.position === 1
-  // )?.content;
+  const introText = contentBlocks.find(
+    (block) => block.block_type === "text" && block.position === 1
+  )?.content;
 
   const missionText = contentBlocks.find(
     (block) => block.block_type === "text" && block.position === 2
@@ -39,10 +39,7 @@ export default async function About() {
       <p className="text-2xl text-center text-gray-600 mb-8">
         {aboutPage.description}
       </p>
-      <p className="text-2xl text-center text-gray-600 mb-8">
-        {aboutPage.description}
-      </p>
-
+      <p className="text-xl text-center text-gray-600 mb-8">{introText}</p>
       <div className="my-12">
         <h2 className="text-3xl font-semibold text-customNavy mb-4">
           החזון שלנו
