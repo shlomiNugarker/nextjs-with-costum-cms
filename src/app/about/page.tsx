@@ -11,25 +11,8 @@ export default async function About() {
 
   const contentBlocks = await getContentBlocksByPageId(aboutPage.id);
 
-  const introText = contentBlocks.find(
-    (block) => block.block_type === "text" && block.position === 1
-  )?.content;
-
-  const missionText = contentBlocks.find(
-    (block) => block.block_type === "text" && block.position === 2
-  )?.content;
-
-  const uniquenessPoints = contentBlocks.find(
-    (block) => block.block_type === "list"
-  )?.content;
-
-  const expertiseText = contentBlocks.find(
-    (block) => block.block_type === "text" && block.position === 3
-  )?.content;
-
-  const visitInvitation = contentBlocks.find(
-    (block) => block.block_type === "text" && block.position === 4
-  )?.content;
+  // Sort blocks by position for proper order rendering
+  const sortedBlocks = contentBlocks.sort((a, b) => a.position - b.position);
 
   return (
     <section className="pb-12 pt-24 px-4 max-w-screen-lg mx-auto mt-2 min-h-screen">
@@ -39,39 +22,52 @@ export default async function About() {
       <p className="text-2xl text-center text-gray-600 mb-8">
         {aboutPage.description}
       </p>
-      <p className="text-xl text-center text-gray-600 mb-8">{introText}</p>
-      <div className="my-12">
-        <h2 className="text-3xl font-semibold text-customNavy mb-4">
-          החזון שלנו
-        </h2>
-        <p className="text-gray-600 mb-6">{missionText}</p>
-      </div>
 
-      <div className="my-12">
-        <h2 className="text-3xl font-semibold text-customNavy mb-4">
-          מה מייחד אותנו
-        </h2>
-        <ul className="list-disc list-inside text-gray-600 space-y-3">
-          {JSON.parse(uniquenessPoints || "[]").map(
-            (point: string, index: number) => (
-              <li key={index}>{point}</li>
-            )
-          )}
-        </ul>
-      </div>
+      {sortedBlocks.map((block) => {
+        if (block.block_type === "text") {
+          return (
+            <div key={block.id} className="my-12">
+              <p className="text-gray-600 text-xl mb-6">{block.content}</p>
+            </div>
+          );
+        }
 
-      <div className="my-12">
-        <h2 className="text-3xl font-semibold text-customNavy mb-4">
-          המומחיות שלנו
-        </h2>
-        <p className="text-gray-600 mb-6">{expertiseText}</p>
-      </div>
+        if (block.block_type === "image") {
+          const imageUrl = block.content;
+          return (
+            <div key={block.id} className="my-12 text-center">
+              <img
+                src={imageUrl}
+                alt="About page image"
+                className="mx-auto rounded-lg"
+              />
+            </div>
+          );
+        }
+
+        if (block.block_type === "list") {
+          const listItems = JSON.parse(block.content || "[]");
+          return (
+            <div key={block.id} className="my-12">
+              <ul className="list-disc list-inside text-gray-600 space-y-3">
+                {listItems.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          );
+        }
+
+        return null;
+      })}
 
       <div className="my-12 text-center">
         <h2 className="text-3xl font-semibold text-customNavy mb-4">
           בואו לבקר אותנו!
         </h2>
-        <p className="text-gray-600 mb-6">{visitInvitation}</p>
+        <p className="text-gray-600 mb-6">
+          הגעתם למקום הנכון להתרשמות מהחקלאות האורגנית שלנו.
+        </p>
         <p className="text-gray-600">
           <Link
             href="https://www.google.com/maps/search/?api=1&query=רחוב+השדה+10,+פרדס+חנה-כרכור,+ישראל"
