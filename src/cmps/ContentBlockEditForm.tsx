@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import { updateContentBlock } from "@/services/client-api/contentBlockApi";
 
 type ContentBlock = {
+  block_type: string;
   id: number;
-  position: number;
-  block_type: "text" | "image" | "list" | "form";
+  created_at: Date | null;
+  page_id: number;
   content: string;
+  position: number | null;
 };
 
 export const ContentBlockEditForm = ({
@@ -23,6 +25,23 @@ export const ContentBlockEditForm = ({
       prevBlocks.map((block) =>
         block.id === id ? { ...block, content: newContent } : block
       )
+    );
+  };
+
+  const handleFormFieldChange = (
+    id: number,
+    index: number,
+    newValue: string
+  ) => {
+    setBlocks((prevBlocks) =>
+      prevBlocks.map((block) => {
+        if (block.id === id && block.block_type === "form") {
+          const parsedContent = JSON.parse(block.content);
+          parsedContent.fields[index] = newValue;
+          return { ...block, content: JSON.stringify(parsedContent) };
+        }
+        return block;
+      })
     );
   };
 
@@ -60,6 +79,7 @@ export const ContentBlockEditForm = ({
           <label className="block text-lg font-medium text-customNavy mb-4">
             {`ערוך ${block.block_type}`}
           </label>
+
           {block.block_type === "text" && (
             <textarea
               value={block.content}
@@ -68,6 +88,7 @@ export const ContentBlockEditForm = ({
               rows={4}
             />
           )}
+
           {block.block_type === "image" && (
             <input
               type="text"
@@ -77,6 +98,7 @@ export const ContentBlockEditForm = ({
               className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
             />
           )}
+
           {block.block_type === "list" && (
             <textarea
               value={block.content}
@@ -86,40 +108,30 @@ export const ContentBlockEditForm = ({
               rows={4}
             />
           )}
+
           {block.block_type === "form" && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                הגדרת שדות טופס (בפורמט JSON)
-              </label>
-              <textarea
-                value={block.content}
-                onChange={(e) => handleContentChange(block.id, e.target.value)}
-                placeholder='Enter form fields as JSON array, e.g., {"fields":["שם","דוא"ל","הודעה"]}'
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
-                rows={4}
-              />
-              <div className="mt-4">
-                <h3 className="text-lg font-semibold text-customNavy mb-2">
-                  תצוגה מקדימה של שדות הטופס:
-                </h3>
-                {JSON.parse(block.content).fields.map(
-                  (field: string, index: number) => (
-                    <div key={index} className="mb-2">
-                      <label className="block text-sm font-medium text-gray-600 text-right">
-                        {field}
-                      </label>
-                      <input
-                        type="text"
-                        className="w-full p-2 border border-gray-300 rounded-lg text-right"
-                        placeholder={`הזן ${field}`}
-                        disabled
-                      />
-                    </div>
-                  )
-                )}
-              </div>
+              <h3 className="text-lg font-semibold text-customNavy mb-2">
+                ערוך שדות טופס:
+              </h3>
+              {JSON.parse(block.content).fields.map(
+                (field: string, index: number) => (
+                  <div key={index} className="mb-4">
+                    <input
+                      type="text"
+                      value={field}
+                      onChange={(e) =>
+                        handleFormFieldChange(block.id, index, e.target.value)
+                      }
+                      className="w-full p-2 border border-gray-300 rounded-lg text-right"
+                      placeholder={`ערוך שדה ${index + 1}`}
+                    />
+                  </div>
+                )
+              )}
             </div>
           )}
+
           <button
             onClick={() => handleSave(block.id)}
             className="mt-6 py-2 px-6 bg-customGreen text-white font-semibold rounded-lg shadow hover:bg-opacity-90 transition"

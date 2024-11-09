@@ -12,7 +12,6 @@ export default async function BlogPage() {
   }
 
   const contentBlocks = await getContentBlocksByPageId(contactPage.id);
-  console.log(contentBlocks);
 
   return (
     <section className="min-h-screen pt-20 px-4">
