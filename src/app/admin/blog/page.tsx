@@ -27,13 +27,13 @@ export default async function BlogPage() {
       <h1 className="text-4xl font-semibold text-center mb-8 text-customNavy">
         פוסטים
       </h1>
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-center">
         {posts.map((post) => (
           <div key={post.id}>
             <BlogCard post={post} />
             <Link
               href={`/admin/blog/edit-post/${post.id}`}
-              className="block h-full w-full"
+              className="py-3 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition shadow-lg"
             >
               ערוך פוסט
             </Link>

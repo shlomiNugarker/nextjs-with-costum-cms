@@ -85,6 +85,7 @@ const MdEditor = ({ initialPost }: { initialPost?: any }) => {
       {MarkdownEditor ? (
         <MarkdownEditor
           style={{ textAlign: "right" }}
+          theme={"light"}
           className="min-h-[400px] max-h-[60vh] text-right w-full"
           value={editorContent}
           onChange={(value) => setEditorContent(value)}

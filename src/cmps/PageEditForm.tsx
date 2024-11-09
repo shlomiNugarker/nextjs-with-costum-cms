@@ -27,12 +27,12 @@ export const PageEditForm = ({ initialPage }: any) => {
   };
 
   return (
-    <div className="space-y-8 p-8 border border-customPeach bg-white shadow-lg rounded-lg max-w-2xl mx-auto mb-10">
+    <div className="space-y-8 p-8 border border-customPeach bg-white shadow-lg rounded-lg max-w-2xl mx-auto mb-10  text-customNavy">
       <h2 className="text-4xl font-extrabold text-center text-customNavy mb-8">
         עריכת דף
       </h2>
 
-      <div>
+      {/* <div>
         <label className="block text-lg font-semibold text-customNavy mb-2">
           שם הדף
         </label>
@@ -44,7 +44,7 @@ export const PageEditForm = ({ initialPage }: any) => {
           className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition placeholder-gray-400"
           placeholder="הזן את שם הדף"
         />
-      </div>
+      </div> */}
 
       <div>
         <label className="block text-lg font-semibold text-customNavy mb-2">
