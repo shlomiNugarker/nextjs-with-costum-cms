@@ -11,8 +11,9 @@ export default async function About() {
 
   const contentBlocks = await getContentBlocksByPageId(aboutPage.id);
 
-  // Sort blocks by position for proper order rendering
-  const sortedBlocks = contentBlocks.sort((a, b) => a.position - b.position);
+  const sortedBlocks = contentBlocks.sort(
+    (a, b) => (a.position || 0) - (b.position || 0)
+  );
 
   return (
     <section className="pb-12 pt-24 px-4 max-w-screen-lg mx-auto mt-2 min-h-screen">

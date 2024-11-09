@@ -1,4 +1,10 @@
-export const Contact = ({ title, description }: any) => {
+export const Contact = ({
+  title,
+  description,
+}: {
+  title: string;
+  description: string;
+}) => {
   return (
     <section className="mt-10" id="contact">
       <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
