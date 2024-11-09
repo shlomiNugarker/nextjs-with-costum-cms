@@ -4,7 +4,7 @@ import {
   savePage,
 } from "@/services/db/repositories/pageRepository";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const pages = await getAllPages();
     return NextResponse.json(pages);

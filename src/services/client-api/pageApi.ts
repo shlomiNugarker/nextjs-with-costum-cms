@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export async function getPageById(pageId: number) {
   const response = await fetch(`/api/pages/${pageId}`);
   if (!response.ok) {

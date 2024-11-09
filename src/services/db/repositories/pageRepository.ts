@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { connectToDatabase } from "@/config/database.config";
 import { pagesTable } from "../schema";
 import { eq } from "drizzle-orm";

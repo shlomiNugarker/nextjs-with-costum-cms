@@ -9,6 +9,7 @@ export default async function Delivery() {
   }
 
   const contentBlocks = await getContentBlocksByPageId(deliveryPage.id);
+  console.log(contentBlocks);
 
   // const mainText = contentBlocks.find(
   //   (block) => block.block_type === "text"

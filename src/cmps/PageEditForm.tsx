@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { savePage } from "@/services/client-api/pageApi";
 import React, { useState } from "react";

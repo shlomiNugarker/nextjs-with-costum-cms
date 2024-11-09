@@ -1,5 +1,6 @@
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
 import { getPageByName } from "@/services/db/repositories/pageRepository";
+import Image from "next/image";
 import Link from "next/link";
 
 export default async function About() {
@@ -37,10 +38,12 @@ export default async function About() {
           const imageUrl = block.content;
           return (
             <div key={block.id} className="my-12 text-center">
-              <img
+              <Image
                 src={imageUrl}
                 alt="About page image"
                 className="mx-auto rounded-lg"
+                width={300}
+                height={300}
               />
             </div>
           );

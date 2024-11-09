@@ -19,6 +19,7 @@ export default async function NurseryPage() {
   const mainText =
     contentBlocks.find((block) => block.block_type === "text")?.content ||
     "ברוכים הבאים למשתלה שלנו!";
+  console.log({ mainText });
 
   return (
     <>

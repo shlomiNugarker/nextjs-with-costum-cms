@@ -6,7 +6,7 @@ import {
 } from "@/services/db/repositories/pageRepository";
 
 export async function GET(
-  request: NextRequest,
+  _request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   const id = parseInt(params.id);
@@ -32,6 +32,8 @@ export async function PUT(
 ) {
   const id = parseInt(params.id);
   const data = await request.json();
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { created_at, ...dataWithoutCreatedAt } = data;
 
   try {

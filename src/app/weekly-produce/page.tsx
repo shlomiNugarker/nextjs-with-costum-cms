@@ -15,6 +15,7 @@ export default async function WeeklyProduce() {
   }
 
   const contentBlocks = await getContentBlocksByPageId(page.id);
+  console.log(contentBlocks);
 
   return (
     <section className="pb-12 pt-24 px-4 max-w-screen-lg mx-auto mt-2 min-h-screen">
