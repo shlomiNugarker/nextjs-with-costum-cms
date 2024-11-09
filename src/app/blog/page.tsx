@@ -19,8 +19,6 @@ export default async function BlogPage() {
 
   const contentBlocks = await getContentBlocksByPageId(blogPage.id);
 
-  console.log({ contentBlocks });
-
   const headerText = contentBlocks.find(
     (block) => block.block_type === "text"
   )?.content;

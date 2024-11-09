@@ -8,8 +8,8 @@ export default async function Delivery() {
     return <div>דף המשלוחים לא נמצא</div>;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const contentBlocks = await getContentBlocksByPageId(deliveryPage.id);
-  console.log(contentBlocks);
 
   // const mainText = contentBlocks.find(
   //   (block) => block.block_type === "text"
