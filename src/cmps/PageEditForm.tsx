@@ -27,25 +27,27 @@ export const PageEditForm = ({ initialPage }: any) => {
   };
 
   return (
-    <div className="space-y-8 p-8 border border-customPeach bg-white shadow-md rounded-lg ">
-      <h2 className="text-3xl font-bold text-center text-customNavy mb-6">
+    <div className="space-y-8 p-8 border border-customPeach bg-white shadow-lg rounded-lg max-w-2xl mx-auto mb-10">
+      <h2 className="text-4xl font-extrabold text-center text-customNavy mb-8">
         עריכת דף
       </h2>
 
-      {/* <div>
-        <label className="block text-lg font-medium text-customNavy mb-2">
+      <div>
+        <label className="block text-lg font-semibold text-customNavy mb-2">
           שם הדף
         </label>
         <input
           type="text"
           name="name"
           value={page.name}
-          onChange={handleChange}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
+          // onChange={handleChange}
+          className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition placeholder-gray-400"
+          placeholder="הזן את שם הדף"
         />
       </div>
+
       <div>
-        <label className="block text-lg font-medium text-customNavy mb-2">
+        <label className="block text-lg font-semibold text-customNavy mb-2">
           כותרת
         </label>
         <input
@@ -53,25 +55,27 @@ export const PageEditForm = ({ initialPage }: any) => {
           name="title"
           value={page.title}
           onChange={handleChange}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
+          className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition placeholder-gray-400"
+          placeholder="הזן את כותרת הדף"
         />
-      </div> */}
+      </div>
 
       <div>
-        <label className="block text-lg font-medium text-customNavy mb-2">
+        <label className="block text-lg font-semibold text-customNavy mb-2">
           תיאור
         </label>
         <textarea
           name="description"
           value={page.description}
           onChange={handleChange}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
+          className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition placeholder-gray-400"
           rows={3}
+          placeholder="הזן תיאור לדף"
         />
       </div>
 
       <div>
-        <label className="block text-lg font-medium text-customNavy mb-2">
+        <label className="block text-lg font-semibold text-customNavy mb-2">
           כותרת מטא
         </label>
         <input
@@ -79,25 +83,27 @@ export const PageEditForm = ({ initialPage }: any) => {
           name="meta_title"
           value={page.meta_title}
           onChange={handleChange}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
+          className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition placeholder-gray-400"
+          placeholder="הזן כותרת מטא"
         />
       </div>
 
       <div>
-        <label className="block text-lg font-medium text-customNavy mb-2">
+        <label className="block text-lg font-semibold text-customNavy mb-2">
           תיאור מטא
         </label>
         <textarea
           name="meta_description"
           value={page.meta_description}
           onChange={handleChange}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
+          className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition placeholder-gray-400"
           rows={3}
+          placeholder="הזן תיאור מטא"
         />
       </div>
 
       <div>
-        <label className="block text-lg font-medium text-customNavy mb-2">
+        <label className="block text-lg font-semibold text-customNavy mb-2">
           מילות מפתח
         </label>
         <input
@@ -105,13 +111,14 @@ export const PageEditForm = ({ initialPage }: any) => {
           name="meta_keywords"
           value={page.meta_keywords}
           onChange={handleChange}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
+          className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition placeholder-gray-400"
+          placeholder="הזן מילות מפתח (מופרדות בפסיק)"
         />
       </div>
 
       <button
         onClick={handleSave}
-        className="w-full py-3 bg-customGreen text-white font-semibold rounded-lg hover:bg-opacity-90 transition mt-6"
+        className="w-full py-3 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mt-6 shadow-md"
       >
         שמור דף
       </button>

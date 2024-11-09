@@ -67,14 +67,14 @@ export const ContentBlockEditForm = ({
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 p-8 border border-customPeach bg-white shadow-lg rounded-lg max-w-2xl mx-auto mb-10">
       <h1 className="text-4xl font-semibold text-center mb-8 text-customNavy">
         עריכת בלוקים בעמוד
       </h1>
       {blocks.map((block) => (
         <div
           key={block.id}
-          className="p-6 border border-customPeach bg-white shadow-md rounded-lg"
+          className="p-6 border border-customPeach bg-gradient-to-br from-white to-gray-50 shadow-lg rounded-lg"
         >
           <label className="block text-lg font-medium text-customNavy mb-4">
             {`ערוך ${block.block_type}`}
@@ -84,7 +84,7 @@ export const ContentBlockEditForm = ({
             <textarea
               value={block.content}
               onChange={(e) => handleContentChange(block.id, e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition shadow-sm"
               rows={4}
             />
           )}
@@ -134,7 +134,7 @@ export const ContentBlockEditForm = ({
 
           <button
             onClick={() => handleSave(block.id)}
-            className="mt-6 py-2 px-6 bg-customGreen text-white font-semibold rounded-lg shadow hover:bg-opacity-90 transition"
+            className="mt-6 py-2 px-6 bg-customGreen text-white font-semibold rounded-lg shadow-md hover:bg-opacity-90 transition transform hover:scale-105"
           >
             שמור
           </button>
