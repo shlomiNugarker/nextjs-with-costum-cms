@@ -10,7 +10,7 @@ export default async function ContactPage() {
 
   return (
     <div className="min-h-screen">
-      <Contact title={page.title} description={page.description} />
+      <Contact title={page.title || ""} description={page.description || ""} />
     </div>
   );
 }
