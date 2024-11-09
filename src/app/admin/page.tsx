@@ -40,6 +40,11 @@ export default async function AdminPage() {
             אודות
           </button>
         </Link>
+        <Link href={"/admin/delivery"}>
+          <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
+            משלוחים
+          </button>
+        </Link>
         <Link href={"/admin/contact"}>
           <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
             צור קשר

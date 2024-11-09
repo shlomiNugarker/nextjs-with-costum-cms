@@ -78,6 +78,30 @@ export async function seedInitialContentBlocks() {
       content: "זמני אספקה הם בימים א'-ה' בין השעות 9:00-17:00.",
       position: 2,
     },
+    {
+      page_id: 2,
+      block_type: "text",
+      content:
+        "אזורים בהם אנו מספקים משלוחים: פרדס חנה, חדרה, קיסריה, חיפה והקריות.",
+      position: 3,
+    },
+    {
+      page_id: 2,
+      block_type: "list",
+      content: JSON.stringify([
+        "משלוח מהיר (עד 24 שעות) - 50 ₪",
+        "משלוח רגיל (עד 3 ימי עסקים) - 30 ₪",
+        "איסוף עצמי ללא עלות מהחווה בפרדס חנה",
+      ]),
+      position: 4,
+    },
+    {
+      page_id: 2,
+      block_type: "text",
+      content:
+        "וודאו שהכתובת מלאה ומדויקת כדי להבטיח אספקה חלקה. לכל שאלה, צרו קשר.",
+      position: 5,
+    },
     // דף צור קשר
     {
       page_id: 5,

@@ -29,7 +29,7 @@ export default async function About() {
       {sortedBlocks.map((block) => {
         if (block.block_type === "text") {
           return (
-            <div key={block.id} className="my-12">
+            <div key={block.id} className="my-12 text-center">
               <p className="text-gray-600 text-xl mb-6">{block.content}</p>
             </div>
           );
@@ -45,17 +45,24 @@ export default async function About() {
                 className="mx-auto rounded-lg"
                 width={300}
                 height={300}
+                loading="lazy" // Lazy loading for better performance
               />
             </div>
           );
         }
 
         if (block.block_type === "list") {
-          const listItems = JSON.parse(block.content || "[]");
+          // Parse JSON content with error handling
+          let listItems: string[] = [];
+          try {
+            listItems = JSON.parse(block.content || "[]");
+          } catch (error) {
+            console.error("Failed to parse list content:", error);
+          }
           return (
             <div key={block.id} className="my-12">
-              <ul className="list-disc list-inside text-gray-600 space-y-3">
-                {listItems.map((item: any, index: any) => (
+              <ul className="list-disc list-inside text-gray-600 space-y-3 mx-auto flex flex-col items-center">
+                {listItems.map((item, index) => (
                   <li key={index}>{item}</li>
                 ))}
               </ul>
