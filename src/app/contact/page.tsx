@@ -11,14 +11,16 @@ export default async function ContactPage() {
 
   const contentBlocks = await getContentBlocksByPageId(page.id);
 
-  console.log({ contentBlocks });
+  const sortedBlocks = contentBlocks.sort(
+    (a, b) => (a.position || 0) - (b.position || 0)
+  );
 
   return (
     <div className="min-h-screen">
       <Contact
         title={page.title || ""}
         description={page.description || ""}
-        contentBlocks={contentBlocks}
+        contentBlocks={sortedBlocks}
       />
     </div>
   );

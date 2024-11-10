@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { NurseryCard } from "@/cmps/NurseryCard";
 import { getNurseryProducts } from "@/services/db/repositories/productRepository";
 import { getPageByName } from "@/services/db/repositories/pageRepository";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
+import { BlockRenderer } from "@/cmps/BlockRenderer";
 
 export const revalidate = 60;
 
@@ -16,10 +18,9 @@ export default async function NurseryPage() {
 
   const contentBlocks = await getContentBlocksByPageId(page.id);
 
-  const mainText =
-    contentBlocks.find((block) => block.block_type === "text")?.content ||
-    "ברוכים הבאים למשתלה שלנו!";
-  console.log({ mainText });
+  const sortedBlocks = contentBlocks
+    .slice()
+    .sort((a: any, b: any) => (a.position || 0) - (b.position || 0));
 
   return (
     <>
@@ -32,6 +33,13 @@ export default async function NurseryPage() {
             {page.description}
           </p>
         </div>
+
+        <div>
+          {sortedBlocks.map((block: any) => (
+            <BlockRenderer key={block.id} block={block} />
+          ))}
+        </div>
+
         <div className="py-1 px-4 max-w-screen-lg mx-auto mt-8 min-h-screen">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-center">
             {nurseryProducts.map((product) => (

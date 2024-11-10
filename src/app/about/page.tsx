@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { BlockRenderer } from "@/cmps/BlockRenderer";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
 import { getPageByName } from "@/services/db/repositories/pageRepository";
-import Image from "next/image";
 import Link from "next/link";
 
 export default async function About() {
@@ -26,52 +26,9 @@ export default async function About() {
         {aboutPage.description}
       </p>
 
-      {sortedBlocks.map((block) => {
-        if (block.block_type === "text") {
-          return (
-            <div key={block.id} className="my-12 text-center">
-              <p className="text-gray-600 text-xl mb-6">{block.content}</p>
-            </div>
-          );
-        }
-
-        if (block.block_type === "image") {
-          const imageUrl = block.content;
-          return (
-            <div key={block.id} className="my-12 text-center">
-              <Image
-                src={imageUrl}
-                alt="About page image"
-                className="mx-auto rounded-lg"
-                width={300}
-                height={300}
-                loading="lazy" // Lazy loading for better performance
-              />
-            </div>
-          );
-        }
-
-        if (block.block_type === "list") {
-          // Parse JSON content with error handling
-          let listItems: string[] = [];
-          try {
-            listItems = JSON.parse(block.content || "[]");
-          } catch (error) {
-            console.error("Failed to parse list content:", error);
-          }
-          return (
-            <div key={block.id} className="my-12">
-              <ul className="list-disc list-inside text-gray-600 space-y-3 mx-auto flex flex-col items-center">
-                {listItems.map((item, index) => (
-                  <li key={index}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          );
-        }
-
-        return null;
-      })}
+      {sortedBlocks.map((block: any) => (
+        <BlockRenderer key={block.id} block={block} />
+      ))}
 
       <div className="my-12 text-center">
         <h2 className="text-3xl font-semibold text-customNavy mb-4">

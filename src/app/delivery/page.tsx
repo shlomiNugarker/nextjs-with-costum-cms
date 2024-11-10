@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { BlockRenderer } from "@/cmps/BlockRenderer";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
 import { getPageByName } from "@/services/db/repositories/pageRepository";
 
@@ -24,30 +26,9 @@ export default async function Delivery() {
       </p>
 
       <div className="mt-8">
-        {sortedBlocks.map((block) => {
-          if (block.block_type === "text") {
-            return (
-              <div key={block.id} className="my-6 text-center">
-                <p className="text-gray-600 text-xl mb-4">{block.content}</p>
-              </div>
-            );
-          }
-
-          if (block.block_type === "list") {
-            const listItems = JSON.parse(block.content || "[]");
-            return (
-              <div key={block.id} className="my-6 text-center">
-                <ul className="list-disc list-inside text-gray-600 space-y-2 flex flex-col items-center">
-                  {listItems.map((item: string, index: number) => (
-                    <li key={index}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            );
-          }
-
-          return null;
-        })}
+        {sortedBlocks.map((block: any) => (
+          <BlockRenderer key={block.id} block={block} />
+        ))}
       </div>
     </section>
   );

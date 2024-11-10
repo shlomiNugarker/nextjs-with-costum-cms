@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { BlockRenderer } from "@/cmps/BlockRenderer";
 import { BlogCard } from "@/cmps/BlogCard";
 import { getAllBlogs } from "@/services/db/repositories/blogRepository";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
@@ -19,9 +21,9 @@ export default async function BlogPage() {
 
   const contentBlocks = await getContentBlocksByPageId(blogPage.id);
 
-  const headerText = contentBlocks.find(
-    (block) => block.block_type === "text"
-  )?.content;
+  const sortedBlocks = contentBlocks.sort(
+    (a, b) => (a.position || 0) - (b.position || 0)
+  );
 
   return (
     <div className="min-h-screen pt-20 px-4">
@@ -31,10 +33,11 @@ export default async function BlogPage() {
       <p className="text-center text-gray-600 mb-8 text-2xl">
         {blogPage.description}
       </p>
-      <p className="text-center text-gray-600 mb-8 text-2xl">
-        {headerText ||
-          "כאן תוכלו לקרוא את כל המאמרים שלנו ולהתעדכן בנושאים האחרונים"}
-      </p>
+
+      {sortedBlocks.map((block: any) => (
+        <BlockRenderer key={block.id} block={block} />
+      ))}
+
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
           <div key={post.id}>
