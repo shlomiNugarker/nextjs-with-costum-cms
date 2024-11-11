@@ -53,17 +53,17 @@ export async function saveSiteInfo(info: {
   }
 }
 
-export async function deleteSiteInfo(id: number) {
-  try {
-    const response = await fetch(`/api/site-info/${id}`, {
-      method: "DELETE",
-    });
-    if (!response.ok) {
-      throw new Error("Failed to delete site information");
-    }
-    console.log(`Site information with ID ${id} deleted successfully.`);
-  } catch (error) {
-    console.error(`Error deleting site information with ID ${id}:`, error);
-    throw new Error("Unable to delete site information");
-  }
-}
+// export async function deleteSiteInfo(id: number) {
+//   try {
+//     const response = await fetch(`/api/site-info/${id}`, {
+//       method: "DELETE",
+//     });
+//     if (!response.ok) {
+//       throw new Error("Failed to delete site information");
+//     }
+//     console.log(`Site information with ID ${id} deleted successfully.`);
+//   } catch (error) {
+//     console.error(`Error deleting site information with ID ${id}:`, error);
+//     throw new Error("Unable to delete site information");
+//   }
+// }

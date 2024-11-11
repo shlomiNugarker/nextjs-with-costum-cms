@@ -22,7 +22,6 @@ const geistMono = localFont({
 export async function generateMetadata(): Promise<Metadata> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const siteInfo: any = await getSiteInfo();
-  console.log({ siteInfo });
 
   return {
     title:
