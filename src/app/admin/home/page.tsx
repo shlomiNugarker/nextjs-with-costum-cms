@@ -10,7 +10,6 @@ export default async function Page() {
   if (!page) {
     return <div> לא נמצא דף כזה</div>;
   }
-
   const contentBlocks = await getContentBlocksByPageId(page.id);
 
   return (

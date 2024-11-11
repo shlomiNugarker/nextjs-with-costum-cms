@@ -1,17 +1,28 @@
+import { ContentBlockEditForm } from "@/cmps/ContentBlockEditForm";
+import { PageEditForm } from "@/cmps/PageEditForm";
 import { ProductCard } from "@/cmps/ProductCard";
+import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
+import { getPageByName } from "@/services/db/repositories/pageRepository";
 import { getWeeklyProducts } from "@/services/db/repositories/productRepository";
 import Link from "next/link";
 
 export const revalidate = 5;
 
 export default async function page() {
+  const page = await getPageByName("weekly-produce");
+  if (!page) {
+    return <div> לא נמצא דף כזה</div>;
+  }
+  const contentBlocks = await getContentBlocksByPageId(page.id);
   const weeklyProducts = await getWeeklyProducts();
   return (
     <div className="min-h-screen mt-10 pt-10  px-4 text-customNavy">
+      <PageEditForm initialPage={page} />
+      <ContentBlockEditForm contentBlocks={contentBlocks} />
       <div className="flex justify-center mt-8">
         <Link href={"weekly-products/"}>
           <p className="text-4xl font-bold text-center mb-6 text-customNavy ">
-            תוצרת שבועית
+            מוצרים
           </p>
         </Link>
       </div>
