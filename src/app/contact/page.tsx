@@ -2,6 +2,8 @@ import { Contact } from "@/cmps/Contact";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
 import { getPageByName } from "@/services/db/repositories/pageRepository";
 
+export const revalidate = 60;
+
 export default async function ContactPage() {
   const page = await getPageByName("contact");
 
