@@ -54,6 +54,7 @@ const SiteInfoEditForm = () => {
           name="site_name"
           value={siteInfo.site_name}
           onChange={handleChange}
+          placeholder="לדוגמה: הגינה בפרדס"
           className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
         />
       </div>
@@ -63,6 +64,7 @@ const SiteInfoEditForm = () => {
           name="description"
           value={siteInfo.description}
           onChange={handleChange}
+          placeholder="תיאור כללי של האתר"
           className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
         />
       </div>
@@ -73,6 +75,7 @@ const SiteInfoEditForm = () => {
           name="address"
           value={siteInfo.address}
           onChange={handleChange}
+          placeholder="לדוגמה: רחוב החקלאי 12, פרדס חנה"
           className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
         />
       </div>
@@ -83,6 +86,7 @@ const SiteInfoEditForm = () => {
           name="contact_email"
           value={siteInfo.contact_email}
           onChange={handleChange}
+          placeholder="לדוגמה: info@haginabapardes.com"
           className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
         />
       </div>
@@ -95,6 +99,7 @@ const SiteInfoEditForm = () => {
           name="phone_number"
           value={siteInfo.phone_number}
           onChange={handleChange}
+          placeholder="לדוגמה: 052-1234567"
           className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
         />
       </div>
@@ -107,6 +112,7 @@ const SiteInfoEditForm = () => {
           name="opening_hours"
           value={siteInfo.opening_hours}
           onChange={handleChange}
+          placeholder="לדוגמה: א'-ה' 9:00-17:00"
           className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
         />
       </div>
@@ -119,6 +125,7 @@ const SiteInfoEditForm = () => {
           name="meta_title"
           value={siteInfo.meta_title}
           onChange={handleChange}
+          placeholder="כותרת עבור SEO"
           className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
         />
       </div>
@@ -130,6 +137,7 @@ const SiteInfoEditForm = () => {
           name="meta_description"
           value={siteInfo.meta_description}
           onChange={handleChange}
+          placeholder="תיאור קצר עבור SEO"
           className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
         />
       </div>
@@ -142,6 +150,7 @@ const SiteInfoEditForm = () => {
           name="og_title"
           value={siteInfo.og_title}
           onChange={handleChange}
+          placeholder="כותרת לשיתוף ברשתות חברתיות"
           className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
         />
       </div>
@@ -153,6 +162,7 @@ const SiteInfoEditForm = () => {
           name="og_description"
           value={siteInfo.og_description}
           onChange={handleChange}
+          placeholder="תיאור לשיתוף ברשתות חברתיות"
           className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
         />
       </div>
@@ -163,6 +173,7 @@ const SiteInfoEditForm = () => {
           name="og_url"
           value={siteInfo.og_url}
           onChange={handleChange}
+          placeholder="כתובת URL לשיתוף ברשתות חברתיות"
           className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
         />
       </div>
@@ -173,6 +184,7 @@ const SiteInfoEditForm = () => {
           name="og_type"
           value={siteInfo.og_type}
           onChange={handleChange}
+          placeholder="סוג התוכן, לדוגמה: website"
           className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
         />
       </div>
