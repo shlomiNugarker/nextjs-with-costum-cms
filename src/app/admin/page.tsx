@@ -8,13 +8,7 @@ export default async function AdminPage() {
 
   return (
     <div className="min-h-screen mt-10 flex flex-col items-center justify-center space-y-6 bg-gray-100 py-10">
-      <h1 className="text-2xl text-center font-semibold text-customNavy">
-        אתה מחובר בתור {session?.user?.email}
-      </h1>
-
-      <SignOut />
-
-      <div className="mt-6 space-y-4">
+      <div className="mt-6 flex flex-col">
         <Link href={"/admin/site-info"}>
           <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
             מידע כללי
@@ -55,7 +49,12 @@ export default async function AdminPage() {
             צור קשר
           </button>
         </Link>
+
+        <h1 className="text-2xl text-center font-semibold text-customNavy">
+          אתה מחובר בתור {session?.user?.email}
+        </h1>
       </div>
+      <SignOut />
     </div>
   );
 }

@@ -24,25 +24,17 @@ export async function generateMetadata(): Promise<Metadata> {
   const siteInfo: any = await getSiteInfo();
 
   return {
-    title:
-      siteInfo?.meta_title ||
-      "הגינה בפרדס - חווה אורגנית ומשתלה | חקלאות | משתלה",
-    description:
-      siteInfo?.meta_description ||
-      "הגינה בפרדס - חווה אורגנית ומשתלה בפרדס חנה שמציעה מגוון ירקות, פירות, וצמחי נוי ותבלין אורגניים. חוויה טבעית וירוקה לכל המשפחה.",
+    title: siteInfo?.meta_title,
+    description: siteInfo?.meta_description,
     keywords: ["חקלאות אורגנית", "משתלה", "צמחי תבלין", "פירות וירקות"],
     openGraph: {
-      title: siteInfo?.og_title || "הגינה בפרדס - חווה אורגנית ומשתלה",
-      description:
-        siteInfo?.og_description ||
-        "מבחר ירקות, פירות וצמחים אורגניים, ישירות מהמשתלה בפרדס חנה.",
-      url: siteInfo?.og_url || "https://example.com",
-      type: siteInfo?.og_type || "website",
+      title: siteInfo?.og_title,
+      description: siteInfo?.og_description,
+      url: siteInfo?.og_url,
+      type: siteInfo?.og_type,
       images: [
         {
-          url:
-            siteInfo?.og_image ||
-            "https://images.unsplash.com/photo-1488459716781-31db52582fe9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+          url: siteInfo?.og_image,
           width: 800,
           height: 600,
           alt: "תמונה של הגינה בפרדס",
@@ -52,14 +44,9 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       site: "@yourTwitterHandle",
-      title: siteInfo?.og_title || "הגינה בפרדס - חווה אורגנית ומשתלה",
-      description:
-        siteInfo?.og_description ||
-        "מבחר ירקות, פירות וצמחים אורגניים, ישירות מהמשתלה בפרדס חנה.",
-      images: [
-        siteInfo?.og_image ||
-          "https://images.unsplash.com/photo-1488459716781-31db52582fe9?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      ],
+      title: siteInfo?.og_title,
+      description: siteInfo?.og_description,
+      images: [siteInfo?.og_image],
     },
   };
 }
