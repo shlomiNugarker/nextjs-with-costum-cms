@@ -1,30 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
-  getPageById,
+  // getPageById,
   deletePageById,
   updatePage,
 } from "@/services/db/repositories/pageRepository";
 
-export async function GET(
-  _request: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  const id = parseInt(params.id);
+// export async function GET(
+//   _request: NextRequest,
+//   { params }: { params: { id: string } }
+// ) {
+//   const id = parseInt(params.id);
 
-  try {
-    const page = await getPageById(id);
-    if (!page) {
-      return NextResponse.json({ message: "Page not found" }, { status: 404 });
-    }
-    return NextResponse.json(page);
-  } catch (error) {
-    console.error("Error fetching page:", error);
-    return NextResponse.json(
-      { message: "Failed to fetch page" },
-      { status: 500 }
-    );
-  }
-}
+//   try {
+//     const page = await getPageById(id);
+//     if (!page) {
+//       return NextResponse.json({ message: "Page not found" }, { status: 404 });
+//     }
+//     return NextResponse.json(page);
+//   } catch (error) {
+//     console.error("Error fetching page:", error);
+//     return NextResponse.json(
+//       { message: "Failed to fetch page" },
+//       { status: 500 }
+//     );
+//   }
+// }
 
 export async function PUT(
   request: NextRequest,

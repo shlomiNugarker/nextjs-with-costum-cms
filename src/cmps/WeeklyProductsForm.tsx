@@ -66,9 +66,7 @@ export const WeeklyProductsForm = ({
   const handleWeeklyProductSubmit = async (product: any) => {
     try {
       const isUpdate = Boolean(product.id);
-      const response = await saveWeeklyProduct(product);
-
-      console.log({ response });
+      await saveWeeklyProduct(product);
 
       alert(`מוצר התוצרת השבועית ${isUpdate ? "עודכן" : "נוסף"} בהצלחה`);
       router.push("/admin");
@@ -85,10 +83,9 @@ export const WeeklyProductsForm = ({
     if (!confirmDelete) return;
 
     try {
-      const response = await deleteWeeklyProduct(product.id);
+      await deleteWeeklyProduct(product.id);
 
-      const result = await response.json();
-      alert(result.message || "המוצר נמחק בהצלחה");
+      alert("המוצר נמחק בהצלחה");
 
       setProduct({
         name: "",

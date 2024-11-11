@@ -1,26 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
-import { nurseryProductsTable } from "@/services/db/schema";
-import { connectToDatabase } from "@/config/database.config";
+import {
+  // getNurseryProducts,
+  saveProduct,
+} from "@/services/db/repositories/productRepository";
 
-export async function GET() {
-  try {
-    const db = await connectToDatabase();
-
-    const products = await db.select().from(nurseryProductsTable);
-    return NextResponse.json(products);
-  } catch (error) {
-    console.error("Error fetching nursery products:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch products" },
-      { status: 500 }
-    );
-  }
-}
+// export async function GET() {
+//   try {
+//     const products = await getNurseryProducts();
+//     return NextResponse.json(products);
+//   } catch (error) {
+//     console.error("Error fetching nursery products:", error);
+//     return NextResponse.json(
+//       { error: "Failed to fetch products" },
+//       { status: 500 }
+//     );
+//   }
+// }
 
 export async function POST(request: NextRequest) {
   try {
-    const db = await connectToDatabase();
-
     const data = await request.json();
     const { name, description, pot_size, category, price, image_url } = data;
 
@@ -31,17 +29,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const newProduct = await db
-      .insert(nurseryProductsTable)
-      .values({
+    const newProduct = await saveProduct(
+      {
         name,
         description,
         pot_size,
         category,
         price,
         image_url,
-      })
-      .returning();
+      },
+      "nursery"
+    );
 
     return NextResponse.json(newProduct);
   } catch (error) {

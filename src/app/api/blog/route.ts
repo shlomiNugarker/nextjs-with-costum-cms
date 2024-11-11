@@ -1,20 +1,12 @@
 import { NextResponse } from "next/server";
-import { blogsTable } from "@/services/db/schema";
-import { eq } from "drizzle-orm";
-import { connectToDatabase } from "@/config/database.config";
+import { addPost, updateBlog } from "@/services/db/repositories/blogRepository";
 
 export async function POST(request: Request) {
   try {
-    const db = await connectToDatabase();
-
     const data = await request.json();
     const { title, description, content } = data;
 
-    await db.insert(blogsTable).values({
-      title,
-      description,
-      content,
-    });
+    await addPost({ title, description, content });
 
     return NextResponse.json({ message: "הפוסט נוסף בהצלחה" }, { status: 201 });
   } catch (error) {
@@ -25,8 +17,6 @@ export async function POST(request: Request) {
 
 export async function PUT(request: Request) {
   try {
-    const db = await connectToDatabase();
-
     const data = await request.json();
     const { id, title, description, content } = data;
 
@@ -37,14 +27,7 @@ export async function PUT(request: Request) {
       );
     }
 
-    await db
-      .update(blogsTable)
-      .set({
-        title,
-        description,
-        content,
-      })
-      .where(eq(blogsTable.id, id));
+    await updateBlog(id, { title, description, content });
 
     return NextResponse.json(
       { message: "הפוסט עודכן בהצלחה" },
@@ -55,4 +38,3 @@ export async function PUT(request: Request) {
     return NextResponse.json({ error: "שגיאה בעדכון הפוסט" }, { status: 500 });
   }
 }
-

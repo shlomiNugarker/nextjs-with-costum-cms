@@ -1,16 +1,14 @@
-import { connectToDatabase } from "@/config/database.config";
-import { SiteInfo } from "@/services/db/schema";
 import { NextRequest, NextResponse } from "next/server";
-import { eq } from "drizzle-orm";
-import { deleteSiteInfoById } from "@/services/db/repositories/siteInfoRepository";
+import {
+  deleteSiteInfoById,
+  updateSiteInfo,
+} from "@/services/db/repositories/siteInfoRepository";
 
 export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
-    const db = await connectToDatabase();
-
     const id = parseInt(params.id);
 
     const data = await request.json();
@@ -36,26 +34,22 @@ export async function PUT(
       );
     }
 
-    const updatedSiteInfo = await db
-      .update(SiteInfo)
-      .set({
-        site_name,
-        description,
-        address,
-        contact_email,
-        phone_number,
-        opening_hours,
-        meta_title,
-        meta_description,
-        og_title,
-        og_description,
-        og_url,
-        og_type,
-      })
-      .where(eq(SiteInfo.id, id))
-      .returning();
+    const updatedSiteInfo = updateSiteInfo(id, {
+      site_name,
+      description,
+      address,
+      contact_email,
+      phone_number,
+      opening_hours,
+      meta_title,
+      meta_description,
+      og_title,
+      og_description,
+      og_url,
+      og_type,
+    });
 
-    return NextResponse.json(updatedSiteInfo[0]);
+    return NextResponse.json(updatedSiteInfo);
   } catch (error) {
     console.error("Error updating site information:", error);
     return NextResponse.json(

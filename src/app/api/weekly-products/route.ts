@@ -1,27 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
-import { weeklyProductsTable } from "@/services/db/schema";
-import { eq } from "drizzle-orm";
-import { connectToDatabase } from "@/config/database.config";
 
-export async function GET() {
-  try {
-    const db = await connectToDatabase();
+import {
+  // getWeeklyProducts,
+  saveProduct,
+} from "@/services/db/repositories/productRepository";
 
-    const products = await db.select().from(weeklyProductsTable);
-    return NextResponse.json(products);
-  } catch (error) {
-    console.error("Error fetching weekly products:", error);
-    return NextResponse.json(
-      { error: "Failed to fetch products" },
-      { status: 500 }
-    );
-  }
-}
+// export async function GET() {
+//   try {
+//     const products = await getWeeklyProducts();
+//     return NextResponse.json(products);
+//   } catch (error) {
+//     console.error("Error fetching weekly products:", error);
+//     return NextResponse.json(
+//       { error: "Failed to fetch products" },
+//       { status: 500 }
+//     );
+//   }
+// }
 
 export async function POST(request: NextRequest) {
   try {
-    const db = await connectToDatabase();
-
     const data = await request.json();
     const { name, description, weight, category, price, image_url } = data;
 
@@ -31,20 +29,19 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-
-    const newProduct = await db
-      .insert(weeklyProductsTable)
-      .values({
+    const newProduct = await saveProduct(
+      {
         name,
         description,
         weight,
         category,
         price,
         image_url,
-      })
-      .returning();
+      },
+      "weekly"
+    );
 
-    return NextResponse.json(newProduct[0]);
+    return NextResponse.json(newProduct);
   } catch (error) {
     console.error("Error adding weekly product:", error);
     return NextResponse.json(
@@ -56,8 +53,6 @@ export async function POST(request: NextRequest) {
 
 export async function PUT(request: NextRequest) {
   try {
-    const db = await connectToDatabase();
-
     const data = await request.json();
     const { id, name, description, weight, category, price, image_url } = data;
 
@@ -67,21 +62,20 @@ export async function PUT(request: NextRequest) {
         { status: 400 }
       );
     }
-
-    const updatedProduct = await db
-      .update(weeklyProductsTable)
-      .set({
+    const updatedProduct = await saveProduct(
+      {
+        id,
         name,
         description,
         weight,
         category,
         price,
         image_url,
-      })
-      .where(eq(weeklyProductsTable.id, id))
-      .returning();
+      },
+      "weekly"
+    );
 
-    return NextResponse.json(updatedProduct[0]);
+    return NextResponse.json(updatedProduct);
   } catch (error) {
     console.error("Error updating weekly product:", error);
     return NextResponse.json(

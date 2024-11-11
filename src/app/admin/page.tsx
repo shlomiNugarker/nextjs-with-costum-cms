@@ -20,6 +20,11 @@ export default async function AdminPage() {
             מידע כללי
           </button>
         </Link>
+        <Link href={"/admin/home"}>
+          <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
+            דף הבית
+          </button>
+        </Link>
         <Link href={"/admin/nursery-products"}>
           <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
             מוצרים במשתלה

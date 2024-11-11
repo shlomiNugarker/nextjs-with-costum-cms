@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { nurseryProductsTable } from "@/services/db/schema";
-import { eq } from "drizzle-orm";
-import { connectToDatabase } from "@/config/database.config";
+import {
+  deleteProductById,
+  saveProduct,
+} from "@/services/db/repositories/productRepository";
 
 export async function DELETE(
   request: NextRequest,
@@ -14,11 +15,8 @@ export async function DELETE(
   }
 
   try {
-    const db = await connectToDatabase();
+    await deleteProductById(productId, "nursery");
 
-    await db
-      .delete(nurseryProductsTable)
-      .where(eq(nurseryProductsTable.id, productId));
     return NextResponse.json({ message: "Product deleted successfully" });
   } catch (error) {
     console.error("Error deleting product:", error);
@@ -31,8 +29,6 @@ export async function DELETE(
 
 export async function PUT(request: NextRequest) {
   try {
-    const db = await connectToDatabase();
-
     const data = await request.json();
     const { id, name, description, pot_size, category, price, image_url } =
       data;
@@ -44,18 +40,18 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    const updatedProduct = await db
-      .update(nurseryProductsTable)
-      .set({
+    const updatedProduct = await saveProduct(
+      {
+        id,
         name,
         description,
         pot_size,
         category,
         price,
         image_url,
-      })
-      .where(eq(nurseryProductsTable.id, id))
-      .returning();
+      },
+      "nursery"
+    );
 
     return NextResponse.json(updatedProduct);
   } catch (error) {

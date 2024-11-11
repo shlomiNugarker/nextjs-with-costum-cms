@@ -2,33 +2,33 @@ import { NextRequest, NextResponse } from "next/server";
 import {
   createContentBlock,
   deleteContentBlock,
-  getContentBlockById,
+  // getContentBlockById,
   updateContentBlock,
 } from "@/services/db/repositories/contentBlockRepository";
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  const id = parseInt(params.id);
+// export async function GET(
+//   request: NextRequest,
+//   { params }: { params: { id: string } }
+// ) {
+//   const id = parseInt(params.id);
 
-  try {
-    const block = await getContentBlockById(id);
-    if (!block) {
-      return NextResponse.json(
-        { message: "Content block not found" },
-        { status: 404 }
-      );
-    }
-    return NextResponse.json(block);
-  } catch (error) {
-    console.error("Error fetching content block:", error);
-    return NextResponse.json(
-      { message: "Failed to fetch content block" },
-      { status: 500 }
-    );
-  }
-}
+//   try {
+//     const block = await getContentBlockById(id);
+//     if (!block) {
+//       return NextResponse.json(
+//         { message: "Content block not found" },
+//         { status: 404 }
+//       );
+//     }
+//     return NextResponse.json(block);
+//   } catch (error) {
+//     console.error("Error fetching content block:", error);
+//     return NextResponse.json(
+//       { message: "Failed to fetch content block" },
+//       { status: 500 }
+//     );
+//   }
+// }
 
 export async function PUT(
   request: NextRequest,
@@ -49,7 +49,6 @@ export async function PUT(
   }
 }
 
-// Create a New Content Block
 export async function POST(request: NextRequest) {
   const { content, block_type, position, page_id } = await request.json();
 
@@ -70,7 +69,6 @@ export async function POST(request: NextRequest) {
   }
 }
 
-// Delete Content Block by ID
 export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }

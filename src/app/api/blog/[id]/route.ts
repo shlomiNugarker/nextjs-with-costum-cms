@@ -1,7 +1,5 @@
-import { connectToDatabase } from "@/config/database.config";
-import { blogsTable } from "@/services/db/schema";
 import { NextResponse } from "next/server";
-import { eq } from "drizzle-orm";
+import { deleteBlogById } from "@/services/db/repositories/blogRepository";
 
 export async function DELETE(
   request: Request,
@@ -17,9 +15,7 @@ export async function DELETE(
       );
     }
 
-    const db = await connectToDatabase();
-
-    await db.delete(blogsTable).where(eq(blogsTable.id, postId));
+    await deleteBlogById(postId);
 
     return NextResponse.json({ message: "הפוסט נמחק בהצלחה" }, { status: 200 });
   } catch (error) {

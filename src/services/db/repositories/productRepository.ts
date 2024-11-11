@@ -106,3 +106,25 @@ export async function getNurseryProducts() {
     return [];
   }
 }
+
+export async function deleteProductById(
+  id: number,
+  tableType: "nursery" | "weekly"
+) {
+  try {
+    const table =
+      tableType === "nursery" ? nurseryProductsTable : weeklyProductsTable;
+
+    const db = await connectToDatabase();
+    await db.delete(table).where(eq(table.id, id));
+    console.log(
+      `Product with ID ${id} deleted successfully from ${tableType} table.`
+    );
+  } catch (error) {
+    console.error(
+      `Error deleting product with ID ${id} from ${tableType} table:`,
+      error
+    );
+    throw new Error("Unable to delete product");
+  }
+}

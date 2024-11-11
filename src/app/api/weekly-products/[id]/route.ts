@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { weeklyProductsTable } from "@/services/db/schema";
-import { eq } from "drizzle-orm";
-import { connectToDatabase } from "@/config/database.config";
+import { deleteProductById } from "@/services/db/repositories/productRepository";
 
 export async function DELETE(
   request: NextRequest,
@@ -14,11 +12,8 @@ export async function DELETE(
   }
 
   try {
-    const db = await connectToDatabase();
+    await deleteProductById(productId, "weekly");
 
-    await db
-      .delete(weeklyProductsTable)
-      .where(eq(weeklyProductsTable.id, productId));
     return NextResponse.json({ message: "Product deleted successfully" });
   } catch (error) {
     console.error("Error deleting weekly product:", error);
