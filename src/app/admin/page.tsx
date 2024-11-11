@@ -15,7 +15,7 @@ export default async function AdminPage() {
       <SignOut />
 
       <div className="mt-6 space-y-4">
-        <Link href={"/admin/general"}>
+        <Link href={"/admin/site-info"}>
           <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
             מידע כללי
           </button>

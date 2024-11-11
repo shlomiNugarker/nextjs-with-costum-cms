@@ -12,6 +12,7 @@ export async function PUT(
     const db = await connectToDatabase();
 
     const id = parseInt(params.id);
+
     const data = await request.json();
     const {
       site_name,
@@ -20,6 +21,12 @@ export async function PUT(
       contact_email,
       phone_number,
       opening_hours,
+      meta_title,
+      meta_description,
+      og_title,
+      og_description,
+      og_url,
+      og_type,
     } = data;
 
     if (!id || !site_name) {
@@ -38,6 +45,12 @@ export async function PUT(
         contact_email,
         phone_number,
         opening_hours,
+        meta_title,
+        meta_description,
+        og_title,
+        og_description,
+        og_url,
+        og_type,
       })
       .where(eq(SiteInfo.id, id))
       .returning();

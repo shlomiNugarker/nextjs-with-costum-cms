@@ -84,4 +84,5 @@ export const SiteInfo = pgTable("site_info", {
   og_description: text("og_description"),
   og_url: text("og_url"),
   og_type: text("og_type").default("website"),
+  created_at: timestamp("created_at").default(sql`NOW()`),
 });

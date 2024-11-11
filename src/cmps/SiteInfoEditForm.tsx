@@ -1,32 +1,24 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { getSiteInfo, saveSiteInfo } from "@/services/client-api/siteInfoApi";
-import { useState, useEffect } from "react";
+import { saveSiteInfo } from "@/services/client-api/siteInfoApi";
+import { useState } from "react";
 
-const SiteInfoEditForm = () => {
+const SiteInfoEditForm = ({ initialData }: any) => {
   const [siteInfo, setSiteInfo] = useState({
-    site_name: "",
-    description: "",
-    address: "",
-    contact_email: "",
-    phone_number: "",
-    opening_hours: "",
-    meta_title: "",
-    meta_description: "",
-    og_title: "",
-    og_description: "",
-    og_url: "",
-    og_type: "website",
+    site_name: initialData.site_name || "",
+    description: initialData.description || "",
+    address: initialData.address,
+    contact_email: initialData.contact_email || "",
+    phone_number: initialData.phone_number || "",
+    opening_hours: initialData.opening_hours || "",
+    meta_title: initialData.meta_title || "",
+    meta_description: initialData.meta_description || "",
+    og_title: initialData.og_title || "",
+    og_description: initialData.og_description || "",
+    og_url: initialData.og_url || "",
+    og_type: initialData.og_type || "",
   });
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getSiteInfo();
-      setSiteInfo(data);
-    };
-    fetchData();
-  }, []);
 
   const handleChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
@@ -42,7 +34,7 @@ const SiteInfoEditForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-lg mx-auto bg-white p-6 rounded-md shadow-md"
+      className="max-w-lg mx-auto bg-white p-6 rounded-md shadow-md text-customNavy"
     >
       <h2 className="text-2xl font-bold mb-4 text-center text-customNavy">
         עריכת מידע על האתר

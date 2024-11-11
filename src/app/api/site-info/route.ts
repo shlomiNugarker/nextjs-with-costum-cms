@@ -7,7 +7,7 @@ export async function GET() {
     const db = await connectToDatabase();
 
     const siteInfo = await db.select().from(SiteInfo).limit(1);
-    return NextResponse.json(siteInfo[0]);
+    return NextResponse.json(siteInfo.length > 0 ? siteInfo[0] : {});
   } catch (error) {
     console.error("Error fetching site information:", error);
     return NextResponse.json(
@@ -29,6 +29,12 @@ export async function POST(request: NextRequest) {
       contact_email,
       phone_number,
       opening_hours,
+      meta_title,
+      meta_description,
+      og_title,
+      og_description,
+      og_url,
+      og_type,
     } = data;
 
     if (!site_name) {
@@ -47,6 +53,12 @@ export async function POST(request: NextRequest) {
         contact_email,
         phone_number,
         opening_hours,
+        meta_title,
+        meta_description,
+        og_title,
+        og_description,
+        og_url,
+        og_type,
       })
       .returning();
 
