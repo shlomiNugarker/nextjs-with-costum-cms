@@ -6,6 +6,7 @@ import { ensureNurseryProductsTableExists } from "../services/db/seed/nurseryPro
 import { ensurePagesTableExists } from "../services/db/seed/pages";
 import { ensureUsersTableExists } from "../services/db/seed/users";
 import { ensureWeeklyProductsTableExists } from "../services/db/seed/weeklyProducts";
+import { ensureSiteInfoTableExists } from "@/services/db/seed/siteInfo";
 
 export let client: postgres.Sql;
 let db: PostgresJsDatabase<Record<string, unknown>>;
@@ -38,4 +39,5 @@ export async function ensureAllTablesExists() {
   await ensureBlogsTableExists();
   await ensurePagesTableExists();
   await ensureContentBlocksTableExists();
+  await ensureSiteInfoTableExists();
 }

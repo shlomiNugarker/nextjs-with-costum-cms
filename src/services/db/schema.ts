@@ -69,3 +69,19 @@ export const contentBlocksTable = pgTable("content_blocks", {
   position: integer("position").default(0),
   created_at: timestamp("created_at").default(sql`NOW()`),
 });
+
+export const SiteInfo = pgTable("site_info", {
+  id: serial("id").primaryKey(),
+  site_name: text("site_name").notNull(),
+  description: text("description"),
+  address: text("address"),
+  contact_email: text("contact_email"),
+  phone_number: text("phone_number"),
+  opening_hours: text("opening_hours"),
+  meta_title: text("meta_title"),
+  meta_description: text("meta_description"),
+  og_title: text("og_title"),
+  og_description: text("og_description"),
+  og_url: text("og_url"),
+  og_type: text("og_type").default("website"),
+});
