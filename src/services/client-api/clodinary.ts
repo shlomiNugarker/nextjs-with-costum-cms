@@ -19,3 +19,23 @@ export async function uploadImageToCloudinary(file: File): Promise<string> {
     throw error;
   }
 }
+
+export async function getAllImagesFromCloudinary(
+  folder: string
+): Promise<{ url: string; public_id: string }[]> {
+  try {
+    const response = await fetch(`/api/cloudinary/?folder=${folder}`, {
+      method: "GET",
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch images");
+    }
+
+    const data = await response.json();
+    return data.images;
+  } catch (error) {
+    console.error("Error fetching images:", error);
+    throw error;
+  }
+}
