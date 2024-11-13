@@ -25,6 +25,10 @@ export async function PUT(
       og_description,
       og_url,
       og_type,
+      facebook_url,
+      instagram_url,
+      twitter_url,
+      youtube_url,
     } = data;
 
     if (!id || !site_name) {
@@ -34,7 +38,7 @@ export async function PUT(
       );
     }
 
-    const updatedSiteInfo = updateSiteInfo(id, {
+    const updatedSiteInfo = await updateSiteInfo(id, {
       site_name,
       description,
       address,
@@ -47,6 +51,10 @@ export async function PUT(
       og_description,
       og_url,
       og_type,
+      facebook_url,
+      instagram_url,
+      twitter_url,
+      youtube_url,
     });
 
     return NextResponse.json(updatedSiteInfo);

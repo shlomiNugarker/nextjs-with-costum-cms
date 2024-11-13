@@ -62,6 +62,58 @@ const SiteInfoEditForm = ({ initialData }: any) => {
         עריכת מידע על האתר
       </h2>
 
+      {/* שם האתר */}
+      <div className="mb-4">
+        <label className="block text-customNavy font-bold mb-2">שם האתר:</label>
+        <input
+          type="text"
+          name="site_name"
+          value={siteInfo.site_name}
+          onChange={handleChange}
+          placeholder="לדוגמה: הגינה בפרדס"
+          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
+        />
+      </div>
+
+      {/* תיאור */}
+      <div className="mb-4">
+        <label className="block text-customNavy font-bold mb-2">תיאור:</label>
+        <textarea
+          name="description"
+          value={siteInfo.description}
+          onChange={handleChange}
+          placeholder="תיאור כללי של האתר"
+          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
+        />
+      </div>
+
+      {/* כתובת */}
+      <div className="mb-4">
+        <label className="block text-customNavy font-bold mb-2">כתובת:</label>
+        <input
+          type="text"
+          name="address"
+          value={siteInfo.address}
+          onChange={handleChange}
+          placeholder="לדוגמה: רחוב החקלאי 12, פרדס חנה"
+          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
+        />
+      </div>
+
+      {/* אימייל */}
+      <div className="mb-4">
+        <label className="block text-customNavy font-bold mb-2">אימייל:</label>
+        <input
+          type="email"
+          name="contact_email"
+          value={siteInfo.contact_email}
+          onChange={handleChange}
+          placeholder="לדוגמה: info@haginabapardes.com"
+          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
+        />
+      </div>
+
+      {/* מספר טלפון */}
       <div className="mb-4">
         <label className="block text-customNavy font-bold mb-2">
           מספר טלפון:
@@ -76,6 +128,106 @@ const SiteInfoEditForm = ({ initialData }: any) => {
         />
       </div>
 
+      {/* שעות פתיחה */}
+      <div className="mb-4">
+        <label className="block text-customNavy font-bold mb-2">
+          שעות פתיחה:
+        </label>
+        <input
+          type="text"
+          name="opening_hours"
+          value={siteInfo.opening_hours}
+          onChange={handleChange}
+          placeholder="לדוגמה: א'-ה' 9:00-17:00"
+          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
+        />
+      </div>
+
+      {/* Meta Title */}
+      <div className="mb-4">
+        <label className="block text-customNavy font-bold mb-2">
+          Meta Title:
+        </label>
+        <input
+          type="text"
+          name="meta_title"
+          value={siteInfo.meta_title}
+          onChange={handleChange}
+          placeholder="כותרת עבור SEO"
+          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
+        />
+      </div>
+
+      {/* Meta Description */}
+      <div className="mb-4">
+        <label className="block text-customNavy font-bold mb-2">
+          Meta Description:
+        </label>
+        <textarea
+          name="meta_description"
+          value={siteInfo.meta_description}
+          onChange={handleChange}
+          placeholder="תיאור קצר עבור SEO"
+          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
+        />
+      </div>
+
+      {/* OG Title */}
+      <div className="mb-4">
+        <label className="block text-customNavy font-bold mb-2">
+          OG Title:
+        </label>
+        <input
+          type="text"
+          name="og_title"
+          value={siteInfo.og_title}
+          onChange={handleChange}
+          placeholder="כותרת לשיתוף ברשתות חברתיות"
+          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
+        />
+      </div>
+
+      {/* OG Description */}
+      <div className="mb-4">
+        <label className="block text-customNavy font-bold mb-2">
+          OG Description:
+        </label>
+        <textarea
+          name="og_description"
+          value={siteInfo.og_description}
+          onChange={handleChange}
+          placeholder="תיאור לשיתוף ברשתות חברתיות"
+          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
+        />
+      </div>
+
+      {/* OG URL */}
+      <div className="mb-4">
+        <label className="block text-customNavy font-bold mb-2">OG URL:</label>
+        <input
+          type="text"
+          name="og_url"
+          value={siteInfo.og_url}
+          onChange={handleChange}
+          placeholder="כתובת URL לשיתוף ברשתות חברתיות"
+          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
+        />
+      </div>
+
+      {/* OG Type */}
+      <div className="mb-4">
+        <label className="block text-customNavy font-bold mb-2">OG Type:</label>
+        <input
+          type="text"
+          name="og_type"
+          value={siteInfo.og_type}
+          onChange={handleChange}
+          placeholder="סוג התוכן, לדוגמה: website"
+          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
+        />
+      </div>
+
+      {/* Facebook URL */}
       <div className="mb-4">
         <label className="block text-customNavy font-bold mb-2">
           Facebook URL:
@@ -89,6 +241,8 @@ const SiteInfoEditForm = ({ initialData }: any) => {
           className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
         />
       </div>
+
+      {/* Instagram URL */}
       <div className="mb-4">
         <label className="block text-customNavy font-bold mb-2">
           Instagram URL:
@@ -102,6 +256,8 @@ const SiteInfoEditForm = ({ initialData }: any) => {
           className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
         />
       </div>
+
+      {/* Twitter URL */}
       <div className="mb-4">
         <label className="block text-customNavy font-bold mb-2">
           Twitter URL:
@@ -115,6 +271,8 @@ const SiteInfoEditForm = ({ initialData }: any) => {
           className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
         />
       </div>
+
+      {/* YouTube URL */}
       <div className="mb-4">
         <label className="block text-customNavy font-bold mb-2">
           YouTube URL:

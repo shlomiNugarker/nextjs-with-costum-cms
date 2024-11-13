@@ -1,5 +1,12 @@
 import Link from "next/link";
-import { FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import {
+  FaFacebook,
+  FaInstagram,
+  FaWhatsapp,
+  FaTwitter,
+  FaYoutube,
+} from "react-icons/fa";
+import { Logo } from "./Logo";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Footer = ({ siteInfo }: any) => {
@@ -11,9 +18,10 @@ export const Footer = ({ siteInfo }: any) => {
         <div className="max-w-sm">
           <div className="mt-2 mb-2  flex h-12 items-center space-x-2">
             <Link href="/" className="hover:text-customGreen hover:underline">
-              <span className="text-2xl font-bold text-customNavy">
+              {/* <span className="text-2xl font-bold text-customNavy">
                 הגינה<span className="text-customGreen"> בפרדס</span>.
-              </span>
+              </span> */}
+              <Logo siteName={siteInfo.site_name} />
             </Link>
           </div>
           <div className="text-gray-600">
@@ -143,6 +151,29 @@ export const Footer = ({ siteInfo }: any) => {
                 <FaInstagram className="text-customNavy hover:text-customGreen text-4xl" />
               </Link>
             )}
+
+            {siteInfo.twitter_url && (
+              <Link
+                href={siteInfo.twitter_url}
+                target="_blank"
+                aria-label="Twitter"
+                className="flex justify-center items-center"
+              >
+                <FaTwitter className="text-customNavy hover:text-customGreen text-4xl" />
+              </Link>
+            )}
+
+            {siteInfo.youtube_url && (
+              <Link
+                href={siteInfo.youtube_url}
+                target="_blank"
+                aria-label="YouTube"
+                className="flex justify-center items-center"
+              >
+                <FaYoutube className="text-customNavy hover:text-customGreen text-4xl" />
+              </Link>
+            )}
+
             {siteInfo.phone_number && (
               <Link
                 href={"https://wa.me/972" + siteInfo.phone_number}

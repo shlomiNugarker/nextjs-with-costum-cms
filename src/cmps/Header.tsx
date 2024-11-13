@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRef, useState, useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
+import { Logo } from "./Logo";
 // import { CiShoppingCart } from "react-icons/ci";
 // import { Cart } from "./Cart";
 
@@ -42,10 +43,11 @@ export const Header = ({ menuItems, siteName }: any) => {
         href="/"
         className="flex items-center justify-center whitespace-nowrap text-2xl text-[40px] font-black text-customGreen"
       >
-        <span className="text-3xl font-bold text-customNavy">
+        {/* <span className="text-3xl font-bold text-customNavy">
           {siteName.split(" ")[0]}
           <span className="text-customGreen">{siteName.split(" ")[1]}</span>.
-        </span>
+        </span> */}
+        <Logo siteName={siteName} />
       </Link>
       <input
         type="checkbox"
