@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { uploadImageToCloudinary } from "@/services/clodinary";
+import { uploadImageToCloudinary } from "@/services/client-api/clodinary";
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
