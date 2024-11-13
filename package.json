@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.15",
     "@uiw/react-markdown-editor": "^6.1.2",
     "bcrypt-ts": "^5.0.2",
     "cloudinary": "^2.5.1",
