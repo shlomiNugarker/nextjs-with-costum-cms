@@ -15,7 +15,7 @@ export default async function Page() {
   return (
     <section className="min-h-screen pt-20 px-4">
       <h1 className="text-4xl font-bold text-center mb-12 text-customNavy">
-        דף עריכת צור קשר
+        דף הבית
       </h1>
       <PageEditForm initialPage={page} />
       <ContentBlockEditForm contentBlocks={contentBlocks} />

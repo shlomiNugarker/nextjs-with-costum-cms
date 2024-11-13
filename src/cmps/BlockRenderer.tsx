@@ -42,8 +42,8 @@ export const BlockRenderer = ({ block }: { block: any }) => {
         console.error("Failed to parse list content:", error);
       }
       return (
-        <div key={block.id} className="my-12">
-          <ul className="list-disc list-inside text-gray-600 space-y-3 mx-auto flex flex-col items-center">
+        <div key={block.id} className="my-12 flex">
+          <ul className="list-disc  list-inside text-gray-600 space-y-3 mx-auto flex flex-col items-start">
             {listItems.map((item, index) => (
               <li key={index}>{item}</li>
             ))}

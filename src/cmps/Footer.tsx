@@ -41,10 +41,10 @@ export const Footer = ({ siteInfo }: any) => {
   ];
 
   return (
-    <footer className="bg-customPeach">
+    <footer className="bg-customPeach text-center">
       <div className="mx-auto grid max-w-screen-xl gap-y-8 gap-x-12 px-4 py-10 md:grid-cols-2 xl:grid-cols-4 xl:px-10">
         <div className="max-w-sm">
-          <div className="mt-2 mb-2 flex h-12 items-center space-x-2">
+          <div className="mt-2 mb-2 flex h-12 items-center space-x-2 justify-center">
             <Link href="/" className="hover:text-customGreen hover:underline">
               <Logo siteName={siteInfo.site_name} />
             </Link>
@@ -105,7 +105,7 @@ export const Footer = ({ siteInfo }: any) => {
             </button>
           </div>
 
-          <div className="flex gap-4 mt-4">
+          <div className="flex gap-4 mt-4 justify-center">
             {socialLinks.map(
               ({ url, icon: Icon, label }) =>
                 url && (
