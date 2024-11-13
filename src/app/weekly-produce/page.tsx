@@ -30,15 +30,15 @@ export default async function WeeklyProduce() {
         {page.description}
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {weeklyProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
-
       <div>
         {sortedBlocks.map((block: any) => (
           <BlockRenderer key={block.id} block={block} />
+        ))}
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {weeklyProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
     </section>
