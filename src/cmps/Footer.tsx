@@ -10,7 +10,14 @@ import { Logo } from "./Logo";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Footer = ({ siteInfo }: any) => {
-  console.log(siteInfo);
+  console.log(siteInfo.address.split(","));
+  const [city, street, houseNumber] = (siteInfo.address as string)
+    .split(",")
+    .map((part) => part.trim());
+
+  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    `${siteInfo.street}, ${siteInfo.house_number}, ${siteInfo.city}, ישראל`
+  )}`;
 
   return (
     <footer className="bg-customPeach">
@@ -18,17 +25,10 @@ export const Footer = ({ siteInfo }: any) => {
         <div className="max-w-sm">
           <div className="mt-2 mb-2  flex h-12 items-center space-x-2">
             <Link href="/" className="hover:text-customGreen hover:underline">
-              {/* <span className="text-2xl font-bold text-customNavy">
-                הגינה<span className="text-customGreen"> בפרדס</span>.
-              </span> */}
               <Logo siteName={siteInfo.site_name} />
             </Link>
           </div>
-          <div className="text-gray-600">
-            הגינה בפרדס - חווה אורגנית ומשתלה הממוקמת בפרדס חנה, מציעה מגוון רחב
-            של צמחי תבלין, עצי פרי ותוצרת חקלאית טרייה, באיכות הגבוהה ביותר וללא
-            חומרי הדברה.
-          </div>
+          <div className="text-gray-600">{siteInfo.description}</div>
         </div>
         <div>
           <div className="mt-4 mb-2 font-medium text-customNavy xl:mb-4">
@@ -36,13 +36,13 @@ export const Footer = ({ siteInfo }: any) => {
           </div>
           <div className="text-gray-600">
             <Link
-              href="https://www.google.com/maps/search/?api=1&query=רחוב+השדה+10,+פרדס+חנה-כרכור,+ישראל"
+              href={googleMapsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-customGreen hover:underline"
             >
-              רחוב השדה 10, <br />
-              פרדס חנה-כרכור, <br />
+              {street} {houseNumber}, <br />
+              {city} <br />
               ישראל
             </Link>
           </div>
@@ -189,7 +189,7 @@ export const Footer = ({ siteInfo }: any) => {
       </div>
       <div className="bg-customNavy">
         <div className="mx-auto flex max-w-screen-xl flex-col gap-y-4 px-4 py-3 text-center text-customPeach sm:flex-row sm:justify-between sm:text-left">
-          <div>© 2024 הגינה בפרדס | כל הזכויות שמורות</div>
+          <div>© 2024 {siteInfo.site_name} | כל הזכויות שמורות</div>
           <div>
             <Link className="hover:text-customGreen" href="/privacy-policy">
               מדיניות פרטיות

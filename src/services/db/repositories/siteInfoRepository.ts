@@ -63,8 +63,6 @@ export async function updateSiteInfo(
   }>
 ) {
   try {
-    console.log({ updatedFields });
-
     const db = await connectToDatabase();
     const updatedInfo = await db
       .update(SiteInfo)
