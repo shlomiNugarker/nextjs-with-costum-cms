@@ -13,7 +13,7 @@ export const BlogCard = ({ post }: any) => {
         src="https://images.unsplash.com/photo-1511546865855-fe4788edf4b6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       />
       <div className="w-full bg-white p-4">
-        <p className=" font-medium text-customGreen">Nature</p>
+        {/* <p className=" font-medium text-customGreen">Nature</p> */}
         <h1 className="mb-2 sm:text-xl font-medium text-customNavy">
           {post.title}
         </h1>
