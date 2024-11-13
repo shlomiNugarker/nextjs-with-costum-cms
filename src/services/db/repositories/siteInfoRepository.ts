@@ -26,6 +26,10 @@ export async function createSiteInfo(info: {
   og_description?: string;
   og_url?: string;
   og_type?: string;
+  facebook_url?: string;
+  instagram_url?: string;
+  twitter_url?: string;
+  youtube_url?: string;
 }) {
   try {
     const db = await connectToDatabase();
@@ -52,6 +56,10 @@ export async function updateSiteInfo(
     og_description?: string;
     og_url?: string;
     og_type?: string;
+    facebook_url?: string;
+    instagram_url?: string;
+    twitter_url?: string;
+    youtube_url?: string;
   }>
 ) {
   try {

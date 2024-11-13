@@ -14,20 +14,24 @@ export async function ensureSiteInfoTableExists() {
   if (!result[0].exists) {
     await client`
       CREATE TABLE "site_info" (
-        id SERIAL PRIMARY KEY,
-        site_name VARCHAR(100) NOT NULL,
-        description TEXT,
-        address VARCHAR(255),
-        contact_email VARCHAR(100),
-        phone_number VARCHAR(20),
-        opening_hours VARCHAR(100),
-        meta_title TEXT,
-        meta_description TEXT,
-        og_title TEXT,
-        og_description TEXT,
-        og_url TEXT,
-        og_type VARCHAR(50) DEFAULT 'website',
-        created_at TIMESTAMPTZ DEFAULT NOW()     
+       id SERIAL PRIMARY KEY,
+      site_name VARCHAR(100) NOT NULL,
+      description TEXT,
+      address VARCHAR(255),
+      contact_email VARCHAR(100),
+      phone_number VARCHAR(20),
+      opening_hours VARCHAR(100),
+      meta_title TEXT,
+      meta_description TEXT,
+      og_title TEXT,
+      og_description TEXT,
+      og_url TEXT,
+      og_type VARCHAR(50) DEFAULT 'website',
+      facebook_url VARCHAR(255),
+      instagram_url VARCHAR(255),
+      twitter_url VARCHAR(255),
+      youtube_url VARCHAR(255),
+      created_at TIMESTAMPTZ DEFAULT NOW() 
       );`;
 
     console.log("Created site_info table, seeding initial site information...");
@@ -67,14 +71,19 @@ export async function seedInitialSiteInfo() {
     og_description: "חווה אורגנית למכירת ירקות טריים בפרדס חנה.",
     og_url: "https://haginabapardes.com",
     og_type: "website",
+    facebook_url: "https://www.facebook.com/haginabapardes",
+    instagram_url: "https://www.instagram.com/haginabapardes",
+    twitter_url: "https://www.twitter.com/haginabapardes",
+    youtube_url: "https://www.youtube.com/haginabapardes",
   };
 
   const client = await getClient();
 
   if (client) {
     await client`
-        INSERT INTO site_info (site_name, description, address, contact_email, phone_number, opening_hours, meta_title, meta_description, og_title, og_description, og_url, og_type)
-        VALUES (${initialSiteInfo.site_name}, ${initialSiteInfo.description}, ${initialSiteInfo.address}, ${initialSiteInfo.contact_email}, ${initialSiteInfo.phone_number}, ${initialSiteInfo.opening_hours}, ${initialSiteInfo.meta_title}, ${initialSiteInfo.meta_description}, ${initialSiteInfo.og_title}, ${initialSiteInfo.og_description}, ${initialSiteInfo.og_url}, ${initialSiteInfo.og_type});`;
+      INSERT INTO site_info (site_name, description, address, contact_email, phone_number, opening_hours, meta_title, meta_description, og_title, og_description, og_url, og_type, facebook_url, instagram_url, twitter_url, youtube_url)
+      VALUES (${initialSiteInfo.site_name}, ${initialSiteInfo.description}, ${initialSiteInfo.address}, ${initialSiteInfo.contact_email}, ${initialSiteInfo.phone_number}, ${initialSiteInfo.opening_hours}, ${initialSiteInfo.meta_title}, ${initialSiteInfo.meta_description}, ${initialSiteInfo.og_title}, ${initialSiteInfo.og_description}, ${initialSiteInfo.og_url}, ${initialSiteInfo.og_type}, ${initialSiteInfo.facebook_url}, ${initialSiteInfo.instagram_url}, ${initialSiteInfo.twitter_url}, ${initialSiteInfo.youtube_url});
+    `;
 
     console.log("Initial site information added to site_info table.");
   }

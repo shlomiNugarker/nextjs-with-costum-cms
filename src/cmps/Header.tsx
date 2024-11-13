@@ -8,7 +8,7 @@ import { FiMenu, FiX } from "react-icons/fi";
 // import { Cart } from "./Cart";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const Header = ({ menuItems }: any) => {
+export const Header = ({ menuItems, siteName }: any) => {
   const currentPath = usePathname();
   const checkboxRef = useRef<HTMLInputElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -43,7 +43,8 @@ export const Header = ({ menuItems }: any) => {
         className="flex items-center justify-center whitespace-nowrap text-2xl text-[40px] font-black text-customGreen"
       >
         <span className="text-3xl font-bold text-customNavy">
-          הגינה<span className="text-customGreen">בפרדס</span>.
+          {siteName.split(" ")[0]}
+          <span className="text-customGreen">{siteName.split(" ")[1]}</span>.
         </span>
       </Link>
       <input

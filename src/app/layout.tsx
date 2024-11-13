@@ -67,6 +67,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const siteInfo = await getSiteInfo();
+
   return (
     <html lang="he">
       <body
@@ -79,7 +81,7 @@ export default async function RootLayout({
               "url('https://tzahile.co.il/wp-content/uploads/2021/06/new-bg-1920x1074.jpg')",
           }}
         ></div>
-        <Header menuItems={menuItems} />
+        <Header menuItems={menuItems} siteName={siteInfo?.site_name || ""} />
         {children}
         <WhatsAppButton />
         <Footer />
