@@ -5,7 +5,6 @@ import { getAllBlogs } from "@/services/db/repositories/blogRepository";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
 import { getPageByName } from "@/services/db/repositories/pageRepository";
 import Link from "next/link";
-import React from "react";
 
 export const revalidate = 60;
 

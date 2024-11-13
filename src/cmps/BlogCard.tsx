@@ -5,7 +5,6 @@ import Image from "next/image";
 export const BlogCard = ({ post }: any) => {
   return (
     <article className=" m-auto min-h-full overflow-hidden rounded-lg pb-2 transition-transform duration-200 ">
-      {/* <Link href={`/blog/${blog.id}`} className="block h-full w-full"> */}
       <Image
         width={300}
         height={300}
@@ -21,16 +20,15 @@ export const BlogCard = ({ post }: any) => {
         <p className="font-light text-gray-500 mb-6 line-clamp-3">
           {post.description}
         </p>
-        <div className="justify-start mt-4 flex flex-wrap items-center">
+        {/* <div className="justify-start mt-4 flex flex-wrap items-center">
           <div className="mr-2 mt-1 rounded-2xl bg-customPeach py-1.5 px-4 text-xs text-gray-600">
             #js
           </div>
           <div className="mr-2 mt-1 rounded-2xl bg-customPeach py-1.5 px-4 text-xs text-gray-600">
             #icefactory
           </div>
-        </div>
+        </div> */}
       </div>
-      {/* </Link> */}
     </article>
   );
 };
