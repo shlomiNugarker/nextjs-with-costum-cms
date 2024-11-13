@@ -18,7 +18,7 @@ export const BlogCard = ({ post }: any) => {
           {post.title}
         </h1>
         <p className="font-light text-gray-500 mb-6 line-clamp-3">
-          {post.description}
+          {post.content}
         </p>
         {/* <div className="justify-start mt-4 flex flex-wrap items-center">
           <div className="mr-2 mt-1 rounded-2xl bg-customPeach py-1.5 px-4 text-xs text-gray-600">

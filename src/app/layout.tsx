@@ -28,13 +28,13 @@ export async function generateMetadata(): Promise<Metadata> {
     description: siteInfo?.meta_description,
     keywords: ["חקלאות אורגנית", "משתלה", "צמחי תבלין", "פירות וירקות"],
     openGraph: {
-      title: siteInfo?.og_title,
-      description: siteInfo?.og_description,
-      url: siteInfo?.og_url,
+      title: siteInfo?.og_title || "",
+      description: siteInfo?.og_description || "",
+      url: siteInfo?.og_url || "",
       type: siteInfo?.og_type,
       images: [
         {
-          url: siteInfo?.og_image,
+          url: siteInfo?.og_image || "",
           width: 800,
           height: 600,
           alt: "תמונה של הגינה בפרדס",

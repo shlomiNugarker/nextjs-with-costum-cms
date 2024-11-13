@@ -86,6 +86,7 @@ const MdEditor = ({ initialPost }: { initialPost?: any }) => {
         <MarkdownEditor
           style={{ textAlign: "right" }}
           minHeight="200px"
+          previewWidth={"100%"}
           theme={"none"}
           className="max-h-[100vh] text-right w-[90vw] mt-7"
           value={editorContent}
