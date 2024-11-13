@@ -1,5 +1,5 @@
-import { ContentBlockEditForm } from "@/cmps/ContentBlockEditForm";
-import { PageEditForm } from "@/cmps/PageEditForm";
+import { ContentBlockEditForm } from "@/cmps/admin/ContentBlockEditForm";
+import { PageEditForm } from "@/cmps/admin/PageEditForm";
 import { ProductCard } from "@/cmps/ProductCard";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
 import { getPageByName } from "@/services/db/repositories/pageRepository";

@@ -1,4 +1,4 @@
-import MdEditor from "@/cmps/MdEditor";
+import MdEditor from "@/cmps/admin/MdEditor";
 
 export const revalidate = 5;
 

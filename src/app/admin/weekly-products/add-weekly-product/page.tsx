@@ -1,4 +1,4 @@
-import { WeeklyProductsForm } from "@/cmps/WeeklyProductsForm";
+import { WeeklyProductsForm } from "@/cmps/admin/WeeklyProductsForm";
 
 export const revalidate = 5;
 

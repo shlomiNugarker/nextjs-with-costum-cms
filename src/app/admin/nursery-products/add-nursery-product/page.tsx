@@ -1,4 +1,4 @@
-import { NurseryProductsForm } from "@/cmps/NurseryProductsForm";
+import { NurseryProductsForm } from "@/cmps/admin/NurseryProductsForm";
 
 export const revalidate = 5;
 

@@ -1,4 +1,4 @@
-import MdEditor from "@/cmps/MdEditor";
+import MdEditor from "@/cmps/admin/MdEditor";
 import { getBlogById } from "@/services/db/repositories/blogRepository";
 import React from "react";
 

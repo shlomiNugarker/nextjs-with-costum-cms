@@ -1,6 +1,6 @@
 import { BlogCard } from "@/cmps/BlogCard";
-import { ContentBlockEditForm } from "@/cmps/ContentBlockEditForm";
-import { PageEditForm } from "@/cmps/PageEditForm";
+import { ContentBlockEditForm } from "@/cmps/admin/ContentBlockEditForm";
+import { PageEditForm } from "@/cmps/admin/PageEditForm";
 import { getAllBlogs } from "@/services/db/repositories/blogRepository";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
 import { getPageByName } from "@/services/db/repositories/pageRepository";

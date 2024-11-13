@@ -1,4 +1,4 @@
-import SiteInfoEditForm from "@/cmps/SiteInfoEditForm";
+import SiteInfoEditForm from "@/cmps/admin/SiteInfoEditForm";
 import { getSiteInfo } from "@/services/db/repositories/siteInfoRepository";
 
 const Page = async () => {

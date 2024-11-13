@@ -1,6 +1,6 @@
-import { ContentBlockEditForm } from "@/cmps/ContentBlockEditForm";
+import { ContentBlockEditForm } from "@/cmps/admin/ContentBlockEditForm";
 import { NurseryCard } from "@/cmps/NurseryCard";
-import { PageEditForm } from "@/cmps/PageEditForm";
+import { PageEditForm } from "@/cmps/admin/PageEditForm";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
 import { getPageByName } from "@/services/db/repositories/pageRepository";
 import { getNurseryProducts } from "@/services/db/repositories/productRepository";
