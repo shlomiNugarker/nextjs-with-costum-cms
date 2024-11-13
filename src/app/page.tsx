@@ -21,7 +21,7 @@ export default async function Home() {
   )?.content;
 
   return (
-    <main>
+    <main className="">
       <section className="mt-5 h-[100vh] w-full flex flex-col md:flex-row justify-center items-center text-customNavy px-4 animate-float">
         <div className="max-w-[500px] text-center md:text-right animate-fade-in-up">
           <h1 className="text-4xl md:text-[70px] font-bold leading-tight ">

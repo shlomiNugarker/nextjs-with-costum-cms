@@ -25,7 +25,7 @@ export const BlockRenderer = ({ block }: { block: any }) => {
     case "text":
       return (
         <div key={block.id} className="my-12 text-center">
-          <p className="text-gray-600 text-xl mb-6">{block.content}</p>
+          <p className="text-gray-600 text-2xl mb-6">{block.content}</p>
         </div>
       );
     case "gallery":
