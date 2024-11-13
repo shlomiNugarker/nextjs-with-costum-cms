@@ -45,7 +45,9 @@ export const BlockRenderer = ({ block }: { block: any }) => {
         <div key={block.id} className="my-12 flex">
           <ul className="list-disc  list-inside text-gray-600 space-y-3 mx-auto flex flex-col items-start">
             {listItems.map((item, index) => (
-              <li key={index}>{item}</li>
+              <li key={index} className="text-2xl">
+                {item}
+              </li>
             ))}
           </ul>
         </div>
