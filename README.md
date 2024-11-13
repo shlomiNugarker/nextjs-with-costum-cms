@@ -46,7 +46,7 @@ To get started with the Haginabapardes project, follow these steps:
 1. **Clone the repository**
 
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/shlomiNugarker/Haginabapardes.git
    cd Haginabapardes-main
    ```
 
