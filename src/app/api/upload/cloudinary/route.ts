@@ -8,12 +8,6 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
@@ -53,3 +47,36 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+// export async function GET(request: NextRequest) {
+//   try {
+//     const { searchParams } = new URL(request.url);
+//     const folder = searchParams.get("hagina_bapardes");
+
+//     if (!folder) {
+//       return NextResponse.json(
+//         { error: "Folder name is required" },
+//         { status: 400 }
+//       );
+//     }
+
+//     const result = await cloudinary.api.resources({
+//       type: "upload",
+//       prefix: folder,
+//       max_results: 100,
+//     });
+
+//     const images = result.resources.map((resource: any) => ({
+//       url: resource.secure_url,
+//       public_id: resource.public_id,
+//     }));
+
+//     return NextResponse.json({ images });
+//   } catch (error) {
+//     console.error("Error fetching images from folder:", error);
+//     return NextResponse.json(
+//       { error: "Failed to fetch images" },
+//       { status: 500 }
+//     );
+//   }
+// }
