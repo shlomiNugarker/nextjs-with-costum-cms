@@ -40,9 +40,17 @@ export default async function BlogPage() {
 
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {posts.map((post) => (
-          <div key={post.id}>
+          <div
+            key={post.id}
+            className="max-w-lg mx-auto mb-8 p-6 bg-white rounded-lg shadow-lg border border-gray-200 transition-transform hover:scale-105 hover:shadow-xl"
+          >
             <BlogCard post={post} />
-            <Link href={`/blog/${post.id}`}>קרא עוד</Link>
+            <Link
+              href={`/blog/${post.id}`}
+              className="mt-4 inline-block text-center w-full py-2 px-4 bg-customGreen text-white font-medium rounded-md hover:bg-green-600 focus:outline-none focus:bg-green-700 transition-all"
+            >
+              קרא עוד
+            </Link>
           </div>
         ))}
       </div>

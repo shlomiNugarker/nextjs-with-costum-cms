@@ -4,7 +4,7 @@ import Image from "next/image";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const BlogCard = ({ post }: any) => {
   return (
-    <article className="col-span-1 m-auto min-h-full cursor-pointer overflow-hidden rounded-lg pb-2 shadow-lg transition-transform duration-200 ">
+    <article className="col-span-1 m-auto min-h-full overflow-hidden rounded-lg pb-2 transition-transform duration-200 ">
       {/* <Link href={`/blog/${blog.id}`} className="block h-full w-full"> */}
       <Image
         width={300}
