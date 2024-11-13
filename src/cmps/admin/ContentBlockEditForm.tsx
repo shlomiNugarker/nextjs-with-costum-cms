@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { updateContentBlock } from "@/services/client-api/contentBlockApi";
+import Image from "next/image";
 import { uploadImageToCloudinary } from "@/services/client-api/clodinaryApi";
 
 type ContentBlock = {
@@ -151,13 +152,24 @@ export const ContentBlockEditForm = ({
           )}
 
           {block.block_type === "image" && (
-            <input
-              type="text"
-              value={block.content}
-              onChange={(e) => handleContentChange(block.id, e.target.value)}
-              placeholder="כתובת URL של התמונה"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
-            />
+            <div>
+              <input
+                type="text"
+                value={block.content}
+                onChange={(e) => handleContentChange(block.id, e.target.value)}
+                placeholder="כתובת URL של התמונה"
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
+              />
+              {block.content && (
+                <Image
+                  src={block.content}
+                  width={100}
+                  height={100}
+                  alt="Selected"
+                  className="mt-4 max-w-full h-auto rounded-lg shadow-md"
+                />
+              )}
+            </div>
           )}
 
           {block.block_type === "list" && (
@@ -228,6 +240,15 @@ export const ContentBlockEditForm = ({
                     >
                       הסר
                     </button>
+                    {imageUrl && (
+                      <Image
+                        width={100}
+                        height={100}
+                        src={imageUrl}
+                        alt={`Gallery item ${index + 1}`}
+                        className="ml-4 max-w-xs h-auto rounded-lg shadow-md"
+                      />
+                    )}
                   </div>
                 )
               )}
