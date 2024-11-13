@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { uploadImageToCloudinary } from "@/services/client-api/clodinary";
+import { uploadImageToCloudinary } from "@/services/client-api/clodinaryApi";
 import { useRouter } from "next/navigation";
 import {
   deleteWeeklyProduct,

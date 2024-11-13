@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { updateContentBlock } from "@/services/client-api/contentBlockApi";
+import { uploadImageToCloudinary } from "@/services/client-api/clodinaryApi";
 
 type ContentBlock = {
   block_type: string;
@@ -82,6 +83,20 @@ export const ContentBlockEditForm = ({
         return block;
       })
     );
+  };
+
+  const handleUploadGalleryImage = async (
+    id: number,
+    index: number,
+    file: File
+  ) => {
+    try {
+      const uploadedUrl = await uploadImageToCloudinary(file);
+      handleGalleryChange(id, index, uploadedUrl);
+    } catch (error) {
+      console.error("Failed to upload image to Cloudinary:", error);
+      alert("Error uploading image. Please try again.");
+    }
   };
 
   const handleSave = async (id: number) => {
@@ -194,6 +209,18 @@ export const ContentBlockEditForm = ({
                       }
                       className="w-full p-2 border border-gray-300 rounded-lg text-right"
                       placeholder="כתובת URL של תמונה"
+                    />
+                    <input
+                      type="file"
+                      onChange={(e) =>
+                        e.target.files &&
+                        handleUploadGalleryImage(
+                          block.id,
+                          index,
+                          e.target.files[0]
+                        )
+                      }
+                      className="ml-2"
                     />
                     <button
                       onClick={() => handleRemoveGalleryImage(block.id, index)}

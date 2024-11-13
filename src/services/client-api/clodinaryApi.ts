@@ -3,7 +3,7 @@ export async function uploadImageToCloudinary(file: File): Promise<string> {
   formData.append("file", file);
 
   try {
-    const response = await fetch("/api/upload/cloudinary", {
+    const response = await fetch("/api/cloudinary/upload", {
       method: "POST",
       body: formData,
     });
