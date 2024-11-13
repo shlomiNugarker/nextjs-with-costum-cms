@@ -27,10 +27,25 @@ const SiteInfoEditForm = ({ initialData }: any) => {
 
   const handleChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
-    setSiteInfo((prev) => ({ ...prev, [name]: value }));
-  };
 
-  console.log({ siteInfo });
+    // בדיקה עבור מספר טלפון והוספת קידומת המדינה אם היא חסרה
+    if (name === "phone_number") {
+      let formattedValue = value;
+
+      // אם המספר לא מתחיל בקידומת של ישראל (972), נוסיף אותה
+      if (!formattedValue.startsWith("972")) {
+        // הסרת אפסים מהתחלה במידה וישנם
+        formattedValue = formattedValue.replace(/^0+/, "");
+
+        // הוספת קידומת ישראלית 972
+        formattedValue = "972" + formattedValue;
+      }
+
+      setSiteInfo((prev) => ({ ...prev, [name]: formattedValue }));
+    } else {
+      setSiteInfo((prev) => ({ ...prev, [name]: value }));
+    }
+  };
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -46,49 +61,7 @@ const SiteInfoEditForm = ({ initialData }: any) => {
       <h2 className="text-2xl font-bold mb-4 text-center text-customNavy">
         עריכת מידע על האתר
       </h2>
-      <div className="mb-4">
-        <label className="block text-customNavy font-bold mb-2">שם האתר:</label>
-        <input
-          type="text"
-          name="site_name"
-          value={siteInfo.site_name}
-          onChange={handleChange}
-          placeholder="לדוגמה: הגינה בפרדס"
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-customNavy font-bold mb-2">תיאור:</label>
-        <textarea
-          name="description"
-          value={siteInfo.description}
-          onChange={handleChange}
-          placeholder="תיאור כללי של האתר"
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-customNavy font-bold mb-2">כתובת:</label>
-        <input
-          type="text"
-          name="address"
-          value={siteInfo.address}
-          onChange={handleChange}
-          placeholder="לדוגמה: רחוב החקלאי 12, פרדס חנה"
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-customNavy font-bold mb-2">אימייל:</label>
-        <input
-          type="email"
-          name="contact_email"
-          value={siteInfo.contact_email}
-          onChange={handleChange}
-          placeholder="לדוגמה: info@haginabapardes.com"
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
-        />
-      </div>
+
       <div className="mb-4">
         <label className="block text-customNavy font-bold mb-2">
           מספר טלפון:
@@ -99,91 +72,6 @@ const SiteInfoEditForm = ({ initialData }: any) => {
           value={siteInfo.phone_number}
           onChange={handleChange}
           placeholder="לדוגמה: 052-1234567"
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-customNavy font-bold mb-2">
-          שעות פתיחה:
-        </label>
-        <input
-          type="text"
-          name="opening_hours"
-          value={siteInfo.opening_hours}
-          onChange={handleChange}
-          placeholder="לדוגמה: א'-ה' 9:00-17:00"
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-customNavy font-bold mb-2">
-          Meta Title:
-        </label>
-        <input
-          type="text"
-          name="meta_title"
-          value={siteInfo.meta_title}
-          onChange={handleChange}
-          placeholder="כותרת עבור SEO"
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-customNavy font-bold mb-2">
-          Meta Description:
-        </label>
-        <textarea
-          name="meta_description"
-          value={siteInfo.meta_description}
-          onChange={handleChange}
-          placeholder="תיאור קצר עבור SEO"
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-customNavy font-bold mb-2">
-          OG Title:
-        </label>
-        <input
-          type="text"
-          name="og_title"
-          value={siteInfo.og_title}
-          onChange={handleChange}
-          placeholder="כותרת לשיתוף ברשתות חברתיות"
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-customNavy font-bold mb-2">
-          OG Description:
-        </label>
-        <textarea
-          name="og_description"
-          value={siteInfo.og_description}
-          onChange={handleChange}
-          placeholder="תיאור לשיתוף ברשתות חברתיות"
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-customNavy font-bold mb-2">OG URL:</label>
-        <input
-          type="text"
-          name="og_url"
-          value={siteInfo.og_url}
-          onChange={handleChange}
-          placeholder="כתובת URL לשיתוף ברשתות חברתיות"
-          className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-customNavy font-bold mb-2">OG Type:</label>
-        <input
-          type="text"
-          name="og_type"
-          value={siteInfo.og_type}
-          onChange={handleChange}
-          placeholder="סוג התוכן, לדוגמה: website"
           className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-customGreen"
         />
       </div>

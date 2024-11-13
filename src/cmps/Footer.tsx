@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
 
-export const Footer = () => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const Footer = ({ siteInfo }: any) => {
+  console.log(siteInfo);
+
   return (
     <footer className="bg-customPeach">
       <div className="mx-auto grid max-w-screen-xl gap-y-8 gap-x-12 px-4 py-10 md:grid-cols-2 xl:grid-cols-4 xl:px-10">
@@ -119,30 +122,37 @@ export const Footer = () => {
           </div>
 
           <div className="flex gap-4 mt-4 ">
-            <Link
-              href="https://www.facebook.com/profile.php?id=61560831838203"
-              target="_blank"
-              aria-label="Facebook"
-              className="flex justify-center items-center"
-            >
-              <FaFacebook className="text-customNavy hover:text-customGreen text-4xl" />
-            </Link>
-            <Link
-              href="https://instagram.com"
-              target="_blank"
-              aria-label="Instagram"
-              className="flex justify-center items-center"
-            >
-              <FaInstagram className="text-customNavy hover:text-customGreen text-4xl" />
-            </Link>
-            <Link
-              href="https://wa.me/972529526762"
-              target="_blank"
-              aria-label="WhatsApp"
-              className="flex justify-center items-center"
-            >
-              <FaWhatsapp className="text-customNavy hover:text-customGreen text-4xl" />
-            </Link>
+            {siteInfo.facebook_url && (
+              <Link
+                href={siteInfo.facebook_url}
+                target="_blank"
+                aria-label="Facebook"
+                className="flex justify-center items-center"
+              >
+                <FaFacebook className="text-customNavy hover:text-customGreen text-4xl" />
+              </Link>
+            )}
+
+            {siteInfo.instagram_url && (
+              <Link
+                href={siteInfo.instagram_url}
+                target="_blank"
+                aria-label="Instagram"
+                className="flex justify-center items-center"
+              >
+                <FaInstagram className="text-customNavy hover:text-customGreen text-4xl" />
+              </Link>
+            )}
+            {siteInfo.phone_number && (
+              <Link
+                href={"https://wa.me/972" + siteInfo.phone_number}
+                target="_blank"
+                aria-label="WhatsApp"
+                className="flex justify-center items-center"
+              >
+                <FaWhatsapp className="text-customNavy hover:text-customGreen text-4xl" />
+              </Link>
+            )}
           </div>
         </div>
       </div>

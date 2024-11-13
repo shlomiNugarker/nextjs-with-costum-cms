@@ -84,7 +84,7 @@ export default async function RootLayout({
         <Header menuItems={menuItems} siteName={siteInfo?.site_name || ""} />
         {children}
         <WhatsAppButton />
-        <Footer />
+        <Footer siteInfo={siteInfo} />
       </body>
     </html>
   );
