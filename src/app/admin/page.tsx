@@ -8,6 +8,9 @@ export default async function AdminPage() {
 
   return (
     <div className="min-h-screen mt-10 flex flex-col items-center justify-center space-y-6 bg-gray-100 py-10">
+      <h1 className="text-4xl font-bold text-center mb-12 text-customNavy">
+        ערוך עמודים{" "}
+      </h1>
       <div className="mt-6 flex flex-col">
         <Link href={"/admin/site-info"}>
           <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
@@ -16,27 +19,27 @@ export default async function AdminPage() {
         </Link>
         <Link href={"/admin/home"}>
           <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
-            דף הבית
+            עמוד דף הבית{" "}
           </button>
         </Link>
         <Link href={"/admin/nursery-products"}>
           <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
-            מוצרים במשתלה
+            עמוד המשתלה{" "}
           </button>
         </Link>
         <Link href={"/admin/weekly-products"}>
           <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
-            תוצרת שבועית
+            עמוד תוצרת שבועית{" "}
           </button>
         </Link>
         <Link href={"/admin/blog"}>
           <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
-            בלוג
+            עמוד הבלוג{" "}
           </button>
         </Link>
         <Link href={"/admin/about"}>
           <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
-            אודות
+            עמוד אודות{" "}
           </button>
         </Link>
         <Link href={"/admin/delivery"}>

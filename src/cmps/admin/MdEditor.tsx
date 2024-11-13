@@ -67,7 +67,7 @@ const MdEditor = ({ initialPost }: { initialPost?: any }) => {
   };
 
   return (
-    <div className="flex flex-col items-center space-y-4">
+    <div className="flex flex-col items-center ">
       <input
         type="text"
         value={title}
@@ -80,13 +80,14 @@ const MdEditor = ({ initialPost }: { initialPost?: any }) => {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         placeholder="תיאור הפוסט"
-        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
+        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen mt-4"
       />
       {MarkdownEditor ? (
         <MarkdownEditor
           style={{ textAlign: "right" }}
-          theme={"light"}
-          className="min-h-[400px] max-h-[60vh] text-right w-full"
+          minHeight="200px"
+          theme={"none"}
+          className="max-h-[100vh] text-right w-[90vw] mt-7"
           value={editorContent}
           onChange={(value) => setEditorContent(value)}
         />
@@ -96,7 +97,7 @@ const MdEditor = ({ initialPost }: { initialPost?: any }) => {
       <button
         onClick={handleSave}
         disabled={isSaving}
-        className="py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition"
+        className="py-2 mt-5 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition"
       >
         {isSaving ? "שומר..." : "שמור פוסט"}
       </button>
