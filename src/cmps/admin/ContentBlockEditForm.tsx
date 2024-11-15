@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { updateContentBlock } from "@/services/client-api/contentBlockApi";
 import Image from "next/image";
 import { uploadImageToCloudinary } from "@/services/client-api/clodinaryApi";
@@ -21,82 +21,99 @@ export const ContentBlockEditForm = ({
   const [blocks, setBlocks] = useState(
     contentBlocks.slice().sort((a, b) => (a.position || 0) - (b.position || 0))
   );
+  const [loadingBlocks, setLoadingBlocks] = useState<number[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const handleContentChange = (id: number, newContent: string) => {
+  const safeJSONParse = (data: string) => {
+    try {
+      return JSON.parse(data);
+    } catch {
+      return null;
+    }
+  };
+
+  const handleContentChange = useCallback((id: number, newContent: string) => {
     setBlocks((prevBlocks) =>
       prevBlocks.map((block) =>
         block.id === id ? { ...block, content: newContent } : block
       )
     );
-  };
+  }, []);
 
-  const handleFormFieldChange = (
-    id: number,
-    index: number,
-    newValue: string
-  ) => {
-    setBlocks((prevBlocks) =>
-      prevBlocks.map((block) => {
-        if (block.id === id && block.block_type === "form") {
-          const parsedContent = JSON.parse(block.content);
-          parsedContent.fields[index] = newValue;
-          return { ...block, content: JSON.stringify(parsedContent) };
-        }
-        return block;
-      })
-    );
-  };
+  const handleFormFieldChange = useCallback(
+    (id: number, index: number, newValue: string) => {
+      setBlocks((prevBlocks) =>
+        prevBlocks.map((block) => {
+          if (block.id === id && block.block_type === "form") {
+            const parsedContent = safeJSONParse(block.content) || {
+              fields: [],
+            };
+            parsedContent.fields[index] = newValue;
+            return { ...block, content: JSON.stringify(parsedContent) };
+          }
+          return block;
+        })
+      );
+    },
+    []
+  );
 
-  const handleGalleryChange = (id: number, index: number, newUrl: string) => {
+  const handleGalleryChange = useCallback(
+    (id: number, index: number, newUrl: string) => {
+      setBlocks((prevBlocks) =>
+        prevBlocks.map((block) => {
+          if (block.id === id && block.block_type === "gallery") {
+            const gallery = safeJSONParse(block.content) || [];
+            gallery[index] = newUrl;
+            return { ...block, content: JSON.stringify(gallery) };
+          }
+          return block;
+        })
+      );
+    },
+    []
+  );
+
+  const handleAddGalleryImage = useCallback((id: number) => {
     setBlocks((prevBlocks) =>
       prevBlocks.map((block) => {
         if (block.id === id && block.block_type === "gallery") {
-          const gallery = JSON.parse(block.content);
-          gallery[index] = newUrl;
-          return { ...block, content: JSON.stringify(gallery) };
-        }
-        return block;
-      })
-    );
-  };
-
-  const handleAddGalleryImage = (id: number) => {
-    setBlocks((prevBlocks) =>
-      prevBlocks.map((block) => {
-        if (block.id === id && block.block_type === "gallery") {
-          const gallery = JSON.parse(block.content);
+          const gallery = safeJSONParse(block.content) || [];
           gallery.push(""); // Add an empty URL
           return { ...block, content: JSON.stringify(gallery) };
         }
         return block;
       })
     );
-  };
+  }, []);
 
-  const handleRemoveGalleryImage = (id: number, index: number) => {
+  const handleRemoveGalleryImage = useCallback((id: number, index: number) => {
     setBlocks((prevBlocks) =>
       prevBlocks.map((block) => {
         if (block.id === id && block.block_type === "gallery") {
-          const gallery = JSON.parse(block.content);
+          const gallery = safeJSONParse(block.content) || [];
           gallery.splice(index, 1); // Remove the image URL at the given index
           return { ...block, content: JSON.stringify(gallery) };
         }
         return block;
       })
     );
-  };
+  }, []);
 
   const handleUploadGalleryImage = async (
     id: number,
     index: number,
     file: File
   ) => {
+    setLoadingBlocks((prev) => [...prev, id]);
     try {
       const uploadedUrl = await uploadImageToCloudinary(file);
       handleGalleryChange(id, index, uploadedUrl);
     } catch (error) {
       console.error("Failed to upload image to Cloudinary:", error);
-      alert("Error uploading image. Please try again.");
+      setErrorMessage("שגיאה בהעלאת התמונה. אנא נסה שוב.");
+    } finally {
+      setLoadingBlocks((prev) => prev.filter((blockId) => blockId !== id));
     }
   };
 
@@ -104,26 +121,34 @@ export const ContentBlockEditForm = ({
     const block = blocks.find((b) => b.id === id);
     if (!block) return;
 
+    setLoadingBlocks((prev) => [...prev, id]);
+    setErrorMessage("");
+
     try {
       if (
         block.block_type === "list" ||
         block.block_type === "form" ||
         block.block_type === "gallery"
       ) {
-        JSON.parse(block.content);
+        const parsedContent = safeJSONParse(block.content);
+        if (!parsedContent) {
+          throw new Error("Invalid JSON format");
+        }
       }
 
       await updateContentBlock(id, { content: block.content });
-      alert("Content block updated successfully");
+      alert("בלוק התוכן עודכן בהצלחה");
     } catch (error) {
       console.error("Failed to save content block:", error);
-      alert(
+      setErrorMessage(
         block.block_type === "list" ||
           block.block_type === "form" ||
           block.block_type === "gallery"
-          ? "Error updating content block. Ensure JSON format is correct."
-          : "Error updating content block"
+          ? "שגיאה בעדכון בלוק התוכן. ודא כי הפורמט של JSON תקין."
+          : "שגיאה בעדכון בלוק התוכן"
       );
+    } finally {
+      setLoadingBlocks((prev) => prev.filter((blockId) => blockId !== id));
     }
   };
 
@@ -132,6 +157,11 @@ export const ContentBlockEditForm = ({
       <h1 className="text-4xl font-semibold text-center mb-8 text-customNavy">
         עריכת בלוקים בעמוד
       </h1>
+      {errorMessage && (
+        <div className="p-4 bg-red-100 text-red-700 rounded-md">
+          {errorMessage}
+        </div>
+      )}
       {blocks.map((block) => (
         <div
           key={block.id}
@@ -187,7 +217,7 @@ export const ContentBlockEditForm = ({
               <h3 className="text-lg font-semibold text-customNavy mb-2">
                 ערוך שדות טופס:
               </h3>
-              {JSON.parse(block.content).fields.map(
+              {(safeJSONParse(block.content)?.fields || []).map(
                 (field: string, index: number) => (
                   <div key={index} className="mb-4">
                     <input
@@ -210,7 +240,7 @@ export const ContentBlockEditForm = ({
               <h3 className="text-lg font-semibold text-customNavy mb-2">
                 ערוך גלריה:
               </h3>
-              {JSON.parse(block.content).map(
+              {(safeJSONParse(block.content) || []).map(
                 (imageUrl: string, index: number) => (
                   <div key={index} className="mb-4 flex items-center">
                     <input
@@ -233,6 +263,7 @@ export const ContentBlockEditForm = ({
                         )
                       }
                       className="ml-2"
+                      disabled={loadingBlocks.includes(block.id)}
                     />
                     <button
                       onClick={() => handleRemoveGalleryImage(block.id, index)}
@@ -263,9 +294,14 @@ export const ContentBlockEditForm = ({
 
           <button
             onClick={() => handleSave(block.id)}
-            className="mt-6 py-2 px-6 bg-customGreen text-white font-semibold rounded-lg shadow-md hover:bg-opacity-90 transition transform hover:scale-105"
+            className={`mt-6 py-2 px-6 bg-customGreen text-white font-semibold rounded-lg shadow-md hover:bg-opacity-90 transition transform hover:scale-105 ${
+              loadingBlocks.includes(block.id)
+                ? "opacity-50 cursor-not-allowed"
+                : ""
+            }`}
+            disabled={loadingBlocks.includes(block.id)}
           >
-            שמור
+            {loadingBlocks.includes(block.id) ? "שומר..." : "שמור"}
           </button>
         </div>
       ))}
