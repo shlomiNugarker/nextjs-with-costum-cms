@@ -2,6 +2,7 @@
 import { getBlogById } from "@/services/db/repositories/blogRepository";
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import Image from "next/image";
 
 export const revalidate = 60;
 
@@ -26,6 +27,12 @@ export default async function Page({ params }: any) {
             ? new Date(post.created_at).toLocaleDateString()
             : null}
         </p>
+
+        {post.image_url && (
+          <div className="flex flex-col items-center ">
+            <Image alt="" width={500} height={500} src={post.image_url} />
+          </div>
+        )}
         <ReactMarkdown
           components={{
             p: ({ node, ...props }) => (

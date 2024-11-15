@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { deleteBlogPost, saveBlogPost } from "@/services/client-api/blogApi";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { uploadImageToCloudinary } from "@/services/client-api/clodinaryApi";
 
 const MarkdownEditor = dynamic(() => import("@uiw/react-markdown-editor"), {
   ssr: false,
@@ -19,15 +21,34 @@ export const PostEditor = ({ initialPost }: { initialPost?: any }) => {
   const [description, setDescription] = useState(
     initialPost?.description || ""
   );
+  const [imageUrl, setImageUrl] = useState(initialPost?.image_url || "");
   const [isSaving, setIsSaving] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
 
   useEffect(() => {
     if (initialPost) {
       setEditorContent(initialPost.content);
       setTitle(initialPost.title);
       setDescription(initialPost.description);
+      setImageUrl(initialPost.image_url);
     }
   }, [initialPost]);
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setIsUploading(true);
+      try {
+        const uploadedImageUrl = await uploadImageToCloudinary(file);
+        setImageUrl(uploadedImageUrl);
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        alert("שגיאה בהעלאת התמונה");
+      } finally {
+        setIsUploading(false);
+      }
+    }
+  };
 
   const handleSave = async () => {
     setIsSaving(true);
@@ -37,6 +58,7 @@ export const PostEditor = ({ initialPost }: { initialPost?: any }) => {
         title,
         description,
         content: editorContent,
+        image_url: imageUrl,
       };
       const result = await saveBlogPost(blogPost);
 
@@ -82,6 +104,22 @@ export const PostEditor = ({ initialPost }: { initialPost?: any }) => {
         placeholder="תיאור הפוסט"
         className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen mt-4"
       />
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleImageUpload}
+        className="w-full p-3 mt-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
+      />
+      {isUploading && <p className="text-red-500 mt-2">מעלה את התמונה...</p>}
+      {imageUrl && (
+        <Image
+          width={100}
+          height={100}
+          src={imageUrl}
+          alt="Uploaded"
+          className="mt-4 w-32 h-32 object-cover rounded-lg"
+        />
+      )}
       {MarkdownEditor ? (
         <MarkdownEditor
           style={{ textAlign: "right" }}

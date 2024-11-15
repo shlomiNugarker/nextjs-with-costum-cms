@@ -18,7 +18,7 @@ export async function POST(request: Request) {
 export async function PUT(request: Request) {
   try {
     const data = await request.json();
-    const { id, title, description, content } = data;
+    const { id, title, description, content, image_url } = data;
 
     if (!id) {
       return NextResponse.json(
@@ -27,7 +27,7 @@ export async function PUT(request: Request) {
       );
     }
 
-    await updateBlog(id, { title, description, content });
+    await updateBlog(id, { title, description, content, image_url });
 
     return NextResponse.json(
       { message: "הפוסט עודכן בהצלחה" },

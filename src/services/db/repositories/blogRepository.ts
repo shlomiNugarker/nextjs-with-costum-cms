@@ -61,6 +61,7 @@ export async function updateBlog(
     title?: string;
     description?: string;
     content?: string;
+    image_url?: string;
   }
 ) {
   try {
