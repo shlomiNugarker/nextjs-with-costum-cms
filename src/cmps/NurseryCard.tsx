@@ -1,7 +1,14 @@
 import Image from "next/image";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const NurseryCard = ({ product }: any) => {
+interface Product {
+  image_url: string;
+  name: string;
+  description: string;
+  pot_size: string;
+  price: number;
+}
+
+export const NurseryCard = ({ product }: { product: Product }) => {
   return (
     <div className="flex flex-col justify-between border rounded-lg overflow-hidden shadow-md bg-white">
       <div>
@@ -20,7 +27,7 @@ export const NurseryCard = ({ product }: any) => {
               {product.name}
             </h2>
             <p className="text-gray-600 mt-2">{product.description}</p>
-            <p className="text-gray-500 mt-1"> {product.pot_size}</p>
+            <p className="text-gray-500 mt-1">{product.pot_size}</p>
           </div>
         </div>
         <p className="mb-4 text-customGreen text-2xl font-bold mt-4 text-center">
