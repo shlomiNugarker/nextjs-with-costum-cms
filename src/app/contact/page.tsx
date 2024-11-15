@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BlockRenderer } from "@/cmps/BlockRenderer";
 import { Contact } from "@/cmps/Contact";
+import { saveContactMessage } from "@/services/db/repositories/contactMessagesRepository";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
 import { getPageByName } from "@/services/db/repositories/pageRepository";
 
@@ -29,6 +30,14 @@ export default async function ContactPage() {
       <Contact
         title={page.title || "צור קשר"}
         description={page.description || "תיאור"}
+        action={async (formData: FormData) => {
+          "use server";
+          await saveContactMessage({
+            name: formData.get("name") as string,
+            email: formData.get("email") as string,
+            message: formData.get("message") as string,
+          });
+        }}
       />
     </div>
   );
