@@ -2,7 +2,6 @@
 import { BlockRenderer } from "@/cmps/BlockRenderer";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
 import { getPageByName } from "@/services/db/repositories/pageRepository";
-import Link from "next/link";
 
 export const revalidate = 60;
 
@@ -31,25 +30,6 @@ export default async function About() {
       {sortedBlocks.map((block: any) => (
         <BlockRenderer key={block.id} block={block} />
       ))}
-
-      <div className="my-12 text-center">
-        <h2 className="text-3xl font-semibold text-customNavy mb-4">
-          בואו לבקר אותנו!
-        </h2>
-        <p className="text-gray-600 mb-6">
-          הגעתם למקום הנכון להתרשמות מהחקלאות האורגנית שלנו.
-        </p>
-        <p className="text-gray-600">
-          <Link
-            href="https://www.google.com/maps/search/?api=1&query=רחוב+השדה+10,+פרדס+חנה-כרכור,+ישראל"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-customGreen hover:underline"
-          >
-            כתובת: רחוב השדה 10, פרדס חנה-כרכור, ישראל
-          </Link>
-        </p>
-      </div>
     </section>
   );
 }
