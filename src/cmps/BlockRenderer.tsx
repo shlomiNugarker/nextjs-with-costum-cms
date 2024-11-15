@@ -82,25 +82,25 @@ export const BlockRenderer = ({ block }: { block: any }) => {
           ></textarea>
         </div>
       );
-    case "form":
-      const fields = JSON.parse(block.content).fields || [];
-      return (
-        <div key={block.id} className="space-y-6">
-          {fields.map((field: string, index: number) => (
-            <div key={index}>
-              <label className="text-3xl font-semibold text-customNavy mb-4">
-                {field}
-              </label>
-              <input
-                type="text"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
-                placeholder={`הזן ${field}`}
-                required
-              />
-            </div>
-          ))}
-        </div>
-      );
+    // case "form":
+    //   const fields = JSON.parse(block.content).fields || [];
+    //   return (
+    //     <div key={block.id} className="space-y-6">
+    //       {fields.map((field: string, index: number) => (
+    //         <div key={index}>
+    //           <label className="text-3xl font-semibold text-customNavy mb-4">
+    //             {field}
+    //           </label>
+    //           <input
+    //             type="text"
+    //             className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
+    //             placeholder={`הזן ${field}`}
+    //             required
+    //           />
+    //         </div>
+    //       ))}
+    //     </div>
+    //   );
     default:
       return null;
   }

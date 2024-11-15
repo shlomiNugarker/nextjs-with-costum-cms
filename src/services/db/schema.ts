@@ -91,3 +91,11 @@ export const SiteInfo = pgTable("site_info", {
   youtube_url: text("youtube_url"),
   created_at: timestamp("created_at").default(sql`NOW()`),
 });
+
+export const contactMessagesTable = pgTable("contact_messages", {
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  email: varchar("email", { length: 255 }).notNull(),
+  message: text("message").notNull(),
+  created_at: timestamp("created_at").default(sql`NOW()`),
+});

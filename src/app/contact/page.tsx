@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { BlockRenderer } from "@/cmps/BlockRenderer";
 import { Contact } from "@/cmps/Contact";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
 import { getPageByName } from "@/services/db/repositories/pageRepository";
@@ -19,10 +21,14 @@ export default async function ContactPage() {
 
   return (
     <div className="min-h-screen">
+      <div className="mt-8">
+        {sortedBlocks.map((block: any) => (
+          <BlockRenderer key={block.id} block={block} />
+        ))}
+      </div>
       <Contact
-        title={page.title || ""}
-        description={page.description || ""}
-        contentBlocks={sortedBlocks}
+        title={page.title || "צור קשר"}
+        description={page.description || "תיאור"}
       />
     </div>
   );

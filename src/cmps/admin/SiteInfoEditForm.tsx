@@ -27,17 +27,10 @@ const SiteInfoEditForm = ({ initialData }: any) => {
 
   const handleChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
-
-    // בדיקה עבור מספר טלפון והוספת קידומת המדינה אם היא חסרה
     if (name === "phone_number") {
       let formattedValue = value;
-
-      // אם המספר לא מתחיל בקידומת של ישראל (972), נוסיף אותה
       if (!formattedValue.startsWith("972")) {
-        // הסרת אפסים מהתחלה במידה וישנם
         formattedValue = formattedValue.replace(/^0+/, "");
-
-        // הוספת קידומת ישראלית 972
         formattedValue = "972" + formattedValue;
       }
 
