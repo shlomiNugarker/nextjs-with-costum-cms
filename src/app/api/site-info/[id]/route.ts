@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
-  deleteSiteInfoById,
+  // deleteSiteInfoById,
   updateSiteInfo,
 } from "@/services/db/repositories/siteInfoRepository";
 
@@ -67,20 +67,20 @@ export async function PUT(
   }
 }
 
-export async function DELETE(
-  _request: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  const id = parseInt(params.id);
+// export async function DELETE(
+//   _request: NextRequest,
+//   { params }: { params: { id: string } }
+// ) {
+//   const id = parseInt(params.id);
 
-  try {
-    const deletedSiteInfo = await deleteSiteInfoById(id);
-    return NextResponse.json(deletedSiteInfo);
-  } catch (error) {
-    console.error("Error deleting site information:", error);
-    return NextResponse.json(
-      { message: "Failed to delete site information" },
-      { status: 500 }
-    );
-  }
-}
+//   try {
+//     const deletedSiteInfo = await deleteSiteInfoById(id);
+//     return NextResponse.json(deletedSiteInfo);
+//   } catch (error) {
+//     console.error("Error deleting site information:", error);
+//     return NextResponse.json(
+//       { message: "Failed to delete site information" },
+//       { status: 500 }
+//     );
+//   }
+// }

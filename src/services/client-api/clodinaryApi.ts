@@ -1,22 +1,19 @@
+import httpService from "../httpService";
+
 export async function uploadImageToCloudinary(file: File): Promise<string> {
   const formData = new FormData();
   formData.append("file", file);
 
   try {
-    const response = await fetch("/api/cloudinary/upload", {
-      method: "POST",
-      body: formData,
+    const response = await httpService.post("/cloudinary/upload", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     });
-
-    if (!response.ok) {
-      throw new Error("Failed to upload image");
-    }
-
-    const data = await response.json();
-    return data.url;
+    return response.data.url;
   } catch (error) {
     console.error("Error uploading image:", error);
-    throw error;
+    throw new Error("Failed to upload image");
   }
 }
 
@@ -24,18 +21,12 @@ export async function getAllImagesFromCloudinary(
   folder: string
 ): Promise<{ url: string; public_id: string }[]> {
   try {
-    const response = await fetch(`/api/cloudinary/?folder=${folder}`, {
-      method: "GET",
+    const response = await httpService.get(`/cloudinary`, {
+      params: { folder },
     });
-
-    if (!response.ok) {
-      throw new Error("Failed to fetch images");
-    }
-
-    const data = await response.json();
-    return data.images;
+    return response.data.images;
   } catch (error) {
     console.error("Error fetching images:", error);
-    throw error;
+    throw new Error("Failed to fetch images");
   }
 }

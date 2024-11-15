@@ -18,7 +18,7 @@ export default async function EditWeeklyProduct(props: any) {
           <WeeklyProductsForm initialProduct={product} />
         ) : (
           <p>לא נמצא מוצר עם מזהה זה</p>
-        )}{" "}
+        )}
       </section>
     </>
   );

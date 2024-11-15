@@ -8,7 +8,7 @@ export default async function ContactPage() {
   const page = await getPageByName("contact");
 
   if (!page) {
-    return <div>דף תוצרת שבועית לא נמצא</div>;
+    return <div>דף צור קשר לא נמצא</div>;
   }
 
   const contentBlocks = await getContentBlocksByPageId(page.id);

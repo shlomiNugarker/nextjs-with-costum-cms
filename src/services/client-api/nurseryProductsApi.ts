@@ -1,21 +1,36 @@
+import httpService from "../httpService";
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function addProduct(product: any) {
-  return fetch("/api/nursery-products", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(product),
-  });
+  try {
+    const response = await httpService.post("/nursery-products", product);
+    return response.data;
+  } catch (error) {
+    console.error("Failed to add product", error);
+    throw new Error("Failed to add product");
+  }
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function updateProduct(product: any) {
-  return fetch(`/api/nursery-products/${product.id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(product),
-  });
+  try {
+    const response = await httpService.put(
+      `/nursery-products/${product.id}`,
+      product
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Failed to update product", error);
+    throw new Error("Failed to update product");
+  }
 }
 
 export async function deleteProductById(productId: number) {
-  return fetch(`/api/nursery-products/${productId}`, { method: "DELETE" });
+  try {
+    const response = await httpService.delete(`/nursery-products/${productId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Failed to delete product", error);
+    throw new Error("Failed to delete product");
+  }
 }

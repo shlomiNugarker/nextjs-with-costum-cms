@@ -87,12 +87,8 @@ export const NurseryProductsForm = ({
     if (!confirmDelete) return;
 
     try {
-      const response = await deleteProductById(product.id);
-
-      if (!response.ok) throw new Error("Failed to delete product");
-
-      const result = await response.json();
-      alert(result.message || "המוצר נמחק בהצלחה");
+      await deleteProductById(product.id);
+      alert("המוצר נמחק בהצלחה");
 
       setProduct({
         name: "",

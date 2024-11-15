@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
   // getPageById,
-  deletePageById,
+  // deletePageById,
   updatePage,
 } from "@/services/db/repositories/pageRepository";
 
@@ -48,20 +48,20 @@ export async function PUT(
   }
 }
 
-export async function DELETE(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  const id = parseInt(params.id);
+// export async function DELETE(
+//   request: NextRequest,
+//   { params }: { params: { id: string } }
+// ) {
+//   const id = parseInt(params.id);
 
-  try {
-    const deletedPage = await deletePageById(id);
-    return NextResponse.json(deletedPage);
-  } catch (error) {
-    console.error("Error deleting page:", error);
-    return NextResponse.json(
-      { message: "Failed to delete page" },
-      { status: 500 }
-    );
-  }
-}
+//   try {
+//     const deletedPage = await deletePageById(id);
+//     return NextResponse.json(deletedPage);
+//   } catch (error) {
+//     console.error("Error deleting page:", error);
+//     return NextResponse.json(
+//       { message: "Failed to delete page" },
+//       { status: 500 }
+//     );
+//   }
+// }

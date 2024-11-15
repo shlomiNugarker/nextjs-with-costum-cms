@@ -1,29 +1,25 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function saveBlogPost(blogPost: any) {
-  const method = blogPost.id ? "PUT" : "POST";
-  const response = await fetch("/api/blog", {
-    method,
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(blogPost),
-  });
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-  if (!response.ok) {
+import httpService from "../httpService";
+
+export async function saveBlogPost(blogPost: any) {
+  const method = blogPost.id ? "put" : "post";
+  const url = "/blog";
+  try {
+    const response = await httpService[method](url, blogPost);
+    return response.data;
+  } catch (error) {
+    console.error("Failed to save blog post", error);
     throw new Error("Failed to save blog post");
   }
-
-  return await response.json();
 }
 
 export async function deleteBlogPost(postId: number) {
-  const response = await fetch(`/api/blog/${postId}`, {
-    method: "DELETE",
-  });
-
-  if (!response.ok) {
+  try {
+    const response = await httpService.delete(`/blog/${postId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Failed to delete blog post", error);
     throw new Error("Failed to delete blog post");
   }
-
-  return await response.json();
 }

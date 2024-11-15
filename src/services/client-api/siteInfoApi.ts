@@ -1,20 +1,14 @@
-export async function getSiteInfo() {
-  try {
-    const baseUrl =
-      typeof window === "undefined"
-        ? process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-        : "";
+import httpService from "../httpService";
 
-    const response = await fetch(`${baseUrl}/api/site-info`);
-    if (!response.ok) {
-      throw new Error("Failed to fetch site information");
-    }
-    return await response.json();
-  } catch (error) {
-    console.error("Error fetching site information:", error);
-    throw new Error("Unable to fetch site information");
-  }
-}
+// export async function getSiteInfo() {
+//   try {
+//     const response = await httpService.get(`/site-info`);
+//     return response.data;
+//   } catch (error) {
+//     console.error("Error fetching site information:", error);
+//     throw new Error("Unable to fetch site information");
+//   }
+// }
 
 export async function saveSiteInfo(info: {
   id?: number;
@@ -26,22 +20,11 @@ export async function saveSiteInfo(info: {
   opening_hours?: string;
 }) {
   try {
-    const method = info.id ? "PUT" : "POST";
-    const url = "/api/site-info" + (method === "PUT" ? `/${info.id}` : "");
+    const method = info.id ? "put" : "post";
+    const url = "/site-info" + (method === "put" ? `/${info.id}` : "");
 
-    const response = await fetch(url, {
-      method,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(info),
-    });
-    if (!response.ok) {
-      throw new Error(
-        `Failed to ${method === "POST" ? "create" : "update"} site information`
-      );
-    }
-    return await response.json();
+    const response = await httpService[method](url, info);
+    return response.data;
   } catch (error) {
     console.error(
       `Error ${info.id ? "updating" : "creating"} site information:`,
@@ -55,12 +38,7 @@ export async function saveSiteInfo(info: {
 
 // export async function deleteSiteInfo(id: number) {
 //   try {
-//     const response = await fetch(`/api/site-info/${id}`, {
-//       method: "DELETE",
-//     });
-//     if (!response.ok) {
-//       throw new Error("Failed to delete site information");
-//     }
+//     const response = await httpService.delete(`/site-info/${id}`);
 //     console.log(`Site information with ID ${id} deleted successfully.`);
 //   } catch (error) {
 //     console.error(`Error deleting site information with ID ${id}:`, error);
