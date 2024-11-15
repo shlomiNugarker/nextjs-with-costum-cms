@@ -99,3 +99,9 @@ export const contactMessagesTable = pgTable("contact_messages", {
   message: text("message").notNull(),
   created_at: timestamp("created_at").default(sql`NOW()`),
 });
+
+export const newsletterSubscribers = pgTable("newsletter_subscribers", {
+  id: serial("id").primaryKey(),
+  email: text("email").notNull().unique(),
+  createdAt: timestamp("created_at").defaultNow(),
+});

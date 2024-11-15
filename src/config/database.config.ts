@@ -8,6 +8,7 @@ import { ensureUsersTableExists } from "../services/db/seed/users";
 import { ensureWeeklyProductsTableExists } from "../services/db/seed/weeklyProducts";
 import { ensureSiteInfoTableExists } from "@/services/db/seed/siteInfo";
 import { ensureContactMessagesTableExists } from "@/services/db/seed/contactMessages";
+import { ensureNewsletterSubscribersTableExists } from "@/services/db/seed/newsletter";
 
 export let client: postgres.Sql;
 let db: PostgresJsDatabase<Record<string, unknown>>;
@@ -42,4 +43,5 @@ export async function ensureAllTablesExists() {
   await ensureContentBlocksTableExists();
   await ensureSiteInfoTableExists();
   await ensureContactMessagesTableExists();
+  await ensureNewsletterSubscribersTableExists();
 }

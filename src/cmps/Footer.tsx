@@ -7,6 +7,7 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { Logo } from "./Logo";
+import { addSubscriber } from "@/services/db/repositories/newsletterRepository";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Footer = ({ siteInfo }: any) => {
@@ -94,16 +95,27 @@ export const Footer = ({ siteInfo }: any) => {
           <div className="mt-4 mb-2 font-medium text-customNavy xl:mb-4">
             הרשמו לניוזלטר שלנו:
           </div>
-          <div className="flex flex-col mb-4">
+          <Form
+            action={async (formData: FormData) => {
+              "use server";
+              const email = formData.get("email") as string;
+              console.log(email + "ddddddddd");
+              await addSubscriber(email);
+            }}
+            className="flex flex-col mb-4"
+          >
             <input
               type="email"
+              id="email"
+              name="email"
               className="focus:outline mb-2 block h-14 w-full rounded-xl bg-white px-4 focus:outline-none focus:ring-1 focus:ring-customGreen"
               placeholder="הכנס את האימייל שלך"
+              required
             />
             <button className="block rounded-xl bg-customGreen px-6 py-3 font-medium text-white">
               הרשמה
             </button>
-          </div>
+          </Form>
 
           <div className="flex gap-4 mt-4 justify-center">
             {socialLinks.map(
@@ -140,4 +152,9 @@ export const Footer = ({ siteInfo }: any) => {
       </div>
     </footer>
   );
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Form = ({ children, action }: any) => {
+  return <form action={action}>{...children}</form>;
 };

@@ -49,7 +49,7 @@ export const Contact = ({
                 id="email"
                 name="email"
                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
-                placeholder="הזן את כתובת הדואל שלך"
+                placeholder="הכנס את האימייל שלך"
                 required
               />
             </div>
