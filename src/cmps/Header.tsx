@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -6,11 +5,20 @@ import { useRef, useState, useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { Logo } from "./Logo";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const Header = ({ menuItems, siteName }: any) => {
+type MenuItem = {
+  href: string;
+  label: string;
+};
+
+type HeaderProps = {
+  menuItems: MenuItem[];
+  siteName: string;
+};
+
+export const Header = ({ menuItems, siteName }: HeaderProps) => {
   const currentPath = usePathname();
   const checkboxRef = useRef<HTMLInputElement>(null);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const isActive = (path: string) =>
     currentPath === path ? "text-customGreen font-bold" : "text-customNavy";
@@ -63,7 +71,7 @@ export const Header = ({ menuItems, siteName }: any) => {
         className="peer-checked:min-h-fit flex max-h-0 w-full flex-col items-center overflow-hidden transition-all lg:ml-24 lg:max-h-full lg:flex-row"
       >
         <ul className="flex flex-col items-center w-full space-y-2 text-2xl text-center mt-4 xl:mt-0 lg:flex-row lg:space-y-0 lg:justify-center">
-          {menuItems.map(({ href, label }: any) => (
+          {menuItems.map(({ href, label }) => (
             <li key={href} className="lg:ml-12">
               <Link
                 href={href}

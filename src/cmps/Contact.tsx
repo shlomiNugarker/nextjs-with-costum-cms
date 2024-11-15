@@ -1,7 +1,12 @@
 import { SubmitButton } from "@/cmps/submit-button";
-import React from "react";
 
-export const Contact = ({
+type ContactProps = {
+  title: string;
+  description: string;
+  action: (formData: FormData) => Promise<void>;
+};
+
+export const Contact: React.FC<ContactProps> = ({
   title,
   description,
   action,

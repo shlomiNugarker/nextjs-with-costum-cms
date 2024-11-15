@@ -9,8 +9,18 @@ import {
 import { Logo } from "./Logo";
 import { addSubscriber } from "@/services/db/repositories/newsletterRepository";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const Footer = ({ siteInfo }: any) => {
+type SiteInfo = {
+  site_name: string;
+  description: string;
+  address: string;
+  phone_number: string;
+  facebook_url?: string;
+  instagram_url?: string;
+  twitter_url?: string;
+  youtube_url?: string;
+};
+
+export const Footer = ({ siteInfo }: { siteInfo: SiteInfo }) => {
   const [city, street, houseNumber] = (siteInfo.address as string)
     .split(",")
     .map((part) => part.trim());
@@ -137,7 +147,10 @@ export const Footer = ({ siteInfo }: any) => {
 
       <div className="bg-customNavy">
         <div className="mx-auto flex max-w-screen-xl flex-col gap-y-4 px-4 py-3 text-center text-customPeach sm:flex-row sm:justify-between sm:text-left">
-          <div>© 2024 {siteInfo.site_name} | כל הזכויות שמורות</div>
+          <div>
+            © {new Date().getFullYear()} {siteInfo.site_name} | כל הזכויות
+            שמורות
+          </div>
           <div>
             <Link className="hover:text-customGreen" href="/privacy-policy">
               מדיניות פרטיות
