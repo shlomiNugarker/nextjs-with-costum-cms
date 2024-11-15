@@ -23,11 +23,6 @@ export default async function ContactPage() {
 
   return (
     <div className="min-h-screen">
-      <div className="mt-8">
-        {sortedBlocks.map((block: any) => (
-          <BlockRenderer key={block.id} block={block} />
-        ))}
-      </div>
       <Contact
         title={page.title || "צור קשר"}
         description={page.description || "תיאור"}
@@ -41,6 +36,12 @@ export default async function ContactPage() {
           redirect("/");
         }}
       />
+
+      <div className="mt-8 pt-10">
+        {sortedBlocks.map((block: any) => (
+          <BlockRenderer key={block.id} block={block} />
+        ))}
+      </div>
     </div>
   );
 }
