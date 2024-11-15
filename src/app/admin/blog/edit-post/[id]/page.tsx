@@ -1,4 +1,4 @@
-import MdEditor from "@/cmps/admin/MdEditor";
+import { PostEditor } from "@/cmps/admin/PostEditor";
 import { getBlogById } from "@/services/db/repositories/blogRepository";
 import React from "react";
 
@@ -15,7 +15,7 @@ export default async function EditBlogPage(props: any) {
 
       {post ? (
         <div className="w-[90vw] p-7 text-right">
-          <MdEditor initialPost={post} />
+          <PostEditor initialPost={post} />
         </div>
       ) : (
         <p>לא נמצא פוסט עם מזהה זה</p>

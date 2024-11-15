@@ -9,7 +9,7 @@ const MarkdownEditor = dynamic(() => import("@uiw/react-markdown-editor"), {
 });
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const MdEditor = ({ initialPost }: { initialPost?: any }) => {
+export const PostEditor = ({ initialPost }: { initialPost?: any }) => {
   const router = useRouter();
 
   const [editorContent, setEditorContent] = useState(
@@ -114,5 +114,3 @@ const MdEditor = ({ initialPost }: { initialPost?: any }) => {
     </div>
   );
 };
-
-export default MdEditor;

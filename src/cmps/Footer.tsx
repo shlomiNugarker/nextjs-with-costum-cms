@@ -42,7 +42,7 @@ export const Footer = ({ siteInfo }: any) => {
 
   return (
     <footer className="bg-customPeach text-center">
-      <div className="mx-auto grid max-w-screen-xl gap-y-8 gap-x-12 px-4 py-10 md:grid-cols-2 xl:grid-cols-4 xl:px-10">
+      <div className="mx-auto grid justify-items-center max-w-screen-xl gap-y-8 gap-x-12 px-4 py-10 md:grid-cols-2 xl:grid-cols-4 xl:px-10">
         <div className="max-w-sm">
           <div className="mt-2 mb-2 flex h-12 items-center space-x-2 justify-center">
             <Link href="/" className="hover:text-customGreen hover:underline">

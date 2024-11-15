@@ -45,6 +45,7 @@ export const blogsTable = pgTable("blogs", {
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description"),
   content: text("content").notNull(),
+  image_url: varchar("image_url", { length: 255 }),
   created_at: timestamp("created_at").default(sql`NOW()`),
 });
 
