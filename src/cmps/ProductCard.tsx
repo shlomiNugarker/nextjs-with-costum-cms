@@ -1,7 +1,14 @@
 import Image from "next/image";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const ProductCard = ({ product }: any) => {
+interface Product {
+  name: string;
+  description: string;
+  weight: string;
+  image_url: string;
+  price: number;
+}
+
+export const ProductCard = ({ product }: { product: Product }) => {
   return (
     <div className="border rounded-lg overflow-hidden shadow-md bg-white flex flex-col justify-between">
       <div>
@@ -25,12 +32,9 @@ export const ProductCard = ({ product }: any) => {
         </div>
       </div>
       <div>
-        <p className="text-customGreen font-bold text-2xl  text-center">
+        <p className="text-customGreen font-bold text-2xl text-center">
           {product.price} ש&quot;ח
         </p>
-        {/* <button className="mt-4 w-full bg-customGreen text-white py-2 rounded">
-          הוסף לסל
-        </button> */}
       </div>
     </div>
   );

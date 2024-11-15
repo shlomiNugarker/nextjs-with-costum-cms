@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { FaWhatsapp } from "react-icons/fa";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const WhatsAppButton = ({ phone }: { phone: string }) => {
   return (
     <Link
