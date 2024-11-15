@@ -1,28 +1,40 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { savePage } from "@/services/client-api/pageApi";
 import React, { useState } from "react";
 
-export const PageEditForm = ({ initialPage }: any) => {
-  const [page, setPage] = useState(initialPage);
+type Page = {
+  id?: number;
+  title: string;
+  description: string;
+  meta_title: string;
+  meta_description: string;
+  meta_keywords: string;
+};
+
+export const PageEditForm = ({ initialPage }: { initialPage: Page }) => {
+  const [page, setPage] = useState<Page>(initialPage);
+  const [isSaving, setIsSaving] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setPage((prevPage: any) => ({
+    setPage((prevPage) => ({
       ...prevPage,
       [name]: value,
     }));
   };
 
   const handleSave = async () => {
+    setIsSaving(true);
     try {
       await savePage(page);
-      alert("Page updated successfully");
+      alert("הדף עודכן בהצלחה");
     } catch (error) {
       console.error("Failed to save page:", error);
-      alert("Error updating page");
+      alert("שגיאה בעדכון הדף");
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -118,9 +130,12 @@ export const PageEditForm = ({ initialPage }: any) => {
 
       <button
         onClick={handleSave}
-        className="w-full py-3 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mt-6 shadow-md"
+        disabled={isSaving}
+        className={`w-full py-3 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mt-6 shadow-md ${
+          isSaving ? "opacity-50 cursor-not-allowed" : ""
+        }`}
       >
-        שמור דף
+        {isSaving ? "שומר..." : "שמור דף"}
       </button>
     </div>
   );
