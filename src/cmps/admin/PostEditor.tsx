@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import dynamic from "next/dynamic";
 import { deleteBlogPost, saveBlogPost } from "@/services/client-api/blogApi";
 import { useRouter } from "next/navigation";
@@ -10,20 +10,23 @@ const MarkdownEditor = dynamic(() => import("@uiw/react-markdown-editor"), {
   ssr: false,
 });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const PostEditor = ({ initialPost }: { initialPost?: any }) => {
+type BlogPost = {
+  id?: number;
+  title: string;
+  description: string;
+  content: string;
+  image_url: string;
+};
+
+export const PostEditor = ({ initialPost }: { initialPost?: BlogPost }) => {
   const router = useRouter();
 
-  const [editorContent, setEditorContent] = useState(
-    initialPost?.content || ""
-  );
-  const [title, setTitle] = useState(initialPost?.title || "");
-  const [description, setDescription] = useState(
-    initialPost?.description || ""
-  );
-  const [imageUrl, setImageUrl] = useState(initialPost?.image_url || "");
-  const [isSaving, setIsSaving] = useState(false);
-  const [isUploading, setIsUploading] = useState(false);
+  const [editorContent, setEditorContent] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [imageUrl, setImageUrl] = useState<string>("");
+  const [isSaving, setIsSaving] = useState<boolean>(false);
+  const [isUploading, setIsUploading] = useState<boolean>(false);
 
   useEffect(() => {
     if (initialPost) {
@@ -34,26 +37,29 @@ export const PostEditor = ({ initialPost }: { initialPost?: any }) => {
     }
   }, [initialPost]);
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setIsUploading(true);
-      try {
-        const uploadedImageUrl = await uploadImageToCloudinary(file);
-        setImageUrl(uploadedImageUrl);
-      } catch (error) {
-        console.error("Error uploading image:", error);
-        alert("שגיאה בהעלאת התמונה");
-      } finally {
-        setIsUploading(false);
+  const handleImageUpload = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        setIsUploading(true);
+        try {
+          const uploadedImageUrl = await uploadImageToCloudinary(file);
+          setImageUrl(uploadedImageUrl);
+        } catch (error) {
+          console.error("Error uploading image:", error);
+          alert("שגיאה בהעלאת התמונה");
+        } finally {
+          setIsUploading(false);
+        }
       }
-    }
-  };
+    },
+    []
+  );
 
-  const handleSave = async () => {
+  const handleSave = useCallback(async () => {
     setIsSaving(true);
     try {
-      const blogPost = {
+      const blogPost: BlogPost = {
         id: initialPost?.id,
         title,
         description,
@@ -70,9 +76,9 @@ export const PostEditor = ({ initialPost }: { initialPost?: any }) => {
     } finally {
       setIsSaving(false);
     }
-  };
+  }, [initialPost?.id, title, description, editorContent, imageUrl, router]);
 
-  const handleDelete = async () => {
+  const handleDelete = useCallback(async () => {
     if (!initialPost?.id) return;
 
     const confirmDelete = confirm("האם אתה בטוח שברצונך למחוק את הפוסט?");
@@ -86,10 +92,10 @@ export const PostEditor = ({ initialPost }: { initialPost?: any }) => {
       console.error("Error deleting blog post:", error);
       alert("שגיאה במחיקת הפוסט");
     }
-  };
+  }, [initialPost?.id, router]);
 
   return (
-    <div className="flex flex-col items-center ">
+    <div className="flex flex-col items-center">
       <input
         type="text"
         value={title}
@@ -108,35 +114,40 @@ export const PostEditor = ({ initialPost }: { initialPost?: any }) => {
         type="file"
         accept="image/*"
         onChange={handleImageUpload}
-        className="w-full p-3 mt-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
+        disabled={isUploading}
+        className="bg-white w-full p-3 mt-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
       />
-      {isUploading && <p className="text-red-500 mt-2">מעלה את התמונה...</p>}
-      {imageUrl && (
-        <Image
-          width={100}
-          height={100}
-          src={imageUrl}
-          alt="Uploaded"
-          className="mt-4 w-32 h-32 object-cover rounded-lg"
-        />
+      {isUploading && (
+        <p className="text-customNavy mt-2 animate-pulse">מעלה את התמונה...</p>
       )}
-      {MarkdownEditor ? (
+      {imageUrl && (
+        <div className="mt-4 w-32 h-32 rounded-lg overflow-hidden shadow-md">
+          <Image
+            width={128}
+            height={128}
+            src={imageUrl}
+            alt="Uploaded"
+            className="object-cover w-full h-full transition-transform duration-200 hover:scale-105"
+          />
+        </div>
+      )}
+      <div className="w-full mt-7">
         <MarkdownEditor
           style={{ textAlign: "right" }}
           minHeight="200px"
-          previewWidth={"100%"}
-          theme={"none"}
-          className="max-h-[100vh] text-right w-[90vw] mt-7"
+          previewWidth="100%"
+          theme="none"
+          className="max-h-[100vh] text-right w-full"
           value={editorContent}
           onChange={(value) => setEditorContent(value)}
         />
-      ) : (
-        "טוען עורך..."
-      )}
+      </div>
       <button
         onClick={handleSave}
         disabled={isSaving}
-        className="py-2 mt-5 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition"
+        className={`py-2 mt-5 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition ${
+          isSaving ? "opacity-50 cursor-not-allowed" : ""
+        }`}
       >
         {isSaving ? "שומר..." : "שמור פוסט"}
       </button>
