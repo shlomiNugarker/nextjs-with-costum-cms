@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Image from "next/image";
 import { uploadImageToCloudinary } from "@/services/client-api/clodinaryApi";
 import { useRouter } from "next/navigation";
@@ -10,14 +9,24 @@ import {
   saveWeeklyProduct,
 } from "@/services/client-api/weeklyProductsApi";
 
+type WeeklyProduct = {
+  id?: number;
+  name: string;
+  description: string;
+  weight: string;
+  category: string;
+  price: number;
+  image_url: string;
+};
+
 export const WeeklyProductsForm = ({
   initialProduct,
 }: {
-  initialProduct?: any;
+  initialProduct?: WeeklyProduct;
 }) => {
   const router = useRouter();
 
-  const [product, setProduct] = useState<any>(
+  const [product, setProduct] = useState<WeeklyProduct>(
     initialProduct || {
       name: "",
       description: "",
@@ -27,56 +36,72 @@ export const WeeklyProductsForm = ({
       image_url: "",
     }
   );
-  const [isUploading, setIsUploading] = useState(false);
+  const [isUploading, setIsUploading] = useState<boolean>(false);
+  const [isSaving, setIsSaving] = useState<boolean>(false);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setProduct((prev: any) => ({
-      ...prev,
-      [name]: name === "price" ? parseInt(value, 10) : value,
-    }));
-  };
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target;
+      setProduct((prev) => {
+        if (name === "price") {
+          return { ...prev, price: parseInt(value, 10) || 0 };
+        } else if (
+          name === "name" ||
+          name === "description" ||
+          name === "weight" ||
+          name === "category"
+        ) {
+          return { ...prev, [name]: value };
+        }
+        return prev;
+      });
+    },
+    []
+  );
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setIsUploading(true);
-      try {
-        const imageUrl = await uploadImageToCloudinary(file);
-        setProduct((prev: any) => ({
-          ...prev,
-          image_url: imageUrl,
-        }));
-      } catch (error) {
-        console.error("Error uploading image:", error);
-        alert("שגיאה בהעלאת התמונה");
-      } finally {
-        setIsUploading(false);
+  const handleImageUpload = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];
+      if (file) {
+        setIsUploading(true);
+        try {
+          const imageUrl = await uploadImageToCloudinary(file);
+          setProduct((prev) => ({
+            ...prev,
+            image_url: imageUrl,
+          }));
+        } catch (error) {
+          console.error("Error uploading image:", error);
+          alert("שגיאה בהעלאת התמונה");
+        } finally {
+          setIsUploading(false);
+        }
       }
-    }
-  };
+    },
+    []
+  );
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    await handleWeeklyProductSubmit(product);
-  };
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      setIsSaving(true);
+      try {
+        const isUpdate = Boolean(product.id);
+        await saveWeeklyProduct(product);
 
-  const handleWeeklyProductSubmit = async (product: any) => {
-    try {
-      const isUpdate = Boolean(product.id);
-      await saveWeeklyProduct(product);
+        alert(`מוצר התוצרת השבועית ${isUpdate ? "עודכן" : "נוסף"} בהצלחה`);
+        router.push("/admin");
+      } catch (err) {
+        console.error("Error saving product:", err);
+        alert("שגיאה בהוספה/עדכון מוצר התוצרת השבועית");
+      } finally {
+        setIsSaving(false);
+      }
+    },
+    [product, router]
+  );
 
-      alert(`מוצר התוצרת השבועית ${isUpdate ? "עודכן" : "נוסף"} בהצלחה`);
-      router.push("/admin");
-    } catch (err) {
-      console.error("Error saving product:", err);
-      alert("שגיאה בהוספה/עדכון מוצר התוצרת השבועית");
-    }
-  };
-
-  const deleteProduct = async () => {
+  const deleteProduct = useCallback(async () => {
     if (!product.id) return;
 
     const confirmDelete = confirm("האם אתה בטוח שברצונך למחוק את המוצר?");
@@ -100,12 +125,12 @@ export const WeeklyProductsForm = ({
       console.error("Error deleting product:", err);
       alert("שגיאה במחיקת המוצר");
     }
-  };
+  }, [product.id, router]);
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6 flex flex-col p-6 bg-white shadow-md rounded-lg w-1/2 mx-auto"
+      className="space-y-6 flex flex-col p-6 bg-white shadow-md rounded-lg max-w-md mx-auto text-customNavy"
     >
       <input
         type="text"
@@ -172,8 +197,8 @@ export const WeeklyProductsForm = ({
               src={product.image_url}
               alt="Uploaded"
               className="object-cover w-full h-full transition-transform duration-200 hover:scale-105"
-              width={300}
-              height={300}
+              width={128}
+              height={128}
             />
           </div>
         )}
@@ -181,9 +206,12 @@ export const WeeklyProductsForm = ({
 
       <button
         type="submit"
-        className="w-full py-3 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition"
+        disabled={isSaving}
+        className={`w-full py-3 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition ${
+          isSaving ? "opacity-50 cursor-not-allowed" : ""
+        }`}
       >
-        שמור מוצר
+        {isSaving ? "שומר..." : "שמור מוצר"}
       </button>
       {product.id && (
         <button
