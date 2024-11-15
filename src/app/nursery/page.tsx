@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { NurseryCard } from "@/cmps/NurseryCard";
 import { getNurseryProducts } from "@/services/db/repositories/productRepository";
@@ -20,7 +19,7 @@ export default async function NurseryPage() {
 
   const sortedBlocks = contentBlocks
     .slice()
-    .sort((a: any, b: any) => (a.position || 0) - (b.position || 0));
+    .sort((a, b) => (a.position || 0) - (b.position || 0));
 
   return (
     <>
@@ -35,13 +34,13 @@ export default async function NurseryPage() {
         </div>
 
         <div>
-          {sortedBlocks.map((block: any) => (
+          {sortedBlocks.map((block) => (
             <BlockRenderer key={block.id} block={block} />
           ))}
         </div>
 
         <div className="py-1 px-4 max-w-screen-lg mx-auto mt-8">
-          <p className="text-center text-gray-600 mb-12 text-2xl">מוצרים: </p>
+          <p className="text-center text-gray-600 mb-12 text-2xl">מוצרים:</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-center">
             {nurseryProducts.map((product) => (
               <NurseryCard key={product.id} product={product} />

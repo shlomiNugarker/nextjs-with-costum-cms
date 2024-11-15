@@ -6,10 +6,15 @@ import Image from "next/image";
 
 export const revalidate = 60;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default async function Page({ params }: any) {
+interface Params {
+  params: {
+    id: string;
+  };
+}
+
+export default async function Page({ params }: Params) {
   const { id } = params;
-  const post = await getBlogById(id);
+  const post = await getBlogById(Number(id));
 
   if (!post) {
     return (

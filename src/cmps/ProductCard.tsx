@@ -1,11 +1,14 @@
 import Image from "next/image";
 
 interface Product {
+  id: number;
   name: string;
-  description: string;
-  weight: string;
-  image_url: string;
+  description: string | null;
+  created_at: Date | null;
+  weight: string | null;
+  category: string | null;
   price: number;
+  image_url: string | null;
 }
 
 export const ProductCard = ({ product }: { product: Product }) => {

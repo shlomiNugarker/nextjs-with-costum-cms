@@ -1,11 +1,14 @@
 import Image from "next/image";
 
 interface Product {
-  image_url: string;
+  id: number;
   name: string;
-  description: string;
-  pot_size: string;
+  description: string | null;
+  pot_size: string | null;
+  category: string | null;
   price: number;
+  image_url: string | null;
+  created_at: Date | null;
 }
 
 export const NurseryCard = ({ product }: { product: Product }) => {
@@ -13,7 +16,7 @@ export const NurseryCard = ({ product }: { product: Product }) => {
     <div className="flex flex-col justify-between border rounded-lg overflow-hidden shadow-md bg-white">
       <div>
         <Image
-          src={product.image_url}
+          src={product.image_url || ""}
           alt={product.name}
           className="w-full h-48 object-cover"
           width={300}

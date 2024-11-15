@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BlockRenderer } from "@/cmps/BlockRenderer";
 import { BlogCard } from "@/cmps/BlogCard";
 import { getAllBlogs } from "@/services/db/repositories/blogRepository";
@@ -30,7 +29,7 @@ export default async function BlogPage() {
         {blogPage.description}
       </p>
 
-      {sortedBlocks.map((block: any) => (
+      {sortedBlocks.map((block) => (
         <BlockRenderer key={block.id} block={block} />
       ))}
 

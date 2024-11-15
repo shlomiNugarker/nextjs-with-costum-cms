@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BlockRenderer } from "@/cmps/BlockRenderer";
 import { Contact } from "@/cmps/Contact";
 import { saveContactMessage } from "@/services/db/repositories/contactMessagesRepository";
@@ -38,7 +37,7 @@ export default async function ContactPage() {
       />
 
       <div className="mt-8 pt-10">
-        {sortedBlocks.map((block: any) => (
+        {sortedBlocks.map((block) => (
           <BlockRenderer key={block.id} block={block} />
         ))}
       </div>

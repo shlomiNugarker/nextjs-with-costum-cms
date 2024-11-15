@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { ProductCard } from "@/cmps/ProductCard";
 import { getWeeklyProducts } from "@/services/db/repositories/productRepository";
@@ -20,7 +19,8 @@ export default async function WeeklyProduce() {
 
   const sortedBlocks = contentBlocks
     .slice()
-    .sort((a: any, b: any) => (a.position || 0) - (b.position || 0));
+    .sort((a, b) => (a.position || 0) - (b.position || 0));
+
   return (
     <section className="pb-12 pt-24 px-4 max-w-screen-lg mx-auto mt-2 min-h-screen">
       <h1 className="text-4xl font-bold text-center mb-6 text-customNavy">
@@ -31,7 +31,7 @@ export default async function WeeklyProduce() {
       </p>
 
       <div>
-        {sortedBlocks.map((block: any) => (
+        {sortedBlocks.map((block) => (
           <BlockRenderer key={block.id} block={block} />
         ))}
       </div>
