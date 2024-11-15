@@ -1,12 +1,19 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
+
 import Image from "next/image";
 import { Gallery } from "./Gallery";
 
-export const BlockRenderer = ({ block }: { block: any }) => {
+type Block = {
+  id: number;
+  block_type: string;
+  content: string;
+};
+
+export const BlockRenderer = ({ block }: { block: Block }) => {
   switch (block.block_type) {
     case "input":
       return (
-        <div key={block.id}>
+        <div>
           <label
             htmlFor={`input-${block.id}`}
             className="text-3xl font-semibold text-customNavy mb-4"
@@ -24,17 +31,24 @@ export const BlockRenderer = ({ block }: { block: any }) => {
       );
     case "text":
       return (
-        <div key={block.id} className="my-12 text-center">
+        <div className="my-12 text-center">
           <p className="text-gray-600 text-2xl mb-6">{block.content}</p>
         </div>
       );
-    case "gallery":
+    case "gallery": {
+      let images: string[] = [];
+      try {
+        images = JSON.parse(block.content || "[]");
+      } catch (error) {
+        console.error("Failed to parse gallery content:", error);
+      }
       return (
         <div className="animate-fade-in">
-          <Gallery images={JSON.parse(block.content || "[]")} />
+          <Gallery images={images} />
         </div>
       );
-    case "list":
+    }
+    case "list": {
       let listItems: string[] = [];
       try {
         listItems = JSON.parse(block.content || "[]");
@@ -42,8 +56,8 @@ export const BlockRenderer = ({ block }: { block: any }) => {
         console.error("Failed to parse list content:", error);
       }
       return (
-        <div key={block.id} className="my-12 flex">
-          <ul className="list-disc  list-inside text-gray-600 space-y-3 mx-auto flex flex-col items-start">
+        <div className="my-12 flex">
+          <ul className="list-disc list-inside text-gray-600 space-y-3 mx-auto flex flex-col items-start">
             {listItems.map((item, index) => (
               <li key={index} className="text-2xl">
                 {item}
@@ -52,12 +66,13 @@ export const BlockRenderer = ({ block }: { block: any }) => {
           </ul>
         </div>
       );
+    }
     case "image":
       return (
-        <div key={block.id} className="my-12 text-center">
+        <div className="my-12 text-center">
           <Image
             src={block.content}
-            alt="Content block image"
+            alt="תמונת בלוק תוכן"
             className="mx-auto rounded-lg"
             width={300}
             height={300}
@@ -67,7 +82,7 @@ export const BlockRenderer = ({ block }: { block: any }) => {
       );
     case "textarea":
       return (
-        <div key={block.id} className="sm:col-span-2">
+        <div className="sm:col-span-2">
           <label
             htmlFor={`textarea-${block.id}`}
             className="text-3xl font-semibold text-customNavy mb-4"
