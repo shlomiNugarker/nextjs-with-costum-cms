@@ -5,15 +5,12 @@ import { usePathname } from "next/navigation";
 import { useRef, useState, useEffect } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { Logo } from "./Logo";
-// import { CiShoppingCart } from "react-icons/ci";
-// import { Cart } from "./Cart";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const Header = ({ menuItems, siteName }: any) => {
   const currentPath = usePathname();
   const checkboxRef = useRef<HTMLInputElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const [isCartShown, setisCartShown] = useState(false);
 
   const isActive = (path: string) =>
     currentPath === path ? "text-customGreen font-bold" : "text-customNavy";
@@ -43,10 +40,6 @@ export const Header = ({ menuItems, siteName }: any) => {
         href="/"
         className="flex items-center justify-center whitespace-nowrap text-2xl text-[40px] font-black text-customGreen"
       >
-        {/* <span className="text-3xl font-bold text-customNavy">
-          {siteName.split(" ")[0]}
-          <span className="text-customGreen">{siteName.split(" ")[1]}</span>.
-        </span> */}
         <Logo siteName={siteName} />
       </Link>
       <input
@@ -85,19 +78,6 @@ export const Header = ({ menuItems, siteName }: any) => {
           ))}
         </ul>
       </nav>
-
-      {/* <div
-        onClick={() => {
-          setisCartShown((prev) => !prev);
-        }}
-        className="flex items-center space-x-2 text-customGreen"
-      >
-        <span className="bg-customPeach p-3 text-customNavy font-semibold  w-5 h-5 flex items-center justify-center rounded-full">
-          3
-        </span>
-        <CiShoppingCart className="w-9 h-9" />
-      </div>
-      {isCartShown && <Cart></Cart>} */}
     </header>
   );
 };

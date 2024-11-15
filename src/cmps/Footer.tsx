@@ -99,7 +99,6 @@ export const Footer = ({ siteInfo }: any) => {
             action={async (formData: FormData) => {
               "use server";
               const email = formData.get("email") as string;
-              console.log(email + "ddddddddd");
               await addSubscriber(email);
             }}
             className="flex flex-col mb-4"

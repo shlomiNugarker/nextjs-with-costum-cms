@@ -2,7 +2,10 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 const instance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000/api",
+  baseURL:
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000/api"
+      : process.env.NEXT_PUBLIC_BASE_URL,
 });
 
 const httpService = {

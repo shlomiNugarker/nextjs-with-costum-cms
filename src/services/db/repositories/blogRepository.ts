@@ -1,3 +1,4 @@
+"use server";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { blogsTable } from "@/services/db/schema";
 import { connectToDatabase } from "../../../config/database.config";
