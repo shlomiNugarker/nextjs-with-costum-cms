@@ -4,6 +4,7 @@ import { Contact } from "@/cmps/Contact";
 import { saveContactMessage } from "@/services/db/repositories/contactMessagesRepository";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
 import { getPageByName } from "@/services/db/repositories/pageRepository";
+import { redirect } from "next/navigation";
 
 export const revalidate = 60;
 
@@ -37,6 +38,7 @@ export default async function ContactPage() {
             email: formData.get("email") as string,
             message: formData.get("message") as string,
           });
+          redirect("/");
         }}
       />
     </div>
