@@ -1,12 +1,34 @@
 "use client";
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { saveSiteInfo } from "@/services/client-api/siteInfoApi";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
-const SiteInfoEditForm = ({ initialData }: any) => {
-  const [siteInfo, setSiteInfo] = useState({
-    id: initialData.id || undefined,
+type SiteInfo = {
+  id?: number;
+  site_name: string;
+  description: string;
+  address: string;
+  contact_email: string;
+  phone_number: string;
+  opening_hours: string;
+  meta_title: string;
+  meta_description: string;
+  og_title: string;
+  og_description: string;
+  og_url: string;
+  og_type: string;
+  facebook_url: string;
+  instagram_url: string;
+  twitter_url: string;
+  youtube_url: string;
+};
+
+type SiteInfoEditFormProps = {
+  initialData: Partial<SiteInfo>;
+};
+
+const SiteInfoEditForm = ({ initialData }: SiteInfoEditFormProps) => {
+  const [siteInfo, setSiteInfo] = useState<SiteInfo>({
+    id: initialData.id,
     site_name: initialData.site_name || "",
     description: initialData.description || "",
     address: initialData.address || "",
@@ -25,26 +47,41 @@ const SiteInfoEditForm = ({ initialData }: any) => {
     youtube_url: initialData.youtube_url || "",
   });
 
-  const handleChange = (e: { target: { name: any; value: any } }) => {
-    const { name, value } = e.target;
-    if (name === "phone_number") {
-      let formattedValue = value;
-      if (!formattedValue.startsWith("972")) {
-        formattedValue = formattedValue.replace(/^0+/, "");
-        formattedValue = "972" + formattedValue;
+  const [isSaving, setIsSaving] = useState<boolean>(false);
+
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target;
+      if (name === "phone_number") {
+        let formattedValue = value;
+        if (!formattedValue.startsWith("972")) {
+          formattedValue = formattedValue.replace(/^0+/, "");
+          formattedValue = "972" + formattedValue;
+        }
+        setSiteInfo((prev) => ({ ...prev, [name]: formattedValue }));
+      } else {
+        setSiteInfo((prev) => ({ ...prev, [name]: value }));
       }
+    },
+    []
+  );
 
-      setSiteInfo((prev) => ({ ...prev, [name]: formattedValue }));
-    } else {
-      setSiteInfo((prev) => ({ ...prev, [name]: value }));
-    }
-  };
-
-  const handleSubmit = async (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    await saveSiteInfo(siteInfo);
-    alert("המידע על האתר עודכן בהצלחה");
-  };
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      setIsSaving(true);
+      try {
+        await saveSiteInfo(siteInfo);
+        alert("המידע על האתר עודכן בהצלחה");
+      } catch (error) {
+        console.error("Error saving site info:", error);
+        alert("שגיאה בעדכון המידע על האתר");
+      } finally {
+        setIsSaving(false);
+      }
+    },
+    [siteInfo]
+  );
 
   return (
     <form
@@ -282,9 +319,12 @@ const SiteInfoEditForm = ({ initialData }: any) => {
 
       <button
         type="submit"
-        className="w-full bg-customGreen text-white py-2 px-4 rounded-md hover:bg-green-600 focus:outline-none focus:bg-green-600"
+        disabled={isSaving}
+        className={`w-full bg-customGreen text-white py-2 px-4 rounded-md hover:bg-opacity-90 focus:outline-none focus:bg-customGreen ${
+          isSaving ? "opacity-50 cursor-not-allowed" : ""
+        }`}
       >
-        שמירת שינויים
+        {isSaving ? "שומר..." : "שמירת שינויים"}
       </button>
     </form>
   );
