@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 const instance = axios.create({
@@ -9,31 +8,31 @@ const instance = axios.create({
 });
 
 const httpService = {
-  get: async (
+  get: async <T = unknown>(
     url: string,
     config?: AxiosRequestConfig
-  ): Promise<AxiosResponse> => {
-    return instance.get(url, config);
+  ): Promise<AxiosResponse<T>> => {
+    return instance.get<T>(url, config);
   },
-  post: async (
+  post: async <T = unknown, D = unknown>(
     url: string,
-    data: any,
+    data: D,
     config?: AxiosRequestConfig
-  ): Promise<AxiosResponse> => {
-    return instance.post(url, data, config);
+  ): Promise<AxiosResponse<T>> => {
+    return instance.post<T, AxiosResponse<T>, D>(url, data, config);
   },
-  put: async (
+  put: async <T = unknown, D = unknown>(
     url: string,
-    data: any,
+    data: D,
     config?: AxiosRequestConfig
-  ): Promise<AxiosResponse> => {
-    return instance.put(url, data, config);
+  ): Promise<AxiosResponse<T>> => {
+    return instance.put<T, AxiosResponse<T>, D>(url, data, config);
   },
-  delete: async (
+  delete: async <T = unknown>(
     url: string,
     config?: AxiosRequestConfig
-  ): Promise<AxiosResponse> => {
-    return instance.delete(url, config);
+  ): Promise<AxiosResponse<T>> => {
+    return instance.delete<T>(url, config);
   },
 };
 

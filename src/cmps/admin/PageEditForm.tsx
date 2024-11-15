@@ -4,15 +4,31 @@ import React, { useState } from "react";
 
 type Page = {
   id?: number;
-  title: string;
-  description: string;
-  meta_title: string;
-  meta_description: string;
-  meta_keywords: string;
+  name: string;
+  description: string | null;
+  created_at: Date | null;
+  title: string | null;
+  meta_title: string | null;
+  meta_description: string | null;
+  meta_keywords: string | null;
 };
 
-export const PageEditForm = ({ initialPage }: { initialPage: Page }) => {
-  const [page, setPage] = useState<Page>(initialPage);
+export const PageEditForm = ({
+  initialPage,
+}: {
+  initialPage: Page | undefined;
+}) => {
+  const [page, setPage] = useState<Page>(
+    initialPage || {
+      name: "",
+      description: null,
+      created_at: null,
+      title: null,
+      meta_title: null,
+      meta_description: null,
+      meta_keywords: null,
+    }
+  );
   const [isSaving, setIsSaving] = useState(false);
 
   const handleChange = (
@@ -65,7 +81,7 @@ export const PageEditForm = ({ initialPage }: { initialPage: Page }) => {
         <input
           type="text"
           name="title"
-          value={page.title}
+          value={page.title || ""}
           onChange={handleChange}
           className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition placeholder-gray-400"
           placeholder="הזן את כותרת הדף"
@@ -78,7 +94,7 @@ export const PageEditForm = ({ initialPage }: { initialPage: Page }) => {
         </label>
         <textarea
           name="description"
-          value={page.description}
+          value={page.description || ""}
           onChange={handleChange}
           className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition placeholder-gray-400"
           rows={3}
@@ -93,7 +109,7 @@ export const PageEditForm = ({ initialPage }: { initialPage: Page }) => {
         <input
           type="text"
           name="meta_title"
-          value={page.meta_title}
+          value={page.meta_title || ""}
           onChange={handleChange}
           className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition placeholder-gray-400"
           placeholder="הזן כותרת מטא"
@@ -106,7 +122,7 @@ export const PageEditForm = ({ initialPage }: { initialPage: Page }) => {
         </label>
         <textarea
           name="meta_description"
-          value={page.meta_description}
+          value={page.meta_description || ""}
           onChange={handleChange}
           className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition placeholder-gray-400"
           rows={3}
@@ -121,7 +137,7 @@ export const PageEditForm = ({ initialPage }: { initialPage: Page }) => {
         <input
           type="text"
           name="meta_keywords"
-          value={page.meta_keywords}
+          value={page.meta_keywords || ""}
           onChange={handleChange}
           className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition placeholder-gray-400"
           placeholder="הזן מילות מפתח (מופרדות בפסיק)"

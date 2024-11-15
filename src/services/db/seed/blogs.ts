@@ -1,4 +1,4 @@
-import { getClient } from "../../../config/database.config";
+import { getClient } from "@/config/database.config";
 
 export async function ensureBlogsTableExists() {
   const client = await getClient();
