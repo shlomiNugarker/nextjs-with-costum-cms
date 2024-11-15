@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { uploadImageToCloudinary } from "@/services/client-api/clodinaryApi";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import {
   addProduct,
@@ -11,14 +10,24 @@ import {
   updateProduct,
 } from "@/services/client-api/nurseryProductsApi";
 
+type NurseryProduct = {
+  id?: number;
+  name: string;
+  description: string;
+  category: string;
+  pot_size: string;
+  price: number;
+  image_url: string;
+};
+
 export const NurseryProductsForm = ({
   initialProduct,
 }: {
-  initialProduct?: any;
+  initialProduct?: NurseryProduct;
 }) => {
   const router = useRouter();
 
-  const [product, setProduct] = useState<any>(
+  const [product, setProduct] = useState<NurseryProduct>(
     initialProduct || {
       name: "",
       description: "",
@@ -29,16 +38,18 @@ export const NurseryProductsForm = ({
     }
   );
   const [isUploading, setIsUploading] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setProduct((prev: any) => ({
-      ...prev,
-      [name]: name === "price" ? parseInt(value, 10) : value,
-    }));
-  };
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target;
+      setProduct((prev) => ({
+        ...prev,
+        [name]: name === "price" ? parseFloat(value) : value,
+      }));
+    },
+    []
+  );
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -46,7 +57,7 @@ export const NurseryProductsForm = ({
       setIsUploading(true);
       try {
         const imageUrl = await uploadImageToCloudinary(file);
-        setProduct((prev: any) => ({
+        setProduct((prev) => ({
           ...prev,
           image_url: imageUrl,
         }));
@@ -61,11 +72,13 @@ export const NurseryProductsForm = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSaving(true);
     await handleNurseryProductSubmit(product);
+    setIsSaving(false);
     router.push("/admin");
   };
 
-  const handleNurseryProductSubmit = async (product: any) => {
+  const handleNurseryProductSubmit = async (product: NurseryProduct) => {
     try {
       const isUpdate = Boolean(product.id);
       const response = isUpdate
@@ -87,9 +100,8 @@ export const NurseryProductsForm = ({
     if (!confirmDelete) return;
 
     try {
-      await deleteProductById(product.id);
+      await deleteProductById(product.id as number);
       alert("המוצר נמחק בהצלחה");
-
       setProduct({
         name: "",
         description: "",
@@ -184,9 +196,12 @@ export const NurseryProductsForm = ({
 
       <button
         type="submit"
-        className="w-full py-3 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition"
+        disabled={isSaving}
+        className={`w-full py-3 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition ${
+          isSaving ? "opacity-50 cursor-not-allowed" : ""
+        }`}
       >
-        שמור מוצר
+        {isSaving ? "שומר..." : "שמור מוצר"}
       </button>
       {product.id && (
         <button
