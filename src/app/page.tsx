@@ -34,10 +34,6 @@ export default async function Home() {
     homePage.id
   );
 
-  const heroUrl = contentBlocks.find(
-    (block) => block.block_type === "text"
-  )?.content;
-
   const galleryImages = contentBlocks.find(
     (block) => block.block_type === "gallery"
   )?.content;
@@ -53,7 +49,11 @@ export default async function Home() {
           <p className="text-2xl">{homePage.description}</p>
         </div>
         <div className="mt-8 md:mt-0 md:ml-8 flex justify-center animate-fade-in">
-          <HeroImg href={heroUrl || ""} />
+          <HeroImg
+            href={
+              "https://images.unsplash.com/photo-1488459716781-31db52582fe9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            }
+          />
         </div>
       </section>
 

@@ -78,7 +78,7 @@ export default async function RootLayout({
           className="h-screen bg-cover bg-center fixed inset-0 z-[-2] blur"
           style={{
             backgroundImage:
-              "url('https://tzahile.co.il/wp-content/uploads/2021/06/new-bg-1920x1074.jpg')",
+              "url('https://images.unsplash.com/photo-1495195129352-aeb325a55b65?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
           }}
         ></div>
         <Header menuItems={menuItems} siteName={siteInfo?.site_name || ""} />

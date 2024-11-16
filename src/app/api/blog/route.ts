@@ -4,9 +4,9 @@ import { addPost, updateBlog } from "@/services/db/repositories/blogRepository";
 export async function POST(request: Request) {
   try {
     const data = await request.json();
-    const { title, description, content } = data;
+    const { title, description, content, image_url } = data;
 
-    await addPost({ title, description, content });
+    await addPost({ title, description, content, image_url });
 
     return NextResponse.json({ message: "הפוסט נוסף בהצלחה" }, { status: 201 });
   } catch (error) {
