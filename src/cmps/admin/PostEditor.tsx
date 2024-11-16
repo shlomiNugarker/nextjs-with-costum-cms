@@ -11,12 +11,11 @@ const MarkdownEditor = dynamic(() => import("@uiw/react-markdown-editor"), {
 });
 
 type BlogPost = {
-  id?: number;
+  id: number | undefined;
+  description: string | null;
   title: string;
   content: string;
-  description: string | null;
   image_url: string | null;
-  created_at?: Date | null;
 };
 
 export const PostEditor = ({
@@ -65,7 +64,7 @@ export const PostEditor = ({
     setIsSaving(true);
     try {
       const blogPost: BlogPost = {
-        id: initialPost?.id || undefined,
+        id: initialPost?.id,
         title,
         description,
         content: editorContent,
