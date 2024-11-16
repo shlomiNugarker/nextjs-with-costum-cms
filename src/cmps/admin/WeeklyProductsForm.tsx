@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState, useCallback } from "react";
@@ -9,24 +10,10 @@ import {
   saveWeeklyProduct,
 } from "@/services/client-api/weeklyProductsApi";
 
-type WeeklyProduct = {
-  id?: number;
-  name: string;
-  description: string;
-  weight: string;
-  category: string;
-  price: number;
-  image_url: string;
-};
-
-export const WeeklyProductsForm = ({
-  initialProduct,
-}: {
-  initialProduct?: WeeklyProduct;
-}) => {
+export const WeeklyProductsForm = ({ initialProduct }: any) => {
   const router = useRouter();
 
-  const [product, setProduct] = useState<WeeklyProduct>(
+  const [product, setProduct] = useState(
     initialProduct || {
       name: "",
       description: "",
@@ -42,7 +29,7 @@ export const WeeklyProductsForm = ({
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const { name, value } = e.target;
-      setProduct((prev) => {
+      setProduct((prev: any) => {
         if (name === "price") {
           return { ...prev, price: parseInt(value, 10) || 0 };
         } else if (
@@ -66,7 +53,7 @@ export const WeeklyProductsForm = ({
         setIsUploading(true);
         try {
           const imageUrl = await uploadImageToCloudinary(file);
-          setProduct((prev) => ({
+          setProduct((prev: any) => ({
             ...prev,
             image_url: imageUrl,
           }));

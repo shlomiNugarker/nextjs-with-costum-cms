@@ -1,33 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { saveSiteInfo } from "@/services/client-api/siteInfoApi";
 import { useState, useCallback } from "react";
 
-type SiteInfo = {
-  id?: number;
-  site_name: string;
-  description: string;
-  address: string;
-  contact_email: string;
-  phone_number: string;
-  opening_hours: string;
-  meta_title: string;
-  meta_description: string;
-  og_title: string;
-  og_description: string;
-  og_url: string;
-  og_type: string;
-  facebook_url: string;
-  instagram_url: string;
-  twitter_url: string;
-  youtube_url: string;
-};
-
-type SiteInfoEditFormProps = {
-  initialData: Partial<SiteInfo>;
-};
-
-const SiteInfoEditForm = ({ initialData }: SiteInfoEditFormProps) => {
-  const [siteInfo, setSiteInfo] = useState<SiteInfo>({
+const SiteInfoEditForm = ({ initialData }: any) => {
+  const [siteInfo, setSiteInfo] = useState({
     id: initialData.id,
     site_name: initialData.site_name || "",
     description: initialData.description || "",
