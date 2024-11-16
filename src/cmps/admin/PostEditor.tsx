@@ -13,12 +13,17 @@ const MarkdownEditor = dynamic(() => import("@uiw/react-markdown-editor"), {
 type BlogPost = {
   id?: number;
   title: string;
-  description: string;
   content: string;
-  image_url: string;
+  description: string | null;
+  image_url: string | null;
+  created_at?: Date | null;
 };
 
-export const PostEditor = ({ initialPost }: { initialPost?: BlogPost }) => {
+export const PostEditor = ({
+  initialPost,
+}: {
+  initialPost?: BlogPost | null;
+}) => {
   const router = useRouter();
 
   const [editorContent, setEditorContent] = useState<string>("");
@@ -30,10 +35,10 @@ export const PostEditor = ({ initialPost }: { initialPost?: BlogPost }) => {
 
   useEffect(() => {
     if (initialPost) {
-      setEditorContent(initialPost.content);
-      setTitle(initialPost.title);
-      setDescription(initialPost.description);
-      setImageUrl(initialPost.image_url);
+      setEditorContent(initialPost.content || "");
+      setTitle(initialPost.title || "");
+      setDescription(initialPost.description || "");
+      setImageUrl(initialPost.image_url || "");
     }
   }, [initialPost]);
 
@@ -60,15 +65,15 @@ export const PostEditor = ({ initialPost }: { initialPost?: BlogPost }) => {
     setIsSaving(true);
     try {
       const blogPost: BlogPost = {
-        id: initialPost?.id,
+        id: initialPost?.id || undefined,
         title,
         description,
         content: editorContent,
         image_url: imageUrl,
       };
-      const result = await saveBlogPost(blogPost);
+      await saveBlogPost(blogPost);
 
-      alert(result.message || "הפוסט נשמר בהצלחה");
+      alert("הפוסט נשמר בהצלחה");
       router.push("/admin");
     } catch (error) {
       console.error("Error saving blog post:", error);

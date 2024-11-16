@@ -9,18 +9,8 @@ import {
 import { Logo } from "./Logo";
 import { addSubscriber } from "@/services/db/repositories/newsletterRepository";
 
-type SiteInfo = {
-  site_name: string;
-  description: string;
-  address: string;
-  phone_number: string;
-  facebook_url?: string;
-  instagram_url?: string;
-  twitter_url?: string;
-  youtube_url?: string;
-};
-
-export const Footer = ({ siteInfo }: { siteInfo: SiteInfo }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const Footer = ({ siteInfo }: { siteInfo: any }) => {
   const [city, street, houseNumber] = (siteInfo.address as string)
     .split(",")
     .map((part) => part.trim());
