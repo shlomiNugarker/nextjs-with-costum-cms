@@ -13,7 +13,7 @@ export const BlockRenderer = ({ block }: { block: Block }) => {
   switch (block.block_type) {
     case "input":
       return (
-        <div>
+        <div className="my-3">
           <label
             htmlFor={`input-${block.id}`}
             className="text-3xl font-semibold text-customNavy mb-4"
@@ -31,8 +31,8 @@ export const BlockRenderer = ({ block }: { block: Block }) => {
       );
     case "text":
       return (
-        <div className="text-center">
-          <p className="text-gray-600 text-2xl mb-6">{block.content}</p>
+        <div className="text-center my-3">
+          <p className="text-gray-600 text-2xl">{block.content}</p>
         </div>
       );
     case "gallery": {
@@ -43,7 +43,7 @@ export const BlockRenderer = ({ block }: { block: Block }) => {
         console.error("Failed to parse gallery content:", error);
       }
       return (
-        <div className="animate-fade-in">
+        <div className="animate-fade-in my-3">
           <Gallery images={images} />
         </div>
       );
@@ -56,7 +56,7 @@ export const BlockRenderer = ({ block }: { block: Block }) => {
         console.error("Failed to parse list content:", error);
       }
       return (
-        <div className="mb-6 flex">
+        <div className="flex my-3">
           <ul className="list-disc list-inside text-gray-600 space-y-3 mx-auto flex flex-col items-start">
             {listItems.map((item, index) => (
               <li key={index} className="text-2xl">
@@ -69,7 +69,7 @@ export const BlockRenderer = ({ block }: { block: Block }) => {
     }
     case "image":
       return (
-        <div className="my-12 text-center">
+        <div className="text-center my-3">
           <Image
             src={block.content}
             alt="תמונת בלוק תוכן"
@@ -81,7 +81,7 @@ export const BlockRenderer = ({ block }: { block: Block }) => {
       );
     case "textarea":
       return (
-        <div className="sm:col-span-2">
+        <div className="sm:col-span-2 my-3">
           <label
             htmlFor={`textarea-${block.id}`}
             className="text-3xl font-semibold text-customNavy mb-4"

@@ -26,7 +26,7 @@ export default async function NurseryPage() {
           <h1 className="text-4xl font-bold text-center mb-6 text-customNavy">
             {page.title}
           </h1>
-          <p className="text-center text-gray-600 mb-12 text-2xl">
+          <p className="text-center text-gray-600 text-2xl">
             {page.description}
           </p>
         </div>

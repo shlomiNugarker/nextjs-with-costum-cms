@@ -21,12 +21,10 @@ export default async function WeeklyProduce() {
 
   return (
     <section className="pb-12 px-4 max-w-screen-lg mx-auto  min-h-[calc(100vh-70px)] justify-center items-center flex flex-col pt-5">
-      <h1 className="text-4xl font-bold text-center mb-6 text-customNavy">
+      <h1 className="text-4xl font-bold text-center my-3 text-customNavy">
         {page.title}
       </h1>
-      <p className="text-center text-gray-600 mb-12 text-2xl">
-        {page.description}
-      </p>
+      <p className="text-center text-gray-600 text-2xl">{page.description}</p>
 
       <div>
         {sortedBlocks.map((block) => (

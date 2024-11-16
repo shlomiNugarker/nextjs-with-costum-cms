@@ -5,7 +5,7 @@ import Link from "next/link";
 export const BlogCard = ({ post }: { post: any }) => {
   return (
     <Link href={`/blog/${post.id}`}>
-      <article className="cursor-pointer m-auto min-h-full overflow-hidden rounded-lg pb-2 transition-transform duration-200 hover:shadow-lg">
+      <article className="cursor-pointer m-auto h-full overflow-hidden rounded-lg pb-2 transition-transform duration-200 hover:shadow-lg">
         <Image
           width={300}
           height={300}

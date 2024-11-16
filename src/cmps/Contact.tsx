@@ -14,17 +14,15 @@ export const Contact: React.FC<ContactProps> = ({
   return (
     <section className="p-5" id="contact">
       <div className="lg:py-16 px-6 mx-auto max-w-screen-md bg-white shadow-lg rounded-lg">
-        <h2 className="text-4xl font-bold text-center mb-6 text-customNavy">
+        <h2 className="text-4xl font-bold text-center mb-3 text-customNavy">
           {title}
         </h2>
-        <p className="text-center text-gray-600 mb-12 text-2xl">
-          {description}
-        </p>
+        <p className="text-center text-gray-600 my-3 text-2xl">{description}</p>
         <form action={action}>
           <div className="space-y-6">
             <div>
               <label
-                className="block text-xl font-medium text-customNavy mb-2"
+                className="block text-xl font-medium text-customNavy my-3"
                 htmlFor="name"
               >
                 שם
@@ -42,7 +40,7 @@ export const Contact: React.FC<ContactProps> = ({
             <div>
               <label
                 htmlFor="email"
-                className="block text-xl font-medium text-customNavy mb-2"
+                className="block text-xl font-medium text-customNavy my-3"
               >
                 דוא&quot;ל
               </label>
@@ -59,7 +57,7 @@ export const Contact: React.FC<ContactProps> = ({
             <div>
               <label
                 htmlFor="message"
-                className="block text-xl font-medium text-customNavy mb-2"
+                className="block text-xl font-medium text-customNavy my-3"
               >
                 הודעה
               </label>
@@ -76,7 +74,7 @@ export const Contact: React.FC<ContactProps> = ({
             <div className="text-center">
               <SubmitButton
                 aria-label="Submit message"
-                className="mt-4 px-8 py-4 text-white bg-customGreen rounded-md hover:bg-green-600 transition"
+                className="my-3 px-8 py-4 text-white bg-customGreen rounded-md hover:bg-green-600 transition"
               >
                 שלח הודעה
               </SubmitButton>

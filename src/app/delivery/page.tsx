@@ -23,7 +23,7 @@ export default async function Delivery() {
       <h1 className="text-4xl font-bold text-center mb-6 text-customNavy">
         {deliveryPage.title || "משלוחים"}
       </h1>
-      <p className="text-center text-gray-600 mb-12 text-2xl">
+      <p className="text-center text-gray-600 text-2xl">
         {deliveryPage.description}
       </p>
 
