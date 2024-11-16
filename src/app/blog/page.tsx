@@ -37,7 +37,7 @@ export default async function BlogPage() {
         {posts.map((post) => (
           <div
             key={post.id}
-            className="p-6 bg-white rounded-lg shadow-lg border border-gray-200 transition-transform hover:scale-105 hover:shadow-xl max-w-[450px] "
+            className="p-6 bg-white rounded-lg shadow-lg border border-gray-200 transition-transform hover:scale-105 hover:shadow-xl max-w-[450px] animate-float"
           >
             <BlogCard post={post} />
             <Link

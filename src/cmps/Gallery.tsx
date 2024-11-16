@@ -1,40 +1,39 @@
-import Image from "next/image";
+/* eslint-disable @next/next/no-img-element */
+import React from "react";
 
 interface GalleryProps {
   images: string[];
 }
 
-const isLoaded = true;
 export const Gallery = ({ images }: GalleryProps) => {
+  const columns = 3;
+
+  const columnImages: string[][] = [];
+  for (let i = 0; i < columns; i++) {
+    columnImages[i] = [];
+  }
+
+  images.forEach((image, index) => {
+    const columnIndex = index % columns;
+    columnImages[columnIndex].push(image);
+  });
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h2 className="text-4xl font-bold text-center mb-8 text-customNavy">
-        הגלריה שלנו
-      </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className={`relative overflow-hidden rounded-lg shadow-lg transition-opacity duration-1000 ${
-              isLoaded ? "opacity-100" : "opacity-0"
-            }`}
-            style={{ transitionDelay: `${index * 100}ms` }}
-          >
-            <Image
-              src={image}
-              alt={image}
-              width={400}
-              height={400}
-              className="w-full h-full  object-cover transition-transform duration-300 ease-in-out hover:scale-110"
+    <div
+      className={`grid grid-cols-2 container mx-auto mb-7 gap-4 md:grid-cols-${columns}`}
+    >
+      {columnImages.map((column, columnIndex) => (
+        <div key={columnIndex} className="flex flex-col gap-4 items-start">
+          {column.map((imageSrc, imageIndex) => (
+            <img
+              key={imageIndex}
+              className="h-auto max-w-full rounded-lg object-cover object-center"
+              src={imageSrc}
+              alt={`gallery-photo-${columnIndex}-${imageIndex}`}
             />
-            <div className="absolute inset-0 bg-customNavy bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-              <p className="text-white text-lg font-semibold">
-                {/* {"כותרת של התמונה"} */}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ))}
     </div>
   );
 };

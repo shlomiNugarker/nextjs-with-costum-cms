@@ -107,11 +107,11 @@ export const Footer = ({ siteInfo }: { siteInfo: any }) => {
               type="email"
               id="email"
               name="email"
-              className="focus:outline mb-2 block h-14 w-full rounded-xl bg-white px-4 focus:outline-none focus:ring-1 focus:ring-customGreen"
+              className="focus:outline mb-2 block h-14 w-full rounded-xl  bg-white px-4 focus:outline-none focus:ring-1 focus:ring-customGreen"
               placeholder="הכנס את האימייל שלך"
               required
             />
-            <button className="block rounded-xl bg-customGreen px-6 py-3 font-medium text-white">
+            <button className="block rounded-xl bg-customGreen px-6 w-full py-3 font-medium text-white">
               הרשמה
             </button>
           </Form>

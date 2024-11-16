@@ -21,7 +21,9 @@ export const Header = ({ menuItems, siteName }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const isActive = (path: string) =>
-    currentPath === path ? "text-customGreen font-bold" : "text-customNavy";
+    currentPath.startsWith(path)
+      ? "text-customGreen font-bold"
+      : "text-customNavy";
 
   const handleCloseMenu = () => {
     if (checkboxRef.current) {
