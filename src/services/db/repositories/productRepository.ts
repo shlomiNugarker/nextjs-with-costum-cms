@@ -65,7 +65,16 @@ export async function saveProduct(
 export async function getProductById(
   id: number,
   tableType: "nursery" | "weekly"
-) {
+): Promise<{
+  description: string | null;
+  category: string | null;
+  price: number;
+  image_url: string | null;
+  id: number;
+  name: string;
+  created_at: Date | null;
+  pot_size?: string;
+} | null> {
   try {
     const table =
       tableType === "nursery" ? nurseryProductsTable : weeklyProductsTable;

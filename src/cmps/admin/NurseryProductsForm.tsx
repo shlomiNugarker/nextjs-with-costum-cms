@@ -12,12 +12,12 @@ import {
 
 type NurseryProduct = {
   id?: number;
-  name: string;
-  description: string;
-  category: string;
-  pot_size: string;
+  description: string | null;
+  category: string | null;
   price: number;
-  image_url: string;
+  image_url: string | null;
+  name: string;
+  pot_size?: string;
 };
 
 export const NurseryProductsForm = ({
@@ -100,7 +100,7 @@ export const NurseryProductsForm = ({
     if (!confirmDelete) return;
 
     try {
-      await deleteProductById(product.id as number);
+      await deleteProductById(product.id);
       alert("המוצר נמחק בהצלחה");
       setProduct({
         name: "",
@@ -133,7 +133,7 @@ export const NurseryProductsForm = ({
       />
       <textarea
         name="description"
-        value={product.description}
+        value={product.description || ""}
         onChange={handleChange}
         placeholder="תיאור"
         required
@@ -142,7 +142,7 @@ export const NurseryProductsForm = ({
       <input
         type="text"
         name="category"
-        value={product.category}
+        value={product.category || ""}
         onChange={handleChange}
         placeholder="קטגוריה"
         className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
