@@ -1,3 +1,5 @@
+"use server";
+
 import { connectToDatabase } from "@/config/database.config";
 import { contactMessagesTable } from "../schema";
 

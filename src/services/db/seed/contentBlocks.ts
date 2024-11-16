@@ -1,4 +1,6 @@
-import { getClient } from "../../../config/database.config";
+"use server";
+
+import { getClient } from "@/config/database.config";
 
 export async function ensureContentBlocksTableExists() {
   const client = await getClient();

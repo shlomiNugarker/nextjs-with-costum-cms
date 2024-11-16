@@ -1,3 +1,5 @@
+"use server";
+
 import { genSaltSync, hashSync } from "bcrypt-ts";
 import { connectToDatabase } from "../../../config/database.config";
 import { ensureUsersTableExists } from "../seed/users";
@@ -8,7 +10,13 @@ export async function getUser(email: string) {
     const db = await connectToDatabase();
 
     const users = await ensureUsersTableExists();
-    return await db.select().from(users).where(eq(users.email, email));
+    const userArray = await db
+      .select()
+      .from(users)
+      .where(eq(users.email, email));
+
+    const { username, email: mail, role, password } = userArray[0];
+    return { email: mail, role, username, password };
   } catch (error) {
     console.error("Error getting user:", error);
   }

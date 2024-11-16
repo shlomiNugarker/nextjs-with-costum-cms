@@ -1,3 +1,5 @@
+"use server";
+
 import { integer, pgTable, serial, text, varchar } from "drizzle-orm/pg-core";
 import { getClient } from "../../../config/database.config";
 

@@ -1,3 +1,5 @@
+"use server";
+
 import { getClient } from "@/config/database.config";
 
 export async function ensureBlogsTableExists() {

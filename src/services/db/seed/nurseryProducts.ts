@@ -1,5 +1,7 @@
+"use server";
+
+import { getClient } from "@/config/database.config";
 import { integer, pgTable, serial, text, varchar } from "drizzle-orm/pg-core";
-import { getClient } from "../../../config/database.config";
 
 export async function ensureNurseryProductsTableExists() {
   const client = await getClient();
