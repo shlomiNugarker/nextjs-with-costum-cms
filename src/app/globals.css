@@ -69,9 +69,3 @@ body {
     flex-basis: auto;
   }
 }
-
-body,
-a,
-button {
-  cursor: none; /* הסתרת הסמן הרגיל */
-}
