@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
 import React from "react";
 
 interface GalleryProps {
@@ -25,9 +26,11 @@ export const Gallery = ({ images }: GalleryProps) => {
       {columnImages.map((column, columnIndex) => (
         <div key={columnIndex} className="flex flex-col gap-4 items-start">
           {column.map((imageSrc, imageIndex) => (
-            <img
+            <Image
+              width={400}
+              height={300}
               key={imageIndex}
-              className="h-auto max-w-full rounded-lg object-cover object-center"
+              className="h-auto max-w-full w-full object-cover rounded-lg object-center"
               src={imageSrc}
               alt={`gallery-photo-${columnIndex}-${imageIndex}`}
             />
