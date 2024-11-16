@@ -6,7 +6,7 @@ export default function Page() {
   const [selectedShipping, setSelectedShipping] = useState("radio_1");
 
   return (
-    <main className="min-h-screen flex flex-col justify-center bg-whiter text-customNavy bg-white">
+    <main className="pb-12 px-4 max-w-screen-lg mx-auto  min-h-[calc(100vh-70px)] justify-center items-center flex flex-col pt-5">
       <div className="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32 mt-20">
         <div className="px-4 pt-8">
           <h2 className="text-4xl font-bold text-center mb-6 text-customNavy">

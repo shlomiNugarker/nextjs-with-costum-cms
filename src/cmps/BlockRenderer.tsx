@@ -31,7 +31,7 @@ export const BlockRenderer = ({ block }: { block: Block }) => {
       );
     case "text":
       return (
-        <div className="my-12 text-center">
+        <div className="text-center">
           <p className="text-gray-600 text-2xl mb-6">{block.content}</p>
         </div>
       );
@@ -56,7 +56,7 @@ export const BlockRenderer = ({ block }: { block: Block }) => {
         console.error("Failed to parse list content:", error);
       }
       return (
-        <div className="my-12 flex">
+        <div className="mb-6 flex">
           <ul className="list-disc list-inside text-gray-600 space-y-3 mx-auto flex flex-col items-start">
             {listItems.map((item, index) => (
               <li key={index} className="text-2xl">
@@ -74,9 +74,8 @@ export const BlockRenderer = ({ block }: { block: Block }) => {
             src={block.content}
             alt="תמונת בלוק תוכן"
             className="mx-auto rounded-lg"
-            width={300}
-            height={300}
-            loading="lazy"
+            width={500}
+            height={600}
           />
         </div>
       );

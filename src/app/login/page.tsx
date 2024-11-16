@@ -4,7 +4,7 @@ import { Form } from "@/cmps/Form";
 
 export default function Login() {
   return (
-    <div className="flex items-center justify-center bg-theme-light dark:bg-darkmode-theme-light min-h-screen">
+    <div className="pb-12 px-4 max-w-screen-lg mx-auto  min-h-[calc(100vh-70px)] justify-center items-center flex flex-col pt-5">
       <div className="z-10 w-full max-w-md overflow-hidden rounded-2xl border border-gray-300 shadow-xl bg-white">
         <div className="flex flex-col items-center justify-center space-y-3 border-b px-6 py-8 text-center sm:px-12">
           <h3 className="text-2xl font-bold text-customNavy">התחברות</h3>
@@ -23,7 +23,7 @@ export default function Login() {
           }}
         >
           <div className="p-6 sm:px-12">
-            <SubmitButton>היכנס</SubmitButton>
+            <SubmitButton className="">היכנס</SubmitButton>
           </div>
         </Form>
       </div>

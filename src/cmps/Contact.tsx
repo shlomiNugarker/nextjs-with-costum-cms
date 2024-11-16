@@ -10,14 +10,10 @@ export const Contact: React.FC<ContactProps> = ({
   title,
   description,
   action,
-}: {
-  title: string;
-  description: string;
-  action: (formData: FormData) => Promise<void>;
 }) => {
   return (
-    <section className="mt-10" id="contact">
-      <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+    <section className="p-5" id="contact">
+      <div className="lg:py-16 px-6 mx-auto max-w-screen-md bg-white shadow-lg rounded-lg">
         <h2 className="text-4xl font-bold text-center mb-6 text-customNavy">
           {title}
         </h2>
@@ -25,10 +21,10 @@ export const Contact: React.FC<ContactProps> = ({
           {description}
         </p>
         <form action={action}>
-          <div className="space-y-8">
+          <div className="space-y-6">
             <div>
               <label
-                className="text-3xl font-semibold text-customNavy mb-4"
+                className="block text-xl font-medium text-customNavy mb-2"
                 htmlFor="name"
               >
                 שם
@@ -37,46 +33,54 @@ export const Contact: React.FC<ContactProps> = ({
                 type="text"
                 id="name"
                 name="name"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
+                aria-label="Name"
+                className="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-customGreen transition"
                 placeholder="הזן את שמך"
                 required
               />
             </div>
             <div>
               <label
-                className="text-3xl font-semibold text-customNavy mb-4"
                 htmlFor="email"
+                className="block text-xl font-medium text-customNavy mb-2"
               >
-                דוא&ldquo;ל
+                דוא&quot;ל
               </label>
               <input
                 type="email"
                 id="email"
                 name="email"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
+                aria-label="Email"
+                className="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-customGreen transition"
                 placeholder="הכנס את האימייל שלך"
                 required
               />
             </div>
             <div>
               <label
-                className="text-3xl font-semibold text-customNavy mb-4"
                 htmlFor="message"
+                className="block text-xl font-medium text-customNavy mb-2"
               >
                 הודעה
               </label>
               <textarea
                 id="message"
                 name="message"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
+                aria-label="Message"
+                className="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-customGreen transition"
                 placeholder="כתוב את הודעתך כאן"
-                rows={5}
+                rows={6}
                 required
               ></textarea>
             </div>
-          </div>
-          <div className="p-6 sm:px-12">
-            <SubmitButton>שלח הודעה</SubmitButton>
+            <div className="text-center">
+              <SubmitButton
+                aria-label="Submit message"
+                className="mt-4 px-8 py-4 text-white bg-customGreen rounded-md hover:bg-green-600 transition"
+              >
+                שלח הודעה
+              </SubmitButton>
+            </div>
           </div>
         </form>
       </div>

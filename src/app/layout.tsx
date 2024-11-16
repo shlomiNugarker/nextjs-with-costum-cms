@@ -72,7 +72,7 @@ export default async function RootLayout({
   return (
     <html lang="he">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased pt-[70px]`}
       >
         <div
           className="h-screen bg-cover bg-center fixed inset-0 z-[-2] blur"

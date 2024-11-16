@@ -2,7 +2,13 @@
 
 import { useFormStatus } from "react-dom";
 
-export function SubmitButton({ children }: { children: React.ReactNode }) {
+export function SubmitButton({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className: string;
+}) {
   const { pending } = useFormStatus();
 
   return (
@@ -14,7 +20,7 @@ export function SubmitButton({ children }: { children: React.ReactNode }) {
           pending
             ? "bg-gray-400 cursor-not-allowed"
             : "bg-customGreen hover:bg-opacity-90"
-        }`}
+        } ${className}`}
     >
       {children}
       {pending && (

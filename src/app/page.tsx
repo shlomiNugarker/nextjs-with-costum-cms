@@ -40,7 +40,7 @@ export default async function Home() {
 
   return (
     <main>
-      <section className="mt-5 h-[100vh] w-full flex flex-col md:flex-row justify-center items-center text-customNavy px-4 animate-float">
+      <section className="pb-12 px-4 max-w-screen-lg mx-auto  min-h-[calc(100vh-70px)] justify-center items-center flex flex-col pt-5 animate-float">
         <div className="max-w-[500px] text-center md:text-right animate-fade-in-up">
           <h1 className="text-4xl md:text-[70px] font-bold leading-tight">
             {homePage.title}

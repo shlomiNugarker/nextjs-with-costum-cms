@@ -21,7 +21,7 @@ export default function Login() {
   }
 
   return (
-    <div className="flex items-center justify-center bg-theme-light dark:bg-darkmode-theme-light min-h-screen">
+    <div className="pb-12 px-4 max-w-screen-lg mx-auto  min-h-[calc(100vh-70px)] justify-center items-center flex flex-col pt-5">
       <div className="z-10 w-full max-w-md overflow-hidden rounded-2xl border  shadow-xl">
         <div className="flex flex-col items-center justify-center space-y-3 border-b px-4 py-6 pt-8 text-center sm:px-16">
           <h3 className="text-xl font-semibold">Sign Up</h3>
@@ -30,7 +30,7 @@ export default function Login() {
           </p>
         </div>
         <Form action={register}>
-          <SubmitButton>Sign Up</SubmitButton>
+          <SubmitButton className="">Sign Up</SubmitButton>
           <p className="text-center text-sm">
             {"Already have an account? "}
             <Link href="/login" className="font-semibold ">

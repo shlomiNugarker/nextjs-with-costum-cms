@@ -25,7 +25,7 @@ export default async function Page({ params }: Params) {
   }
 
   return (
-    <div className="min-h-screen pt-20 px-4">
+    <div className="pb-12 px-4 max-w-screen-lg mx-auto  min-h-[calc(100vh-70px)] justify-center items-center flex flex-col pt-5">
       <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md  mb-6">
         <p className="text-gray-500 text-sm mb-8">
           {post.created_at

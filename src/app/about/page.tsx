@@ -19,11 +19,11 @@ export default async function About() {
   );
 
   return (
-    <section className="pb-12 pt-24 px-4 max-w-screen-lg mx-auto mt-2 min-h-screen">
+    <section className="pb-12 px-4 max-w-screen-lg mx-auto  min-h-[calc(100vh-70px)] justify-center items-center flex flex-col pt-5">
       <h1 className="text-4xl font-bold text-center mb-6 text-customNavy">
         {aboutPage.title}
       </h1>
-      <p className="text-2xl text-center text-gray-600 mb-8">
+      <p className="text-2xl text-center text-gray-600 mb-6">
         {aboutPage.description}
       </p>
 

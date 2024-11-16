@@ -21,7 +21,7 @@ export default async function BlogPage() {
   );
 
   return (
-    <div className="min-h-screen pt-20 px-4 container m-auto">
+    <div className="pb-12 px-4 max-w-screen-lg mx-auto  min-h-[calc(100vh-70px)] justify-center items-center flex flex-col pt-5">
       <h1 className="text-4xl font-bold text-center mb-12 text-customNavy">
         {blogPage.title || "הבלוג"}
       </h1>
@@ -33,11 +33,11 @@ export default async function BlogPage() {
         <BlockRenderer key={block.id} block={block} />
       ))}
 
-      <div className="grid gap-24 justify-items-center sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 pb-10">
+      <div className="grid gap-4 justify-items-center sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 pb-10">
         {posts.map((post) => (
           <div
             key={post.id}
-            className="p-6 bg-white rounded-lg shadow-lg border border-gray-200 transition-transform hover:scale-105 hover:shadow-xl max-w-[450px] animate-float"
+            className="p-6 mb-9 bg-white rounded-lg shadow-lg border border-gray-200 transition-transform hover:scale-105 hover:shadow-xl max-w-[450px] animate-float"
           >
             <BlogCard post={post} />
             <Link
