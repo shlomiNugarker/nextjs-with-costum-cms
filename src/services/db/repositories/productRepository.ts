@@ -1,10 +1,10 @@
 "use server";
 
+import { connectToDatabase } from "@/config/database.config";
 import {
   nurseryProductsTable,
   weeklyProductsTable,
 } from "@/services/db/schema";
-import { connectToDatabase } from "../../../config/database.config";
 import { eq } from "drizzle-orm";
 
 export async function saveProduct(

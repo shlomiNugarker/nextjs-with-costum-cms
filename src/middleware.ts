@@ -12,6 +12,7 @@ export default auth(async function middleware(request: NextRequest) {
   }
 
   const isAdminRoute = request.nextUrl.pathname.startsWith("/admin");
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   if (isAdminRoute && (session.user as any).role !== "Admin") {
     return NextResponse.redirect(new URL("/not-found", request.url));
   }

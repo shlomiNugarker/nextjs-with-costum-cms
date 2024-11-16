@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { getUser } from "@/services/db/repositories/userRepository";
 import { compare } from "bcrypt-ts";
 import { NextAuthConfig } from "next-auth";
@@ -9,10 +10,13 @@ export const authConfig = {
   },
   providers: [
     Credentials({
-      async authorize({ email, password }: any) {
-        const user = await getUser(email);
+      async authorize({ email, password }) {
+        const user = await getUser(email as string);
         if (!user) return null;
-        const passwordsMatch = await compare(password, user.password!);
+        const passwordsMatch = await compare(
+          password as string,
+          user.password!
+        );
 
         if (passwordsMatch) return user as any;
         return null;

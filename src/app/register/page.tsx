@@ -12,7 +12,7 @@ export default function Login() {
     const password = formData.get("password") as string;
     const user = await getUser(email);
 
-    if (user && user.length > 0) {
+    if (user) {
       return "User already exists"; // TODO: Handle errors with useFormStatus
     } else {
       await createUser(email, password, username);
