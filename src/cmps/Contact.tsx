@@ -12,7 +12,7 @@ export const Contact: React.FC<ContactProps> = ({
   action,
 }) => {
   return (
-    <section className="p-5" id="contact">
+    <section className="p-5 w-full" id="contact">
       <div className="lg:py-16 px-6 mx-auto max-w-screen-md bg-white shadow-lg rounded-lg">
         <h2 className="text-4xl font-bold text-center mb-3 text-customNavy">
           {title}

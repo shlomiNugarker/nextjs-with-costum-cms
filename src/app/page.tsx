@@ -1,5 +1,6 @@
 import { Gallery } from "@/cmps/Gallery";
 import { HeroImg } from "@/cmps/HeroImg";
+import { YouTubeVideo } from "@/cmps/YouTubeVideo";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
 import { getPageByName } from "@/services/db/repositories/pageRepository";
 
@@ -42,7 +43,7 @@ export default async function Home() {
     <main>
       <section className="pb-12 px-4 max-w-screen-lg mx-auto  min-h-[calc(100vh-70px)] justify-center items-center flex flex-col pt-5 animate-float text-customNavy">
         <div className="max-w-[500px] text-center md:text-right animate-fade-in-up">
-          <h1 className="text-4xl md:text-[70px] font-bold leading-tight ">
+          <h1 className="text-4xl text-center md:text-[70px] font-bold leading-tight ">
             {homePage.title}
           </h1>
           <br />
@@ -57,12 +58,8 @@ export default async function Home() {
         </div>
       </section>
 
-      <div>
-        <iframe
-          src="https://www.youtube.com/watch?v=EdKDIph5IaM"
-          frameBorder="0"
-          allowFullScreen
-        />
+      <div className={"w-full min-h-[calc(100vh-70px)]"}>
+        <YouTubeVideo videoId={"EdKDIph5IaM"} />
       </div>
 
       <section>
