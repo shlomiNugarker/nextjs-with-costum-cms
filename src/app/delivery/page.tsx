@@ -3,7 +3,7 @@ import { BlockRenderer } from "@/cmps/BlockRenderer";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
 import { getPageByName } from "@/services/db/repositories/pageRepository";
 
-export const revalidate = 60;
+// export const revalidate = 60;
 
 export default async function Delivery() {
   const deliveryPage = await getPageByName("delivery");

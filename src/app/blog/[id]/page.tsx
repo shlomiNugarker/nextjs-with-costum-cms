@@ -4,7 +4,7 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import Image from "next/image";
 
-export const revalidate = 60;
+// export const revalidate = 60;
 
 interface Params {
   params: {

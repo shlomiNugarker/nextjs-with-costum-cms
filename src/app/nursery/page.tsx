@@ -5,8 +5,6 @@ import { getPageByName } from "@/services/db/repositories/pageRepository";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
 import { BlockRenderer } from "@/cmps/BlockRenderer";
 
-export const revalidate = 60;
-
 export default async function NurseryPage() {
   const nurseryProducts = await getNurseryProducts();
   const page = await getPageByName("nursery");

@@ -5,7 +5,7 @@ import { getContentBlocksByPageId } from "@/services/db/repositories/contentBloc
 import { getPageByName } from "@/services/db/repositories/pageRepository";
 import Link from "next/link";
 
-export const revalidate = 60;
+// export const revalidate = 60;
 
 export default async function BlogPage() {
   const posts = await getAllBlogs();
