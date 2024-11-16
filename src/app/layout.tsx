@@ -6,6 +6,7 @@ import { Header } from "@/cmps/Header";
 import { WhatsAppButton } from "@/cmps/WhatsAppButton";
 import { initialize } from "@/services/db/initializeDatabase";
 import { getSiteInfo } from "@/services/db/repositories/siteInfoRepository";
+import { CosumeMouse } from "@/cmps/CosumeMouse";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -74,6 +75,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <CosumeMouse />
         <div
           className="h-screen bg-cover bg-center fixed inset-0 z-[-2] blur"
           style={{

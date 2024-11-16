@@ -69,3 +69,53 @@ body {
     flex-basis: auto;
   }
 }
+.custom-cursor {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background-color: #8b5e3c; /* גוון חום אדמתי */
+  border: 2px solid #6b4226; /* מסגרת כהה */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(255, 255, 255, 0.1); /* צל רך */
+  border-radius: 50%; /* עיגול מושלם */
+  pointer-events: none; /* למנוע חסימת קליקים */
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease-out, background-color 0.2s ease,
+    box-shadow 0.2s ease;
+  z-index: 9999;
+}
+
+body,
+a,
+button {
+  cursor: none; /* הסתרת הסמן הרגיל */
+}
+
+.custom-cursor.click {
+  transform: scale(0.8);
+  background-color: #5a3920; /* גוון חום כהה */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* צל חזק יותר */
+}
+
+.custom-cursor.hover {
+  transform: scale(1.5);
+  background-color: #a2836e; /* חום בהיר */
+  border: 3px solid #d2b48c; /* מסגרת בצבע חול */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(255, 255, 255, 0.2); /* צל מודגש */
+}
+
+.custom-cursor.scroll {
+  background-color: #5c4033; /* חום עמוק */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); /* צל כבד */
+}
+
+.custom-cursor.drag {
+  border: 3px dashed #7c5231; /* קו מקווקו בגוון חום */
+  background-color: #8b5e3c; /* צבע רגיל */
+}
+
+.custom-cursor.button-hover {
+  transform: scale(2); /* הגדלה */
+  background-color: #ff6347; /* אדום עגבנייה */
+  border: 3px solid #ff4500; /* מסגרת אדומה כהה */
+  box-shadow: 0 6px 12px rgba(255, 69, 0, 0.4); /* צל מודגש */
+}
