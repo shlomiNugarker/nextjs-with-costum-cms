@@ -2,6 +2,7 @@
 import { BlockRenderer } from "@/cmps/BlockRenderer";
 import { PostsList } from "@/cmps/blocks/PostsList";
 import { Contact } from "@/cmps/Contact";
+import { NurseryProductsList } from "@/cmps/NurseryProductsList";
 import { saveContactMessage } from "@/services/db/repositories/contactMessagesRepository";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
 import { getPageByName } from "@/services/db/repositories/pageRepository";
@@ -43,6 +44,7 @@ export default async function page({ params }: Params) {
         </div>
 
         {name === "blog" ? <PostsList /> : null}
+        {name === "nursery" ? <NurseryProductsList /> : null}
 
         {name === "contact" ? (
           <Contact
