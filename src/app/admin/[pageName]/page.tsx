@@ -1,3 +1,4 @@
+import { AdminPostsList } from "@/cmps/admin/AdminPostsList";
 import { ContentBlockEditForm } from "@/cmps/admin/ContentBlockEditForm";
 import { PageEditForm } from "@/cmps/admin/PageEditForm";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
@@ -24,6 +25,8 @@ export default async function AdminEditPage({ params }: Params) {
       </h1>
       <PageEditForm initialPage={page} />
       <ContentBlockEditForm contentBlocks={contentBlocks} />
+
+      {pageName === "blog" ? <AdminPostsList /> : null}
     </div>
   );
 }
