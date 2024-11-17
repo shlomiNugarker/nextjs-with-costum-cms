@@ -70,7 +70,7 @@ export const Footer = ({ siteInfo, pageLinks }: any) => {
               {pageLinks.map((link: any) => (
                 <li key={link.href}>
                   <Link
-                    href={link.href}
+                    href={"/page/" + link.href}
                     className="hover:text-customGreen hover:underline"
                   >
                     {link.label}
