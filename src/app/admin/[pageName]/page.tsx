@@ -3,6 +3,7 @@ import { PageEditForm } from "@/cmps/admin/PageEditForm";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
 import { getPageByName } from "@/services/db/repositories/pageRepository";
 
+export const revalidate = 5;
 interface Params {
   params: {
     pageName: string;
