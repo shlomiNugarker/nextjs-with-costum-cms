@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link";
 import {
   FaFacebook,
@@ -9,8 +10,7 @@ import {
 import { Logo } from "./Logo";
 import { addSubscriber } from "@/services/db/repositories/newsletterRepository";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const Footer = ({ siteInfo }: { siteInfo: any }) => {
+export const Footer = ({ siteInfo, pageLinks }: any) => {
   const [city, street, houseNumber] = (siteInfo.address as string)
     .split(",")
     .map((part) => part.trim());
@@ -29,16 +29,6 @@ export const Footer = ({ siteInfo }: { siteInfo: any }) => {
       icon: FaWhatsapp,
       label: "WhatsApp",
     },
-  ];
-
-  const pageLinks = [
-    { href: "/", label: "דף הבית" },
-    { href: "/nursery", label: "המשתלה" },
-    { href: "/weekly-produce", label: "התוצרת השבועית" },
-    { href: "/contact", label: "דברו איתנו" },
-    { href: "/blog", label: "הבלוג" },
-    { href: "/delivery", label: "משלוחים" },
-    { href: "/about", label: "אודות" },
   ];
 
   return (
@@ -77,7 +67,7 @@ export const Footer = ({ siteInfo }: { siteInfo: any }) => {
           </div>
           <nav aria-label="Footer Navigation" className="text-gray-600">
             <ul className="space-y-3">
-              {pageLinks.map((link) => (
+              {pageLinks.map((link: any) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
