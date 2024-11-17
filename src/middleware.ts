@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import NextAuth from "next-auth";
@@ -8,13 +9,16 @@ const { auth } = NextAuth(authConfig);
 export default auth(async function middleware(request: NextRequest) {
   const session = await auth();
   if (!session?.user) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   const isAdminRoute = request.nextUrl.pathname.startsWith("/admin");
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  if (isAdminRoute && (session.user as any).role !== "Admin") {
-    return NextResponse.redirect(new URL("/not-found", request.url));
+  if (
+    isAdminRoute &&
+    (session.user as any).role &&
+    (session.user as any).role !== "Admin"
+  ) {
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   return NextResponse.next();
