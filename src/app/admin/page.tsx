@@ -1,10 +1,12 @@
 import { auth, signOut } from "@/services/auth";
+import { getAllPages } from "@/services/db/repositories/pageRepository";
 import Link from "next/link";
 
 export const revalidate = 5;
 
 export default async function AdminPage() {
   const session = await auth();
+  const pages = await getAllPages();
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center space-y-6 bg-gray-100 text-customNavy">
@@ -17,41 +19,13 @@ export default async function AdminPage() {
             מידע כללי
           </button>
         </Link>
-        <Link href={"/admin/home"}>
-          <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
-            עמוד דף הבית{" "}
-          </button>
-        </Link>
-        <Link href={"/admin/nursery"}>
-          <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
-            עמוד המשתלה{" "}
-          </button>
-        </Link>
-        <Link href={"/admin/weekly-produce"}>
-          <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
-            עמוד תוצרת שבועית{" "}
-          </button>
-        </Link>
-        <Link href={"/admin/blog"}>
-          <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
-            עמוד הבלוג{" "}
-          </button>
-        </Link>
-        <Link href={"/admin/about"}>
-          <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
-            עמוד אודות{" "}
-          </button>
-        </Link>
-        <Link href={"/admin/delivery"}>
-          <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
-            משלוחים
-          </button>
-        </Link>
-        <Link href={"/admin/contact"}>
-          <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
-            צור קשר
-          </button>
-        </Link>
+        {pages.map((page) => (
+          <Link key={page.id} href={`/admin/${page.name}`}>
+            <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
+              {page.name}
+            </button>
+          </Link>
+        ))}
 
         <h1 className="text-2xl text-center font-semibold text-customNavy">
           אתה מחובר בתור {session?.user?.email}

@@ -1,6 +1,8 @@
 import SiteInfoEditForm from "@/cmps/admin/SiteInfoEditForm";
 import { getSiteInfo } from "@/services/db/repositories/siteInfoRepository";
 
+export const revalidate = 5;
+
 const Page = async () => {
   const siteInfo = await getSiteInfo();
 
