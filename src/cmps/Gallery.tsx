@@ -21,7 +21,7 @@ export const Gallery = ({ images }: GalleryProps) => {
 
   return (
     <div
-      className={`grid grid-cols-2 container mx-auto mb-7 gap-4 md:grid-cols-${columns}`}
+      className={`grid grid-cols-2 p-5 container mx-auto mb-7 gap-4 md:grid-cols-${columns}`}
     >
       {columnImages.map((column, columnIndex) => (
         <div key={columnIndex} className="flex flex-col gap-4 items-start">
