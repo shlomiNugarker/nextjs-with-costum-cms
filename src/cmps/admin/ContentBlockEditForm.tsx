@@ -171,7 +171,6 @@ export const ContentBlockEditForm = ({
             {`ערוך ${block.block_type}`}
           </label>
 
-          {/* Render text, image, list, form, and gallery edit fields */}
           {block.block_type === "text" && (
             <textarea
               value={block.content}
