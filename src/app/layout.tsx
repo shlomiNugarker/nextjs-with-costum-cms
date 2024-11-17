@@ -6,6 +6,7 @@ import { Header } from "@/cmps/Header";
 import { WhatsAppButton } from "@/cmps/WhatsAppButton";
 import { initialize } from "@/services/db/initializeDatabase";
 import { getSiteInfo } from "@/services/db/repositories/siteInfoRepository";
+import { getAllPages } from "@/services/db/repositories/pageRepository";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -51,15 +52,6 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-const menuItems = [
-  { href: "/nursery", label: "המשתלה" },
-  { href: "/weekly-produce", label: "התוצרת השבועית" },
-  { href: "/contact", label: "דברו איתנו" },
-  { href: "/blog", label: "הבלוג" },
-  { href: "/delivery", label: "משלוחים" },
-  { href: "/about", label: "אודות" },
-];
-
 await initialize();
 
 export default async function RootLayout({
@@ -68,6 +60,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const siteInfo = await getSiteInfo();
+  const pages = await getAllPages();
+
+  const menuItems = pages.map((page) => ({
+    href: "/" + page.name,
+    label: page.title || page.name,
+  }));
 
   return (
     <html lang="he">

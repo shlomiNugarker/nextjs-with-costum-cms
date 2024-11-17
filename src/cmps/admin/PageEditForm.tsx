@@ -60,19 +60,21 @@ export const PageEditForm = ({
         עריכת דף
       </h2>
 
-      <div>
-        <label className="block text-lg font-semibold text-customNavy mb-2">
-          שם הדף
-        </label>
-        <input
-          type="text"
-          name="name"
-          value={page.name}
-          onChange={handleChange}
-          className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition placeholder-gray-400"
-          placeholder="הזן את שם הדף לדוגמא: home, contact או blog"
-        />
-      </div>
+      {page.name !== "home" && (
+        <div>
+          <label className="block text-lg font-semibold text-customNavy mb-2">
+            שם הדף (באנגלית)
+          </label>
+          <input
+            type="text"
+            name="name"
+            value={page.name}
+            onChange={handleChange}
+            className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition placeholder-gray-400"
+            placeholder="הזן את שם הדף לדוגמא: home, contact או blog"
+          />
+        </div>
+      )}
 
       <div>
         <label className="block text-lg font-semibold text-customNavy mb-2">
