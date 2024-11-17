@@ -6,7 +6,7 @@ interface GalleryProps {
   images: string[];
 }
 
-export const Gallery = ({ images }: GalleryProps) => {
+export const Gallery = async ({ images }: GalleryProps) => {
   const columns = 3;
 
   const columnImages: string[][] = [];

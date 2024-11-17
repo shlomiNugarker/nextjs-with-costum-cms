@@ -9,7 +9,7 @@ export default async function AdminPage() {
   const pages = await getAllPages();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center space-y-6 bg-gray-100 text-customNavy">
+    <div className="min-h-screen flex flex-col items-center justify-center space-y-6  text-customNavy">
       <h1 className="text-4xl font-bold text-center mb-12 text-customNavy">
         ערוך עמודים{" "}
       </h1>

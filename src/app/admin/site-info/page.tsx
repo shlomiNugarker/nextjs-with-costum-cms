@@ -7,7 +7,7 @@ const Page = async () => {
   const siteInfo = await getSiteInfo();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center space-y-6 bg-gray-100 text-customNavy">
+    <div className="min-h-screen flex flex-col items-center justify-center space-y-6 text-customNavy">
       <SiteInfoEditForm initialData={siteInfo} />
     </div>
   );
