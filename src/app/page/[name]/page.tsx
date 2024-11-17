@@ -1,3 +1,4 @@
+"use server";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BlockRenderer } from "@/cmps/BlockRenderer";
 import { PostsList } from "@/cmps/blocks/PostsList";
@@ -44,7 +45,10 @@ export default async function page({ params }: Params) {
         </div>
 
         {name === "blog" ? <PostsList /> : null}
+
         {name === "nursery" ? <NurseryProductsList /> : null}
+
+        {name === "weekly-produce" ? <NurseryProductsList /> : null}
 
         {name === "contact" ? (
           <Contact
