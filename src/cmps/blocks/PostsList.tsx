@@ -16,7 +16,7 @@ export const PostsList = async () => {
         >
           <BlogCard post={post} />
           <Link
-            href={`/blog/${post.id}`}
+            href={`/page/blog/${post.id}`}
             className="mt-4 block text-center w-full py-2 px-4 bg-customGreen text-white font-medium rounded-md hover:bg-green-600 focus:outline-none focus:bg-green-700 transition-all"
           >
             קרא עוד

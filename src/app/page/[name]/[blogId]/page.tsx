@@ -1,20 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { getBlogById } from "@/services/db/repositories/blogRepository";
-import React from "react";
-import ReactMarkdown from "react-markdown";
 import Image from "next/image";
-
-// export const revalidate = 60;
+import ReactMarkdown from "react-markdown";
 
 interface Params {
   params: {
-    id: string;
+    blogId: string;
   };
 }
 
 export default async function Page({ params }: Params) {
-  const { id } = params;
-  const post = await getBlogById(Number(id));
+  const { blogId } = params;
+  const post = await getBlogById(Number(blogId));
 
   if (!post) {
     return (
