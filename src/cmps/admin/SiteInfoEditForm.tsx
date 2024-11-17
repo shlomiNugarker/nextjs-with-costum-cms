@@ -63,7 +63,7 @@ const SiteInfoEditForm = ({ initialData }: any) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-lg mx-auto bg-white p-6 rounded-md shadow-md text-customNavy"
+      className="max-w-lg w-full m-5 mx-auto bg-white p-6 rounded-md shadow-md text-customNavy"
     >
       <h2 className="text-2xl font-bold mb-4 text-center text-customNavy">
         עריכת מידע על האתר
