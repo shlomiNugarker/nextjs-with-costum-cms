@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BlockRenderer } from "@/cmps/BlockRenderer";
+import { PostsList } from "@/cmps/blocks/PostsList";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
 import { getPageByName } from "@/services/db/repositories/pageRepository";
 import React from "react";
@@ -37,6 +38,8 @@ export default async function page({ params }: Params) {
             <BlockRenderer key={block.id} block={block} />
           ))}
         </div>
+
+        {name === "blog" ? <PostsList /> : null}
       </section>
     </div>
   );

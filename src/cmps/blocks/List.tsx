@@ -1,5 +1,3 @@
-import React from "react";
-
 export const List = ({ listItems }: { listItems: string[] }) => {
   return (
     <div className="flex my-3">
