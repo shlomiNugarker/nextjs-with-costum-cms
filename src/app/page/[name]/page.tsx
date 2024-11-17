@@ -4,6 +4,7 @@ import { BlockRenderer } from "@/cmps/BlockRenderer";
 import { PostsList } from "@/cmps/blocks/PostsList";
 import { Contact } from "@/cmps/Contact";
 import { NurseryProductsList } from "@/cmps/NurseryProductsList";
+import { WeeklyProductsList } from "@/cmps/WeeklyProductsList";
 import { saveContactMessage } from "@/services/db/repositories/contactMessagesRepository";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
 import { getPageByName } from "@/services/db/repositories/pageRepository";
@@ -48,7 +49,7 @@ export default async function page({ params }: Params) {
 
         {name === "nursery" ? <NurseryProductsList /> : null}
 
-        {name === "weekly-produce" ? <NurseryProductsList /> : null}
+        {name === "weekly-produce" ? <WeeklyProductsList /> : null}
 
         {name === "contact" ? (
           <Contact
