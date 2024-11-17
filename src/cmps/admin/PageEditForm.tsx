@@ -55,7 +55,7 @@ export const PageEditForm = ({
   };
 
   return (
-    <div className="space-y-8 p-8 border border-customPeach bg-white shadow-lg rounded-lg max-w-2xl mx-auto mb-10  text-customNavy">
+    <div className="w-full space-y-8 p-8 border border-customPeach bg-white shadow-lg rounded-lg max-w-2xl mx-auto mb-10  text-customNavy">
       <h2 className="text-4xl font-extrabold text-center text-customNavy mb-8">
         עריכת דף
       </h2>

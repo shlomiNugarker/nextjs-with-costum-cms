@@ -7,7 +7,7 @@ export default async function AdminPage() {
   const session = await auth();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center space-y-6 bg-gray-100">
+    <div className="min-h-screen flex flex-col items-center justify-center space-y-6 bg-gray-100 text-customNavy">
       <h1 className="text-4xl font-bold text-center mb-12 text-customNavy">
         ערוך עמודים{" "}
       </h1>

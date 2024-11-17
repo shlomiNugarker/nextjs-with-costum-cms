@@ -10,7 +10,7 @@ export default async function EditNurseryProduct(props: any) {
   const product = await getProductById(productId, "nursery");
 
   return (
-    <section className="min-h-screen mt-10 pt-10 flex flex-col justify-center items-center text-customNavy">
+    <section className="min-h-screen flex flex-col items-center justify-center space-y-6 bg-gray-100 text-customNavy">
       <h2 className="text-4xl font-bold text-center mb-6 text-customNavy ">
         ערוך מוצר במשתלה
       </h2>

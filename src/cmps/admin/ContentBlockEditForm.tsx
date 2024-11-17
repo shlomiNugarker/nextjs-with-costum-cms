@@ -153,7 +153,7 @@ export const ContentBlockEditForm = ({
   };
 
   return (
-    <div className="space-y-8 p-8 border border-customPeach bg-white shadow-lg rounded-lg max-w-2xl mx-auto mb-10 text-customNavy">
+    <div className="space-y-8 p-8 border border-customPeach bg-white shadow-lg rounded-lg max-w-2xl mx-auto mb-10 text-customNavy w-full">
       <h1 className="text-4xl font-semibold text-center mb-8 text-customNavy">
         עריכת בלוקים בעמוד
       </h1>
