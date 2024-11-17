@@ -1,3 +1,4 @@
+import { AdminNurseryList } from "@/cmps/admin/AdminNurseryList";
 import { AdminPostsList } from "@/cmps/admin/AdminPostsList";
 import { ContentBlockEditForm } from "@/cmps/admin/ContentBlockEditForm";
 import { PageEditForm } from "@/cmps/admin/PageEditForm";
@@ -27,6 +28,7 @@ export default async function AdminEditPage({ params }: Params) {
       <ContentBlockEditForm contentBlocks={contentBlocks} />
 
       {pageName === "blog" ? <AdminPostsList /> : null}
+      {pageName === "nursery" ? <AdminNurseryList /> : null}
     </div>
   );
 }
