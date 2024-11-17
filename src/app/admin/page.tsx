@@ -22,12 +22,12 @@ export default async function AdminPage() {
             עמוד דף הבית{" "}
           </button>
         </Link>
-        <Link href={"/admin/nursery-products"}>
+        <Link href={"/admin/nursery"}>
           <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
             עמוד המשתלה{" "}
           </button>
         </Link>
-        <Link href={"/admin/weekly-products"}>
+        <Link href={"/admin/weekly-produce"}>
           <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
             עמוד תוצרת שבועית{" "}
           </button>
