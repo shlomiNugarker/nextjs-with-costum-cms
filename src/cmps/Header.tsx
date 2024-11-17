@@ -20,10 +20,11 @@ export const Header = ({ menuItems, siteName }: HeaderProps) => {
   const checkboxRef = useRef<HTMLInputElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
-  const isActive = (path: string) =>
-    currentPath.startsWith(path)
+  const isActive = (path: string) => {
+    return currentPath.startsWith("/page" + path)
       ? "text-customGreen font-bold"
       : "text-customNavy";
+  };
 
   const handleCloseMenu = () => {
     if (checkboxRef.current) {
@@ -76,7 +77,7 @@ export const Header = ({ menuItems, siteName }: HeaderProps) => {
           {menuItems.map(({ href, label }) => (
             <li key={href} className="lg:ml-12">
               <Link
-                href={href}
+                href={"/page/" + href}
                 className={`rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105 hover:text-customGreen ${isActive(
                   href
                 )}`}
