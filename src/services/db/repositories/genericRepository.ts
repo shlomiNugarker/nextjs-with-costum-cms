@@ -86,14 +86,3 @@ export const genericRepository = {
     }
   },
 };
-
-// Example usage specifically for blogs
-// export const getAllBlogs = () => genericRepository.getAll("blogs");
-// export const getBlogById = (id: number) =>
-//   genericRepository.getById("blogs", id);
-// export const deleteBlogById = (id: number) =>
-//   genericRepository.deleteById("blogs", id);
-// export const addPost = (newBlog: any) =>
-//   genericRepository.addRecord("blogs", newBlog);
-// export const updateBlog = (id: number, updatedFields: Record<string, any>) =>
-//   genericRepository.updateRecord("blogs", id, updatedFields);

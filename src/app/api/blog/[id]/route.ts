@@ -1,4 +1,4 @@
-import { genericRepository } from "@/services/db/repositories/repository";
+import { genericRepository } from "@/services/db/repositories/genericRepository";
 import { NextResponse } from "next/server";
 
 export async function DELETE(
