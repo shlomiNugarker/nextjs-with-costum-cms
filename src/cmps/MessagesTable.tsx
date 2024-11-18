@@ -26,12 +26,10 @@ export const MessagesTable: React.FC<MessagesTableProps> = ({ messages }) => {
     direction: "asc" | "desc";
   } | null>(null);
 
-  // עדכון מסנן
   const handleFilterChange = (field: string, value: string) => {
     setFilters((prev) => ({ ...prev, [field]: value }));
   };
 
-  // עדכון מיון
   const handleSort = (key: keyof Message) => {
     setSortConfig((prev) =>
       prev?.key === key
@@ -40,7 +38,6 @@ export const MessagesTable: React.FC<MessagesTableProps> = ({ messages }) => {
     );
   };
 
-  // ניקוי כל הפילטרים והמיון
   const clearFiltersAndSort = () => {
     setFilters({
       name: "",
@@ -51,7 +48,6 @@ export const MessagesTable: React.FC<MessagesTableProps> = ({ messages }) => {
     setSortConfig(null);
   };
 
-  // עיבוד הודעות מסוננות וממוינות
   const processedMessages = React.useMemo(() => {
     const filtered = messages.filter((message) => {
       const matchesName =
@@ -92,62 +88,59 @@ export const MessagesTable: React.FC<MessagesTableProps> = ({ messages }) => {
   }, [messages, filters, sortConfig]);
 
   return (
-    <div className="container mx-auto p-6 bg-customPeach rounded-lg shadow-md text-center">
-      <h1 className="text-3xl font-bold mb-6 text-customNavy">
+    <div className="container mx-auto p-4 sm:p-6 bg-customPeach rounded-lg shadow-md text-center">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-customNavy">
         הודעות יצירת קשר
       </h1>
 
-      {/* שדות סינון */}
-      <div className="flex flex-wrap justify-center gap-4 mb-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
         <input
           type="text"
           placeholder="סינון לפי שם"
-          className="p-2 border border-gray-300 rounded-md"
+          className="p-2 border border-gray-300 rounded-md w-full"
           value={filters.name}
           onChange={(e) => handleFilterChange("name", e.target.value)}
         />
         <input
           type="text"
           placeholder="סינון לפי אימייל"
-          className="p-2 border border-gray-300 rounded-md"
+          className="p-2 border border-gray-300 rounded-md w-full"
           value={filters.email}
           onChange={(e) => handleFilterChange("email", e.target.value)}
         />
         <input
           type="text"
           placeholder="סינון לפי הודעה"
-          className="p-2 border border-gray-300 rounded-md"
+          className="p-2 border border-gray-300 rounded-md w-full"
           value={filters.message}
           onChange={(e) => handleFilterChange("message", e.target.value)}
         />
         <input
           type="text"
           placeholder="סינון לפי תאריך (YYYY-MM-DD)"
-          className="p-2 border border-gray-300 rounded-md"
+          className="p-2 border border-gray-300 rounded-md w-full"
           value={filters.date}
           onChange={(e) => handleFilterChange("date", e.target.value)}
         />
       </div>
 
-      {/* כפתור לניקוי פילטרים ומיון */}
       <div className="flex justify-center mb-4">
         <button
-          className="px-4 py-2 bg-customGreen text-white rounded-md hover:bg-customGreen/90"
+          className="px-4 py-2 bg-customGreen text-white rounded-md hover:bg-customGreen/90 w-full sm:w-auto"
           onClick={clearFiltersAndSort}
         >
           נקה פילטרים ומיון
         </button>
       </div>
 
-      {/* טבלה */}
       <div className="overflow-x-auto">
-        <table className="table-auto w-full border border-customNavy rounded-lg bg-white">
+        <table className="table-auto w-full border border-customNavy rounded-lg bg-white text-sm sm:text-base">
           <thead>
             <tr className="bg-customGreen text-white">
               {["id", "name", "email", "message", "created_at"].map((key) => (
                 <th
                   key={key}
-                  className="px-4 py-3 border-b border-customNavy cursor-pointer"
+                  className="px-2 sm:px-4 py-3 border-b border-customNavy cursor-pointer"
                   onClick={() => handleSort(key as keyof Message)}
                 >
                   {key === sortConfig?.key && (
@@ -169,19 +162,19 @@ export const MessagesTable: React.FC<MessagesTableProps> = ({ messages }) => {
           <tbody>
             {processedMessages.map((message) => (
               <tr key={message.id} className="hover:bg-customPeach/50">
-                <td className="px-4 py-2 border-b border-gray-300 text-center">
+                <td className="px-2 sm:px-4 py-2 border-b border-gray-300 text-center">
                   {message.id}
                 </td>
-                <td className="px-4 py-2 border-b border-gray-300">
+                <td className="px-2 sm:px-4 py-2 border-b border-gray-300">
                   {message.name}
                 </td>
-                <td className="px-4 py-2 border-b border-gray-300">
+                <td className="px-2 sm:px-4 py-2 border-b border-gray-300">
                   {message.email}
                 </td>
-                <td className="px-4 py-2 border-b border-gray-300">
+                <td className="px-2 sm:px-4 py-2 border-b border-gray-300">
                   {message.message}
                 </td>
-                <td className="px-4 py-2 border-b border-gray-300 text-center">
+                <td className="px-2 sm:px-4 py-2 border-b border-gray-300 text-center">
                   {message.created_at
                     ? new Date(message.created_at).toLocaleString()
                     : "N/A"}
