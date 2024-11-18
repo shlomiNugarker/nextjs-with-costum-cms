@@ -25,13 +25,16 @@ export const authConfig = {
   ],
   callbacks: {
     async jwt({ token, user }: any) {
-      if (user) {
+      if (user?.role) {
         token.role = user.role;
       }
       return token;
     },
     async session({ session, token }: any) {
-      session.user.role = token.role;
+      if (token?.role) {
+        session.user = session.user || {};
+        session.user.role = token.role;
+      }
       return session;
     },
     authorized({ auth, request: { nextUrl } }) {
