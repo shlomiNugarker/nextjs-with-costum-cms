@@ -5,7 +5,7 @@ import { useState, useCallback } from "react";
 
 const SiteInfoEditForm = ({ initialData }: any) => {
   const [siteInfo, setSiteInfo] = useState({
-    id: initialData.id,
+    id: initialData.id || undefined,
     site_name: initialData.site_name || "",
     description: initialData.description || "",
     address: initialData.address || "",

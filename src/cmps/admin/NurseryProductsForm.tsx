@@ -24,20 +24,19 @@ type NurseryProduct = {
 export const NurseryProductsForm = ({
   initialProduct,
 }: {
-  initialProduct?: any;
+  initialProduct?: NurseryProduct;
 }) => {
   const router = useRouter();
 
-  const [product, setProduct] = useState<NurseryProduct>(
-    initialProduct || {
-      name: "",
-      description: "",
-      category: "",
-      pot_size: "",
-      price: 0,
-      image_url: "",
-    }
-  );
+  const [product, setProduct] = useState<NurseryProduct>({
+    id: initialProduct?.id || undefined,
+    name: initialProduct?.name || "",
+    description: initialProduct?.description || "",
+    category: initialProduct?.category || "",
+    pot_size: initialProduct?.pot_size || "",
+    price: initialProduct?.price || 0,
+    image_url: initialProduct?.image_url || "",
+  });
   const [isUploading, setIsUploading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 

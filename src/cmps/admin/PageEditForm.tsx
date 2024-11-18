@@ -18,6 +18,7 @@ export const PageEditForm = ({
   initialPage: Page | undefined;
 }) => {
   const [page, setPage] = useState<Page>({
+    id: initialPage?.id || undefined,
     name: initialPage?.name || "",
     description: initialPage?.description || "",
     title: initialPage?.title || "",
