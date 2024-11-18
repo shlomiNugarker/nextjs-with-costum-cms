@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { uploadImageToCloudinary } from "@/services/client-api/clodinaryApi";
@@ -23,7 +24,7 @@ type NurseryProduct = {
 export const NurseryProductsForm = ({
   initialProduct,
 }: {
-  initialProduct?: NurseryProduct;
+  initialProduct?: any;
 }) => {
   const router = useRouter();
 
