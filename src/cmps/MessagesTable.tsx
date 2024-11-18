@@ -26,10 +26,12 @@ export const MessagesTable: React.FC<MessagesTableProps> = ({ messages }) => {
     direction: "asc" | "desc";
   } | null>(null);
 
+  // עדכון מסנן
   const handleFilterChange = (field: string, value: string) => {
     setFilters((prev) => ({ ...prev, [field]: value }));
   };
 
+  // עדכון מיון
   const handleSort = (key: keyof Message) => {
     setSortConfig((prev) =>
       prev?.key === key
@@ -38,6 +40,18 @@ export const MessagesTable: React.FC<MessagesTableProps> = ({ messages }) => {
     );
   };
 
+  // ניקוי כל הפילטרים והמיון
+  const clearFiltersAndSort = () => {
+    setFilters({
+      name: "",
+      email: "",
+      message: "",
+      date: "",
+    });
+    setSortConfig(null);
+  };
+
+  // עיבוד הודעות מסוננות וממוינות
   const processedMessages = React.useMemo(() => {
     const filtered = messages.filter((message) => {
       const matchesName =
@@ -82,6 +96,8 @@ export const MessagesTable: React.FC<MessagesTableProps> = ({ messages }) => {
       <h1 className="text-3xl font-bold mb-6 text-customNavy">
         הודעות יצירת קשר
       </h1>
+
+      {/* שדות סינון */}
       <div className="flex flex-wrap justify-center gap-4 mb-4">
         <input
           type="text"
@@ -113,6 +129,17 @@ export const MessagesTable: React.FC<MessagesTableProps> = ({ messages }) => {
         />
       </div>
 
+      {/* כפתור לניקוי פילטרים ומיון */}
+      <div className="flex justify-center mb-4">
+        <button
+          className="px-4 py-2 bg-customGreen text-white rounded-md hover:bg-customGreen/90"
+          onClick={clearFiltersAndSort}
+        >
+          נקה פילטרים ומיון
+        </button>
+      </div>
+
+      {/* טבלה */}
       <div className="overflow-x-auto">
         <table className="table-auto w-full border border-customNavy rounded-lg bg-white">
           <thead>
