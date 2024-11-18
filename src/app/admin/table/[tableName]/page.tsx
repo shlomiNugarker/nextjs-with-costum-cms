@@ -1,39 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DynamicTable } from "@/cmps/admin/DynamicTable";
-import { getAllBlogs } from "@/services/db/repositories/blogRepository";
-import { getAllContactMessages } from "@/services/db/repositories/contactMessagesRepository";
-import { getAllSubscribers } from "@/services/db/repositories/newsletterRepository";
-import {
-  getNurseryProducts,
-  getWeeklyProducts,
-} from "@/services/db/repositories/productRepository";
-import { getAllUsers } from "@/services/db/repositories/userRepository";
+import { genericRepository } from "@/services/db/repositories/genericRepository";
+import { TableName } from "@/services/db/schema";
 
 export const revalidate = 5;
 
 interface Params {
   params: {
-    tableName: string;
+    tableName: TableName;
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const tableHandlers: Record<string, () => Promise<any[]>> = {
-  contact_messages: getAllContactMessages,
-  blogs: getAllBlogs,
-  newsletter_subscribers: getAllSubscribers,
-  nursery_products: getNurseryProducts,
-  weekly_products: getWeeklyProducts,
-  users: getAllUsers,
-};
-
 const Page = async ({ params: { tableName } }: Params) => {
   try {
-    const handler = tableHandlers[tableName];
-    if (!handler) {
-      throw new Error(`Table "${tableName}" does not exist.`);
-    }
+    const data: any = await genericRepository.getAll(tableName);
 
-    const data = await handler();
+    console.log({ data, tableName });
 
     return (
       <div className="pb-12 px-4 max-w-screen-lg mx-auto min-h-[calc(100vh-70px)] justify-center items-center flex flex-col pt-5 text-customNavy">

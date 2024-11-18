@@ -9,7 +9,7 @@ export const genericRepository = {
     try {
       const db = await connectToDatabase();
       const record = await db.select().from(tables[tableName]);
-      return record.length ? record[0] : null;
+      return record.length ? record : null;
     } catch (error) {
       console.error(`Error fetching records from table ${tableName}:`, error);
       return [];
