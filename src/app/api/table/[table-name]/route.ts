@@ -4,9 +4,9 @@ import { TableName } from "@/services/db/schema";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { table: TableName } }
+  { params }: { params: { "table-name": TableName } }
 ) {
-  const { table } = params;
+  const table = params["table-name"];
 
   try {
     const records = await genericRepository.getAll(table);
@@ -22,9 +22,9 @@ export async function GET(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { table: TableName } }
+  { params }: { params: { "table-name": TableName } }
 ) {
-  const { table } = params;
+  const table = params["table-name"];
   try {
     const data = await request.json();
     await genericRepository.addRecord(table, data);

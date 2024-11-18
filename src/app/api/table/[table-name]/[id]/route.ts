@@ -4,25 +4,24 @@ import { genericRepository } from "@/services/db/repositories/genericRepository"
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { table: TableName; id: string } }
+  { params }: { params: { "table-name": TableName; id: string } }
 ) {
-  const { table, id } = params;
-  const recordId = parseInt(id, 10);
+  const recordId = parseInt(params.id, 10);
 
   if (isNaN(recordId)) {
     return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
   }
 
   try {
-    await genericRepository.deleteById(table, recordId);
+    await genericRepository.deleteById(params["table-name"], recordId);
     return NextResponse.json(
-      { message: `Record deleted successfully from ${table}` },
+      { message: `Record deleted successfully from ${params["table-name"]}` },
       { status: 200 }
     );
   } catch (error) {
-    console.error(`Error deleting record from ${table}:`, error);
+    console.error(`Error deleting record from ${params["table-name"]}:`, error);
     return NextResponse.json(
-      { error: `Failed to delete record from ${table}` },
+      { error: `Failed to delete record from ${params["table-name"]}` },
       { status: 500 }
     );
   }
@@ -30,28 +29,31 @@ export async function DELETE(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { table: TableName; id: string } }
+  { params }: { params: { "table-name": TableName; id: string } }
 ) {
-  const { table, id } = params;
   try {
     const data = await request.json();
 
-    if (!id) {
+    if (!params.id) {
       return NextResponse.json(
         { error: "ID is required for update" },
         { status: 400 }
       );
     }
 
-    await genericRepository.updateRecord(table, Number(id), data);
+    await genericRepository.updateRecord(
+      params["table-name"],
+      Number(params.id),
+      data
+    );
     return NextResponse.json(
-      { message: `Record updated successfully in ${table}` },
+      { message: `Record updated successfully in ${params["table-name"]}` },
       { status: 200 }
     );
   } catch (error) {
-    console.error(`Error updating record in ${table}:`, error);
+    console.error(`Error updating record in ${params["table-name"]}:`, error);
     return NextResponse.json(
-      { error: `Failed to update record in ${table}` },
+      { error: `Failed to update record in ${params["table-name"]}` },
       { status: 500 }
     );
   }
