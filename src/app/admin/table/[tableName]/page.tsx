@@ -1,4 +1,4 @@
-import { DynamicTable } from "@/cmps/DynamicTable";
+import { DynamicTable } from "@/cmps/admin/DynamicTable";
 import { getAllBlogs } from "@/services/db/repositories/blogRepository";
 import { getAllContactMessages } from "@/services/db/repositories/contactMessagesRepository";
 import { getAllSubscribers } from "@/services/db/repositories/newsletterRepository";
