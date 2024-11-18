@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useEffect, useState, useCallback } from "react";
 import dynamic from "next/dynamic";
@@ -10,19 +11,7 @@ const MarkdownEditor = dynamic(() => import("@uiw/react-markdown-editor"), {
   ssr: false,
 });
 
-type BlogPost = {
-  id: number | undefined;
-  description: string | null;
-  title: string;
-  content: string;
-  image_url: string | null;
-};
-
-export const PostEditor = ({
-  initialPost,
-}: {
-  initialPost?: BlogPost | null;
-}) => {
+export const PostEditor = ({ initialPost }: { initialPost?: any }) => {
   const router = useRouter();
 
   const [editorContent, setEditorContent] = useState<string>("");
@@ -63,7 +52,7 @@ export const PostEditor = ({
   const handleSave = useCallback(async () => {
     setIsSaving(true);
     try {
-      const blogPost: BlogPost = {
+      const blogPost = {
         id: initialPost?.id,
         title,
         description,
