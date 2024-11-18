@@ -1,26 +1,26 @@
 import httpService from "../httpService";
 
-// export async function getContentBlocks(pageId: number) {
-//   try {
-//     const response = await httpService.get("/content-blocks", {
-//       params: { pageId },
-//     });
-//     return response.data;
-//   } catch (error) {
-//     console.error("Failed to fetch content blocks", error);
-//     throw new Error("Failed to fetch content blocks");
-//   }
-// }
+export async function getContentBlocks(pageId: number) {
+  try {
+    const response = await httpService.get("/content-blocks", {
+      params: { pageId },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch content blocks", error);
+    throw new Error("Failed to fetch content blocks");
+  }
+}
 
-// export async function getContentBlockById(blockId: number) {
-//   try {
-//     const response = await httpService.get(`/content-blocks/${blockId}`);
-//     return response.data;
-//   } catch (error) {
-//     console.error("Failed to fetch content block", error);
-//     throw new Error("Failed to fetch content block");
-//   }
-// }
+export async function getContentBlockById(blockId: number) {
+  try {
+    const response = await httpService.get(`/content-blocks/${blockId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch content block", error);
+    throw new Error("Failed to fetch content block");
+  }
+}
 
 export async function updateContentBlock(
   blockId: number,
