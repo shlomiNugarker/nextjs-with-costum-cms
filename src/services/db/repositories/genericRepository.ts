@@ -2,7 +2,7 @@
 import { connectToDatabase } from "../../../config/database.config";
 import { eq } from "drizzle-orm";
 import { TableName, tables } from "@/services/db/schema";
-import { PgTableWithColumns, AnyPgColumn } from "drizzle-orm/pg-core";
+import { AnyPgColumn } from "drizzle-orm/pg-core";
 
 export const genericRepository = {
   getAll: async (tableName: TableName) => {
@@ -19,7 +19,7 @@ export const genericRepository = {
   getById: async (tableName: TableName, id: number) => {
     try {
       const db = await connectToDatabase();
-      const table = tables[tableName] as PgTableWithColumns<any>;
+      const table = tables[tableName];
       const idColumn = (table as any)["id"] as AnyPgColumn;
       if (!idColumn) {
         throw new Error(`No 'id' column found in table ${tableName}`);
@@ -67,7 +67,7 @@ export const genericRepository = {
   deleteById: async (tableName: TableName, id: number) => {
     try {
       const db = await connectToDatabase();
-      const table = tables[tableName] as PgTableWithColumns<any>;
+      const table = tables[tableName];
       const idColumn = (table as any)["id"] as AnyPgColumn;
       if (!idColumn) {
         throw new Error(`No 'id' column found in table ${tableName}`);
@@ -88,7 +88,7 @@ export const genericRepository = {
   addRecord: async (tableName: TableName, newRecord: any) => {
     try {
       const db = await connectToDatabase();
-      const table = tables[tableName] as PgTableWithColumns<any>;
+      const table = tables[tableName];
       const insertedRecord = await db
         .insert(table)
         .values(newRecord)
@@ -108,7 +108,7 @@ export const genericRepository = {
   ) => {
     try {
       const db = await connectToDatabase();
-      const table = tables[tableName] as PgTableWithColumns<any>;
+      const table = tables[tableName];
       const idColumn = (table as any)["id"] as AnyPgColumn;
       if (!idColumn) {
         throw new Error(`No 'id' column found in table ${tableName}`);
@@ -136,10 +136,10 @@ export const genericRepository = {
   ) => {
     try {
       const db = await connectToDatabase();
-      const table = tables[tableName] as PgTableWithColumns<any>;
+      const table = tables[tableName];
       const columnKey = Object.keys(filter)[0];
       const columnValue = Object.values(filter)[0];
-      const column = (table as any)[columnKey] as AnyPgColumn;
+      const column = (table as any)[columnKey];
       if (!column) {
         throw new Error(
           `Column '${columnKey}' not found in table ${tableName}`

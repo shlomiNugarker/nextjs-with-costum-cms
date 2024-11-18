@@ -13,16 +13,15 @@ import {
 export const WeeklyProductsForm = ({ initialProduct }: any) => {
   const router = useRouter();
 
-  const [product, setProduct] = useState(
-    initialProduct || {
-      name: "",
-      description: "",
-      weight: "",
-      category: "",
-      price: 0,
-      image_url: "",
-    }
-  );
+  const [product, setProduct] = useState({
+    id: initialProduct.id || undefined,
+    name: initialProduct.name || "",
+    description: initialProduct.description || "",
+    weight: initialProduct.weight || "",
+    category: initialProduct.category || "",
+    price: initialProduct.price || 0,
+    image_url: initialProduct.image_url || "",
+  });
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [isSaving, setIsSaving] = useState<boolean>(false);
 
@@ -100,6 +99,7 @@ export const WeeklyProductsForm = ({ initialProduct }: any) => {
       alert("המוצר נמחק בהצלחה");
 
       setProduct({
+        id: undefined,
         name: "",
         description: "",
         weight: "",

@@ -1,9 +1,14 @@
 import httpService from "../httpService";
 
+const nurseryProductsTableName = "nurseryProductsTable";
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function addProduct(product: any) {
   try {
-    const response = await httpService.post("/nursery-products", product);
+    const response = await httpService.post(
+      "/table/" + nurseryProductsTableName,
+      product
+    );
     return response.data;
   } catch (error) {
     console.error("Failed to add product", error);
@@ -15,7 +20,7 @@ export async function addProduct(product: any) {
 export async function updateProduct(product: any) {
   try {
     const response = await httpService.put(
-      `/nursery-products/${product.id}`,
+      `/table/${nurseryProductsTableName}/${product.id}`,
       product
     );
     return response.data;
@@ -27,7 +32,9 @@ export async function updateProduct(product: any) {
 
 export async function deleteProductById(productId: number) {
   try {
-    const response = await httpService.delete(`/nursery-products/${productId}`);
+    const response = await httpService.delete(
+      `/table/${nurseryProductsTableName}/${productId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Failed to delete product", error);

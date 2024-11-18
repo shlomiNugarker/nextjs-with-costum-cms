@@ -4,7 +4,12 @@ import httpService from "../httpService";
 export async function saveWeeklyProduct(product: any) {
   try {
     const method = product.id ? "put" : "post";
-    const url = "/weekly-products";
+    const url = product.id
+      ? `/table/weeklyProductsTable/${product.id}`
+      : "/table/weeklyProductsTable";
+
+    console.log({ product });
+
     const response = await httpService[method](url, product);
     return response.data;
   } catch (error) {
@@ -15,7 +20,9 @@ export async function saveWeeklyProduct(product: any) {
 
 export async function deleteWeeklyProduct(productId: number) {
   try {
-    const response = await httpService.delete(`/weekly-products/${productId}`);
+    const response = await httpService.delete(
+      `/table/weeklyProductsTable/${productId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Failed to delete product", error);

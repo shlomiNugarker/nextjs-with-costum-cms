@@ -1,8 +1,10 @@
 import httpService from "../httpService";
 
+const contentBlocksTableName = "contentBlocksTable";
+
 export async function getContentBlocks(pageId: number) {
   try {
-    const response = await httpService.get("/content-blocks", {
+    const response = await httpService.get("/table/" + contentBlocksTableName, {
       params: { pageId },
     });
     return response.data;
@@ -14,7 +16,9 @@ export async function getContentBlocks(pageId: number) {
 
 export async function getContentBlockById(blockId: number) {
   try {
-    const response = await httpService.get(`/content-blocks/${blockId}`);
+    const response = await httpService.get(
+      `/table/${contentBlocksTableName}/${blockId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Failed to fetch content block", error);
@@ -29,7 +33,7 @@ export async function updateContentBlock(
 ) {
   try {
     const response = await httpService.put(
-      `/content-blocks/${blockId}`,
+      `/table/${contentBlocksTableName}/${blockId}`,
       updatedBlockData
     );
     return response.data;
@@ -41,7 +45,9 @@ export async function updateContentBlock(
 
 export async function deleteContentBlock(blockId: number) {
   try {
-    const response = await httpService.delete(`/content-blocks/${blockId}`);
+    const response = await httpService.delete(
+      `/table/${contentBlocksTableName}/${blockId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Failed to delete content block", error);

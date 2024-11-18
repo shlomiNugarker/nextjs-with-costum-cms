@@ -6,7 +6,6 @@ type Page = {
   id?: number;
   name: string;
   description: string | null;
-  created_at: Date | null;
   title: string | null;
   meta_title: string | null;
   meta_description: string | null;
@@ -18,17 +17,14 @@ export const PageEditForm = ({
 }: {
   initialPage: Page | undefined;
 }) => {
-  const [page, setPage] = useState<Page>(
-    initialPage || {
-      name: "",
-      description: null,
-      created_at: null,
-      title: null,
-      meta_title: null,
-      meta_description: null,
-      meta_keywords: null,
-    }
-  );
+  const [page, setPage] = useState<Page>({
+    name: initialPage?.name || "",
+    description: initialPage?.description || "",
+    title: initialPage?.title || "",
+    meta_title: initialPage?.meta_title || "",
+    meta_description: initialPage?.meta_description || "",
+    meta_keywords: initialPage?.meta_keywords || "",
+  });
   const [isSaving, setIsSaving] = useState(false);
 
   const handleChange = (

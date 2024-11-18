@@ -3,7 +3,7 @@ import httpService from "../httpService";
 
 // export async function getPageById(pageId: number) {
 //   try {
-//     const response = await httpService.get(`/pages/${pageId}`);
+//     const response = await httpService.get(`/table/pagesTable/${pageId}`);
 //     return response.data;
 //   } catch (error) {
 //     console.error("Failed to fetch page", error);
@@ -13,7 +13,7 @@ import httpService from "../httpService";
 
 // export async function getAllPages() {
 //   try {
-//     const response = await httpService.get("/pages");
+//     const response = await httpService.get("/table/pagesTable");
 //     return response.data;
 //   } catch (error) {
 //     console.error("Failed to fetch pages", error);
@@ -23,7 +23,9 @@ import httpService from "../httpService";
 
 export async function savePage(pageData: any) {
   const method = pageData.id ? "put" : "post";
-  const url = pageData.id ? `/page/${pageData.id}` : `/page`;
+  const url = pageData.id
+    ? `/table/pagesTable/${pageData.id}`
+    : `/table/pagesTable`;
   try {
     const response = await httpService[method](url, pageData);
     return response.data;
@@ -35,7 +37,7 @@ export async function savePage(pageData: any) {
 
 export async function deletePage(pageId: number) {
   try {
-    const response = await httpService.delete(`/pages/${pageId}`);
+    const response = await httpService.delete(`/table/pagesTable/${pageId}`);
     return response.data;
   } catch (error) {
     console.error("Failed to delete page", error);
