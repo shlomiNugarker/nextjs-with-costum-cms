@@ -10,7 +10,8 @@ interface Params {
 }
 
 const Page = async ({ params: { tableName } }: Params) => {
-  let data;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let data: any;
 
   if (tableName === "contact-messages") {
     data = await getAllContactMessages();
@@ -18,8 +19,7 @@ const Page = async ({ params: { tableName } }: Params) => {
 
   return (
     <div className="pb-12 px-4 max-w-screen-lg mx-auto  min-h-[calc(100vh-70px)] justify-center items-center flex flex-col pt-5 text-customNavy">
-      {tableName}
-      <DynamicTable data={data || []} title="הודעות צור קשר" />
+      <DynamicTable data={data || []} title={tableName} />
     </div>
   );
 };
