@@ -66,7 +66,6 @@ export default async function page({ params }: Params) {
                 email: formData.get("email") as string,
                 message: formData.get("message") as string,
               });
-              // redirect("/");
             }}
           />
         ) : null}
