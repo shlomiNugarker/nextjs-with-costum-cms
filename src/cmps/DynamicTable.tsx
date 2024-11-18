@@ -116,7 +116,7 @@ export const DynamicTable: React.FC<DynamicTableProps> = ({
                 {headers.map((key) => (
                   <td
                     key={key}
-                    className="px-2 sm:px-4 py-2 border-b border-gray-300 text-center"
+                    className="px-2 sm:px-4 py-2 border-b border-gray-300 text-center truncate max-w-14"
                   >
                     {row[key] != null ? row[key].toString() : "N/A"}
                   </td>
