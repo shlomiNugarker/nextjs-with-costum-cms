@@ -105,3 +105,26 @@ export const newsletterSubscribers = pgTable("newsletter_subscribers", {
   email: text("email").notNull().unique(),
   createdAt: timestamp("created_at").defaultNow(),
 });
+
+export type TableName =
+  | "weeklyProductsTable"
+  | "nurseryProductsTable"
+  | "users"
+  | "blogsTable"
+  | "pagesTable"
+  | "contentBlocksTable"
+  | "SiteInfo"
+  | "contactMessagesTable"
+  | "newsletterSubscribers";
+
+export const tables = {
+  weeklyProductsTable,
+  nurseryProductsTable,
+  users,
+  blogsTable,
+  pagesTable,
+  contentBlocksTable,
+  SiteInfo,
+  contactMessagesTable,
+  newsletterSubscribers,
+};
