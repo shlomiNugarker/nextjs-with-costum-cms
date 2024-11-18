@@ -20,3 +20,15 @@ export async function saveContactMessage(contact: {
     throw new Error("Unable to save contact message");
   }
 }
+
+export async function getAllContactMessages() {
+  try {
+    const db = await connectToDatabase();
+    const messages = await db.select().from(contactMessagesTable);
+
+    return messages;
+  } catch (error) {
+    console.error("Error fetching contact messages:", error);
+    throw new Error("Unable to fetch contact messages");
+  }
+}

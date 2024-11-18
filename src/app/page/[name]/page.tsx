@@ -8,7 +8,7 @@ import { WeeklyProductsList } from "@/cmps/WeeklyProductsList";
 import { saveContactMessage } from "@/services/db/repositories/contactMessagesRepository";
 import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
 import { getPageByName } from "@/services/db/repositories/pageRepository";
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 import React from "react";
 
 interface Params {
@@ -62,7 +62,7 @@ export default async function page({ params }: Params) {
                 email: formData.get("email") as string,
                 message: formData.get("message") as string,
               });
-              redirect("/");
+              // redirect("/");
             }}
           />
         ) : null}
