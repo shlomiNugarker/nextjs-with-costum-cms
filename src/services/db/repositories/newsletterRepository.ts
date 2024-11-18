@@ -14,3 +14,15 @@ export const addSubscriber = async (email: string) => {
     return { success: false, error: "Failed to add subscriber." };
   }
 };
+
+export const getAllSubscribers = async () => {
+  try {
+    const db = await connectToDatabase();
+
+    const subscribers = await db.select().from(newsletterSubscribers);
+    return subscribers;
+  } catch (error) {
+    console.error("Error fetching subscribers:", error);
+    return [];
+  }
+};

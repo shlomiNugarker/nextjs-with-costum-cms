@@ -41,3 +41,18 @@ export async function createUser(
     console.error("Error creating user:", error);
   }
 }
+
+export async function getAllUsers() {
+  try {
+    const db = await connectToDatabase();
+
+    const users = await ensureUsersTableExists();
+
+    const allUsers = await db.select().from(users);
+
+    return allUsers;
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    return [];
+  }
+}

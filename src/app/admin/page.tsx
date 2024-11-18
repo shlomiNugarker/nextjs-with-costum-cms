@@ -19,7 +19,7 @@ export default async function AdminPage() {
             מידע כללי
           </button>
         </Link>
-        <Link href={"/admin/table/contact-messages"}>
+        <Link href={"/admin/table/contact_messages"}>
           <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
             הודעות יצירת קשר{" "}
           </button>
