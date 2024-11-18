@@ -1,4 +1,3 @@
-"use server";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { connectToDatabase } from "../../../config/database.config";
 import { eq } from "drizzle-orm";

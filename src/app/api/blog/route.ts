@@ -1,12 +1,17 @@
+import { genericRepository } from "@/services/db/repositories/repository";
 import { NextResponse } from "next/server";
-import { addPost, updateBlog } from "@/services/db/repositories/blogRepository";
 
 export async function POST(request: Request) {
   try {
     const data = await request.json();
     const { title, description, content, image_url } = data;
 
-    await addPost({ title, description, content, image_url });
+    await genericRepository.addRecord("blogsTable", {
+      title,
+      description,
+      content,
+      image_url,
+    });
 
     return NextResponse.json({ message: "הפוסט נוסף בהצלחה" }, { status: 201 });
   } catch (error) {
@@ -27,7 +32,12 @@ export async function PUT(request: Request) {
       );
     }
 
-    await updateBlog(id, { title, description, content, image_url });
+    await genericRepository.updateRecord("blogsTable", id, {
+      title,
+      description,
+      content,
+      image_url,
+    });
 
     return NextResponse.json(
       { message: "הפוסט עודכן בהצלחה" },

@@ -1,5 +1,5 @@
+import { genericRepository } from "@/services/db/repositories/repository";
 import { NextResponse } from "next/server";
-import { deleteBlogById } from "@/services/db/repositories/blogRepository";
 
 export async function DELETE(
   request: Request,
@@ -15,7 +15,7 @@ export async function DELETE(
       );
     }
 
-    await deleteBlogById(postId);
+    await genericRepository.deleteById("blogsTable", postId);
 
     return NextResponse.json({ message: "הפוסט נמחק בהצלחה" }, { status: 200 });
   } catch (error) {
