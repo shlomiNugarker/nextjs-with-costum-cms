@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { getBlogById } from "@/services/db/repositories/blogRepository";
+import { genericRepository } from "@/services/db/repositories/genericRepository";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 
@@ -11,7 +11,7 @@ interface Params {
 
 export default async function Page({ params }: Params) {
   const { blogId } = params;
-  const post = await getBlogById(Number(blogId));
+  const post = await genericRepository.getById("blogsTable", Number(blogId));
 
   if (!post) {
     return (

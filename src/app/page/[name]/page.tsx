@@ -5,10 +5,7 @@ import { PostsList } from "@/cmps/blocks/PostsList";
 import { Contact } from "@/cmps/Contact";
 import { NurseryProductsList } from "@/cmps/NurseryProductsList";
 import { WeeklyProductsList } from "@/cmps/WeeklyProductsList";
-import { saveContactMessage } from "@/services/db/repositories/contactMessagesRepository";
-import { getContentBlocksByPageId } from "@/services/db/repositories/contentBlockRepository";
-import { getPageByName } from "@/services/db/repositories/pageRepository";
-// import { redirect } from "next/navigation";
+import { genericRepository } from "@/services/db/repositories/genericRepository";
 import React from "react";
 
 interface Params {
@@ -19,13 +16,20 @@ interface Params {
 
 export default async function page({ params }: Params) {
   const { name } = params;
-  const page = await getPageByName(name);
+  const page: any = await genericRepository.getByField(
+    "pagesTable",
+    "name",
+    name
+  );
 
   if (!page) {
     return <div>דף לא נמצא</div>;
   }
 
-  const contentBlocks = await getContentBlocksByPageId(page.id);
+  const contentBlocks = await genericRepository.getAllWithFilter(
+    "contentBlocksTable",
+    { page_id: page.id }
+  );
 
   const sortedBlocks = contentBlocks.sort(
     (a, b) => (a.position || 0) - (b.position || 0)
@@ -57,7 +61,7 @@ export default async function page({ params }: Params) {
             description={page.description || "תיאור"}
             action={async (formData: FormData) => {
               "use server";
-              await saveContactMessage({
+              await genericRepository.addRecord("contactMessagesTable", {
                 name: formData.get("name") as string,
                 email: formData.get("email") as string,
                 message: formData.get("message") as string,
