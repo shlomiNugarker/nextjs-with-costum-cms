@@ -59,6 +59,12 @@ export default async function Page({ params }: Params) {
                 {...props}
               />
             ),
+            h3: ({ node, ...props }) => (
+              <h1
+                className="text-customNavy font-bold text-3xl mt-4 mb-2"
+                {...props}
+              />
+            ),
           }}
           className="prose prose-lg mx-auto max-w-full text-customNavy"
         >
