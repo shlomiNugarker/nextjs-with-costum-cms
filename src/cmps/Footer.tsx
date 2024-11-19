@@ -91,7 +91,7 @@ export const Footer = ({ siteInfo, pageLinks }: any) => {
               const email = formData.get("email") as string;
               await genericRepository.addRecord("newsletterSubscribers", {
                 email,
-              });
+              } as any);
             }}
             className="flex flex-col mb-4"
           >

@@ -16,11 +16,7 @@ interface Params {
 
 export default async function page({ params }: Params) {
   const { name } = params;
-  const page: any = await genericRepository.getByField(
-    "pagesTable",
-    "name",
-    name
-  );
+  const page = await genericRepository.getByField("pagesTable", "name", name);
 
   if (!page) {
     return <div>דף לא נמצא</div>;
@@ -32,7 +28,7 @@ export default async function page({ params }: Params) {
   );
 
   const sortedBlocks = contentBlocks.sort(
-    (a: any, b: any) => (a.position || 0) - (b.position || 0)
+    (a, b) => (a.position || 0) - (b.position || 0)
   );
 
   return (
@@ -65,7 +61,7 @@ export default async function page({ params }: Params) {
                 name: formData.get("name") as string,
                 email: formData.get("email") as string,
                 message: formData.get("message") as string,
-              });
+              } as any);
             }}
           />
         ) : null}
