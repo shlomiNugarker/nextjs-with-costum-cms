@@ -1,4 +1,4 @@
-import { sql } from "drizzle-orm";
+import { InferSelectModel, sql } from "drizzle-orm";
 import {
   pgTable,
   serial,
@@ -106,16 +106,7 @@ export const newsletterSubscribers = pgTable("newsletter_subscribers", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export type TableName =
-  | "weeklyProductsTable"
-  | "nurseryProductsTable"
-  | "users"
-  | "blogsTable"
-  | "pagesTable"
-  | "contentBlocksTable"
-  | "SiteInfo"
-  | "contactMessagesTable"
-  | "newsletterSubscribers";
+export type TableName = keyof typeof tables;
 
 export const tables = {
   weeklyProductsTable,
@@ -127,4 +118,8 @@ export const tables = {
   SiteInfo,
   contactMessagesTable,
   newsletterSubscribers,
+};
+
+export type TableSchemas = {
+  [K in TableName]: InferSelectModel<(typeof tables)[K]>;
 };
