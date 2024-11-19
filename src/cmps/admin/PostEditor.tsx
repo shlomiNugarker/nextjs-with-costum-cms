@@ -23,10 +23,10 @@ export const PostEditor = ({ initialPost }: { initialPost?: any }) => {
 
   useEffect(() => {
     if (initialPost) {
-      setEditorContent(initialPost.content || "");
-      setTitle(initialPost.title || "");
-      setDescription(initialPost.description || "");
-      setImageUrl(initialPost.image_url || "");
+      setEditorContent(initialPost?.content || "");
+      setTitle(initialPost?.title || "");
+      setDescription(initialPost?.description || "");
+      setImageUrl(initialPost?.image_url || "");
     }
   }, [initialPost]);
 
