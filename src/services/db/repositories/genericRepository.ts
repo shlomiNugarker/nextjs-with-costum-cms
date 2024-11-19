@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { connectToDatabase } from "../../../config/database.config";
 import { eq, InferSelectModel } from "drizzle-orm";
 import { TableName, tables, TableSchemas } from "@/services/db/schema";
@@ -48,12 +47,12 @@ export const genericRepository = {
   getByField: async <T extends TableName>(
     tableName: T,
     fieldName: string,
-    value: any
+    value: unknown
   ): Promise<TableSchemas[T] | null> => {
     try {
       const db = await connectToDatabase();
       const table = tables[tableName];
-      const column = (table as any)[fieldName] as AnyPgColumn;
+      const column = table[fieldName as keyof typeof table] as AnyPgColumn;
       if (!column) {
         throw new Error(
           `Column '${fieldName}' not found in table ${tableName}`
@@ -121,6 +120,7 @@ export const genericRepository = {
   updateRecord: async <T extends TableName>(
     tableName: T,
     id: number,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     updatedFields: any // ??? TODO: find how to handle any field for spesific table
   ): Promise<TableSchemas[T]> => {
     try {
@@ -156,7 +156,8 @@ export const genericRepository = {
 
       const [columnKey, columnValue] = Object.entries(filter)[0];
 
-      const column = (table as any)[columnKey] as AnyPgColumn;
+      const column = table[columnKey as keyof typeof table] as AnyPgColumn;
+
       if (!column) {
         throw new Error(
           `Column '${columnKey}' not found in table ${tableName}`
