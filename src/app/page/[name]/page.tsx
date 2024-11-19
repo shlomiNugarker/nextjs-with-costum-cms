@@ -32,7 +32,7 @@ export default async function page({ params }: Params) {
   );
 
   const sortedBlocks = contentBlocks.sort(
-    (a, b) => (a.position || 0) - (b.position || 0)
+    (a: any, b: any) => (a.position || 0) - (b.position || 0)
   );
 
   return (

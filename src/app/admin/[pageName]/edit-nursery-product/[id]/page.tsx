@@ -12,7 +12,7 @@ export default async function EditNurseryProduct(props: any) {
       throw new Error("Invalid product ID");
     }
 
-    const product = await genericRepository.getById(
+    const product: any = await genericRepository.getById(
       "nurseryProductsTable",
       productId
     );

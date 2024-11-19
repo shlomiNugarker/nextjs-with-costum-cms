@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { genericRepository } from "@/services/db/repositories/genericRepository";
 import Image from "next/image";
@@ -11,7 +12,10 @@ interface Params {
 
 export default async function Page({ params }: Params) {
   const { blogId } = params;
-  const post = await genericRepository.getById("blogsTable", Number(blogId));
+  const post: any = await genericRepository.getById(
+    "blogsTable",
+    Number(blogId)
+  );
 
   if (!post) {
     return (

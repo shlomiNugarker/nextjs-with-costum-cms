@@ -32,8 +32,6 @@ export async function PUT(
   { params }: { params: { "table-name": TableName; id: string } }
 ) {
   try {
-    console.log({ params: params["table-name"] });
-
     const data = await request.json();
 
     if (!params.id) {

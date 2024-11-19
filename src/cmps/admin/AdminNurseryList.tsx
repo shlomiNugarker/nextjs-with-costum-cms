@@ -1,11 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link";
 import { NurseryCard } from "../NurseryCard";
-import { getNurseryProducts } from "@/services/db/repositories/productRepository";
+import { genericRepository } from "@/services/db/repositories/genericRepository";
 
 export const revalidate = 5;
 
 export const AdminNurseryList = async () => {
-  const nurseryProducts = await getNurseryProducts();
+  const nurseryProducts: any = await genericRepository.getAll(
+    "nurseryProductsTable"
+  );
 
   return (
     <>
@@ -17,7 +20,7 @@ export const AdminNurseryList = async () => {
         </Link>
       </div>
       <div className="pb-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
-        {nurseryProducts.map((product) => (
+        {nurseryProducts.map((product: any) => (
           <div key={product.id} className="relative">
             <Link href={`nursery-products/edit-nursery-product/${product.id}`}>
               <NurseryCard product={product} />

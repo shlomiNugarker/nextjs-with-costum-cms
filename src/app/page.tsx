@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Gallery } from "@/cmps/Gallery";
 import { HeroImg } from "@/cmps/HeroImg";
 import { YouTubeVideo } from "@/cmps/YouTubeVideo";
@@ -42,9 +43,9 @@ export default async function Home() {
       }
     );
 
-    const galleryImages = contentBlocks.find(
-      (block) => block.block_type === "gallery"
-    )?.content;
+    const galleryImages = (
+      contentBlocks.find((block: any) => block.block_type === "gallery") as any
+    ).content;
 
     return (
       <main>

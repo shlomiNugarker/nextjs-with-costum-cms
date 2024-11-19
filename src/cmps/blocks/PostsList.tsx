@@ -2,10 +2,10 @@
 import React from "react";
 import { BlogCard } from "../BlogCard";
 import Link from "next/link";
-import { getAllBlogs } from "@/services/db/repositories/blogRepository";
+import { genericRepository } from "@/services/db/repositories/genericRepository";
 
 export const PostsList = async () => {
-  const posts = await getAllBlogs();
+  const posts: any = await genericRepository.getAll("blogsTable");
 
   return (
     <div className="grid gap-4 justify-items-center sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 pb-10">

@@ -8,7 +8,7 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { Logo } from "./Logo";
-import { addSubscriber } from "@/services/db/repositories/newsletterRepository";
+import { genericRepository } from "@/services/db/repositories/genericRepository";
 
 export const Footer = ({ siteInfo, pageLinks }: any) => {
   const [city, street, houseNumber] = (siteInfo.address as string)
@@ -89,7 +89,9 @@ export const Footer = ({ siteInfo, pageLinks }: any) => {
             action={async (formData: FormData) => {
               "use server";
               const email = formData.get("email") as string;
-              await addSubscriber(email);
+              await genericRepository.addRecord("newsletterSubscribers", {
+                email,
+              });
             }}
             className="flex flex-col mb-4"
           >

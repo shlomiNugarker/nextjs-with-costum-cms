@@ -1,9 +1,10 @@
-import { getAllBlogs } from "@/services/db/repositories/blogRepository";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { genericRepository } from "@/services/db/repositories/genericRepository";
 import { BlogCard } from "../BlogCard";
 import Link from "next/link";
 
 export const AdminPostsList = async () => {
-  const posts = await getAllBlogs();
+  const posts: any = await genericRepository.getAll("blogsTable");
 
   return (
     <>
@@ -11,7 +12,7 @@ export const AdminPostsList = async () => {
         פוסטים
       </h1>
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-center container m-auto">
-        {posts.map((post) => (
+        {posts.map((post: any) => (
           <div key={post.id} className="m-5 bg-white">
             <BlogCard post={post} />
             <Link
