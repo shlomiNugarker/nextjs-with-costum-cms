@@ -13,8 +13,7 @@ export default async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL("/", request.url));
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const user = session.user as any;
+    const user = session.user;
     const isAdminRoute = request.nextUrl.pathname.startsWith("/admin");
 
     if (isAdminRoute && user.role !== "Admin") {

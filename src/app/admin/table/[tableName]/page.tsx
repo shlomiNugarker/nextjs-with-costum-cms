@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DynamicTable } from "@/cmps/admin/DynamicTable";
 import { genericRepository } from "@/services/db/repositories/genericRepository";
 import { TableName } from "@/services/db/schema";
@@ -13,7 +12,7 @@ interface Params {
 
 const Page = async ({ params: { tableName } }: Params) => {
   try {
-    const data: any = await genericRepository.getAll(tableName);
+    const data = await genericRepository.getAll(tableName);
 
     return (
       <div className="pb-12 px-4 max-w-screen-lg mx-auto min-h-[calc(100vh-70px)] justify-center items-center flex flex-col pt-5 text-customNavy">
