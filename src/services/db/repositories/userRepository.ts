@@ -11,12 +11,16 @@ export async function getUser(email: string) {
 
     const users = await ensureUsersTableExists();
     const userArray = await db
-      .select()
+      .select({
+        username: users.username,
+        email: users.email,
+        role: users.role,
+      })
       .from(users)
       .where(eq(users.email, email));
 
-    const { username, email: mail, role, password } = userArray[0];
-    return { email: mail, role, username, password };
+    const { username, email: mail, role } = userArray[0];
+    return { email: mail, role, username };
   } catch (error) {
     console.error("Error getting user:", error);
   }
@@ -42,17 +46,22 @@ export async function createUser(
   }
 }
 
-export async function getAllUsers() {
-  try {
-    const db = await connectToDatabase();
+// export async function getAllUsers() {
+//   try {
+//     const db = await connectToDatabase();
 
-    const users = await ensureUsersTableExists();
+//     const users = await ensureUsersTableExists();
 
-    const allUsers = await db.select().from(users);
+//     const allUsers = await db
+//       .select({
+//         username: users.username,
+//         email: users.email,
+//       })
+//       .from(users);
 
-    return allUsers;
-  } catch (error) {
-    console.error("Error fetching users:", error);
-    return [];
-  }
-}
+//     return allUsers;
+//   } catch (error) {
+//     console.error("Error fetching users:", error);
+//     return [];
+//   }
+// }

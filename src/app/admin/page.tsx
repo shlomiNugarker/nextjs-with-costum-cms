@@ -17,12 +17,14 @@ export default async function AdminPage() {
         <h1 className="text-4xl font-bold text-center mb-12 text-customNavy">
           ערוך עמודים
         </h1>
+
         <div className="mt-6 flex flex-col w-full max-w-md">
           <Link href={"/admin/site-info"}>
             <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
               מידע כללי
             </button>
           </Link>
+
           <Link href={"/admin/table"}>
             <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
               טבלאות
@@ -41,6 +43,7 @@ export default async function AdminPage() {
             אתה מחובר בתור {session?.user?.email}
           </h1>
         </div>
+
         <SignOut />
       </div>
     );
@@ -59,11 +62,7 @@ function SignOut() {
     <form
       action={async () => {
         "use server";
-        try {
-          await signOut();
-        } catch (error) {
-          console.error("Error signing out:", error);
-        }
+        await signOut();
       }}
     >
       <button
