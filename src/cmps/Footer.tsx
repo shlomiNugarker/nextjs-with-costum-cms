@@ -11,21 +11,27 @@ import { Logo } from "./Logo";
 import { genericRepository } from "@/services/db/repositories/genericRepository";
 
 export const Footer = async ({ siteInfo, pageLinks }: any) => {
-  const [city, street, houseNumber] = (siteInfo.address as string)
+  const [city, street, houseNumber] = (siteInfo?.address || "site,info")
     .split(",")
-    .map((part) => part.trim());
+    .map((part: string) => part.trim());
 
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
     `${street}, ${houseNumber}, ${city}, ישראל`
   )}`;
 
   const socialLinks = [
-    { url: siteInfo.facebook_url, icon: FaFacebook, label: "Facebook" },
-    { url: siteInfo.instagram_url, icon: FaInstagram, label: "Instagram" },
-    { url: siteInfo.twitter_url, icon: FaTwitter, label: "Twitter" },
-    { url: siteInfo.youtube_url, icon: FaYoutube, label: "YouTube" },
+    { url: siteInfo?.facebook_url || "", icon: FaFacebook, label: "Facebook" },
     {
-      url: siteInfo.phone_number && `https://wa.me/972${siteInfo.phone_number}`,
+      url: siteInfo?.instagram_url || "",
+      icon: FaInstagram,
+      label: "Instagram",
+    },
+    { url: siteInfo?.twitter_url || "", icon: FaTwitter, label: "Twitter" },
+    { url: siteInfo?.youtube_url || "", icon: FaYoutube, label: "YouTube" },
+    {
+      url:
+        siteInfo?.phone_number &&
+        `https://wa.me/972${siteInfo?.phone_number || ""}`,
       icon: FaWhatsapp,
       label: "WhatsApp",
     },
@@ -37,10 +43,10 @@ export const Footer = async ({ siteInfo, pageLinks }: any) => {
         <div className="max-w-sm">
           <div className="mt-2 mb-2 flex h-12 items-center space-x-2 justify-center">
             <Link href="/" className="hover:text-customGreen hover:underline">
-              <Logo siteName={siteInfo.site_name} />
+              <Logo siteName={siteInfo?.site_name || ""} />
             </Link>
           </div>
-          <div className="text-gray-600">{siteInfo.description}</div>
+          <div className="text-gray-600">{siteInfo?.description || ""}</div>
         </div>
 
         <div>
@@ -130,8 +136,8 @@ export const Footer = async ({ siteInfo, pageLinks }: any) => {
       <div className="bg-customNavy">
         <div className="mx-auto flex max-w-screen-xl flex-col gap-y-4 px-4 py-3 text-center text-customPeach sm:flex-row sm:justify-between sm:text-left">
           <div>
-            © {new Date().getFullYear()} {siteInfo.site_name} | כל הזכויות
-            שמורות
+            © {new Date().getFullYear()} {siteInfo?.site_name || ""} | כל
+            הזכויות שמורות
           </div>
           <div>
             <Link className="hover:text-customGreen" href="/privacy-policy">
