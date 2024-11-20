@@ -1,5 +1,4 @@
 "use server";
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BlockRenderer } from "@/cmps/BlockRenderer";
 import { PostsList } from "@/cmps/blocks/PostsList";
 import { Contact } from "@/cmps/Contact";
@@ -40,7 +39,7 @@ export default async function page({ params }: Params) {
         <p className="text-center text-gray-600 text-2xl">{page.description}</p>
 
         <div className="mt-8">
-          {sortedBlocks.map((block: any) => (
+          {sortedBlocks.map((block) => (
             <BlockRenderer key={block.id} block={block} />
           ))}
         </div>
@@ -61,6 +60,7 @@ export default async function page({ params }: Params) {
                 name: formData.get("name") as string,
                 email: formData.get("email") as string,
                 message: formData.get("message") as string,
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
               } as any);
             }}
           />

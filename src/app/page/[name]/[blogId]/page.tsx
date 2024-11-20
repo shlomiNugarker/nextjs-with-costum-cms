@@ -12,10 +12,7 @@ interface Params {
 
 export default async function Page({ params }: Params) {
   const { blogId } = params;
-  const post: any = await genericRepository.getById(
-    "blogsTable",
-    Number(blogId)
-  );
+  const post = await genericRepository.getById("blogsTable", Number(blogId));
 
   if (!post) {
     return (
