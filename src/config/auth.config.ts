@@ -4,6 +4,19 @@ import { compare } from "bcrypt-ts";
 import { NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 
+declare module "next-auth" {
+  interface User {
+    id: string;
+    email?: string | null;
+    username?: string | null;
+    role: "Admin" | "User";
+  }
+
+  interface Session {
+    user: User;
+  }
+}
+
 export const authConfig = {
   pages: {
     signIn: "/login",
@@ -39,8 +52,9 @@ export const authConfig = {
     },
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
+      const isAdminUser = auth?.user.role === "Admin";
       const isOnAdmin = nextUrl.pathname.startsWith("/admin");
-      if (isOnAdmin && !isLoggedIn) {
+      if ((isOnAdmin && !isLoggedIn) || !isAdminUser) {
         return false;
       }
       if (isOnAdmin) {
