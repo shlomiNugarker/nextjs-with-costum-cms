@@ -57,7 +57,7 @@ export const authConfig = {
       if ((isOnAdmin && !isLoggedIn) || !isAdminUser) {
         return false;
       }
-      if (isOnAdmin) {
+      if (isOnAdmin && isAdminUser) {
         if (isLoggedIn) return true;
         return Response.redirect(new URL("/login", nextUrl));
       }
