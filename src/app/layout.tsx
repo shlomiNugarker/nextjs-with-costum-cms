@@ -21,8 +21,7 @@ const geistMono = localFont({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const siteInfo: any = await genericRepository.getAll("SiteInfo");
+  const [siteInfo] = await genericRepository.getAll("SiteInfo");
 
   return {
     title: siteInfo?.meta_title,
@@ -32,10 +31,10 @@ export async function generateMetadata(): Promise<Metadata> {
       title: siteInfo?.og_title || "",
       description: siteInfo?.og_description || "",
       url: siteInfo?.og_url || "",
-      type: siteInfo?.og_type || "website",
+      type: "website",
       images: [
         {
-          url: siteInfo?.og_image || "",
+          url: siteInfo?.og_url || "",
           width: 800,
           height: 600,
           alt: "תמונה של הגינה בפרדס",
@@ -45,9 +44,9 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       card: "summary_large_image",
       site: "@yourTwitterHandle",
-      title: siteInfo?.og_title,
-      description: siteInfo?.og_description,
-      images: [siteInfo?.og_image],
+      title: siteInfo?.meta_title || "",
+      description: siteInfo?.og_description || "",
+      // images: [siteInfo?.og_image],
     },
   };
 }

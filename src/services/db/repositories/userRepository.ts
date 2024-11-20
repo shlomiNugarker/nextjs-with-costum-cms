@@ -15,12 +15,13 @@ export async function getUser(email: string) {
         username: users.username,
         email: users.email,
         role: users.role,
+        password: users.password,
       })
       .from(users)
       .where(eq(users.email, email));
 
-    const { username, email: mail, role } = userArray[0];
-    return { email: mail, role, username };
+    const { username, email: mail, role, password } = userArray[0];
+    return { email: mail, role, username, password };
   } catch (error) {
     console.error("Error getting user:", error);
   }

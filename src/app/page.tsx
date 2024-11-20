@@ -4,33 +4,13 @@ import { HeroImg } from "@/cmps/HeroImg";
 import { YouTubeVideo } from "@/cmps/YouTubeVideo";
 import { genericRepository } from "@/services/db/repositories/genericRepository";
 
-interface Page {
-  id: number;
-  name: string;
-  title: string | null;
-  meta_title: string | null;
-  meta_description: string | null;
-  meta_keywords: string | null;
-  description: string | null;
-  created_at: Date | null;
-}
-
-// interface ContentBlock {
-//   id: number;
-//   created_at: Date | null;
-//   page_id: number;
-//   block_type: string;
-//   content: string;
-//   position: number | null;
-// }
-
 export default async function Home() {
   try {
-    const homePage = (await genericRepository.getByField(
+    const homePage = await genericRepository.getByField(
       "pagesTable",
       "name",
       "home"
-    )) as Page;
+    );
 
     if (!homePage) {
       return <div>דף הבית לא נמצא</div>;
