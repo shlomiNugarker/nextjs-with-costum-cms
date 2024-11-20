@@ -2,7 +2,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import { uploadImageToCloudinary } from "@/services/client-api/clodinaryApi";
-// import { genericRepository } from "@/services/db/repositories/genericRepository";
+import { updateContentBlock } from "@/services/client-api/contentBlockApi";
 
 type ContentBlock = {
   block_type: string;
@@ -246,11 +246,8 @@ export const ContentBlockEditForm: React.FC<{
           throw new Error("Invalid JSON format");
         }
 
-        alert("TODO: CHANGE SAVING TO HTTP REQ");
+        await updateContentBlock(id, { content: block.content });
 
-        // await genericRepository.updateRecord("contentBlocksTable", id, {
-        //   content: block.content,
-        // });
         alert("בלוק התוכן עודכן בהצלחה");
       } catch (error) {
         console.error("Failed to save content block:", error);
