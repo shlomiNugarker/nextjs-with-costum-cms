@@ -4,7 +4,7 @@ import { BlogCard } from "../BlogCard";
 import Link from "next/link";
 
 export const AdminPostsList = async () => {
-  const posts: any = await genericRepository.getAll("blogsTable");
+  const posts = await genericRepository.getAll("blogsTable");
 
   return (
     <>
@@ -12,7 +12,7 @@ export const AdminPostsList = async () => {
         פוסטים
       </h1>
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 justify-center container m-auto">
-        {posts.map((post: any) => (
+        {posts.map((post) => (
           <div key={post.id} className="m-5 bg-white">
             <BlogCard post={post} />
             <Link

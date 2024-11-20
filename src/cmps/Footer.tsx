@@ -10,7 +10,7 @@ import {
 import { Logo } from "./Logo";
 import { genericRepository } from "@/services/db/repositories/genericRepository";
 
-export const Footer = ({ siteInfo, pageLinks }: any) => {
+export const Footer = async ({ siteInfo, pageLinks }: any) => {
   const [city, street, houseNumber] = (siteInfo.address as string)
     .split(",")
     .map((part) => part.trim());

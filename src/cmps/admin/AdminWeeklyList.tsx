@@ -4,9 +4,7 @@ import Link from "next/link";
 import { ProductCard } from "../ProductCard";
 
 export const AdminWeeklyList = async () => {
-  const weeklyProducts: any = await genericRepository.getAll(
-    "weeklyProductsTable"
-  );
+  const weeklyProducts = await genericRepository.getAll("weeklyProductsTable");
 
   return (
     <>
@@ -18,7 +16,7 @@ export const AdminWeeklyList = async () => {
         </Link>
       </div>
       <div className="pb-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
-        {weeklyProducts.map((product: any) => (
+        {weeklyProducts.map((product) => (
           <div key={product.id} className="relative w-full max-w-xs">
             <ProductCard product={product} />
             <Link href={`weekly-products/edit-weekly-product/${product.id}`}>

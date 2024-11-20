@@ -3,7 +3,7 @@ import { genericRepository } from "@/services/db/repositories/genericRepository"
 import { NurseryCard } from "./NurseryCard";
 
 export const NurseryProductsList = async () => {
-  const nurseryProducts: any = await genericRepository.getAll(
+  const nurseryProducts = await genericRepository.getAll(
     "nurseryProductsTable"
   );
 

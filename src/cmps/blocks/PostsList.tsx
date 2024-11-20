@@ -5,11 +5,11 @@ import Link from "next/link";
 import { genericRepository } from "@/services/db/repositories/genericRepository";
 
 export const PostsList = async () => {
-  const posts: any = await genericRepository.getAll("blogsTable");
+  const posts = await genericRepository.getAll("blogsTable");
 
   return (
     <div className="grid gap-4 justify-items-center sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 pb-10">
-      {posts.map((post: any) => (
+      {posts.map((post) => (
         <div
           key={post.id}
           className="p-6 mb-9 bg-white rounded-lg shadow-lg border border-gray-200 transition-transform hover:scale-105 hover:shadow-xl max-w-[450px] animate-float"

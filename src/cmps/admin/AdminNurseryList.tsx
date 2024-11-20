@@ -6,7 +6,7 @@ import { genericRepository } from "@/services/db/repositories/genericRepository"
 export const revalidate = 5;
 
 export const AdminNurseryList = async () => {
-  const nurseryProducts: any = await genericRepository.getAll(
+  const nurseryProducts = await genericRepository.getAll(
     "nurseryProductsTable"
   );
 
@@ -20,7 +20,7 @@ export const AdminNurseryList = async () => {
         </Link>
       </div>
       <div className="pb-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
-        {nurseryProducts.map((product: any) => (
+        {nurseryProducts.map((product) => (
           <div key={product.id} className="relative">
             <Link href={`nursery-products/edit-nursery-product/${product.id}`}>
               <NurseryCard product={product} />
