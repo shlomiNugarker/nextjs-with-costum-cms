@@ -2,33 +2,6 @@
 
 import { getClient } from "@/config/database.config";
 
-export async function ensureBlogsTableExists() {
-  const client = await getClient();
-
-  const result = await client`
-      SELECT EXISTS (
-        SELECT FROM information_schema.tables 
-        WHERE table_schema = 'public' 
-        AND table_name = 'blogs'
-      );`;
-
-  if (!result[0].exists) {
-    await client`
-        CREATE TABLE "blogs" (
-          id SERIAL PRIMARY KEY,
-          title VARCHAR(255) NOT NULL,
-          description TEXT,
-          content TEXT NOT NULL,
-          image_url VARCHAR(255),
-          created_at TIMESTAMPTZ DEFAULT NOW()
-        );
-      `;
-    console.log("Created blogs table.");
-
-    await seedInitialBlogs();
-  }
-}
-
 export async function seedInitialBlogs() {
   const initialBlogs = [
     {

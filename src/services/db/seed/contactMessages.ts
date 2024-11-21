@@ -2,31 +2,6 @@
 
 import { getClient } from "@/config/database.config";
 
-export async function ensureContactMessagesTableExists() {
-  const client = await getClient();
-
-  const result = await client`
-        SELECT EXISTS (
-          SELECT FROM information_schema.tables 
-          WHERE table_schema = 'public' 
-          AND table_name = 'contact_messages'
-        );`;
-
-  if (!result[0].exists) {
-    await client`
-          CREATE TABLE "contact_messages" (
-            id SERIAL PRIMARY KEY,
-            name VARCHAR(255) NOT NULL,
-            email VARCHAR(255) NOT NULL,
-            message TEXT NOT NULL,
-            created_at TIMESTAMPTZ DEFAULT NOW()
-          );
-        `;
-    console.log("Created contact_messages table, seeding initial messages...");
-    await seedInitialContactMessages();
-  }
-}
-
 export async function seedInitialContactMessages() {
   const initialMessages = [
     {

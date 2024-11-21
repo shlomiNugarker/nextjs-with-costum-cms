@@ -2,32 +2,6 @@
 
 import { getClient } from "@/config/database.config";
 
-export async function ensureContentBlocksTableExists() {
-  const client = await getClient();
-
-  const result = await client`
-      SELECT EXISTS (
-        SELECT FROM information_schema.tables 
-        WHERE table_schema = 'public' 
-        AND table_name = 'content_blocks'
-      );`;
-
-  if (!result[0].exists) {
-    await client`
-        CREATE TABLE "content_blocks" (
-          id SERIAL PRIMARY KEY,
-          page_id INTEGER REFERENCES pages(id) ON DELETE CASCADE,
-          block_type VARCHAR(50) NOT NULL,
-          content TEXT NOT NULL,
-          position INTEGER DEFAULT 0,
-          created_at TIMESTAMPTZ DEFAULT NOW()
-        );
-      `;
-    console.log("Created content_blocks table, seeding initial blocks...");
-    await seedInitialContentBlocks();
-  }
-}
-
 export async function seedInitialContentBlocks() {
   const initialBlocks = [
     // דף הבית

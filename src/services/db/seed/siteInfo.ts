@@ -1,63 +1,6 @@
 "use server";
 
 import { getClient } from "@/config/database.config";
-import { pgTable, serial, text, varchar } from "drizzle-orm/pg-core";
-
-export async function ensureSiteInfoTableExists() {
-  const client = await getClient();
-
-  const result = await client`
-    SELECT EXISTS (
-      SELECT FROM information_schema.tables 
-      WHERE table_schema = 'public' 
-      AND table_name = 'site_info'
-    );`;
-
-  if (!result[0].exists) {
-    await client`
-      CREATE TABLE "site_info" (
-       id SERIAL PRIMARY KEY,
-      site_name VARCHAR(100) NOT NULL,
-      description TEXT,
-      address VARCHAR(255),
-      contact_email VARCHAR(100),
-      phone_number VARCHAR(20),
-      opening_hours VARCHAR(100),
-      meta_title TEXT,
-      meta_description TEXT,
-      og_title TEXT,
-      og_description TEXT,
-      og_url TEXT,
-      og_type VARCHAR(50) DEFAULT 'website',
-      facebook_url VARCHAR(255),
-      instagram_url VARCHAR(255),
-      twitter_url VARCHAR(255),
-      youtube_url VARCHAR(255),
-      created_at TIMESTAMPTZ DEFAULT NOW() 
-      );`;
-
-    console.log("Created site_info table, seeding initial site information...");
-    await seedInitialSiteInfo();
-  }
-
-  const siteInfoTable = pgTable("site_info", {
-    id: serial("id").primaryKey(),
-    site_name: varchar("site_name", { length: 100 }).notNull(),
-    description: text("description"),
-    address: varchar("address", { length: 255 }),
-    contact_email: varchar("contact_email", { length: 100 }),
-    phone_number: varchar("phone_number", { length: 20 }),
-    opening_hours: varchar("opening_hours", { length: 100 }),
-    meta_title: text("meta_title"),
-    meta_description: text("meta_description"),
-    og_title: text("og_title"),
-    og_description: text("og_description"),
-    og_url: text("og_url"),
-    og_type: varchar("og_type", { length: 50 }).default("website"),
-  });
-
-  return siteInfoTable;
-}
 
 export async function seedInitialSiteInfo() {
   const initialSiteInfo = {

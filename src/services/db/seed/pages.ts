@@ -1,34 +1,6 @@
 "use server";
 import { getClient } from "../../../config/database.config";
 
-export async function ensurePagesTableExists() {
-  const client = await getClient();
-
-  const result = await client`
-      SELECT EXISTS (
-        SELECT FROM information_schema.tables 
-        WHERE table_schema = 'public' 
-        AND table_name = 'pages'
-      );`;
-
-  if (!result[0].exists) {
-    await client`
-    CREATE TABLE "pages" (
-      id SERIAL PRIMARY KEY,
-      name VARCHAR(255) NOT NULL,
-      title VARCHAR(255),
-      meta_title VARCHAR(255),
-      meta_description TEXT,
-      meta_keywords VARCHAR(255),
-      description TEXT,
-      created_at TIMESTAMPTZ DEFAULT NOW()
-    );
-  `;
-    console.log("Created pages table, seeding initial pages...");
-    await seedInitialPages();
-  }
-}
-
 export async function seedInitialPages() {
   const initialPages = [
     {
