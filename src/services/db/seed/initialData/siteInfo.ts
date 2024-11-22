@@ -1,0 +1,18 @@
+export const initialSiteInfo = {
+  site_name: "הגינה בפרדס",
+  description: "חווה אורגנית למכירת ירקות טריים.",
+  address: "פרדס חנה, רחוב החקלאי 12",
+  contact_email: "info@haginabapardes.com",
+  phone_number: "052-1234567",
+  opening_hours: "א-ה, 9:00-17:00",
+  meta_title: "הגינה בפרדס - חווה אורגנית",
+  meta_description: "חווה אורגנית למכירת ירקות טריים בפרדס חנה.",
+  og_title: "הגינה בפרדס",
+  og_description: "חווה אורגנית למכירת ירקות טריים בפרדס חנה.",
+  og_url: "https://haginabapardes.com",
+  og_type: "website",
+  facebook_url: "https://www.facebook.com/haginabapardes",
+  instagram_url: "https://www.instagram.com/haginabapardes",
+  twitter_url: "https://www.twitter.com/haginabapardes",
+  youtube_url: "https://www.youtube.com/haginabapardes",
+};

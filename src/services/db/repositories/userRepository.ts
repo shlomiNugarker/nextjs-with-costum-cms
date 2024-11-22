@@ -2,14 +2,13 @@
 
 import { genSaltSync, hashSync } from "bcrypt-ts";
 import { connectToDatabase } from "../../../config/database.config";
-import { ensureUsersTableExists } from "../seed/users";
 import { eq } from "drizzle-orm";
+import { users } from "../schema";
 
 export async function getUser(email: string) {
   try {
     const db = await connectToDatabase();
 
-    const users = await ensureUsersTableExists();
     const userArray = await db
       .select({
         username: users.username,
@@ -35,7 +34,6 @@ export async function createUser(
 ) {
   try {
     const db = await connectToDatabase();
-    const users = await ensureUsersTableExists();
     const salt = genSaltSync(10);
     const hash = hashSync(password, salt);
 
@@ -47,22 +45,20 @@ export async function createUser(
   }
 }
 
-// export async function getAllUsers() {
-//   try {
-//     const db = await connectToDatabase();
+export async function getAllUsers() {
+  try {
+    const db = await connectToDatabase();
 
-//     const users = await ensureUsersTableExists();
+    const allUsers = await db
+      .select({
+        username: users.username,
+        email: users.email,
+      })
+      .from(users);
 
-//     const allUsers = await db
-//       .select({
-//         username: users.username,
-//         email: users.email,
-//       })
-//       .from(users);
-
-//     return allUsers;
-//   } catch (error) {
-//     console.error("Error fetching users:", error);
-//     return [];
-//   }
-// }
+    return allUsers;
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    return [];
+  }
+}
