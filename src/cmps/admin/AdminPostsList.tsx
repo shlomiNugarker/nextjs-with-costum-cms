@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { genericRepository } from "@/services/db/repositories/genericRepository";
 import { BlogCard } from "../BlogCard";
 import Link from "next/link";

@@ -2,8 +2,19 @@
 import { savePage } from "@/services/client-api/pageApi";
 import React, { useState } from "react";
 
+type InitialPage = {
+  id: number;
+  name: string;
+  description: string | null;
+  created_at: Date | null;
+  title: string | null;
+  meta_title: string | null;
+  meta_description: string | null;
+  meta_keywords: string | null;
+};
+
 type Page = {
-  id?: number;
+  id: number | undefined;
   name: string;
   description: string | null;
   title: string | null;
@@ -15,7 +26,7 @@ type Page = {
 export const PageEditForm = ({
   initialPage,
 }: {
-  initialPage: Page | undefined;
+  initialPage: InitialPage | null;
 }) => {
   const [page, setPage] = useState<Page>({
     id: initialPage?.id || undefined,

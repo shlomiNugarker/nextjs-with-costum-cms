@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import Link from "next/link";
 import { NurseryCard } from "../NurseryCard";
 import { genericRepository } from "@/services/db/repositories/genericRepository";

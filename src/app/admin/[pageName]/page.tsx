@@ -22,16 +22,15 @@ export default async function AdminEditPage({ params }: Params) {
       "name",
       pageName
     );
-    if (!page) {
-      return <div>לא נמצא דף כזה</div>;
-    }
+    // if (!page) {
+    //   return <div>לא נמצא דף כזה</div>;
+    // }
 
-    const contentBlocks = await genericRepository.getAllWithFilter(
-      "contentBlocksTable",
-      {
-        page_id: page.id,
-      }
-    );
+    const contentBlocks = page?.id
+      ? await genericRepository.getAllWithFilter("contentBlocksTable", {
+          page_id: page.id,
+        })
+      : null;
 
     return (
       <div className="pb-12 px-4 max-w-screen-lg mx-auto min-h-[calc(100vh-70px)] justify-center items-center flex flex-col pt-5 text-customNavy">
@@ -39,7 +38,9 @@ export default async function AdminEditPage({ params }: Params) {
           ערוך עמוד {pageName}
         </h1>
         <PageEditForm initialPage={page} />
-        <ContentBlockEditForm contentBlocks={contentBlocks} />
+        {page?.id && (
+          <ContentBlockEditForm contentBlocks={contentBlocks || []} />
+        )}
 
         {pageName === "blog" ? <AdminPostsList /> : null}
         {pageName === "nursery" ? <AdminNurseryList /> : null}

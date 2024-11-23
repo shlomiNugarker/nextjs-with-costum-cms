@@ -3,6 +3,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import { uploadImageToCloudinary } from "@/services/client-api/clodinaryApi";
 import { updateContentBlock } from "@/services/client-api/contentBlockApi";
+import { TextBlockEditor } from "./TextBlockEditor";
 
 type ContentBlock = {
   block_type: string;
@@ -13,7 +14,7 @@ type ContentBlock = {
   position: number | null;
 };
 
-type BlockEditorProps = {
+export type BlockEditorProps = {
   block: ContentBlock;
   onChange: (id: number, newContent: string) => void;
   loading: boolean;
@@ -28,15 +29,6 @@ function safeJSONParse<T>(data: string): T | null {
     return null;
   }
 }
-
-const TextBlockEditor: React.FC<BlockEditorProps> = ({ block, onChange }) => (
-  <textarea
-    value={block.content}
-    onChange={(e) => onChange(block.id, e.target.value)}
-    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition shadow-sm"
-    rows={4}
-  />
-);
 
 const ImageBlockEditor: React.FC<BlockEditorProps> = ({ block, onChange }) => (
   <div>
@@ -163,7 +155,7 @@ const GalleryBlockEditor: React.FC<
 };
 
 export const ContentBlockEditForm: React.FC<{
-  contentBlocks: ContentBlock[];
+  contentBlocks: ContentBlock[] | [];
 }> = ({ contentBlocks }) => {
   const [blocks, setBlocks] = useState<ContentBlock[]>([]);
   const [loadingBlocks, setLoadingBlocks] = useState<number[]>([]);
@@ -273,6 +265,11 @@ export const ContentBlockEditForm: React.FC<{
           {errorMessage}
         </div>
       )}
+
+      <button className="block text-lg font-medium text-customNavy mb-4">
+        הוסף בלוק
+      </button>
+
       {blocks.map((block) => {
         const loading = loadingBlocks.includes(block.id);
         return (
