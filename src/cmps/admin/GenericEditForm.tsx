@@ -29,7 +29,6 @@ export const GenericEditForm = ({
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const { name, value } = e.target;
-      console.log({ name, value });
       setData((prev: any) => ({
         ...prev,
         [name]: name === "price" ? parseFloat(value) : value,
@@ -116,7 +115,7 @@ export const GenericEditForm = ({
                 <input
                   id={field}
                   type="text"
-                  name="name"
+                  name={field}
                   value={data[field]}
                   onChange={handleChange}
                   placeholder="הכנס טקסט"
@@ -131,7 +130,7 @@ export const GenericEditForm = ({
                 <label htmlFor={field}>{field}</label>
                 <textarea
                   id={field}
-                  name="description"
+                  name={field}
                   value={data[field]}
                   onChange={handleChange}
                   placeholder="הכנס טקסט"
@@ -147,7 +146,7 @@ export const GenericEditForm = ({
                 <input
                   id={field}
                   type="text"
-                  name="category"
+                  name={field}
                   value={data[field]}
                   onChange={handleChange}
                   placeholder="הכנס טקסט"
@@ -162,7 +161,7 @@ export const GenericEditForm = ({
                 <input
                   id={field}
                   type="number"
-                  name="price"
+                  name={field}
                   value={data[field]}
                   onChange={handleChange}
                   placeholder="מחיר"
@@ -178,7 +177,7 @@ export const GenericEditForm = ({
                 <input
                   id={field}
                   type="text"
-                  name="pot_size"
+                  name={field}
                   value={data[field]}
                   onChange={handleChange}
                   placeholder="גודל עציץ"
@@ -209,7 +208,8 @@ export const GenericEditForm = ({
 
                   <div className="mt-4 w-32 h-32 rounded-lg overflow-hidden shadow-md">
                     <Image
-                      src={data[field]}
+                      key={field}
+                      src={data[field] || "/placeholder.png"}
                       alt="Uploaded"
                       className="object-cover w-full h-full transition-transform duration-200 hover:scale-105"
                       width={300}
