@@ -1,5 +1,5 @@
 import { safeJSONParse } from "@/services/utilService";
-import { BlockEditorProps } from "./ContentBlockEditForm";
+import { BlockEditorProps } from "../ContentBlockEditForm";
 
 export const FormBlockEditor: React.FC<BlockEditorProps> = ({
   block,
