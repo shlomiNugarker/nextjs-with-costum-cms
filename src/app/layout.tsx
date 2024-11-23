@@ -58,7 +58,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const siteInfo: any = await genericRepository.getAll("SiteInfo");
+  const siteInfo = await genericRepository.getAll("SiteInfo");
   const pages: any = await genericRepository.getAll("pagesTable");
   const menuItems = pages?.map((page: { name: string; title: any }) => ({
     href: "/" + page.name,

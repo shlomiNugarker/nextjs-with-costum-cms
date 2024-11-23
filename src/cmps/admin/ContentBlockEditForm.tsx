@@ -2,7 +2,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { uploadImageToCloudinary } from "@/services/client-api/clodinaryApi";
 import { updateContentBlock } from "@/services/client-api/contentBlockApi";
-import { TextBlockEditor } from "./blocksEditors/TextBlockEditor";
+import { TextAreaBlockEditor } from "./blocksEditors/TextAreaBlockEditor";
 import { ListBlockEditor } from "./blocksEditors/ListBlockEditor";
 import { safeJSONParse } from "@/services/utilService";
 import { GalleryBlockEditor } from "./blocksEditors/GalleryBlockEditor";
@@ -154,7 +154,7 @@ export const ContentBlockEditForm: React.FC<{
             </label>
 
             {block.block_type === "text" && (
-              <TextBlockEditor
+              <TextAreaBlockEditor
                 block={block}
                 onChange={handleContentChange}
                 loading={loading}

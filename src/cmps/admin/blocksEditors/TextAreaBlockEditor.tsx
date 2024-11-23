@@ -1,6 +1,6 @@
 import { BlockEditorProps } from "../ContentBlockEditForm";
 
-export const TextBlockEditor: React.FC<BlockEditorProps> = ({
+export const TextAreaBlockEditor: React.FC<BlockEditorProps> = ({
   block,
   onChange,
 }) => (
