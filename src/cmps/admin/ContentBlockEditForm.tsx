@@ -1,9 +1,13 @@
 "use client";
 import React, { useState, useCallback, useEffect } from "react";
-import Image from "next/image";
 import { uploadImageToCloudinary } from "@/services/client-api/clodinaryApi";
 import { updateContentBlock } from "@/services/client-api/contentBlockApi";
-import { TextBlockEditor } from "./TextBlockEditor";
+import { TextBlockEditor } from "./blocksEditors/TextBlockEditor";
+import { ListBlockEditor } from "./blocksEditors/ListBlockEditor";
+import { safeJSONParse } from "@/services/utilService";
+import { GalleryBlockEditor } from "./blocksEditors/GalleryBlockEditor";
+import { FormBlockEditor } from "./blocksEditors/FormBlockEditor";
+import { ImageBlockEditor } from "./blocksEditors/ImageBlockEditor";
 
 type ContentBlock = {
   block_type: string;
@@ -20,138 +24,6 @@ export type BlockEditorProps = {
   loading: boolean;
   onSave: (id: number) => void;
   onError: (message: string) => void;
-};
-
-function safeJSONParse<T>(data: string): T | null {
-  try {
-    return JSON.parse(data);
-  } catch {
-    return null;
-  }
-}
-
-const ImageBlockEditor: React.FC<BlockEditorProps> = ({ block, onChange }) => (
-  <div>
-    <input
-      type="text"
-      value={block.content}
-      onChange={(e) => onChange(block.id, e.target.value)}
-      placeholder="כתובת URL של התמונה"
-      className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
-    />
-    {block.content && (
-      <Image
-        src={block.content}
-        width={100}
-        height={100}
-        alt="Selected"
-        className="mt-4 max-w-full h-auto rounded-lg shadow-md"
-      />
-    )}
-  </div>
-);
-
-const ListBlockEditor: React.FC<BlockEditorProps> = ({ block, onChange }) => (
-  <textarea
-    value={block.content}
-    onChange={(e) => onChange(block.id, e.target.value)}
-    placeholder='הזן פריטים בפורמט JSON, למשל: ["פריט1", "פריט2"]'
-    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen transition"
-    rows={4}
-  />
-);
-
-const FormBlockEditor: React.FC<BlockEditorProps> = ({ block, onChange }) => {
-  const parsedContent = safeJSONParse<{ fields: string[] }>(block.content) || {
-    fields: [],
-  };
-
-  const handleFieldChange = (index: number, newValue: string) => {
-    parsedContent.fields[index] = newValue;
-    onChange(block.id, JSON.stringify(parsedContent));
-  };
-
-  return (
-    <div>
-      <h3 className="text-lg font-semibold text-customNavy mb-2">
-        ערוך שדות טופס:
-      </h3>
-      {parsedContent.fields.map((field, index) => (
-        <div key={index} className="mb-4">
-          <input
-            type="text"
-            value={field}
-            onChange={(e) => handleFieldChange(index, e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-lg text-right"
-            placeholder={`ערוך שדה ${index + 1}`}
-          />
-        </div>
-      ))}
-    </div>
-  );
-};
-
-const GalleryBlockEditor: React.FC<
-  BlockEditorProps & {
-    onUpload: (id: number, index: number, file: File) => void;
-    onAddImage: (id: number) => void;
-    onRemoveImage: (id: number, index: number) => void;
-  }
-> = ({ block, onChange, onUpload, onAddImage, onRemoveImage, loading }) => {
-  const gallery = safeJSONParse<string[]>(block.content) || [];
-
-  const handleImageChange = (index: number, newUrl: string) => {
-    gallery[index] = newUrl;
-    onChange(block.id, JSON.stringify(gallery));
-  };
-
-  return (
-    <div>
-      <h3 className="text-lg font-semibold text-customNavy mb-2">
-        ערוך גלריה:
-      </h3>
-      {gallery.map((imageUrl, index) => (
-        <div key={index} className="mb-4 flex items-center">
-          <input
-            type="text"
-            value={imageUrl}
-            onChange={(e) => handleImageChange(index, e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-lg text-right"
-            placeholder="כתובת URL של תמונה"
-          />
-          <input
-            type="file"
-            onChange={(e) =>
-              e.target.files && onUpload(block.id, index, e.target.files[0])
-            }
-            className="ml-2"
-            disabled={loading}
-          />
-          <button
-            onClick={() => onRemoveImage(block.id, index)}
-            className="ml-2 p-2 bg-red-500 text-white rounded-lg"
-          >
-            הסר
-          </button>
-          {imageUrl && (
-            <Image
-              width={100}
-              height={100}
-              src={imageUrl}
-              alt={`Gallery item ${index + 1}`}
-              className="ml-4 max-w-xs h-auto rounded-lg shadow-md"
-            />
-          )}
-        </div>
-      ))}
-      <button
-        onClick={() => onAddImage(block.id)}
-        className="mt-2 py-1 px-4 bg-customGreen text-white font-semibold rounded-lg"
-      >
-        הוסף תמונה לגלריה
-      </button>
-    </div>
-  );
 };
 
 export const ContentBlockEditForm: React.FC<{
