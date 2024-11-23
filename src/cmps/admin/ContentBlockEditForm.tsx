@@ -138,9 +138,16 @@ export const ContentBlockEditForm: React.FC<{
         </div>
       )}
 
-      <button className="block text-lg font-medium text-customNavy mb-4">
-        הוסף בלוק
-      </button>
+      {blocks.length === 0 && (
+        <div
+          className="p-6 border border-customPeach bg-gradient
+        -to-br from-white to-gray-50 shadow-lg rounded-lg"
+        >
+          <label className="block text-lg font-medium text-customNavy mb-4">
+            לא נמצאו בלוקים לעריכה
+          </label>
+        </div>
+      )}
 
       {blocks.map((block) => {
         const loading = loadingBlocks.includes(block.id);
@@ -218,6 +225,10 @@ export const ContentBlockEditForm: React.FC<{
           </div>
         );
       })}
+
+      <button className="block text-lg font-medium text-customNavy mt-8">
+        הוסף בלוק
+      </button>
     </div>
   );
 };

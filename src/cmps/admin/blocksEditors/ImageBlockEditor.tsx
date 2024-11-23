@@ -1,5 +1,5 @@
-import { BlockEditorProps } from "./ContentBlockEditForm";
 import Image from "next/image";
+import { BlockEditorProps } from "../ContentBlockEditForm";
 
 export const ImageBlockEditor: React.FC<BlockEditorProps> = ({
   block,
