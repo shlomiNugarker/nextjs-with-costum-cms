@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AdminNurseryList } from "@/cmps/admin/AdminNurseryList";
 import { AdminPostsList } from "@/cmps/admin/AdminPostsList";
 import { AdminWeeklyList } from "@/cmps/admin/AdminWeeklyList";
@@ -18,7 +17,7 @@ export default async function AdminEditPage({ params }: Params) {
   try {
     const { pageName } = params;
 
-    const page: any = await genericRepository.getByField(
+    const page = await genericRepository.getByField(
       "pagesTable",
       "name",
       pageName
@@ -27,7 +26,7 @@ export default async function AdminEditPage({ params }: Params) {
       return <div>לא נמצא דף כזה</div>;
     }
 
-    const contentBlocks: any = await genericRepository.getAllWithFilter(
+    const contentBlocks = await genericRepository.getAllWithFilter(
       "contentBlocksTable",
       {
         page_id: page.id,

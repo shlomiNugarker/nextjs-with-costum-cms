@@ -17,7 +17,7 @@ type NurseryProduct = {
   price: number;
   image_url: string | null;
   name: string;
-  pot_size?: string;
+  pot_size: string | null;
 };
 
 export const NurseryProductsForm = ({
@@ -149,7 +149,7 @@ export const NurseryProductsForm = ({
       <input
         type="text"
         name="pot_size"
-        value={product.pot_size}
+        value={product.pot_size || "0"}
         onChange={handleChange}
         placeholder="גודל עציץ"
         className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"

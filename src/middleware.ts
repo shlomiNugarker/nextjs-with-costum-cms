@@ -3,10 +3,9 @@
 import NextAuth from "next-auth";
 import { authConfig } from "./config/auth.config";
 
-// const { auth } = NextAuth(authConfig);
-
 export default NextAuth(authConfig).auth;
 
+// const { auth } = NextAuth(authConfig);
 // export default async function middleware(request: NextRequest) {
 //   try {
 //     console.log("middleware");

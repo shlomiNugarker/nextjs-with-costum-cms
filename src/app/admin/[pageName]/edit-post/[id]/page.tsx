@@ -2,8 +2,7 @@ import { PostEditor } from "@/cmps/admin/PostEditor";
 import { genericRepository } from "@/services/db/repositories/genericRepository";
 import React from "react";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default async function EditBlogPage(props: any) {
+export default async function EditBlogPage(props: { params: { id: string } }) {
   try {
     const postId = parseInt(props.params.id, 10);
     if (isNaN(postId)) {

@@ -3,8 +3,9 @@ import { genericRepository } from "@/services/db/repositories/genericRepository"
 
 export const revalidate = 5;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default async function EditWeeklyProduct(props: any) {
+export default async function EditWeeklyProduct(props: {
+  params: { id: string };
+}) {
   try {
     const productId = parseInt(props.params.id, 10);
     if (isNaN(productId)) {
