@@ -18,7 +18,11 @@ export const GenericEditForm = ({
   record: any;
 }) => {
   const router = useRouter();
-  const [data, setData] = useState(record);
+  const [data, setData] = useState(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { created_at, ...rest } = record;
+    return rest;
+  });
   const [isUploading, setIsUploading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
