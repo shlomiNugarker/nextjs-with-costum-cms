@@ -5,6 +5,11 @@ import Image from "next/image";
 import { uploadImageToCloudinary } from "@/services/client-api/clodinaryApi";
 import httpService from "@/services/httpService";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+
+const MarkdownEditor = dynamic(() => import("@uiw/react-markdown-editor"), {
+  ssr: false,
+});
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -132,16 +137,33 @@ export const GenericEditForm = ({
                 </p>
               )}
               <div className="mt-4 w-32 h-32 rounded-lg overflow-hidden shadow-md">
-                <Image
-                  src={data[field] || "/placeholder.png"}
-                  alt="Uploaded"
-                  className="object-cover w-full h-full transition-transform duration-200 hover:scale-105"
-                  width={300}
-                  height={300}
-                />
+                {data[field] && (
+                  <Image
+                    src={data[field]}
+                    alt="Uploaded"
+                    className="object-cover w-full h-full transition-transform duration-200 hover:scale-105"
+                    width={300}
+                    height={300}
+                  />
+                )}
               </div>
             </div>
           </div>
+        ) : field === "content" && tableName === "blogsTable" ? (
+          <MarkdownEditor
+            style={{ textAlign: "right" }}
+            minHeight="200px"
+            previewWidth="100%"
+            theme="none"
+            className="max-h-[100vh] text-right w-full"
+            value={data[field]}
+            onChange={(value) => {
+              setData((prev: any) => ({
+                ...prev,
+                content: value,
+              }));
+            }}
+          />
         ) : (
           <input {...commonProps} type="text" />
         )}
