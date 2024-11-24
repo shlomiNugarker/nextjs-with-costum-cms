@@ -18,11 +18,7 @@ export const GenericEditForm = ({
   record: any;
 }) => {
   const router = useRouter();
-  const [data, setData] = useState(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { created_at, ...rest } = record;
-    return rest;
-  });
+  const [data, setData] = useState(record);
   const [isUploading, setIsUploading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -103,21 +99,34 @@ export const GenericEditForm = ({
       onSubmit={handleSubmit}
       className="space-y-6 flex max-w-[500px] flex-col p-6 bg-white shadow-md rounded-lg mx-auto text-customNavy"
     >
-      <h1>עריכה {tableName}</h1>
+      <h1> {tableName}</h1>
       {fields.map((field: string) => {
         switch (field) {
           case "id":
             return null;
-          case "name":
-          case "title":
-          case "meta_title":
-          case "meta_keywords":
+          case "contact_email":
             return (
               <div key={field}>
                 <label htmlFor={field}>{field}</label>
                 <input
                   id={field}
-                  type="text"
+                  type="email"
+                  name={field}
+                  value={data[field]}
+                  onChange={handleChange}
+                  placeholder="הכנס טקסט"
+                  required
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
+                />
+              </div>
+            );
+          case "phone_number":
+            return (
+              <div key={field}>
+                <label htmlFor={field}>{field}</label>
+                <input
+                  id={field}
+                  type="tel"
                   name={field}
                   value={data[field]}
                   onChange={handleChange}
@@ -129,6 +138,7 @@ export const GenericEditForm = ({
             );
           case "description":
           case "meta_description":
+          case "og_description":
             return (
               <div key={field}>
                 <label htmlFor={field}>{field}</label>
@@ -140,21 +150,6 @@ export const GenericEditForm = ({
                   placeholder="הכנס טקסט"
                   required
                   rows={3}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
-                />
-              </div>
-            );
-          case "category":
-            return (
-              <div key={field}>
-                <label htmlFor={field}>{field}</label>
-                <input
-                  id={field}
-                  type="text"
-                  name={field}
-                  value={data[field]}
-                  onChange={handleChange}
-                  placeholder="הכנס טקסט"
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
                 />
               </div>
@@ -225,7 +220,21 @@ export const GenericEditForm = ({
               </div>
             );
           default:
-            return null;
+            return (
+              <div key={field}>
+                <label htmlFor={field}>{field}</label>
+                <input
+                  id={field}
+                  type="text"
+                  name={field}
+                  value={data[field]}
+                  onChange={handleChange}
+                  placeholder="הכנס טקסט"
+                  required
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
+                />
+              </div>
+            );
         }
       })}
 
@@ -236,7 +245,7 @@ export const GenericEditForm = ({
           isSaving ? "opacity-50 cursor-not-allowed" : ""
         }`}
       >
-        {isSaving ? "שומר..." : "שמור מוצר"}
+        {isSaving ? "שומר..." : "שמור"}
       </button>
       {data.id && (
         <button
@@ -244,7 +253,7 @@ export const GenericEditForm = ({
           onClick={deleteRecord}
           className="w-full py-3 mt-2 bg-red-600 text-white font-bold rounded-lg hover:bg-opacity-90 transition"
         >
-          מחק מוצר
+          מחק
         </button>
       )}
     </form>
