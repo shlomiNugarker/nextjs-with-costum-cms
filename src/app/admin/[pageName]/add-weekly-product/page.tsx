@@ -1,4 +1,4 @@
-import { WeeklyProductsForm } from "@/cmps/admin/WeeklyProductsForm";
+// import { WeeklyProductsForm } from "@/cmps/admin/WeeklyProductsForm";
 
 export const revalidate = 5;
 
@@ -9,7 +9,7 @@ export default async function AddWeeklyProduct() {
         <h2 className="text-4xl font-bold text-center mb-6 text-customNavy">
           הוסף מוצר לתוצרת השבועית
         </h2>
-        <WeeklyProductsForm />
+        {/* <GenericEditForm fields={fields} tableName={tableName} record={rest} /> */}
       </section>
     </>
   );
