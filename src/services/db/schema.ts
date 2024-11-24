@@ -103,7 +103,7 @@ export const contactMessagesTable = pgTable("contact_messages", {
 export const newsletterSubscribers = pgTable("newsletter_subscribers", {
   id: serial("id").primaryKey(),
   email: text("email").notNull().unique(),
-  createdAt: timestamp("created_at").defaultNow(),
+  created_at: timestamp("created_at").defaultNow(),
 });
 
 export type TableName = keyof typeof tables;

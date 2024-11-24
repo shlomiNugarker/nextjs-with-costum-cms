@@ -22,9 +22,6 @@ export default async function AdminEditPage({ params }: Params) {
       "name",
       pageName
     );
-    // if (!page) {
-    //   return <div>לא נמצא דף כזה</div>;
-    // }
 
     const contentBlocks = page?.id
       ? await genericRepository.getAllWithFilter("contentBlocksTable", {

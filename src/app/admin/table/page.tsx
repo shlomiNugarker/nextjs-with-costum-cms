@@ -14,7 +14,7 @@ export default async function AdminPage() {
         </Link>
         <Link href={"/admin/table/blogsTable"}>
           <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
-            טבלת blogs: getAllBlogs,{" "}
+            טבלת blogs
           </button>
         </Link>
         <Link href={"/admin/table/newsletterSubscribers"}>
