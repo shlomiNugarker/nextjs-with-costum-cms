@@ -1,14 +1,15 @@
 "use client";
+import Link from "next/link";
 import React, { useState } from "react";
 
 interface DynamicTableProps {
   data: Record<string, unknown>[];
-  title: string;
+  tableName: string;
 }
 
 export const DynamicTable: React.FC<DynamicTableProps> = ({
   data,
-  title = "טבלה דינמית",
+  tableName,
 }) => {
   const [sortConfig, setSortConfig] = useState<{
     key: string;
@@ -67,7 +68,7 @@ export const DynamicTable: React.FC<DynamicTableProps> = ({
   return (
     <div className="container mx-auto p-4 sm:p-6 bg-customPeach rounded-lg shadow-md text-center">
       <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-customNavy">
-        {title}
+        {tableName}
       </h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-4">
@@ -118,7 +119,9 @@ export const DynamicTable: React.FC<DynamicTableProps> = ({
                     key={key}
                     className="px-2 sm:px-4 py-2 border-b border-gray-300 text-center truncate max-w-14"
                   >
-                    {row[key] != null ? row[key].toString() : "N/A"}
+                    <Link href={`/admin/edit/${tableName}/${row.id}`}>
+                      {row[key] != null ? row[key].toString() : "N/A"}
+                    </Link>
                   </td>
                 ))}
               </tr>

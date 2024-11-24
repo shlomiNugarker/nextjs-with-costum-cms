@@ -17,7 +17,7 @@ const Page = async ({ params: { tableName } }: Params) => {
     return (
       <div className="pb-12 px-4 max-w-screen-lg mx-auto min-h-[calc(100vh-70px)] justify-center items-center flex flex-col pt-5 text-customNavy">
         <h1 className="text-3xl font-bold mb-4 capitalize">{`נתונים עבור ${tableName}`}</h1>
-        <DynamicTable data={data || []} title={tableName} />
+        <DynamicTable data={data || []} tableName={tableName} />
       </div>
     );
   } catch (error) {

@@ -10,6 +10,8 @@ type PageProps<T extends TableName> = {
   };
 };
 
+export const revalidate = 5;
+
 export default async function Page<T extends TableName>({
   params,
 }: PageProps<T>) {
@@ -27,7 +29,6 @@ export default async function Page<T extends TableName>({
 
   return (
     <div className="pb-12 px-4 max-w-screen-lg mx-auto min-h-[calc(100vh-70px)] justify-center items-center flex flex-col pt-5 text-customNavy">
-      <h1>Edit {params.tableName}</h1>
       <GenericEditForm
         fields={fields}
         tableName={params.tableName}
