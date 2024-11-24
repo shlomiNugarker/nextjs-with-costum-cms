@@ -109,6 +109,9 @@ export const GenericEditForm = ({
           case "id":
             return null;
           case "name":
+          case "title":
+          case "meta_title":
+          case "meta_keywords":
             return (
               <div key={field}>
                 <label htmlFor={field}>{field}</label>
@@ -125,6 +128,7 @@ export const GenericEditForm = ({
               </div>
             );
           case "description":
+          case "meta_description":
             return (
               <div key={field}>
                 <label htmlFor={field}>{field}</label>
@@ -135,6 +139,7 @@ export const GenericEditForm = ({
                   onChange={handleChange}
                   placeholder="הכנס טקסט"
                   required
+                  rows={3}
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
                 />
               </div>
