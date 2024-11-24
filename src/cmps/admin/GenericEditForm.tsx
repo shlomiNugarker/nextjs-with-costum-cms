@@ -32,6 +32,7 @@ export const GenericEditForm = ({
     },
     []
   );
+
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -55,15 +56,12 @@ export const GenericEditForm = ({
     e.preventDefault();
     setIsSaving(true);
     try {
-      if (data.id) {
-        await httpService.put(`/table/${tableName}/${data.id}`, data);
-      } else {
-        await httpService.post(`/table/${tableName}`, data);
-      }
-
+      const url = `/table/${tableName}${data.id ? `/${data.id}` : ""}`;
+      const method = data.id ? "put" : "post";
+      await httpService[method](url, data);
       alert("השורה נשמרה בהצלחה");
     } catch (err) {
-      console.error("Error saving col", err);
+      console.error("Error saving row", err);
       alert("שגיאה בשמירת השורה");
     }
     setIsSaving(false);
@@ -78,20 +76,77 @@ export const GenericEditForm = ({
 
     try {
       await httpService.delete(`/table/${tableName}/${data.id}`);
-
       alert("השורה נמחקה בהצלחה");
-      setData(
-        fields.reduce((acc: any, field: string) => {
-          acc[field] = "";
-          return acc;
-        }, {})
-      );
-
       router.push("/admin");
     } catch (err) {
-      console.error("Error delete col", err);
+      console.error("Error deleting row", err);
       alert("שגיאה במחיקת השורה");
     }
+  };
+
+  const renderField = (field: string) => {
+    if (field === "id") return null;
+
+    const commonProps = {
+      id: field,
+      name: field,
+      value: data[field] || "",
+      onChange: handleChange,
+      placeholder: "הכנס טקסט",
+      className:
+        "w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen",
+      required: true,
+    };
+
+    return (
+      <div key={field}>
+        <label
+          htmlFor={field}
+          className="block text-sm font-semibold text-customNavy mb-1"
+        >
+          {field}
+        </label>
+        {field === "contact_email" ? (
+          <input {...commonProps} type="email" />
+        ) : field === "phone_number" ? (
+          <input {...commonProps} type="tel" />
+        ) : ["description", "meta_description", "og_description"].includes(
+            field
+          ) ? (
+          <textarea {...commonProps} rows={3} />
+        ) : field === "price" ? (
+          <input {...commonProps} type="number" />
+        ) : field === "image_url" ? (
+          <div>
+            <div className="relative flex flex-col items-center p-4 border border-gray-300 rounded-lg bg-white shadow-sm hover:shadow-md transition duration-150">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageUpload}
+                disabled={isUploading}
+                className="w-full text-customGreen cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:bg-customPeach file:text-customNavy hover:file:bg-opacity-80"
+              />
+              {isUploading && (
+                <p className="mt-2 text-customNavy text-sm font-medium animate-pulse">
+                  מעלה את התמונה...
+                </p>
+              )}
+              <div className="mt-4 w-32 h-32 rounded-lg overflow-hidden shadow-md">
+                <Image
+                  src={data[field] || "/placeholder.png"}
+                  alt="Uploaded"
+                  className="object-cover w-full h-full transition-transform duration-200 hover:scale-105"
+                  width={300}
+                  height={300}
+                />
+              </div>
+            </div>
+          </div>
+        ) : (
+          <input {...commonProps} type="text" />
+        )}
+      </div>
+    );
   };
 
   return (
@@ -99,144 +154,8 @@ export const GenericEditForm = ({
       onSubmit={handleSubmit}
       className="space-y-6 flex max-w-[500px] flex-col p-6 bg-white shadow-md rounded-lg mx-auto text-customNavy"
     >
-      <h1> {tableName}</h1>
-      {fields.map((field: string) => {
-        switch (field) {
-          case "id":
-            return null;
-          case "contact_email":
-            return (
-              <div key={field}>
-                <label htmlFor={field}>{field}</label>
-                <input
-                  id={field}
-                  type="email"
-                  name={field}
-                  value={data[field]}
-                  onChange={handleChange}
-                  placeholder="הכנס טקסט"
-                  required
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
-                />
-              </div>
-            );
-          case "phone_number":
-            return (
-              <div key={field}>
-                <label htmlFor={field}>{field}</label>
-                <input
-                  id={field}
-                  type="tel"
-                  name={field}
-                  value={data[field]}
-                  onChange={handleChange}
-                  placeholder="הכנס טקסט"
-                  required
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
-                />
-              </div>
-            );
-          case "description":
-          case "meta_description":
-          case "og_description":
-            return (
-              <div key={field}>
-                <label htmlFor={field}>{field}</label>
-                <textarea
-                  id={field}
-                  name={field}
-                  value={data[field]}
-                  onChange={handleChange}
-                  placeholder="הכנס טקסט"
-                  required
-                  rows={3}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
-                />
-              </div>
-            );
-          case "price":
-            return (
-              <div key={field}>
-                <label htmlFor={field}>{field}</label>
-                <input
-                  id={field}
-                  type="number"
-                  name={field}
-                  value={data[field]}
-                  onChange={handleChange}
-                  placeholder="מחיר"
-                  required
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
-                />
-              </div>
-            );
-          case "pot_size":
-            return (
-              <div key={field}>
-                <label htmlFor={field}>{field}</label>
-                <input
-                  id={field}
-                  type="text"
-                  name={field}
-                  value={data[field]}
-                  onChange={handleChange}
-                  placeholder="גודל עציץ"
-                  required
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
-                />
-              </div>
-            );
-          case "image_url":
-            return (
-              <div key={field}>
-                <label className="block text-sm font-semibold text-customNavy mb-2">
-                  תמונה:
-                </label>
-                <div className="relative flex flex-col items-center p-4 border border-gray-300 rounded-lg bg-white shadow-sm hover:shadow-md transition duration-150">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                    disabled={isUploading}
-                    className="w-full text-customGreen cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:bg-customPeach file:text-customNavy hover:file:bg-opacity-80"
-                  />
-                  {isUploading && (
-                    <p className="mt-2 text-customNavy text-sm font-medium animate-pulse">
-                      מעלה את התמונה...
-                    </p>
-                  )}
-
-                  <div className="mt-4 w-32 h-32 rounded-lg overflow-hidden shadow-md">
-                    <Image
-                      key={field}
-                      src={data[field] || "/placeholder.png"}
-                      alt="Uploaded"
-                      className="object-cover w-full h-full transition-transform duration-200 hover:scale-105"
-                      width={300}
-                      height={300}
-                    />
-                  </div>
-                </div>
-              </div>
-            );
-          default:
-            return (
-              <div key={field}>
-                <label htmlFor={field}>{field}</label>
-                <input
-                  id={field}
-                  type="text"
-                  name={field}
-                  value={data[field]}
-                  onChange={handleChange}
-                  placeholder="הכנס טקסט"
-                  required
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-customGreen"
-                />
-              </div>
-            );
-        }
-      })}
+      <h1 className="text-3xl font-semibold text-center mb-6">{tableName}</h1>
+      {fields.map(renderField)}
 
       <button
         type="submit"
