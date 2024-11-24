@@ -18,7 +18,7 @@ export const AdminWeeklyList = async () => {
         {weeklyProducts.map((product) => (
           <div key={product.id} className="relative w-full max-w-xs">
             <ProductCard product={product} />
-            <Link href={`weekly-products/edit-weekly-product/${product.id}`}>
+            <Link href={`/admin/edit/weeklyProductsTable/${product.id}`}>
               <button className="w-full py-2 px-4 bg-customGreen text-white font-semibold rounded-lg hover:bg-opacity-90 transition">
                 ערוך מוצר
               </button>

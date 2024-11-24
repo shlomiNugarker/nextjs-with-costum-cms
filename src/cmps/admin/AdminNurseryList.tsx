@@ -21,7 +21,7 @@ export const AdminNurseryList = async () => {
       <div className="pb-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
         {nurseryProducts.map((product) => (
           <div key={product.id} className="relative">
-            <Link href={`nursery-products/edit-nursery-product/${product.id}`}>
+            <Link href={`/admin/edit/nurseryProductsTable/${product.id}`}>
               <NurseryCard product={product} />
               <button className="w-full py-2 px-4 bg-customGreen text-white font-semibold rounded-lg hover:bg-opacity-90 transition">
                 ערוך
