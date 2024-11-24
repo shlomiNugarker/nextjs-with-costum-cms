@@ -27,7 +27,7 @@ export const AdminWeeklyList = async () => {
         ))}
       </div>
       <div className="flex justify-center mt-8">
-        <Link href={"weekly-products/add-weekly-product"}>
+        <Link href={"/admin/add/weeklyProductsTable"}>
           <button className="py-3 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition shadow-lg">
             הוסף מוצר
           </button>

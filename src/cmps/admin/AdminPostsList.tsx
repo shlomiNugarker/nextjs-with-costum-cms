@@ -16,7 +16,6 @@ export const AdminPostsList = async () => {
             <BlogCard post={post} />
             <Link
               href={`/admin/edit/blogsTable/${post.id}`}
-              // href={`/admin/blog/edit-post/${post.id}`}
               className="py-3 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition shadow-lg"
             >
               ערוך פוסט
@@ -25,7 +24,7 @@ export const AdminPostsList = async () => {
         ))}
       </div>
       <div className="flex justify-center mt-8 mb-8">
-        <Link href={"blog/add-post"}>
+        <Link href={"/admin/add/blogsTable"}>
           <button className="py-3 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition shadow-lg">
             הוסף פוסט
           </button>

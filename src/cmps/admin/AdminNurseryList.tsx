@@ -31,7 +31,7 @@ export const AdminNurseryList = async () => {
         ))}
       </div>
       <div className="flex justify-center mt-8  mb-5">
-        <Link href={"nursery-products/add-nursery-product"}>
+        <Link href={"/admin/add/nurseryProductsTable"}>
           <button className="py-3 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition shadow-lg">
             הוסף מוצר
           </button>
