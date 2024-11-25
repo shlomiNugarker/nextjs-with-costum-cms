@@ -1,24 +1,3 @@
-CREATE TABLE IF NOT EXISTS "site_info" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"site_name" text NOT NULL,
-	"description" text,
-	"address" text,
-	"contact_email" text,
-	"phone_number" text,
-	"opening_hours" text,
-	"meta_title" text,
-	"meta_description" text,
-	"og_title" text,
-	"og_description" text,
-	"og_url" text,
-	"og_type" text DEFAULT 'website',
-	"facebook_url" text,
-	"instagram_url" text,
-	"twitter_url" text,
-	"youtube_url" text,
-	"created_at" timestamp DEFAULT NOW()
-);
---> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "blogs" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"title" varchar(255) NOT NULL,
@@ -71,6 +50,27 @@ CREATE TABLE IF NOT EXISTS "pages" (
 	"meta_description" text,
 	"meta_keywords" varchar(255),
 	"description" text,
+	"created_at" timestamp DEFAULT NOW()
+);
+--> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "site_info" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"site_name" text NOT NULL,
+	"description" text,
+	"address" text,
+	"contact_email" text,
+	"phone_number" text,
+	"opening_hours" text,
+	"meta_title" text,
+	"meta_description" text,
+	"og_title" text,
+	"og_description" text,
+	"og_url" text,
+	"og_type" text DEFAULT 'website',
+	"facebook_url" text,
+	"instagram_url" text,
+	"twitter_url" text,
+	"youtube_url" text,
 	"created_at" timestamp DEFAULT NOW()
 );
 --> statement-breakpoint

@@ -2,7 +2,7 @@
 "use server";
 
 import { connectToDatabase } from "@/config/database.config";
-// import { runSeeds } from "./seed/seed";
+import { runSeeds } from "./seed/seed";
 // import { migrate } from "drizzle-orm/node-postgres/migrator";
 
 export async function initialize() {
@@ -13,7 +13,7 @@ export async function initialize() {
     const db = await connectToDatabase();
     // console.log("Running migrations...");
     // await migrate(db, { migrationsFolder: "src/services/db/migrations" });
-    // await runSeeds();
+    await runSeeds();
 
     console.log("Database initialized successfully!");
   } catch (error) {
