@@ -1,7 +1,7 @@
 import { AdminNurseryList } from "@/cmps/admin/AdminNurseryList";
 import { AdminPostsList } from "@/cmps/admin/AdminPostsList";
 import { AdminWeeklyList } from "@/cmps/admin/AdminWeeklyList";
-import { ContentBlockEditForm } from "@/cmps/admin/ContentBlockEditForm";
+import { ContentBlockEditForm } from "@/cmps/admin/blocksEditors/ContentBlockEditForm";
 import { GenericEditForm } from "@/cmps/admin/GenericEditForm";
 import { genericRepository } from "@/services/db/repositories/genericRepository";
 

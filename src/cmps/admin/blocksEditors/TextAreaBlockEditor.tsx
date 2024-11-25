@@ -1,4 +1,4 @@
-import { BlockEditorProps } from "../ContentBlockEditForm";
+import { BlockEditorProps } from "./ContentBlockEditForm";
 
 export const TextAreaBlockEditor: React.FC<BlockEditorProps> = ({
   block,

@@ -2,12 +2,12 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { uploadImageToCloudinary } from "@/services/client-api/clodinaryApi";
 import { updateContentBlock } from "@/services/client-api/contentBlockApi";
-import { TextAreaBlockEditor } from "./blocksEditors/TextAreaBlockEditor";
-import { ListBlockEditor } from "./blocksEditors/ListBlockEditor";
+import { TextAreaBlockEditor } from "./TextAreaBlockEditor";
+import { ListBlockEditor } from "./ListBlockEditor";
 import { safeJSONParse } from "@/services/utilService";
-import { GalleryBlockEditor } from "./blocksEditors/GalleryBlockEditor";
-import { FormBlockEditor } from "./blocksEditors/FormBlockEditor";
-import { ImageBlockEditor } from "./blocksEditors/ImageBlockEditor";
+import { GalleryBlockEditor } from "./GalleryBlockEditor";
+import { FormBlockEditor } from "./FormBlockEditor";
+import { ImageBlockEditor } from "./ImageBlockEditor";
 import Link from "next/link";
 
 type ContentBlock = {

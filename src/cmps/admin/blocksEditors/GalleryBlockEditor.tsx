@@ -1,5 +1,5 @@
 import { safeJSONParse } from "@/services/utilService";
-import { BlockEditorProps } from "../ContentBlockEditForm";
+import { BlockEditorProps } from "./ContentBlockEditForm";
 import Image from "next/image";
 
 export const GalleryBlockEditor: React.FC<
