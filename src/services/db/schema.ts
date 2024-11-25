@@ -9,32 +9,8 @@ import {
   timestamp,
 } from "drizzle-orm/pg-core";
 
-export const siteInfo = pgTable("site_info", {
-  id: serial("id").primaryKey(),
-  site_name: text("site_name").notNull(),
-  description: text("description"),
-  address: text("address"),
-  contact_email: text("contact_email"),
-  phone_number: text("phone_number"),
-  opening_hours: text("opening_hours"),
-  meta_title: text("meta_title"),
-  meta_description: text("meta_description"),
-  og_title: text("og_title"),
-  og_description: text("og_description"),
-  og_url: text("og_url"),
-  og_type: text("og_type").default("website"),
-  facebook_url: text("facebook_url"),
-  instagram_url: text("instagram_url"),
-  twitter_url: text("twitter_url"),
-  youtube_url: text("youtube_url"),
-  created_at: timestamp("created_at").default(sql`NOW()`),
-});
-
 export const weeklyProductsTable = pgTable("weekly_products", {
   id: serial("id").primaryKey(),
-  site_id: integer("site_id")
-    .references(() => siteInfo.id)
-    .notNull(),
   name: varchar("name", { length: 100 }).notNull(),
   description: text("description"),
   weight: varchar("weight", { length: 50 }),
@@ -46,9 +22,6 @@ export const weeklyProductsTable = pgTable("weekly_products", {
 
 export const nurseryProductsTable = pgTable("nursery_products", {
   id: serial("id").primaryKey(),
-  site_id: integer("site_id")
-    .references(() => siteInfo.id)
-    .notNull(),
   name: varchar("name", { length: 100 }).notNull(),
   description: text("description"),
   pot_size: varchar("pot_size", { length: 50 }),
@@ -70,9 +43,6 @@ export const users = pgTable("users", {
 
 export const blogsTable = pgTable("blogs", {
   id: serial("id").primaryKey(),
-  site_id: integer("site_id")
-    .references(() => siteInfo.id)
-    .notNull(),
   title: varchar("title", { length: 255 }).notNull(),
   description: text("description"),
   content: text("content").notNull(),
@@ -82,9 +52,6 @@ export const blogsTable = pgTable("blogs", {
 
 export const pagesTable = pgTable("pages", {
   id: serial("id").primaryKey(),
-  site_id: integer("site_id")
-    .references(() => siteInfo.id)
-    .notNull(),
   name: varchar("name", { length: 255 }).notNull(),
   title: varchar("title", { length: 255 }),
   meta_title: varchar("meta_title", { length: 255 }),
@@ -96,9 +63,6 @@ export const pagesTable = pgTable("pages", {
 
 export const contentBlocksTable = pgTable("content_blocks", {
   id: serial("id").primaryKey(),
-  site_id: integer("site_id")
-    .references(() => siteInfo.id)
-    .notNull(),
   page_id: integer("page_id")
     .references(() => pagesTable.id)
     .notNull(),
@@ -108,11 +72,29 @@ export const contentBlocksTable = pgTable("content_blocks", {
   created_at: timestamp("created_at").default(sql`NOW()`),
 });
 
+export const siteInfo = pgTable("site_info", {
+  id: serial("id").primaryKey(),
+  site_name: text("site_name").notNull(),
+  description: text("description"),
+  address: text("address"),
+  contact_email: text("contact_email"),
+  phone_number: text("phone_number"),
+  opening_hours: text("opening_hours"),
+  meta_title: text("meta_title"),
+  meta_description: text("meta_description"),
+  og_title: text("og_title"),
+  og_description: text("og_description"),
+  og_url: text("og_url"),
+  og_type: text("og_type").default("website"),
+  facebook_url: text("facebook_url"),
+  instagram_url: text("instagram_url"),
+  twitter_url: text("twitter_url"),
+  youtube_url: text("youtube_url"),
+  created_at: timestamp("created_at").default(sql`NOW()`),
+});
+
 export const contactMessagesTable = pgTable("contact_messages", {
   id: serial("id").primaryKey(),
-  site_id: integer("site_id")
-    .references(() => siteInfo.id)
-    .notNull(),
   name: varchar("name", { length: 255 }).notNull(),
   email: varchar("email", { length: 255 }).notNull(),
   message: text("message").notNull(),
@@ -121,9 +103,6 @@ export const contactMessagesTable = pgTable("contact_messages", {
 
 export const newsletterSubscribers = pgTable("newsletter_subscribers", {
   id: serial("id").primaryKey(),
-  site_id: integer("site_id")
-    .references(() => siteInfo.id)
-    .notNull(),
   email: text("email").notNull().unique(),
   created_at: timestamp("created_at").defaultNow(),
 });
@@ -137,7 +116,7 @@ export const getEmptyRecord = (tableName: TableName): Record<string, any> => {
 
   const emptyRecord: Record<string, any> = {};
 
-  const excludedFields = ["id", "created_at", "updated_at", "site_id"];
+  const excludedFields = ["id", "created_at", "updated_at"];
 
   for (const [key, column] of Object.entries(
     (tableSchema as any)[Symbol.for("drizzle:Columns")]

@@ -1,6 +1,5 @@
 export const initialWeeklyProducts = [
   {
-    site_id: 1,
     name: "מיקס עלי בטטה סגולה, אמרנט, תרד הודי אדום, ריג'לה ותרד ניו זילנדי",
     description: "מיקס עלים אידאלי לאידוי או להקפצה",
     weight: "350 גרם",
@@ -10,7 +9,6 @@ export const initialWeeklyProducts = [
       "https://images.unsplash.com/photo-1495758874721-e9da827a0581?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    site_id: 1,
     name: "מיקס עלי בטטה סגולה, אמרנט, תרד הודי אדום, ריג'לה ותרד ניו זילנדי",
     description: "מיקס עלים אידאלי לאידוי או להקפצה",
     weight: "350 גרם",
@@ -20,7 +18,6 @@ export const initialWeeklyProducts = [
       "https://images.unsplash.com/photo-1495758874721-e9da827a0581?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    site_id: 1,
     name: "מיקס עלי בטטה סגולה, אמרנט, תרד הודי אדום, ריג'לה ותרד ניו זילנדי",
     description: "מיקס עלים אידאלי לאידוי או להקפצה",
     weight: "350 גרם",
@@ -30,7 +27,6 @@ export const initialWeeklyProducts = [
       "https://images.unsplash.com/photo-1495758874721-e9da827a0581?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    site_id: 1,
     name: "מיקס עלי בטטה סגולה, אמרנט, תרד הודי אדום, ריג'לה ותרד ניו זילנדי",
     description: "מיקס עלים אידאלי לאידוי או להקפצה",
     weight: "350 גרם",
@@ -40,7 +36,6 @@ export const initialWeeklyProducts = [
       "https://images.unsplash.com/photo-1495758874721-e9da827a0581?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    site_id: 1,
     name: "מיקס עלי בטטה סגולה, אמרנט, תרד הודי אדום, ריג'לה ותרד ניו זילנדי",
     description: "מיקס עלים אידאלי לאידוי או להקפצה",
     weight: "350 גרם",
@@ -50,7 +45,6 @@ export const initialWeeklyProducts = [
       "https://images.unsplash.com/photo-1495758874721-e9da827a0581?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    site_id: 1,
     name: "מיקס עלי בטטה סגולה, אמרנט, תרד הודי אדום, ריג'לה ותרד ניו זילנדי",
     description: "מיקס עלים אידאלי לאידוי או להקפצה",
     weight: "350 גרם",
@@ -60,7 +54,6 @@ export const initialWeeklyProducts = [
       "https://images.unsplash.com/photo-1495758874721-e9da827a0581?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    site_id: 1,
     name: "מיקס עלי בטטה סגולה, אמרנט, תרד הודי אדום, ריג'לה ותרד ניו זילנדי",
     description: "מיקס עלים אידאלי לאידוי או להקפצה",
     weight: "350 גרם",
@@ -70,7 +63,6 @@ export const initialWeeklyProducts = [
       "https://images.unsplash.com/photo-1495758874721-e9da827a0581?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
-    site_id: 1,
     name: "מיקס עלי בטטה סגולה, אמרנט, תרד הודי אדום, ריג'לה ותרד ניו זילנדי",
     description: "מיקס עלים אידאלי לאידוי או להקפצה",
     weight: "350 גרם",

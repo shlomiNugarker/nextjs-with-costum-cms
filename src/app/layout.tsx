@@ -8,10 +8,7 @@ import { initialize } from "@/services/db/initializeDatabase";
 import { genericRepository } from "@/services/db/repositories/genericRepository";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const siteInfo = await genericRepository.getById(
-    "siteInfo",
-    Number(process.env.POSTGRES_SITE_ID! || 0)
-  );
+  const [siteInfo] = await genericRepository.getAll("siteInfo");
 
   return {
     title: siteInfo?.meta_title,
@@ -48,10 +45,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const siteInfo = await genericRepository.getById(
-    "siteInfo",
-    Number(process.env.POSTGRES_SITE_ID!)
-  );
+  const siteInfo = await genericRepository.getAll("siteInfo");
   const pages = await genericRepository.getAll("pagesTable");
   const menuItems = pages?.map((page: { name: string; title: any }) => ({
     href: "/" + page.name,
@@ -68,10 +62,10 @@ export default async function RootLayout({
               "url('https://images.unsplash.com/photo-1495195129352-aeb325a55b65?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
           }}
         ></div>
-        <Header menuItems={menuItems} siteName={siteInfo?.site_name || ""} />
+        <Header menuItems={menuItems} siteName={siteInfo[0]?.site_name || ""} />
         {children}
-        <WhatsAppButton phone={siteInfo?.phone_number || ""} />
-        <Footer siteInfo={siteInfo} pageLinks={menuItems} />
+        <WhatsAppButton phone={siteInfo[0]?.phone_number || ""} />
+        <Footer siteInfo={siteInfo[0]} pageLinks={menuItems} />
       </body>
     </html>
   );

@@ -4,16 +4,13 @@ import { genericRepository } from "@/services/db/repositories/genericRepository"
 export const revalidate = 5;
 
 const Page = async () => {
-  const siteInfo = await genericRepository.getById(
-    "siteInfo",
-    Number(process.env.POSTGRES_SITE_ID!)
-  );
+  const siteInfo = await genericRepository.getAll("siteInfo");
 
-  if (!siteInfo) {
+  if (!siteInfo[0]) {
     return <div>לא נמצא רשומה</div>;
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { created_at, ...rest } = siteInfo;
+  const { created_at, ...rest } = siteInfo[0];
   const fields = Object.keys(rest);
 
   return (

@@ -1,10 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { connectToDatabase } from "../../../config/database.config";
-import { eq, InferSelectModel, and } from "drizzle-orm";
+import { eq, InferSelectModel } from "drizzle-orm";
 import { TableName, tables, TableSchemas } from "@/services/db/schema";
 import { AnyPgColumn } from "drizzle-orm/pg-core";
-
-const siteId = process.env.POSTGRES_SITE_ID || 0;
 
 export const genericRepository = {
   getAll: async <T extends TableName>(
@@ -13,10 +10,7 @@ export const genericRepository = {
     try {
       const db = await connectToDatabase();
       const table = tables[tableName];
-      const records = await db
-        .select()
-        .from(table)
-        .where(eq((table as any).site_id as AnyPgColumn, siteId));
+      const records = await db.select().from(table);
       return records as TableSchemas[T][];
     } catch (error) {
       console.error(`Error fetching records from table ${tableName}:`, error);
@@ -24,7 +18,6 @@ export const genericRepository = {
     }
   },
 
-  // Get a single record by ID filtered by site_id
   getById: async <T extends TableName>(
     tableName: T,
     id: number
@@ -36,24 +29,10 @@ export const genericRepository = {
       if (!idColumn) {
         throw new Error(`No 'id' column found in table ${tableName}`);
       }
-
-      if (tableName === "siteInfo") {
-        const records = await db
-          .select()
-          .from(table)
-          .where(and(eq(idColumn, id)))
-          .limit(1);
-        return records.length ? (records[0] as TableSchemas[T]) : null;
-      }
       const records = await db
         .select()
         .from(table)
-        .where(
-          and(
-            eq((table as any).site_id as AnyPgColumn, siteId),
-            eq(idColumn, id)
-          )
-        )
+        .where(eq(idColumn, id))
         .limit(1);
       return records.length ? (records[0] as TableSchemas[T]) : null;
     } catch (error) {
@@ -65,7 +44,6 @@ export const genericRepository = {
     }
   },
 
-  // Add a new record and ensure site_id is included
   getByField: async <T extends TableName>(
     tableName: T,
     fieldName: string,
@@ -83,12 +61,7 @@ export const genericRepository = {
       const records = await db
         .select()
         .from(table)
-        .where(
-          and(
-            eq(column, value),
-            eq((table as any).site_id as AnyPgColumn, siteId)
-          )
-        )
+        .where(eq(column, value))
         .limit(1);
       return records.length ? (records[0] as TableSchemas[T]) : null;
     } catch (error) {
@@ -113,14 +86,7 @@ export const genericRepository = {
         throw new Error(`No 'id' column found in table ${tableName}`);
       }
 
-      await db
-        .delete(table)
-        .where(
-          and(
-            eq(idColumn, id),
-            eq((table as any).site_id as AnyPgColumn, siteId)
-          )
-        );
+      await db.delete(table).where(eq(idColumn, id));
       console.log(
         `Record with ID ${id} deleted successfully from table ${tableName}.`
       );
@@ -132,24 +98,17 @@ export const genericRepository = {
       throw new Error(`Unable to delete record from table ${tableName}`);
     }
   },
+
   addRecord: async <T extends TableName>(
     tableName: T,
-    newRecord: any
+    newRecord: TableSchemas[T]
   ): Promise<TableSchemas[T]> => {
     try {
       const db = await connectToDatabase();
       const table = tables[tableName];
-
-      if (tableName === "siteInfo") {
-        const insertedRecord = await db
-          .insert(table)
-          .values({ ...newRecord })
-          .returning();
-        return insertedRecord[0] as TableSchemas[T];
-      }
       const insertedRecord = await db
         .insert(table)
-        .values({ ...newRecord, site_id: siteId })
+        .values(newRecord)
         .returning();
       return insertedRecord[0] as TableSchemas[T];
     } catch (error) {
@@ -158,38 +117,24 @@ export const genericRepository = {
     }
   },
 
-  // Update a record by ID filtered by site_id
   updateRecord: async <T extends TableName>(
     tableName: T,
     id: number,
-    updatedFields: any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    updatedFields: any // ??? TODO: find how to handle any field for spesific table
   ): Promise<TableSchemas[T]> => {
     try {
       const db = await connectToDatabase();
       const table = tables[tableName];
       const idColumn = table.id;
+
       if (!idColumn) {
         throw new Error(`No 'id' column found in table ${tableName}`);
       }
-
-      if (tableName === "siteInfo") {
-        const updatedRecord = await db
-          .update(table)
-          .set(updatedFields)
-          .where(and(eq(idColumn, id)))
-          .returning();
-        return updatedRecord[0] as TableSchemas[T];
-      }
-
       const updatedRecord = await db
         .update(table)
         .set(updatedFields)
-        .where(
-          and(
-            eq((table as any).site_id as AnyPgColumn, siteId),
-            eq(idColumn, id)
-          )
-        )
+        .where(eq(idColumn, id))
         .returning();
       return updatedRecord[0] as TableSchemas[T];
     } catch (error) {
@@ -203,23 +148,27 @@ export const genericRepository = {
 
   getAllWithFilter: async <T extends TableName>(
     tableName: T,
-    filters: Partial<InferSelectModel<(typeof tables)[T]>>
+    filter: Partial<InferSelectModel<(typeof tables)[T]>>
   ): Promise<TableSchemas[T][]> => {
     try {
       const db = await connectToDatabase();
       const table = tables[tableName];
 
-      const filterConditions = [
-        eq((table as any).site_id as AnyPgColumn, siteId),
-        ...Object.entries(filters).map(([key, value]) =>
-          eq(table[key as keyof typeof table] as AnyPgColumn, value)
-        ),
-      ];
+      const [columnKey, columnValue] = Object.entries(filter)[0];
+
+      const column = table[columnKey as keyof typeof table] as AnyPgColumn;
+
+      if (!column) {
+        throw new Error(
+          `Column '${columnKey}' not found in table ${tableName}`
+        );
+      }
 
       const records = await db
         .select()
         .from(table)
-        .where(and(...filterConditions));
+        .where(eq(column, columnValue));
+
       return records as TableSchemas[T][];
     } catch (error) {
       console.error(

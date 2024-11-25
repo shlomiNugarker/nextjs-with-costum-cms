@@ -24,7 +24,7 @@ export default async function Page<T extends TableName>({
     return <div>לא נמצא רשומה עם מזהה זה</div>;
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { created_at, site_id, ...rest } = record as any;
+  const { created_at, ...rest } = record as any;
   const fields = Object.keys(rest);
 
   return (
