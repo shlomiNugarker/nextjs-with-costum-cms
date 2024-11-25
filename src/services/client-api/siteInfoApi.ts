@@ -2,7 +2,7 @@ import httpService from "../httpService";
 
 // export async function getSiteInfo() {
 //   try {
-//     const response = await httpService.get(`/table/SiteInfo`);
+//     const response = await httpService.get(`/table/siteInfo`);
 //     return response.data;
 //   } catch (error) {
 //     console.error("Error fetching site information:", error);
@@ -21,7 +21,7 @@ export async function saveSiteInfo(info: {
 }) {
   try {
     const method = info.id ? "put" : "post";
-    const url = "/table/SiteInfo" + (method === "put" ? `/${info.id}` : "");
+    const url = "/table/siteInfo" + (method === "put" ? `/${info.id}` : "");
 
     const response = await httpService[method](url, info);
     return response.data;
@@ -38,7 +38,7 @@ export async function saveSiteInfo(info: {
 
 // export async function deleteSiteInfo(id: number) {
 //   try {
-//     const response = await httpService.delete(`/table/SiteInfo/${id}`);
+//     const response = await httpService.delete(`/table/siteInfo/${id}`);
 //     console.log(`Site information with ID ${id} deleted successfully.`);
 //   } catch (error) {
 //     console.error(`Error deleting site information with ID ${id}:`, error);

@@ -57,7 +57,7 @@ export async function runSeeds() {
     await seedTable("pagesTable", initialPages);
     console.log("Pages seeded successfully.");
 
-    await seedTable("SiteInfo", initialSiteInfo);
+    await seedTable("siteInfo", initialSiteInfo);
     console.log("Site info seeded successfully.");
 
     await seedTable("weeklyProductsTable", initialWeeklyProducts);

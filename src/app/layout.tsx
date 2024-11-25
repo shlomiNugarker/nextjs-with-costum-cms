@@ -8,7 +8,7 @@ import { initialize } from "@/services/db/initializeDatabase";
 import { genericRepository } from "@/services/db/repositories/genericRepository";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const [siteInfo] = await genericRepository.getAll("SiteInfo");
+  const [siteInfo] = await genericRepository.getAll("siteInfo");
 
   return {
     title: siteInfo?.meta_title,
@@ -45,7 +45,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const siteInfo = await genericRepository.getAll("SiteInfo");
+  const siteInfo = await genericRepository.getAll("siteInfo");
   const pages = await genericRepository.getAll("pagesTable");
   const menuItems = pages?.map((page: { name: string; title: any }) => ({
     href: "/" + page.name,

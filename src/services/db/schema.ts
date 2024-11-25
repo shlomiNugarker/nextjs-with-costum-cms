@@ -72,7 +72,7 @@ export const contentBlocksTable = pgTable("content_blocks", {
   created_at: timestamp("created_at").default(sql`NOW()`),
 });
 
-export const SiteInfo = pgTable("site_info", {
+export const siteInfo = pgTable("site_info", {
   id: serial("id").primaryKey(),
   site_name: text("site_name").notNull(),
   description: text("description"),
@@ -174,7 +174,7 @@ export const tables = {
   blogsTable,
   pagesTable,
   contentBlocksTable,
-  SiteInfo,
+  siteInfo,
   contactMessagesTable,
   newsletterSubscribers,
 };
