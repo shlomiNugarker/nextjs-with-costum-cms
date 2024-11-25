@@ -35,7 +35,7 @@ export default async function AdminEditPage({ params }: Params) {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { created_at, ...rest } = page;
-    const fields = Object.keys(rest);
+    const pageFields = Object.keys(rest);
 
     return (
       <div className="pb-12 px-4 max-w-screen-lg mx-auto min-h-[calc(100vh-70px)] justify-center items-center flex flex-col pt-5 text-customNavy">
@@ -43,11 +43,10 @@ export default async function AdminEditPage({ params }: Params) {
           ערוך עמוד {pageName}
         </h1>
         <GenericEditForm
-          fields={fields}
+          fields={pageFields}
           tableName={"pagesTable"}
           record={rest}
         />
-        {/* <PageEditForm initialPage={page} /> */}
         {page?.id && (
           <ContentBlockEditForm contentBlocks={contentBlocks || []} />
         )}
