@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { InferSelectModel, sql } from "drizzle-orm";
 import {
   pgTable,
@@ -105,6 +106,64 @@ export const newsletterSubscribers = pgTable("newsletter_subscribers", {
   email: text("email").notNull().unique(),
   created_at: timestamp("created_at").defaultNow(),
 });
+
+export const getEmptyRecord = (tableName: TableName): Record<string, any> => {
+  const tableSchema = tables[tableName];
+
+  if (!tableSchema) {
+    throw new Error(`Table ${tableName} not found in schema.`);
+  }
+
+  const emptyRecord: Record<string, any> = {};
+
+  const excludedFields = ["id", "created_at", "updated_at"];
+
+  for (const [key, column] of Object.entries(
+    (tableSchema as any)[Symbol.for("drizzle:Columns")]
+  )) {
+    if (excludedFields.includes(key)) {
+      continue;
+    }
+
+    const col = column as {
+      columnType: string;
+      hasDefault?: boolean;
+      default?: any;
+      enumValues?: string[];
+    };
+
+    if (col.hasDefault) {
+      emptyRecord[key] = col.default ?? null;
+      continue;
+    }
+
+    switch (col.columnType) {
+      case "PgSerial":
+        emptyRecord[key] = null;
+        break;
+      case "PgVarchar":
+      case "PgText":
+        emptyRecord[key] = "";
+        break;
+      case "PgInteger":
+        emptyRecord[key] = 0;
+        break;
+      case "PgTimestamp":
+        emptyRecord[key] = null;
+        break;
+      case "PgBoolean":
+        emptyRecord[key] = false;
+        break;
+      case "PgEnum":
+        emptyRecord[key] = col.enumValues?.[0] || null;
+        break;
+      default:
+        emptyRecord[key] = null;
+    }
+  }
+
+  return emptyRecord;
+};
 
 export type TableName = keyof typeof tables;
 

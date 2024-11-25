@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { GenericEditForm } from "@/cmps/admin/GenericEditForm";
-import { TableName } from "@/services/db/schema";
+import { getEmptyRecord, TableName } from "@/services/db/schema";
 
 type PageProps<T extends TableName> = {
   params: {
@@ -14,7 +14,7 @@ export const revalidate = 5;
 export default async function Page<T extends TableName>({
   params,
 }: PageProps<T>) {
-  const record = { id: 1, name: "test" }; // get empty record ???
+  const record = getEmptyRecord(params.tableName);
 
   if (!record) {
     return <div>לא נמצא רשומה עם מזהה זה</div>;
