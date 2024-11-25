@@ -39,7 +39,7 @@ export default async function AdminEditPage({ params }: Params) {
 
     return (
       <div className="pb-12 px-4 max-w-screen-lg mx-auto min-h-[calc(100vh-70px)] justify-center items-center flex flex-col pt-5 text-customNavy">
-        <h1 className="text-3xl font-semibold text-center mb-6">
+        <h1 className="text-3xl font-semibold text-center mb-6 mt-6">
           ערוך עמוד {pageName}
         </h1>
         <GenericEditForm

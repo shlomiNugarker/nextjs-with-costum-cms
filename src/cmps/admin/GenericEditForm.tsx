@@ -174,7 +174,7 @@ export const GenericEditForm = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6 flex max-w-[500px] flex-col p-6 bg-white shadow-md rounded-lg mx-auto text-customNavy"
+      className="space-y-8 p-8 border border-customPeach bg-white shadow-lg rounded-lg max-w-2xl mx-auto mb-10 text-customNavy w-full"
     >
       <h1 className="text-3xl font-semibold text-center mb-6">{tableName}</h1>
       {fields.map(renderField)}
