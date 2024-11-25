@@ -22,6 +22,7 @@ export function Form({
           id="email"
           name="email"
           type="email"
+          defaultValue={"israel@example.com"}
           placeholder="user@acme.com"
           autoComplete="email"
           required
@@ -54,6 +55,7 @@ export function Form({
         <input
           id="password"
           name="password"
+          defaultValue={"password123"}
           type="password"
           required
           className="mt-2 block w-full rounded-md border border-gray-300 px-4 py-3 shadow-sm focus:border-customGreen focus:ring-customGreen focus:outline-none sm:text-sm"

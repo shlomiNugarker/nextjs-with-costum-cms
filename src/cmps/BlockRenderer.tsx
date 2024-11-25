@@ -11,6 +11,8 @@ export type Block = {
   content: string;
 };
 
+// block types: input, text, gallery, list, image, textarea
+
 export const BlockRenderer = async ({ block }: { block: Block }) => {
   switch (block.block_type) {
     case "input":
@@ -41,8 +43,6 @@ export const BlockRenderer = async ({ block }: { block: Block }) => {
     }
     case "image":
       return <Img src={block.content} />;
-    case "textarea":
-      return <TextArea block={block} />;
     case "textarea":
       return <TextArea block={block} />;
     default:
