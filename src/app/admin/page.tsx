@@ -15,26 +15,28 @@ export default async function AdminPage() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center space-y-6 text-customNavy">
         <h1 className="text-4xl font-bold text-center mb-12 text-customNavy">
-          ערוך עמודים
+          דף ניהול
         </h1>
 
         <div className="mt-6 flex flex-col w-full max-w-md">
           <Link href={"/admin/site-info"}>
             <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
-              מידע כללי
+              ערוך מידע על האתר
             </button>
           </Link>
 
           <Link href={"/admin/table"}>
             <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
-              טבלאות
+              ערוך טבלאות
             </button>
           </Link>
+
+          <h3>עריכה של דפים עם בלוקים משוייכים:</h3>
 
           {pages?.map((page: any) => (
             <Link key={page.id} href={`/admin/${page.name}`}>
               <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
-                {page.name}
+                עריכה והוספה לדף {page.name}
               </button>
             </Link>
           ))}
