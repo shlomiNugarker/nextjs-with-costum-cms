@@ -45,9 +45,6 @@ export async function runSeeds() {
     await seedTable("blogsTable", initialBlogs);
     console.log("Blogs seeded successfully.");
 
-    await seedTable("contentBlocksTable", initialBlocks);
-    console.log("Content blocks seeded successfully.");
-
     await seedTable("contactMessagesTable", initialMessages);
     console.log("Contact messages seeded successfully.");
 
@@ -65,6 +62,9 @@ export async function runSeeds() {
 
     await seedTable("weeklyProductsTable", initialWeeklyProducts);
     console.log("Weekly products seeded successfully.");
+
+    await seedTable("contentBlocksTable", initialBlocks);
+    console.log("Content blocks seeded successfully.");
 
     console.log("Seeding completed successfully!");
   } catch (error) {
