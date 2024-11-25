@@ -17,6 +17,16 @@ export default async function AdminPage() {
             טבלת blogs
           </button>
         </Link>
+        <Link href={"/admin/table/pagesTable"}>
+          <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
+            טבלת pages
+          </button>
+        </Link>
+        <Link href={"/admin/table/contentBlocksTable"}>
+          <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
+            טבלת content_blocks
+          </button>
+        </Link>
         <Link href={"/admin/table/newsletterSubscribers"}>
           <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
             טבלת newsletter_subscribers{" "}

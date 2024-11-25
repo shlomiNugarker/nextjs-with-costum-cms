@@ -10,6 +10,8 @@ interface Params {
   };
 }
 
+export const revalidate = 5;
+
 export default async function Page({ params }: Params) {
   const { blogId } = params;
   const post = await genericRepository.getById("blogsTable", Number(blogId));

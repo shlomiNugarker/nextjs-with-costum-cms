@@ -3,6 +3,8 @@ import { HeroImg } from "@/cmps/HeroImg";
 import { YouTubeVideo } from "@/cmps/YouTubeVideo";
 import { genericRepository } from "@/services/db/repositories/genericRepository";
 
+export const revalidate = 5;
+
 export default async function Home() {
   try {
     const homePage = await genericRepository.getByField(

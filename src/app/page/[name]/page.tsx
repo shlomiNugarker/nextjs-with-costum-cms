@@ -13,6 +13,8 @@ interface Params {
   };
 }
 
+export const revalidate = 5;
+
 export default async function page({ params }: Params) {
   const { name } = params;
   const page = await genericRepository.getByField("pagesTable", "name", name);
