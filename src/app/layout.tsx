@@ -1,24 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import { Footer } from "@/cmps/Footer";
 import { Header } from "@/cmps/Header";
 import { WhatsAppButton } from "@/cmps/WhatsAppButton";
 import { initialize } from "@/services/db/initializeDatabase";
 import { genericRepository } from "@/services/db/repositories/genericRepository";
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export async function generateMetadata(): Promise<Metadata> {
   const [siteInfo] = await genericRepository.getAll("SiteInfo");
@@ -37,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: siteInfo?.og_url || "",
           width: 800,
           height: 600,
-          alt: "תמונה של הגינה בפרדס",
+          alt: "תמונה של הגינה שלנו",
         },
       ],
     },
@@ -59,7 +46,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const siteInfo = await genericRepository.getAll("SiteInfo");
-  const pages: any = await genericRepository.getAll("pagesTable");
+  const pages = await genericRepository.getAll("pagesTable");
   const menuItems = pages?.map((page: { name: string; title: any }) => ({
     href: "/" + page.name,
     label: page.title || page.name,
@@ -67,9 +54,7 @@ export default async function RootLayout({
 
   return (
     <html lang="he">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased pt-[70px]`}
-      >
+      <body className={`antialiased pt-[70px]`}>
         <div
           className="h-screen bg-cover bg-center fixed inset-0 z-[-2] blur"
           style={{

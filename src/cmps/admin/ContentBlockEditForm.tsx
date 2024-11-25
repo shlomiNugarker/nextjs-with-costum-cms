@@ -8,6 +8,7 @@ import { safeJSONParse } from "@/services/utilService";
 import { GalleryBlockEditor } from "./blocksEditors/GalleryBlockEditor";
 import { FormBlockEditor } from "./blocksEditors/FormBlockEditor";
 import { ImageBlockEditor } from "./blocksEditors/ImageBlockEditor";
+import Link from "next/link";
 
 type ContentBlock = {
   block_type: string;
@@ -227,7 +228,7 @@ export const ContentBlockEditForm: React.FC<{
       })}
 
       <button className="block text-lg font-medium text-customNavy mt-8">
-        הוסף בלוק
+        <Link href={`/admin/add/contentBlocksTable`}>הוסף בלוק</Link>
       </button>
     </div>
   );
