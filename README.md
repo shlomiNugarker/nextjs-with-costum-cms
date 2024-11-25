@@ -2,6 +2,12 @@
 
 Welcome to **Haginabapardes**, the website for our organic farm and nursery. Built with **Next.js**, **TypeScript**, and **PostgreSQL**, this project aims to provide visitors with detailed information about the farm, an extensive product catalog, and easy ways to get in touch. Below, you will find all the essential information needed to run and understand the features of this project.
 
+login page to the cms: https://haginabapardes.vercel.app/login.
+
+admin email for login: **israel@example.com**
+
+password: **password123**
+
 ## 🛠️ Overview
 
 Haginabapardes is a dynamic web application designed for an organic farm and nursery. It allows users to explore a wide variety of organic products, get in touch with the farm, and even place orders for nursery items and weekly produce. The platform also includes an admin panel, enabling the farm administrators to manage products, blog posts, pages, and other dynamic content seamlessly.

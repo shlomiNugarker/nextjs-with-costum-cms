@@ -24,6 +24,10 @@ export async function POST(
   request: NextRequest,
   { params }: { params: { "table-name": TableName } }
 ) {
+  if (params["table-name"] === "users") {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const table = params["table-name"];
   try {
     const data = await request.json();

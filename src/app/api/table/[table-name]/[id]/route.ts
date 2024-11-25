@@ -1,11 +1,23 @@
 import { NextRequest, NextResponse } from "next/server";
 import { TableName } from "@/services/db/schema";
 import { genericRepository } from "@/services/db/repositories/genericRepository";
+import { auth } from "@/services/auth";
 
 export async function DELETE(
   request: NextRequest,
   { params }: { params: { "table-name": TableName; id: string } }
 ) {
+  const session = await auth();
+  if (
+    params["table-name"] === "users" ||
+    !session ||
+    !session.user ||
+    session.user.role !== "Admin" ||
+    session.user.email !== "shlomin1231@gmail.com"
+  ) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const recordId = parseInt(params.id, 10);
 
   if (isNaN(recordId)) {
@@ -32,6 +44,10 @@ export async function PUT(
   { params }: { params: { "table-name": TableName; id: string } }
 ) {
   try {
+    if (params["table-name"] === "users") {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const data = await request.json();
 
     if (!params.id) {
