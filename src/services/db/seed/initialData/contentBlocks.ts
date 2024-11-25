@@ -1,11 +1,13 @@
 export const initialBlocks = [
   {
+    site_id: 1,
     page_id: 1,
     block_type: "text",
     content: "ברוכים הבאים , חווה אורגנית",
     position: 1,
   },
   {
+    site_id: 1,
     page_id: 1,
     block_type: "gallery",
     content: JSON.stringify([

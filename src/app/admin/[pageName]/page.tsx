@@ -34,7 +34,7 @@ export default async function AdminEditPage({ params }: Params) {
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { created_at, ...rest } = page;
+    const { created_at, site_id, ...rest } = page;
     const pageFields = Object.keys(rest);
 
     return (
