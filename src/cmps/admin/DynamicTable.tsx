@@ -97,7 +97,7 @@ export const DynamicTable: React.FC<DynamicTableProps> = ({
         <table className="table-auto w-full border border-customNavy rounded-lg bg-white text-sm sm:text-base">
           <thead>
             <tr className="bg-customGreen text-white">
-              {headers.map((key) => (
+              {[...headers, "Edit"].map((key) => (
                 <th
                   key={key}
                   className="px-2 sm:px-4 py-3 border-b border-customNavy cursor-pointer"
@@ -119,15 +119,30 @@ export const DynamicTable: React.FC<DynamicTableProps> = ({
                     key={key}
                     className="px-2 sm:px-4 py-2 border-b border-gray-300 text-center truncate max-w-14"
                   >
-                    <Link href={`/admin/edit/${tableName}/${row.id}`}>
-                      {row[key] != null ? row[key].toString() : "N/A"}
-                    </Link>
+                    {row[key] != null ? row[key].toString() : "N/A"}
                   </td>
                 ))}
+                <td className="px-2 sm:px-4 py-2 border-b border-gray-300 text-center truncate max-w-14">
+                  <Link
+                    href={`/admin/edit/${tableName}/${row.id}`}
+                    className="bg-customGreen text-white rounded-md hover:bg-customGreen/90 p-1"
+                  >
+                    ערוך
+                  </Link>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+
+      <div className="flex justify-center mt-4">
+        <Link
+          className="px-4 py-2 bg-customGreen text-white rounded-md hover:bg-customGreen/90"
+          href={`/admin/add/${tableName}`}
+        >
+          הוסף רשומה חדשה
+        </Link>
       </div>
     </div>
   );
