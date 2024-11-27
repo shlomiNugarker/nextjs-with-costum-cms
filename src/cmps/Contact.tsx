@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { SubmitButton } from "@/cmps/submit-button";
 
 type ContactProps = {
@@ -14,10 +15,7 @@ export const Contact: React.FC<ContactProps> = ({
   return (
     <section className="p-5 w-full" id="contact">
       <div className="lg:py-16 px-6 mx-auto max-w-screen-md bg-white shadow-lg rounded-lg">
-        <h2 className="text-4xl font-bold text-center mb-3 text-customNavy">
-          {title}
-        </h2>
-        <p className="text-center text-gray-600 my-3 text-2xl">{description}</p>
+      
         <form action={action}>
           <div className="space-y-6">
             <div>

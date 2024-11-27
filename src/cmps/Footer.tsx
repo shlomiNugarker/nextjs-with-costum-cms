@@ -62,7 +62,6 @@ export const Footer = async ({ siteInfo, pageLinks }: any) => {
             >
               {street} {houseNumber}, <br />
               {city} <br />
-              ישראל
             </Link>
           </div>
         </div>

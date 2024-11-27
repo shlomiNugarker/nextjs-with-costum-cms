@@ -12,9 +12,9 @@ export const initialSiteInfo = [
     og_description: "תיאור עבור פייסבוק",
     og_url: "https://www.mywebsite.com",
     og_type: "website",
-    facebook_url: "https://www.facebook.com/haginabapardes",
-    instagram_url: "https://www.instagram.com/haginabapardes",
-    twitter_url: "https://www.twitter.com/haginabapardes",
-    youtube_url: "https://www.youtube.com/haginabapardes",
+    facebook_url: "https://www.facebook.com/",
+    instagram_url: "https://www.instagram.com/",
+    twitter_url: "https://www.twitter.com/",
+    youtube_url: "https://www.youtube.com/",
   },
 ];
