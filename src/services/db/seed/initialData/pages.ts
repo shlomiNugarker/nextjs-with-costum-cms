@@ -1,5 +1,6 @@
 export const initialPages = [
   {
+    site_id: 1,
     name: "home",
     title: "ברוכים הבאים לאתר שלנו",
     meta_title: "עמוד הבית - חווה אורגנית",
@@ -9,6 +10,7 @@ export const initialPages = [
     description: "עמוד הבית עם מידע על החווה ותמונות.",
   },
   {
+    site_id: 1,
     name: "weekly-produce",
     title: "תוצרת שבועית",
     meta_title: "תוצרת אורגנית טרייה - החווה שלנו",
@@ -18,14 +20,7 @@ export const initialPages = [
     description: "עמוד המציג את התוצרת השבועית הטרייה שלנו.",
   },
   {
-    name: "nursery",
-    title: "המשתלה שלנו",
-    meta_title: "משתלה - חווה אורגנית",
-    meta_description: "בואו להתרשם מהמבחר שלנו של צמחים ועשבים הגדלים במשתלה.",
-    meta_keywords: "משתלה, צמחים, תבלינים, פרחים",
-    description: "עמוד המשתלה עם מידע על הצמחים והעשבייה שלנו.",
-  },
-  {
+    site_id: 1,
     name: "delivery",
     title: "שירות משלוחים",
     meta_title: "משלוחים - החווה שלנו",
@@ -34,6 +29,7 @@ export const initialPages = [
     description: "מידע על שירות המשלוחים וזמני האספקה.",
   },
   {
+    site_id: 1,
     name: "contact",
     title: "צור קשר",
     meta_title: "צור קשר - החווה שלנו",
@@ -42,6 +38,7 @@ export const initialPages = [
     description: "עמוד יצירת קשר עם פרטי התקשרות.",
   },
   {
+    site_id: 1,
     name: "blog",
     title: "הבלוג",
     meta_title: "בלוג - החווה שלנו",
@@ -50,6 +47,7 @@ export const initialPages = [
     description: "עמוד הבלוג עם מאמרים ועדכונים מהחווה.",
   },
   {
+    site_id: 1,
     name: "about",
     title: "אודות",
     meta_title: "אודות - החווה שלנו",

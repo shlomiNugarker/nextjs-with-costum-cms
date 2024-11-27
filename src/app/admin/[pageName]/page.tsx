@@ -1,4 +1,3 @@
-import { AdminNurseryList } from "@/cmps/admin/AdminNurseryList";
 import { AdminPostsList } from "@/cmps/admin/AdminPostsList";
 import { AdminWeeklyList } from "@/cmps/admin/AdminWeeklyList";
 import { ContentBlockEditForm } from "@/cmps/admin/blocksEditors/ContentBlockEditForm";
@@ -52,7 +51,6 @@ export default async function AdminEditPage({ params }: Params) {
         )}
 
         {pageName === "blog" ? <AdminPostsList /> : null}
-        {pageName === "nursery" ? <AdminNurseryList /> : null}
         {pageName === "weekly-produce" ? <AdminWeeklyList /> : null}
       </div>
     );

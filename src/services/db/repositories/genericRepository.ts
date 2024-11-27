@@ -1,7 +1,9 @@
 import { connectToDatabase } from "../../../config/database.config";
-import { eq, InferSelectModel } from "drizzle-orm";
+import { eq, InferSelectModel, and } from "drizzle-orm";
 import { TableName, tables, TableSchemas } from "@/services/db/schema";
 import { AnyPgColumn } from "drizzle-orm/pg-core";
+
+const siteId = Number(process.env.NEXT_PUBLIC_POSTGRES_SITE_ID!);
 
 export const genericRepository = {
   getAll: async <T extends TableName>(
@@ -10,7 +12,10 @@ export const genericRepository = {
     try {
       const db = await connectToDatabase();
       const table = tables[tableName];
-      const records = await db.select().from(table);
+      const records = await db
+        .select()
+        .from(table)
+        .where(eq(table.site_id, siteId));
       return records as TableSchemas[T][];
     } catch (error) {
       console.error(`Error fetching records from table ${tableName}:`, error);
@@ -32,7 +37,7 @@ export const genericRepository = {
       const records = await db
         .select()
         .from(table)
-        .where(eq(idColumn, id))
+        .where(and(eq(idColumn, id), eq(table.site_id, siteId)))
         .limit(1);
       return records.length ? (records[0] as TableSchemas[T]) : null;
     } catch (error) {
@@ -61,7 +66,7 @@ export const genericRepository = {
       const records = await db
         .select()
         .from(table)
-        .where(eq(column, value))
+        .where(and(eq(column, value), eq(table.site_id, siteId)))
         .limit(1);
       return records.length ? (records[0] as TableSchemas[T]) : null;
     } catch (error) {
@@ -86,7 +91,9 @@ export const genericRepository = {
         throw new Error(`No 'id' column found in table ${tableName}`);
       }
 
-      await db.delete(table).where(eq(idColumn, id));
+      await db
+        .delete(table)
+        .where(and(eq(idColumn, id), eq(table.site_id, siteId)));
       console.log(
         `Record with ID ${id} deleted successfully from table ${tableName}.`
       );
@@ -108,7 +115,7 @@ export const genericRepository = {
       const table = tables[tableName];
       const insertedRecord = await db
         .insert(table)
-        .values(newRecord)
+        .values({ ...newRecord, site_id: siteId })
         .returning();
       return insertedRecord[0] as TableSchemas[T];
     } catch (error) {
@@ -134,7 +141,7 @@ export const genericRepository = {
       const updatedRecord = await db
         .update(table)
         .set(updatedFields)
-        .where(eq(idColumn, id))
+        .where(and(eq(idColumn, id), eq(table.site_id, siteId)))
         .returning();
       return updatedRecord[0] as TableSchemas[T];
     } catch (error) {
@@ -167,7 +174,7 @@ export const genericRepository = {
       const records = await db
         .select()
         .from(table)
-        .where(eq(column, columnValue));
+        .where(and(eq(column, columnValue), eq(table.site_id, siteId)));
 
       return records as TableSchemas[T][];
     } catch (error) {

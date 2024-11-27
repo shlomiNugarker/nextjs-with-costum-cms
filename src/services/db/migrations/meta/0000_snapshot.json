@@ -1,5 +1,5 @@
 {
-  "id": "d8d735cd-ab4c-40b0-925d-91fbfb14a54a",
+  "id": "d41012df-d6d5-4b3d-9ded-e7b13ecca450",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -12,6 +12,12 @@
           "name": "id",
           "type": "serial",
           "primaryKey": true,
+          "notNull": true
+        },
+        "site_id": {
+          "name": "site_id",
+          "type": "integer",
+          "primaryKey": false,
           "notNull": true
         },
         "title": {
@@ -47,7 +53,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "blogs_site_id_site_info_id_fk": {
+          "name": "blogs_site_id_site_info_id_fk",
+          "tableFrom": "blogs",
+          "tableTo": "site_info",
+          "columnsFrom": [
+            "site_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -62,6 +82,12 @@
           "name": "id",
           "type": "serial",
           "primaryKey": true,
+          "notNull": true
+        },
+        "site_id": {
+          "name": "site_id",
+          "type": "integer",
+          "primaryKey": false,
           "notNull": true
         },
         "name": {
@@ -91,7 +117,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "contact_messages_site_id_site_info_id_fk": {
+          "name": "contact_messages_site_id_site_info_id_fk",
+          "tableFrom": "contact_messages",
+          "tableTo": "site_info",
+          "columnsFrom": [
+            "site_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -106,6 +146,12 @@
           "name": "id",
           "type": "serial",
           "primaryKey": true,
+          "notNull": true
+        },
+        "site_id": {
+          "name": "site_id",
+          "type": "integer",
+          "primaryKey": false,
           "notNull": true
         },
         "page_id": {
@@ -143,6 +189,19 @@
       },
       "indexes": {},
       "foreignKeys": {
+        "content_blocks_site_id_site_info_id_fk": {
+          "name": "content_blocks_site_id_site_info_id_fk",
+          "tableFrom": "content_blocks",
+          "tableTo": "site_info",
+          "columnsFrom": [
+            "site_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
         "content_blocks_page_id_pages_id_fk": {
           "name": "content_blocks_page_id_pages_id_fk",
           "tableFrom": "content_blocks",
@@ -173,6 +232,12 @@
           "primaryKey": true,
           "notNull": true
         },
+        "site_id": {
+          "name": "site_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
         "email": {
           "name": "email",
           "type": "text",
@@ -188,7 +253,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "newsletter_subscribers_site_id_site_info_id_fk": {
+          "name": "newsletter_subscribers_site_id_site_info_id_fk",
+          "tableFrom": "newsletter_subscribers",
+          "tableTo": "site_info",
+          "columnsFrom": [
+            "site_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
         "newsletter_subscribers_email_unique": {
@@ -203,68 +282,6 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.nursery_products": {
-      "name": "nursery_products",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "serial",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
-          "type": "varchar(100)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "description": {
-          "name": "description",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "pot_size": {
-          "name": "pot_size",
-          "type": "varchar(50)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "category": {
-          "name": "category",
-          "type": "varchar(50)",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "price": {
-          "name": "price",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "image_url": {
-          "name": "image_url",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": false,
-          "default": "NOW()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
     "public.pages": {
       "name": "pages",
       "schema": "",
@@ -273,6 +290,12 @@
           "name": "id",
           "type": "serial",
           "primaryKey": true,
+          "notNull": true
+        },
+        "site_id": {
+          "name": "site_id",
+          "type": "integer",
+          "primaryKey": false,
           "notNull": true
         },
         "name": {
@@ -320,7 +343,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "pages_site_id_site_info_id_fk": {
+          "name": "pages_site_id_site_info_id_fk",
+          "tableFrom": "pages",
+          "tableTo": "site_info",
+          "columnsFrom": [
+            "site_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -460,6 +497,12 @@
           "primaryKey": true,
           "notNull": true
         },
+        "site_id": {
+          "name": "site_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
         "username": {
           "name": "username",
           "type": "varchar(64)",
@@ -500,7 +543,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "users_site_id_site_info_id_fk": {
+          "name": "users_site_id_site_info_id_fk",
+          "tableFrom": "users",
+          "tableTo": "site_info",
+          "columnsFrom": [
+            "site_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
         "users_email_unique": {
@@ -523,6 +580,12 @@
           "name": "id",
           "type": "serial",
           "primaryKey": true,
+          "notNull": true
+        },
+        "site_id": {
+          "name": "site_id",
+          "type": "integer",
+          "primaryKey": false,
           "notNull": true
         },
         "name": {
@@ -570,7 +633,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "weekly_products_site_id_site_info_id_fk": {
+          "name": "weekly_products_site_id_site_info_id_fk",
+          "tableFrom": "weekly_products",
+          "tableTo": "site_info",
+          "columnsFrom": [
+            "site_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},

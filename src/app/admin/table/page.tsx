@@ -9,7 +9,6 @@ const tables = [
     href: "/admin/table/newsletterSubscribers",
     label: "טבלת newsletter_subscribers",
   },
-  { href: "/admin/table/nurseryProductsTable", label: "טבלת nursery_products" },
   { href: "/admin/table/weeklyProductsTable", label: "טבלת weekly_products" },
 ];
 

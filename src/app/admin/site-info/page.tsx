@@ -1,16 +1,16 @@
 import { GenericEditForm } from "@/cmps/admin/GenericEditForm";
-import { genericRepository } from "@/services/db/repositories/genericRepository";
+import { siteInfoRepository } from "@/services/db/repositories/siteInfoRepository";
 
 export const revalidate = 5;
 
 const Page = async () => {
-  const siteInfo = await genericRepository.getAll("siteInfo");
+  const siteInfo = await siteInfoRepository.getSiteInfo();
 
-  if (!siteInfo[0]) {
+  if (!siteInfo) {
     return <div>לא נמצא רשומה</div>;
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { created_at, ...rest } = siteInfo[0];
+  const { created_at, ...rest } = siteInfo;
   const fields = Object.keys(rest);
 
   return (

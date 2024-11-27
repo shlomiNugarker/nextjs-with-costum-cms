@@ -5,6 +5,8 @@ import { connectToDatabase } from "../../../config/database.config";
 import { eq } from "drizzle-orm";
 import { users } from "../schema";
 
+const siteId = Number(process.env.NEXT_PUBLIC_POSTGRES_SITE_ID!);
+
 export async function getUser(email: string) {
   try {
     const db = await connectToDatabase();
@@ -37,9 +39,13 @@ export async function createUser(
     const salt = genSaltSync(10);
     const hash = hashSync(password, salt);
 
-    return await db
-      .insert(users)
-      .values({ email, password: hash, username, profile_image_url });
+    return await db.insert(users).values({
+      email,
+      password: hash,
+      username,
+      profile_image_url,
+      site_id: siteId,
+    });
   } catch (error) {
     console.error("Error creating user:", error);
   }
@@ -54,7 +60,8 @@ export async function getAllUsers() {
         username: users.username,
         email: users.email,
       })
-      .from(users);
+      .from(users)
+      .where(eq(users.site_id, siteId));
 
     return allUsers;
   } catch (error) {

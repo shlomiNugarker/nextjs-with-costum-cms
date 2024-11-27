@@ -1,14 +1,16 @@
 import { connectToDatabase } from "@/config/database.config";
-import { TableName, tables } from "../schema";
+import { siteInfo, TableName, tables } from "../schema";
 import { seedUsers } from "./initialData/users";
 import { initialBlogs } from "./initialData/blogs";
 import { initialBlocks } from "./initialData/contentBlocks";
 import { initialMessages } from "./initialData/contactMessages";
 import { initialSubscribers } from "./initialData/newsletter";
-import { initialNurseryProducts } from "./initialData/nurseryProducts";
 import { initialPages } from "./initialData/pages";
 import { initialSiteInfo } from "./initialData/siteInfo";
 import { initialWeeklyProducts } from "./initialData/weeklyProducts";
+import { eq } from "drizzle-orm";
+
+const siteId = Number(process.env.NEXT_PUBLIC_POSTGRES_SITE_ID!);
 
 export async function seedTable<T extends TableName>(
   tableName: T,
@@ -35,9 +37,36 @@ export async function seedTable<T extends TableName>(
   }
 }
 
+export async function seedSiteInfo() {
+  try {
+    console.log("Starting seeding for site info...");
+    const db = await connectToDatabase();
+
+    const existingRecords = await db
+      .select()
+      .from(siteInfo)
+      .where(eq(siteInfo.id, siteId));
+    if (existingRecords.length > 0) {
+      console.log(
+        `Site info already contains data for site ${siteId}. Skipping seeding.`
+      );
+      return;
+    }
+
+    const dataToInsert = initialSiteInfo.map((record) => ({ ...record }));
+    await db.insert(siteInfo).values(dataToInsert);
+    console.log("Site info seeded successfully!");
+  } catch (error) {
+    console.error("Error seeding site info:", error);
+  }
+}
+
 export async function runSeeds() {
   try {
     console.log("Starting the seeding process...");
+
+    await seedSiteInfo();
+    console.log("Site info seeded successfully.");
 
     await seedUsers();
     console.log("Users seeded successfully.");
@@ -51,14 +80,8 @@ export async function runSeeds() {
     await seedTable("newsletterSubscribers", initialSubscribers);
     console.log("Newsletter seeded successfully.");
 
-    await seedTable("nurseryProductsTable", initialNurseryProducts);
-    console.log("Nursery products seeded successfully.");
-
     await seedTable("pagesTable", initialPages);
     console.log("Pages seeded successfully.");
-
-    await seedTable("siteInfo", initialSiteInfo);
-    console.log("Site info seeded successfully.");
 
     await seedTable("weeklyProductsTable", initialWeeklyProducts);
     console.log("Weekly products seeded successfully.");

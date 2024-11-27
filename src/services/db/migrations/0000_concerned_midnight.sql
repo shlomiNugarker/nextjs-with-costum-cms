@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS "blogs" (
 	"id" serial PRIMARY KEY NOT NULL,
+	"site_id" integer NOT NULL,
 	"title" varchar(255) NOT NULL,
 	"description" text,
 	"content" text NOT NULL,
@@ -9,6 +10,7 @@ CREATE TABLE IF NOT EXISTS "blogs" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "contact_messages" (
 	"id" serial PRIMARY KEY NOT NULL,
+	"site_id" integer NOT NULL,
 	"name" varchar(255) NOT NULL,
 	"email" varchar(255) NOT NULL,
 	"message" text NOT NULL,
@@ -17,6 +19,7 @@ CREATE TABLE IF NOT EXISTS "contact_messages" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "content_blocks" (
 	"id" serial PRIMARY KEY NOT NULL,
+	"site_id" integer NOT NULL,
 	"page_id" integer NOT NULL,
 	"block_type" varchar(50) NOT NULL,
 	"content" text NOT NULL,
@@ -26,24 +29,15 @@ CREATE TABLE IF NOT EXISTS "content_blocks" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "newsletter_subscribers" (
 	"id" serial PRIMARY KEY NOT NULL,
+	"site_id" integer NOT NULL,
 	"email" text NOT NULL,
 	"created_at" timestamp DEFAULT now(),
 	CONSTRAINT "newsletter_subscribers_email_unique" UNIQUE("email")
 );
 --> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "nursery_products" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"name" varchar(100) NOT NULL,
-	"description" text,
-	"pot_size" varchar(50),
-	"category" varchar(50),
-	"price" integer NOT NULL,
-	"image_url" text,
-	"created_at" timestamp DEFAULT NOW()
-);
---> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "pages" (
 	"id" serial PRIMARY KEY NOT NULL,
+	"site_id" integer NOT NULL,
 	"name" varchar(255) NOT NULL,
 	"title" varchar(255),
 	"meta_title" varchar(255),
@@ -76,6 +70,7 @@ CREATE TABLE IF NOT EXISTS "site_info" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "users" (
 	"id" serial PRIMARY KEY NOT NULL,
+	"site_id" integer NOT NULL,
 	"username" varchar(64) NOT NULL,
 	"email" varchar(64) NOT NULL,
 	"password" varchar(64) NOT NULL,
@@ -87,6 +82,7 @@ CREATE TABLE IF NOT EXISTS "users" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "weekly_products" (
 	"id" serial PRIMARY KEY NOT NULL,
+	"site_id" integer NOT NULL,
 	"name" varchar(100) NOT NULL,
 	"description" text,
 	"weight" varchar(50),
@@ -97,7 +93,49 @@ CREATE TABLE IF NOT EXISTS "weekly_products" (
 );
 --> statement-breakpoint
 DO $$ BEGIN
+ ALTER TABLE "blogs" ADD CONSTRAINT "blogs_site_id_site_info_id_fk" FOREIGN KEY ("site_id") REFERENCES "public"."site_info"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "contact_messages" ADD CONSTRAINT "contact_messages_site_id_site_info_id_fk" FOREIGN KEY ("site_id") REFERENCES "public"."site_info"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "content_blocks" ADD CONSTRAINT "content_blocks_site_id_site_info_id_fk" FOREIGN KEY ("site_id") REFERENCES "public"."site_info"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
  ALTER TABLE "content_blocks" ADD CONSTRAINT "content_blocks_page_id_pages_id_fk" FOREIGN KEY ("page_id") REFERENCES "public"."pages"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "newsletter_subscribers" ADD CONSTRAINT "newsletter_subscribers_site_id_site_info_id_fk" FOREIGN KEY ("site_id") REFERENCES "public"."site_info"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "pages" ADD CONSTRAINT "pages_site_id_site_info_id_fk" FOREIGN KEY ("site_id") REFERENCES "public"."site_info"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "users" ADD CONSTRAINT "users_site_id_site_info_id_fk" FOREIGN KEY ("site_id") REFERENCES "public"."site_info"("id") ON DELETE no action ON UPDATE no action;
+EXCEPTION
+ WHEN duplicate_object THEN null;
+END $$;
+--> statement-breakpoint
+DO $$ BEGIN
+ ALTER TABLE "weekly_products" ADD CONSTRAINT "weekly_products_site_id_site_info_id_fk" FOREIGN KEY ("site_id") REFERENCES "public"."site_info"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

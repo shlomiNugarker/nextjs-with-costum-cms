@@ -4,19 +4,22 @@ import { users } from "../../schema";
 
 const initialUsers = [
   {
-    username: "Israel Israeli",
-    email: "israel@example.com",
-    password: "password123",
+    username: "Shlomi Nugarker",
+    site_id: 1,
+    email: "shlomin1231@gmail.com",
+    password: "854350",
     profile_image_url: "https://example.com/profile1.jpg",
   },
   {
     username: "Jane Doe",
+    site_id: 1,
     email: "jane.doe@example.com",
     password: "securepassword",
     profile_image_url: "https://example.com/profile2.jpg",
   },
   {
     username: "John Smith",
+    site_id: 1,
     email: "john.smith@example.com",
     password: "mypassword",
     profile_image_url: "https://example.com/profile3.jpg",

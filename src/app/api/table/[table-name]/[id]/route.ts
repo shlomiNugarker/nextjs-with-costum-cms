@@ -9,7 +9,6 @@ export async function DELETE(
 ) {
   const session = await auth();
   if (
-    params["table-name"] === "users" ||
     !session ||
     !session.user ||
     session.user.role !== "Admin" ||
@@ -44,9 +43,6 @@ export async function PUT(
   { params }: { params: { "table-name": TableName; id: string } }
 ) {
   try {
-    if (params["table-name"] === "users") {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
 
     const data = await request.json();
 

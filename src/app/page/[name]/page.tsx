@@ -1,7 +1,6 @@
 import { BlockRenderer } from "@/cmps/BlockRenderer";
 import { PostsList } from "@/cmps/blocks/PostsList";
 import { Contact } from "@/cmps/Contact";
-import { NurseryProductsList } from "@/cmps/NurseryProductsList";
 import { WeeklyProductsList } from "@/cmps/WeeklyProductsList";
 import { genericRepository } from "@/services/db/repositories/genericRepository";
 import React from "react";
@@ -46,8 +45,6 @@ export default async function page({ params }: Params) {
         </div>
 
         {name === "blog" ? <PostsList /> : null}
-
-        {name === "nursery" ? <NurseryProductsList /> : null}
 
         {name === "weekly-produce" ? <WeeklyProductsList /> : null}
 
