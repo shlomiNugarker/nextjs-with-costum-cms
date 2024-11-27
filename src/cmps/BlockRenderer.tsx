@@ -4,6 +4,7 @@ import { Img } from "./blocks/Img";
 import { TextArea } from "./blocks/TextArea";
 import { Text } from "./blocks/Text";
 import { Input } from "./blocks/Input";
+import { YouTubeVideo } from "./YouTubeVideo";
 
 export type Block = {
   id: number;
@@ -45,6 +46,9 @@ export const BlockRenderer = async ({ block }: { block: Block }) => {
       return <Img src={block.content} />;
     case "textarea":
       return <TextArea block={block} />;
+      case 'video':
+        return <YouTubeVideo  videoId="" />    
+     
     default:
       return null;
   }

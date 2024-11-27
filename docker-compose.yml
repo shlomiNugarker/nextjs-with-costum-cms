@@ -1,0 +1,30 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:14
+    container_name: haginabapardes_postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: haginabapardes_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  app:
+    build:
+      context: .
+    container_name: haginabapardes_app
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://user:password@postgres:5432/haginabapardes_db
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app
+    command: npm run dev
+
+volumes:
+  postgres_data:
