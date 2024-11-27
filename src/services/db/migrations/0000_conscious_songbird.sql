@@ -47,6 +47,18 @@ CREATE TABLE IF NOT EXISTS "pages" (
 	"created_at" timestamp DEFAULT NOW()
 );
 --> statement-breakpoint
+CREATE TABLE IF NOT EXISTS "products" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"site_id" integer NOT NULL,
+	"name" varchar(100) NOT NULL,
+	"description" text,
+	"weight" varchar(50),
+	"category" varchar(50),
+	"price" integer NOT NULL,
+	"image_url" text,
+	"created_at" timestamp DEFAULT NOW()
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "site_info" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"site_name" text NOT NULL,
@@ -78,18 +90,6 @@ CREATE TABLE IF NOT EXISTS "users" (
 	"role" varchar(20) DEFAULT 'User',
 	"created_at" varchar(255) DEFAULT 'now()',
 	CONSTRAINT "users_email_unique" UNIQUE("email")
-);
---> statement-breakpoint
-CREATE TABLE IF NOT EXISTS "weekly_products" (
-	"id" serial PRIMARY KEY NOT NULL,
-	"site_id" integer NOT NULL,
-	"name" varchar(100) NOT NULL,
-	"description" text,
-	"weight" varchar(50),
-	"category" varchar(50),
-	"price" integer NOT NULL,
-	"image_url" text,
-	"created_at" timestamp DEFAULT NOW()
 );
 --> statement-breakpoint
 DO $$ BEGIN
@@ -129,13 +129,13 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "users" ADD CONSTRAINT "users_site_id_site_info_id_fk" FOREIGN KEY ("site_id") REFERENCES "public"."site_info"("id") ON DELETE no action ON UPDATE no action;
+ ALTER TABLE "products" ADD CONSTRAINT "products_site_id_site_info_id_fk" FOREIGN KEY ("site_id") REFERENCES "public"."site_info"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;
 --> statement-breakpoint
 DO $$ BEGIN
- ALTER TABLE "weekly_products" ADD CONSTRAINT "weekly_products_site_id_site_info_id_fk" FOREIGN KEY ("site_id") REFERENCES "public"."site_info"("id") ON DELETE no action ON UPDATE no action;
+ ALTER TABLE "users" ADD CONSTRAINT "users_site_id_site_info_id_fk" FOREIGN KEY ("site_id") REFERENCES "public"."site_info"("id") ON DELETE no action ON UPDATE no action;
 EXCEPTION
  WHEN duplicate_object THEN null;
 END $$;

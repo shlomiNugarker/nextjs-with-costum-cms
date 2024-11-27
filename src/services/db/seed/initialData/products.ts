@@ -1,4 +1,4 @@
-export const initialWeeklyProducts = [
+export const initialProducts = [
   {
     site_id: 1,
     name: "מיקס עלי בטטה סגולה, אמרנט, תרד הודי אדום, ריג'לה ותרד ניו זילנדי",

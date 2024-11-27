@@ -30,7 +30,7 @@ export const siteInfo = pgTable("site_info", {
   created_at: timestamp("created_at").default(sql`NOW()`),
 });
 
-export const weeklyProductsTable = pgTable("weekly_products", {
+export const productsTable = pgTable("products", {
   id: serial("id").primaryKey(),
   site_id: integer("site_id").notNull().references(() => siteInfo.id),
   name: varchar("name", { length: 100 }).notNull(),
@@ -167,12 +167,10 @@ export const getEmptyRecord = (tableName: TableName): Record<string, any> => {
 export type TableName = keyof typeof tables;
 
 export const tables = {
-  weeklyProductsTable,
-  // users,
+  productsTable,
   blogsTable,
   pagesTable,
   contentBlocksTable,
-  // siteInfo,
   contactMessagesTable,
   newsletterSubscribers,
 };

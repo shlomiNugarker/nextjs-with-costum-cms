@@ -7,7 +7,7 @@ import { initialMessages } from "./initialData/contactMessages";
 import { initialSubscribers } from "./initialData/newsletter";
 import { initialPages } from "./initialData/pages";
 import { initialSiteInfo } from "./initialData/siteInfo";
-import { initialWeeklyProducts } from "./initialData/weeklyProducts";
+import { initialProducts } from "./initialData/products";
 import { eq } from "drizzle-orm";
 
 const siteId = Number(process.env.NEXT_PUBLIC_POSTGRES_SITE_ID!);
@@ -83,7 +83,7 @@ export async function runSeeds() {
     await seedTable("pagesTable", initialPages);
     console.log("Pages seeded successfully.");
 
-    await seedTable("weeklyProductsTable", initialWeeklyProducts);
+    await seedTable("productsTable", initialProducts);
     console.log("Weekly products seeded successfully.");
 
     await seedTable("contentBlocksTable", initialBlocks);
