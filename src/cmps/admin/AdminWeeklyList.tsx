@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ProductCard } from "../ProductCard";
 
 export const AdminWeeklyList = async () => {
-  const weeklyProducts = await genericRepository.getAll("weeklyProductsTable");
+  const weeklyProducts = await genericRepository.getAll("productsTable");
 
   return (
     <>
