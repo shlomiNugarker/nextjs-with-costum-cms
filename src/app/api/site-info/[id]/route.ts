@@ -3,17 +3,16 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { "table-name": string; id: string } }
+  { params }: { params: { id: string } }
 ) {
-  const table = params["table-name"];
-
   try {
     const records = await siteInfoRepository.getSiteInfo(params.id);
+
     return NextResponse.json(records);
   } catch (error) {
-    console.error(`Error fetching records from ${table}:`, error);
+    console.error(`Error fetching records from getSiteInfo:`, error);
     return NextResponse.json(
-      { error: `Failed to fetch records from ${table}` },
+      { error: `Failed to fetch records from getSiteInfo` },
       { status: 500 }
     );
   }
@@ -21,11 +20,11 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { "table-name": string; id: string } }
+  { params }: { params: { id: string } }
 ) {
-  const table = params["table-name"];
-
   try {
+    console.log({ params });
+
     const updatedData = await request.json();
 
     await siteInfoRepository.updateSiteInfo(updatedData);
@@ -34,9 +33,9 @@ export async function PUT(
       message: "Site information updated successfully",
     });
   } catch (error) {
-    console.error(`Error updating records in ${table}:`, error);
+    console.error(`Error updating records in updateSiteInfo:`, error);
     return NextResponse.json(
-      { error: `Failed to update records in ${table}` },
+      { error: `Failed to update records in updateSiteInfo` },
       { status: 500 }
     );
   }
