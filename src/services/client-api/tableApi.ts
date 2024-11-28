@@ -33,7 +33,6 @@ async function getEmptyRecord(tableName: string) {
   }
 }
 
-// קבלת רשומה לפי שדה מסוים
 async function getRecordByField(
   tableName: string,
   field: string,
@@ -53,7 +52,6 @@ async function getRecordByField(
   }
 }
 
-// קבלת כל הרשומות בטבלה
 async function getAllRecords(tableName: string) {
   try {
     const response = await httpService.get(`/table/${tableName}`);
@@ -80,7 +78,6 @@ async function getAllRecordsWithFilter(
   }
 }
 
-// שמירת רשומה - יצירה או עדכון
 async function saveRecord(tableName: string, recordData: any) {
   const method = recordData.id ? "put" : "post";
   const url = recordData.id
@@ -95,7 +92,6 @@ async function saveRecord(tableName: string, recordData: any) {
   }
 }
 
-// מחיקת רשומה לפי ID
 async function deleteRecord(tableName: string, recordId: number) {
   try {
     const response = await httpService.delete(

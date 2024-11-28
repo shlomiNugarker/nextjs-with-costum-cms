@@ -1,5 +1,3 @@
-"use server";
-
 import { genSaltSync, hashSync } from "bcrypt-ts";
 import { connectToDatabase } from "../../../config/database.config";
 import { eq } from "drizzle-orm";
@@ -7,7 +5,9 @@ import { users } from "../schema";
 
 const siteId = Number(process.env.NEXT_PUBLIC_POSTGRES_SITE_ID!);
 
-export async function getUser(email: string) {
+export const userReposiotry = { getUser, createUser, getAllUsers };
+
+async function getUser(email: string) {
   try {
     const db = await connectToDatabase();
 
@@ -28,7 +28,7 @@ export async function getUser(email: string) {
   }
 }
 
-export async function createUser(
+async function createUser(
   email: string,
   password: string,
   username: string,
@@ -51,7 +51,7 @@ export async function createUser(
   }
 }
 
-export async function getAllUsers() {
+async function getAllUsers() {
   try {
     const db = await connectToDatabase();
 

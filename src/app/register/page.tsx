@@ -2,7 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { SubmitButton } from "@/cmps/submit-button";
 import { Form } from "@/cmps/Form";
-import { createUser, getUser } from "@/services/db/repositories/userRepository";
+import { userApiService } from "@/services/client-api/userApi";
 
 export default function Login() {
   async function register(formData: FormData) {
@@ -10,12 +10,12 @@ export default function Login() {
     const email = formData.get("email") as string;
     const username = formData.get("username") as string;
     const password = formData.get("password") as string;
-    const user = await getUser(email);
+    const user = await userApiService.getUser(email);
 
     if (user) {
       return "User already exists"; // TODO: Handle errors with useFormStatus
     } else {
-      await createUser(email, password, username);
+      await userApiService.createUser({ email, password, username });
       redirect("/login");
     }
   }
