@@ -3,6 +3,25 @@ import { TableName } from "@/services/db/schema";
 import { genericRepository } from "@/services/db/repositories/genericRepository";
 import { auth } from "@/services/auth";
 
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { "table-name": TableName; id: string } }
+) {
+  const table = params["table-name"];
+  const id = params.id;
+
+  try {
+    const records = await genericRepository.getById(table, Number(id));
+    return NextResponse.json(records);
+  } catch (error) {
+    console.error(`Error fetching records from ${table}:`, error);
+    return NextResponse.json(
+      { error: `Failed to fetch records from ${table}` },
+      { status: 500 }
+    );
+  }
+}
+
 export async function DELETE(
   request: NextRequest,
   { params }: { params: { "table-name": TableName; id: string } }
@@ -43,7 +62,6 @@ export async function PUT(
   { params }: { params: { "table-name": TableName; id: string } }
 ) {
   try {
-
     const data = await request.json();
 
     if (!params.id) {

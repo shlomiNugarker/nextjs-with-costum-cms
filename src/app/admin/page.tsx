@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { auth, signOut } from "@/services/auth";
-import { genericRepository } from "@/services/db/repositories/genericRepository";
-import { TableName } from "@/services/db/schema";
+import { tableApiService } from "@/services/client-api/tableApi";
+
 import Link from "next/link";
 
 export const revalidate = 5;
@@ -10,7 +10,7 @@ export default async function AdminPage() {
   try {
     const session = await auth();
 
-    const pages = await genericRepository.getAll("pagesTable" as TableName);
+    const pages: any = await tableApiService.getAllRecords("pagesTable");
 
     return (
       <div className="min-h-screen flex flex-col items-center justify-center space-y-6 text-customNavy">

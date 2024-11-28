@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Gallery } from "@/cmps/Gallery";
 import { HeroImg } from "@/cmps/HeroImg";
 import { YouTubeVideo } from "@/cmps/YouTubeVideo";
-import { genericRepository } from "@/services/db/repositories/genericRepository";
+import { tableApiService } from "@/services/client-api/tableApi";
 
 export const revalidate = 5;
 
 export default async function Home() {
   try {
-    const homePage = await genericRepository.getByField(
+    const homePage: any = await tableApiService.getRecordByField(
       "pagesTable",
       "name",
       "home"
@@ -17,15 +18,14 @@ export default async function Home() {
       return <div>דף הבית לא נמצא</div>;
     }
 
-    const contentBlocks = await genericRepository.getAllWithFilter(
+    const contentBlocks: any = await tableApiService.getAllRecordsWithFilter(
       "contentBlocksTable",
-      {
-        page_id: homePage.id,
-      }
+      "page_id",
+      homePage.id
     );
 
     const galleryImages = contentBlocks.find(
-      (block) => block.block_type === "gallery"
+      (block: any) => block.block_type === "gallery"
     )?.content;
 
     return (

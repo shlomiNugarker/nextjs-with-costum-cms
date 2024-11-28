@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { genericRepository } from "@/services/db/repositories/genericRepository";
+import { tableApiService } from "@/services/client-api/tableApi";
 import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 
@@ -14,7 +14,10 @@ export const revalidate = 5;
 
 export default async function Page({ params }: Params) {
   const { blogId } = params;
-  const post = await genericRepository.getById("blogsTable", Number(blogId));
+  const post: any = await tableApiService.getRecordById(
+    "blogsTable",
+    Number(blogId)
+  );
 
   if (!post) {
     return (

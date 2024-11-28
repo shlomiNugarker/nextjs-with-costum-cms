@@ -9,7 +9,7 @@ const tables = [
     href: "/admin/table/newsletterSubscribers",
     label: "טבלת newsletter_subscribers",
   },
-  { href: "/admin/table/weeklyProductsTable", label: "טבלת products" },
+  { href: "/admin/table/productsTable", label: "טבלת products" },
 ];
 
 export default async function AdminPage() {

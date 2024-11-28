@@ -5,11 +5,11 @@ import { Footer } from "@/cmps/Footer";
 import { Header } from "@/cmps/Header";
 import { WhatsAppButton } from "@/cmps/WhatsAppButton";
 import { initialize } from "@/services/db/initializeDatabase";
-import { genericRepository } from "@/services/db/repositories/genericRepository";
-import { siteInfoRepository } from "@/services/db/repositories/siteInfoRepository";
+import { tableApiService } from "@/services/client-api/tableApi";
+import { siteInfoApiService } from "@/services/client-api/siteInfoApi";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const siteInfo = await siteInfoRepository.getSiteInfo();
+  const siteInfo: any = await tableApiService.getRecordById("siteInfoTable", 1);
 
   return {
     title: siteInfo?.meta_title,
@@ -46,8 +46,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const siteInfo = await siteInfoRepository.getSiteInfo();
-  const pages = await genericRepository.getAll("pagesTable");
+  const siteInfo: any = await siteInfoApiService.getSiteInfo();
+  const pages: any = await tableApiService.getAllRecords("pagesTable");
+
   const menuItems = pages?.map((page: { name: string; title: any }) => ({
     href: "/" + page.name,
     label: page.title || page.name,

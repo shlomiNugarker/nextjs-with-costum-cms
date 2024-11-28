@@ -18,3 +18,24 @@ export async function GET(
     );
   }
 }
+
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { "table-name": string; id: string } }
+) {
+  const table = params["table-name"];
+
+  try {
+    const updatedData = await request.json();
+
+    await siteInfoRepository.updateSiteInfo(updatedData);
+
+    return NextResponse.json({ message: "Site information updated successfully" });
+  } catch (error) {
+    console.error(`Error updating records in ${table}:`, error);
+    return NextResponse.json(
+      { error: `Failed to update records in ${table}` },
+      { status: 500 }
+    );
+  }
+}

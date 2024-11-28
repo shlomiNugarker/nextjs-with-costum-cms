@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DynamicTable } from "@/cmps/admin/DynamicTable";
-import { genericRepository } from "@/services/db/repositories/genericRepository";
+import { tableApiService } from "@/services/client-api/tableApi";
 import { TableName } from "@/services/db/schema";
 
 export const revalidate = 5;
@@ -12,7 +13,7 @@ interface Params {
 
 const Page = async ({ params: { tableName } }: Params) => {
   try {
-    const data = await genericRepository.getAll(tableName);
+    const data: any = await tableApiService.getAllRecords(tableName);
 
     return (
       <div className="pb-12 px-4 max-w-screen-lg mx-auto min-h-[calc(100vh-70px)] justify-center items-center flex flex-col pt-5 text-customNavy">

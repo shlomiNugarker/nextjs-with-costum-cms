@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BlockRenderer } from "@/cmps/BlockRenderer";
 import { PostsList } from "@/cmps/blocks/PostsList";
 import { Contact } from "@/cmps/Contact";
 import { ProductsList } from "@/cmps/ProductsList";
+import { tableApiService } from "@/services/client-api/tableApi";
 import { genericRepository } from "@/services/db/repositories/genericRepository";
 import React from "react";
 
@@ -15,19 +17,25 @@ export const revalidate = 5;
 
 export default async function page({ params }: Params) {
   const { name } = params;
-  const page = await genericRepository.getByField("pagesTable", "name", name);
+  const page: any = await tableApiService.getRecordByField(
+    "pagesTable",
+    "name",
+    name
+  );
 
   if (!page) {
     return <div>דף לא נמצא</div>;
   }
 
-  const contentBlocks = await genericRepository.getAllWithFilter(
+  const contentBlocks: any = await tableApiService.getAllRecordsWithFilter(
     "contentBlocksTable",
-    { page_id: page.id }
+    "page_id",
+    page.id
   );
 
-  const sortedBlocks = contentBlocks.sort(
-    (a, b) => (a.position || 0) - (b.position || 0)
+  const sortedBlocks = contentBlocks?.sort(
+    (a: { position: any }, b: { position: any }) =>
+      (a.position || 0) - (b.position || 0)
   );
 
   return (
@@ -39,14 +47,14 @@ export default async function page({ params }: Params) {
         <p className="text-center text-gray-600 text-2xl">{page.description}</p>
 
         <div className="mt-8">
-          {sortedBlocks.map((block) => (
+          {sortedBlocks.map((block: any) => (
             <BlockRenderer key={block.id} block={block} />
           ))}
         </div>
 
         {name === "blog" ? <PostsList /> : null}
 
-        {name === "weekly-produce" ? <ProductsList /> : null}
+        {name === "products" ? <ProductsList /> : null}
 
         {name === "contact" ? (
           <Contact

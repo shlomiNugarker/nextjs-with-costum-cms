@@ -1,10 +1,11 @@
 import { GenericEditForm } from "@/cmps/admin/GenericEditForm";
-import { siteInfoRepository } from "@/services/db/repositories/siteInfoRepository";
+import { siteInfoApiService } from "@/services/client-api/siteInfoApi";
 
 export const revalidate = 5;
 
 const Page = async () => {
-  const siteInfo = await siteInfoRepository.getSiteInfo();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const siteInfo: any = await siteInfoApiService.getSiteInfo();
 
   if (!siteInfo) {
     return <div>לא נמצא רשומה</div>;

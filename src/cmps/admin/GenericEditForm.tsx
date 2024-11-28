@@ -61,7 +61,13 @@ export const GenericEditForm = ({
     e.preventDefault();
     setIsSaving(true);
     try {
-      const url = `/table/${tableName}${data.id ? `/${data.id}` : ""}`;
+      alert(tableName);
+      let url = `/table/${tableName}${data.id ? `/${data.id}` : ""}`;
+
+      if (tableName === "siteInfo") {
+        url = `site-info/${data.id}`;
+      }
+
       const method = data.id ? "put" : "post";
       await httpService[method](url, data);
       alert("השורה נשמרה בהצלחה");

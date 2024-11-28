@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AdminPostsList } from "@/cmps/admin/AdminPostsList";
 import { AdminWeeklyList } from "@/cmps/admin/AdminWeeklyList";
 import { ContentBlockEditForm } from "@/cmps/admin/blocksEditors/ContentBlockEditForm";
 import { GenericEditForm } from "@/cmps/admin/GenericEditForm";
-import { genericRepository } from "@/services/db/repositories/genericRepository";
+import {
+  tableApiService
+} from "@/services/client-api/tableApi";
 
 export const revalidate = 5;
 
@@ -16,16 +19,10 @@ export default async function AdminEditPage({ params }: Params) {
   try {
     const { pageName } = params;
 
-    const page = await genericRepository.getByField(
-      "pagesTable",
-      "name",
-      pageName
-    );
+    const page: any = await tableApiService.getRecordByField("pagesTable", "name", pageName);
 
-    const contentBlocks = page?.id
-      ? await genericRepository.getAllWithFilter("contentBlocksTable", {
-          page_id: page.id,
-        })
+    const contentBlocks: any = page?.id
+      ? await tableApiService.getAllRecordsWithFilter("contentBlocksTable", "page_id", page.id)
       : null;
 
     if (!page) {
