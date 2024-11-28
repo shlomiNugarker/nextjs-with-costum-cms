@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AdminPostsList } from "@/cmps/admin/AdminPostsList";
-import { AdminWeeklyList } from "@/cmps/admin/AdminWeeklyList";
+import { AdminProductsList } from "@/cmps/admin/AdminProductsList";
 import { ContentBlockEditForm } from "@/cmps/admin/blocksEditors/ContentBlockEditForm";
 import { GenericEditForm } from "@/cmps/admin/GenericEditForm";
 import {
@@ -48,7 +48,7 @@ export default async function AdminEditPage({ params }: Params) {
         )}
 
         {pageName === "blog" ? <AdminPostsList /> : null}
-        {pageName === "weekly-produce" ? <AdminWeeklyList /> : null}
+        {pageName === "weekly-produce" ? <AdminProductsList /> : null}
       </div>
     );
   } catch (error) {

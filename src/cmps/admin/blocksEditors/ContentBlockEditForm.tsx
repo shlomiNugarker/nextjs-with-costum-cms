@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useCallback, useEffect } from "react";
 import { uploadImageToCloudinary } from "@/services/client-api/clodinaryApi";
-import { updateContentBlock } from "@/services/client-api/contentBlockApi";
 import { TextAreaBlockEditor } from "./TextAreaBlockEditor";
 import { ListBlockEditor } from "./ListBlockEditor";
 import { safeJSONParse } from "@/services/utilService";
@@ -9,6 +8,7 @@ import { GalleryBlockEditor } from "./GalleryBlockEditor";
 import { FormBlockEditor } from "./FormBlockEditor";
 import { ImageBlockEditor } from "./ImageBlockEditor";
 import Link from "next/link";
+import { tableApiService } from "@/services/client-api/tableApi";
 
 type ContentBlock = {
   block_type: string;
@@ -111,8 +111,11 @@ export const ContentBlockEditForm: React.FC<{
           throw new Error("Invalid JSON format");
         }
 
-        await updateContentBlock(id, { content: block.content });
-
+        await tableApiService.saveRecord("contentBlocksTable", {
+          id: block.id,
+          content: block.content,
+        });
+        
         alert("בלוק התוכן עודכן בהצלחה");
       } catch (error) {
         console.error("Failed to save content block:", error);

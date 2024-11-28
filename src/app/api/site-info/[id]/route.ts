@@ -8,7 +8,7 @@ export async function GET(
   const table = params["table-name"];
 
   try {
-    const records = await siteInfoRepository.getSiteInfo();
+    const records = await siteInfoRepository.getSiteInfo(params.id);
     return NextResponse.json(records);
   } catch (error) {
     console.error(`Error fetching records from ${table}:`, error);
@@ -30,7 +30,9 @@ export async function PUT(
 
     await siteInfoRepository.updateSiteInfo(updatedData);
 
-    return NextResponse.json({ message: "Site information updated successfully" });
+    return NextResponse.json({
+      message: "Site information updated successfully",
+    });
   } catch (error) {
     console.error(`Error updating records in ${table}:`, error);
     return NextResponse.json(

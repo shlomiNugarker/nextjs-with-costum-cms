@@ -61,7 +61,6 @@ export const GenericEditForm = ({
     e.preventDefault();
     setIsSaving(true);
     try {
-      alert(tableName);
       let url = `/table/${tableName}${data.id ? `/${data.id}` : ""}`;
 
       if (tableName === "siteInfo") {

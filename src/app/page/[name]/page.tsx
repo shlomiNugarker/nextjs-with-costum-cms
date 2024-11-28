@@ -4,7 +4,6 @@ import { PostsList } from "@/cmps/blocks/PostsList";
 import { Contact } from "@/cmps/Contact";
 import { ProductsList } from "@/cmps/ProductsList";
 import { tableApiService } from "@/services/client-api/tableApi";
-import { genericRepository } from "@/services/db/repositories/genericRepository";
 import React from "react";
 
 interface Params {
@@ -62,12 +61,14 @@ export default async function page({ params }: Params) {
             description={page.description || "תיאור"}
             action={async (formData: FormData) => {
               "use server";
-              await genericRepository.addRecord("contactMessagesTable", {
-                name: formData.get("name") as string,
-                email: formData.get("email") as string,
-                message: formData.get("message") as string,
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              } as any);
+              console.log({ formData });
+
+              // await tableApiService.saveRecord("contactMessagesTable", {
+              //   name: formData.get("name") as string,
+              //   email: formData.get("email") as string,
+              //   message: formData.get("message") as string,
+              //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              // } as any);
             }}
           />
         ) : null}

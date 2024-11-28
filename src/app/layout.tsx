@@ -9,7 +9,7 @@ import { tableApiService } from "@/services/client-api/tableApi";
 import { siteInfoApiService } from "@/services/client-api/siteInfoApi";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const siteInfo: any = await tableApiService.getRecordById("siteInfoTable", 1);
+  const siteInfo: any = await siteInfoApiService.getSiteInfo();
 
   return {
     title: siteInfo?.meta_title,
@@ -57,13 +57,6 @@ export default async function RootLayout({
   return (
     <html lang="he">
       <body className={`antialiased pt-[70px]`}>
-        <div
-          className="h-screen bg-cover bg-center fixed inset-0 z-[-2] blur"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1495195129352-aeb325a55b65?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
-          }}
-        ></div>
         <Header menuItems={menuItems} siteName={siteInfo?.site_name || ""} />
         {children}
         <WhatsAppButton phone={siteInfo?.phone_number || ""} />

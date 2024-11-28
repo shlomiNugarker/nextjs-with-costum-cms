@@ -8,7 +8,7 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { Logo } from "./Logo";
-import { genericRepository } from "@/services/db/repositories/genericRepository";
+import { tableApiService } from "@/services/client-api/tableApi";
 
 export const Footer = async ({ siteInfo, pageLinks }: any) => {
   const [city, street, houseNumber] = (siteInfo?.address || "site,info")
@@ -91,13 +91,21 @@ export const Footer = async ({ siteInfo, pageLinks }: any) => {
             הרשמו לניוזלטר שלנו:
           </div>
           <Form
-            action={async (formData: FormData) => {
-              "use server";
-              const email = formData.get("email") as string;
-              await genericRepository.addRecord("newsletterSubscribers", {
-                email,
-              } as any);
-            }}
+        action={async (formData: FormData) => {
+          "use server";
+          const email = formData.get("email") as string;
+        
+          try {
+            await tableApiService.saveRecord("newsletterSubscribers", {
+              email,
+            } as any);
+        
+            alert("נרשמת בהצלחה לניוזלטר!");
+          } catch (error) {
+            console.error("Failed to add subscriber to newsletter:", error);
+            alert("שגיאה בהרשמה לניוזלטר. נסה שוב מאוחר יותר.");
+          }
+        }}
             className="flex flex-col mb-4"
           >
             <input

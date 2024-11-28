@@ -4,20 +4,20 @@ import { siteInfo } from "../schema";
 
 const siteId = Number(process.env.NEXT_PUBLIC_POSTGRES_SITE_ID!);
 
-export const siteInfoRepository = { getSiteInfo ,updateSiteInfo};
+export const siteInfoRepository = { getSiteInfo, updateSiteInfo };
 
-async function getSiteInfo() {
+async function getSiteInfo(id: string) {
   try {
     const db = await connectToDatabase();
 
     const record = await db
       .select()
       .from(siteInfo)
-      .where(eq(siteInfo.id, siteId));
+      .where(eq(siteInfo.id, Number(id) || siteId));
 
     return record[0];
   } catch (error) {
-    console.error("Error getting user:", error);
+    console.error("Error getting:", error);
   }
 }
 
@@ -26,10 +26,7 @@ async function updateSiteInfo(updatedData: any) {
   try {
     const db = await connectToDatabase();
 
-    await db
-      .update(siteInfo)
-      .set(updatedData)
-      .where(eq(siteInfo.id, siteId));
+    await db.update(siteInfo).set(updatedData).where(eq(siteInfo.id, siteId));
 
     console.log("Site information updated successfully");
   } catch (error) {
