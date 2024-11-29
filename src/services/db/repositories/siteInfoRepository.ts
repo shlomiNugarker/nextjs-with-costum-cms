@@ -1,6 +1,6 @@
 import { connectToDatabase } from "@/config/database.config";
 import { eq } from "drizzle-orm";
-import { siteInfo } from "../schema";
+import { siteInfoTable } from "../schema";
 
 export const siteInfoRepository = { getSiteInfo, updateSiteInfo };
 
@@ -10,8 +10,8 @@ async function getSiteInfo(id: string) {
 
     const record = await db
       .select()
-      .from(siteInfo)
-      .where(eq(siteInfo.id, Number(id)));
+      .from(siteInfoTable)
+      .where(eq(siteInfoTable.id, Number(id)));
 
     return record[0];
   } catch (error) {
@@ -30,9 +30,9 @@ async function updateSiteInfo(updatedData: any) {
     const db = await connectToDatabase();
 
     await db
-      .update(siteInfo)
+      .update(siteInfoTable)
       .set(updatedData)
-      .where(eq(siteInfo.id, updatedData.id));
+      .where(eq(siteInfoTable.id, updatedData.id));
 
     console.log("Site information updated successfully");
   } catch (error) {

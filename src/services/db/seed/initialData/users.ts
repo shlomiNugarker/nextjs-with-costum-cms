@@ -1,6 +1,9 @@
 import { connectToDatabase } from "@/config/database.config";
-import { genSaltSync, hashSync } from "bcrypt-ts";
-import { users } from "../../schema";
+import { genSalt, hash } from "bcrypt-ts";
+import { usersTable } from "../../schema";
+
+const default_image_url =
+  "https://images.unsplash.com/photo-1640960543409-dbe56ccc30e2?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
 const initialUsers = [
   {
@@ -8,21 +11,21 @@ const initialUsers = [
     site_id: 1,
     email: "shlomin1231@gmail.com",
     password: "854350",
-    profile_image_url: "https://example.com/profile1.jpg",
+    profile_image_url: default_image_url,
   },
   {
-    username: "Jane Doe",
+    username: "Netanel Debuskin",
     site_id: 1,
-    email: "jane.doe@example.com",
-    password: "securepassword",
-    profile_image_url: "https://example.com/profile2.jpg",
+    email: "nati@gmail.com",
+    password: "12345677",
+    profile_image_url: default_image_url,
   },
   {
     username: "John Smith",
     site_id: 1,
     email: "john.smith@example.com",
     password: "mypassword",
-    profile_image_url: "https://example.com/profile3.jpg",
+    profile_image_url: default_image_url,
   },
 ];
 
@@ -31,21 +34,21 @@ export async function seedUsers() {
     console.log("Seeding users...");
     const db = await connectToDatabase();
 
-    const existingUsers = await db.select().from(users);
+    const existingUsers = await db.select().from(usersTable);
 
     if (existingUsers.length === 0) {
       const usersWithHashedPasswords = await Promise.all(
         initialUsers.map(async (user) => {
-          const salt = genSaltSync(10);
-          const hash = hashSync(user.password, salt);
+          const salt = await genSalt(10); // שימוש אסינכרוני ב-genSalt
+          const hashPassword = await hash(user.password, salt);
           return {
             ...user,
-            password: hash,
+            password: hashPassword,
           };
         })
       );
 
-      await db.insert(users).values(usersWithHashedPasswords);
+      await db.insert(usersTable).values(usersWithHashedPasswords);
       console.log("Users seeded successfully!");
     } else {
       console.log("Users already exist. Skipping seeding.");

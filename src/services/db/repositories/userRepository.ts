@@ -1,7 +1,7 @@
 import { genSaltSync, hashSync } from "bcrypt-ts";
 import { connectToDatabase } from "../../../config/database.config";
 import { eq } from "drizzle-orm";
-import { users } from "../schema";
+import { usersTable } from "../schema";
 
 const siteId = Number(process.env.NEXT_PUBLIC_POSTGRES_SITE_ID!);
 
@@ -13,13 +13,13 @@ async function getUser(email: string) {
 
     const userArray = await db
       .select({
-        username: users.username,
-        email: users.email,
-        role: users.role,
-        password: users.password,
+        username: usersTable.username,
+        email: usersTable.email,
+        role: usersTable.role,
+        password: usersTable.password,
       })
-      .from(users)
-      .where(eq(users.email, email));
+      .from(usersTable)
+      .where(eq(usersTable.email, email));
 
     const { username, email: mail, role, password } = userArray[0];
     return { email: mail, role, username, password };
@@ -39,7 +39,7 @@ async function createUser(
     const salt = genSaltSync(10);
     const hash = hashSync(password, salt);
 
-    return await db.insert(users).values({
+    return await db.insert(usersTable).values({
       email,
       password: hash,
       username,
@@ -57,11 +57,11 @@ async function getAllUsers() {
 
     const allUsers = await db
       .select({
-        username: users.username,
-        email: users.email,
+        username: usersTable.username,
+        email: usersTable.email,
       })
-      .from(users)
-      .where(eq(users.site_id, siteId));
+      .from(usersTable)
+      .where(eq(usersTable.site_id, siteId));
 
     return allUsers;
   } catch (error) {

@@ -1,5 +1,5 @@
 import { connectToDatabase } from "@/config/database.config";
-import { siteInfo, TableName, tables } from "../schema";
+import { siteInfoTable, TableName, tables } from "../schema";
 import { seedUsers } from "./initialData/users";
 import { initialBlogs } from "./initialData/blogs";
 import { initialBlocks } from "./initialData/contentBlocks";
@@ -44,8 +44,8 @@ export async function seedSiteInfo() {
 
     const existingRecords = await db
       .select()
-      .from(siteInfo)
-      .where(eq(siteInfo.id, siteId));
+      .from(siteInfoTable)
+      .where(eq(siteInfoTable.id, siteId));
     if (existingRecords.length > 0) {
       console.log(
         `Site info already contains data for site ${siteId}. Skipping seeding.`
@@ -54,7 +54,7 @@ export async function seedSiteInfo() {
     }
 
     const dataToInsert = initialSiteInfo.map((record) => ({ ...record }));
-    await db.insert(siteInfo).values(dataToInsert);
+    await db.insert(siteInfoTable).values(dataToInsert);
     console.log("Site info seeded successfully!");
   } catch (error) {
     console.error("Error seeding site info:", error);
