@@ -5,9 +5,11 @@ export const siteInfoApiService = {
   saveSiteInfo,
 };
 
+const siteId = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1";
+
 async function getSiteInfo() {
   try {
-    const response = await httpService.get(`/site-info/` + process.env.NEXT_PUBLIC_POSTGRES_SITE_ID);
+    const response = await httpService.get(`/site-info/` + siteId);
     return response.data;
   } catch (error) {
     console.error("Error fetching site information:", error);

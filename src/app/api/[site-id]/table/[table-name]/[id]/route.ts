@@ -5,13 +5,16 @@ import { auth } from "@/services/auth";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { "table-name": TableName; id: string } }
+  {
+    params,
+  }: { params: { "site-id": string; "table-name": TableName; id: string } }
 ) {
   const table = params["table-name"];
   const id = params.id;
+  const siteId = params["site-id"];
 
   try {
-    const records = await genericRepository.getById(table, Number(id));
+    const records = await genericRepository.getById(siteId, table, Number(id));
     return NextResponse.json(records);
   } catch (error) {
     console.error(`Error fetching records from ${table}:`, error);
@@ -24,9 +27,12 @@ export async function GET(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { "table-name": TableName; id: string } }
+  {
+    params,
+  }: { params: { "site-id": string; "table-name": TableName; id: string } }
 ) {
   const session = await auth();
+  const siteId = params["site-id"];
   if (
     !session ||
     !session.user ||
@@ -43,7 +49,7 @@ export async function DELETE(
   }
 
   try {
-    await genericRepository.deleteById(params["table-name"], recordId);
+    await genericRepository.deleteById(siteId, params["table-name"], recordId);
     return NextResponse.json(
       { message: `Record deleted successfully from ${params["table-name"]}` },
       { status: 200 }
@@ -59,10 +65,13 @@ export async function DELETE(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { "table-name": TableName; id: string } }
+  {
+    params,
+  }: { params: { "site-id": string; "table-name": TableName; id: string } }
 ) {
   try {
     const data = await request.json();
+    const siteId = params["site-id"];
 
     if (!params.id) {
       return NextResponse.json(
@@ -72,6 +81,7 @@ export async function PUT(
     }
 
     await genericRepository.updateRecord(
+      siteId,
       params["table-name"],
       Number(params.id),
       data

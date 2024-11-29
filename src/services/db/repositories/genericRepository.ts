@@ -3,10 +3,9 @@ import { eq, InferSelectModel, and } from "drizzle-orm";
 import { TableName, tables, TableSchemas } from "@/services/db/schema";
 import { AnyPgColumn } from "drizzle-orm/pg-core";
 
-const siteId = Number(process.env.NEXT_PUBLIC_POSTGRES_SITE_ID!);
-
 export const genericRepository = {
   getAll: async <T extends TableName>(
+    siteId: string,
     tableName: T
   ): Promise<TableSchemas[T][]> => {
     try {
@@ -15,7 +14,7 @@ export const genericRepository = {
       const records = await db
         .select()
         .from(table)
-        .where(eq(table.site_id, siteId));
+        .where(eq(table.site_id, Number(siteId)));
       return records as TableSchemas[T][];
     } catch (error) {
       console.error(`Error fetching records from table ${tableName}:`, error);
@@ -24,6 +23,7 @@ export const genericRepository = {
   },
 
   getById: async <T extends TableName>(
+    siteId: string,
     tableName: T,
     id: number
   ): Promise<TableSchemas[T] | null> => {
@@ -37,7 +37,7 @@ export const genericRepository = {
       const records = await db
         .select()
         .from(table)
-        .where(and(eq(idColumn, id), eq(table.site_id, siteId)))
+        .where(and(eq(idColumn, id), eq(table.site_id, Number(siteId))))
         .limit(1);
       return records.length ? (records[0] as TableSchemas[T]) : null;
     } catch (error) {
@@ -50,6 +50,7 @@ export const genericRepository = {
   },
 
   getByField: async <T extends TableName>(
+    siteId: string,
     tableName: T,
     fieldName: string,
     value: unknown
@@ -66,7 +67,7 @@ export const genericRepository = {
       const records = await db
         .select()
         .from(table)
-        .where(and(eq(column, value), eq(table.site_id, siteId)))
+        .where(and(eq(column, value), eq(table.site_id, Number(siteId))))
         .limit(1);
       return records.length ? (records[0] as TableSchemas[T]) : null;
     } catch (error) {
@@ -79,6 +80,7 @@ export const genericRepository = {
   },
 
   deleteById: async <T extends TableName>(
+    siteId: string,
     tableName: T,
     id: number
   ): Promise<void> => {
@@ -93,7 +95,7 @@ export const genericRepository = {
 
       await db
         .delete(table)
-        .where(and(eq(idColumn, id), eq(table.site_id, siteId)));
+        .where(and(eq(idColumn, id), eq(table.site_id, Number(siteId))));
       console.log(
         `Record with ID ${id} deleted successfully from table ${tableName}.`
       );
@@ -107,6 +109,7 @@ export const genericRepository = {
   },
 
   addRecord: async <T extends TableName>(
+    siteId: string,
     tableName: T,
     newRecord: TableSchemas[T]
   ): Promise<TableSchemas[T]> => {
@@ -125,6 +128,7 @@ export const genericRepository = {
   },
 
   updateRecord: async <T extends TableName>(
+    siteId: string,
     tableName: T,
     id: number,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -141,7 +145,7 @@ export const genericRepository = {
       const updatedRecord = await db
         .update(table)
         .set(updatedFields)
-        .where(and(eq(idColumn, id), eq(table.site_id, siteId)))
+        .where(and(eq(idColumn, id), eq(table.site_id, Number(siteId))))
         .returning();
       return updatedRecord[0] as TableSchemas[T];
     } catch (error) {
@@ -154,6 +158,7 @@ export const genericRepository = {
   },
 
   getAllWithFilter: async <T extends TableName>(
+    siteId: string,
     tableName: T,
     filter: Partial<InferSelectModel<(typeof tables)[T]>>
   ): Promise<TableSchemas[T][]> => {
@@ -174,7 +179,7 @@ export const genericRepository = {
       const records = await db
         .select()
         .from(table)
-        .where(and(eq(column, columnValue), eq(table.site_id, siteId)));
+        .where(and(eq(column, columnValue), eq(table.site_id, Number(siteId))));
 
       return records as TableSchemas[T][];
     } catch (error) {

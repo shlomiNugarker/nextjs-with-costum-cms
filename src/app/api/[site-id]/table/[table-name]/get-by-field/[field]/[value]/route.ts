@@ -6,14 +6,23 @@ export async function GET(
   request: NextRequest,
   {
     params,
-  }: { params: { "table-name": TableName; field: string; value: string } }
+  }: {
+    params: {
+      "site-id": string;
+      "table-name": TableName;
+      field: string;
+      value: string;
+    };
+  }
 ) {
   const tableName = params["table-name"];
   const field = params.field;
   const value = params.value;
+  const siteId = params["site-id"];
 
   try {
     const records = await genericRepository.getByField(
+      siteId,
       tableName,
       field,
       value

@@ -1,6 +1,6 @@
 import httpService from "../httpService";
 
-const siteId = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID;
+const siteId = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || '1';
 
 export const userApiService = { getUser, createUser };
 
