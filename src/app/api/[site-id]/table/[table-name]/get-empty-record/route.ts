@@ -9,7 +9,7 @@ export async function GET(
   
 
   try {
-    const emptyRecord = await getEmptyRecord(tableName)
+    const emptyRecord =  getEmptyRecord(tableName)
     return NextResponse.json(emptyRecord);
   } catch (error) {
     console.error(`Error fetching records from ${tableName}:`, error);

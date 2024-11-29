@@ -11,12 +11,13 @@ export const tableApiService = {
   deleteRecord,
 };
 
-const siteId = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || '1';
+const siteId = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1";
 
 async function getRecordById(tableName: string, recordId: number) {
   try {
+    return null;
     const response = await httpService.get(
-     `/${siteId}/table/${tableName}/${recordId}`
+      `/${siteId}/table/${tableName}/${recordId}`
     );
     return response.data;
   } catch (error) {
@@ -27,6 +28,8 @@ async function getRecordById(tableName: string, recordId: number) {
 
 async function getEmptyRecord(tableName: string) {
   try {
+    return null;
+
     const response = await httpService.get(
       `/${siteId}/table/${tableName}/get-empty-record`
     );
@@ -43,6 +46,8 @@ async function getRecordByField(
   value: string | number
 ) {
   try {
+    return null;
+
     const response = await httpService.get(
       `/${siteId}/table/${tableName}/get-by-field/${field}/${value}`
     );
@@ -58,7 +63,9 @@ async function getRecordByField(
 
 async function getAllRecords(tableName: string) {
   try {
-    const response = await httpService.get( `/${siteId}/table/${tableName}`);
+    return null;
+
+    const response = await httpService.get(`/${siteId}/table/${tableName}`);
     return response.data;
   } catch (error) {
     console.error(`Failed to fetch records from ${tableName}`, error);
@@ -72,6 +79,8 @@ async function getAllRecordsWithFilter(
   value: string
 ) {
   try {
+    return null;
+
     const response = await httpService.get(
       siteId + `/table/${tableName}/get-all-with-filter/${field}/${value}`
     );
@@ -88,6 +97,8 @@ async function saveRecord(tableName: string, recordData: any) {
     ? siteId + `/table/${tableName}/${recordData.id}`
     : siteId + `/table/${tableName}`;
   try {
+    return null;
+
     const response = await httpService[method](url, recordData);
     return response.data;
   } catch (error) {
@@ -98,6 +109,8 @@ async function saveRecord(tableName: string, recordData: any) {
 
 async function deleteRecord(tableName: string, recordId: number) {
   try {
+    return null;
+
     const response = await httpService.delete(
       siteId + `/table/${tableName}/${recordId}`
     );

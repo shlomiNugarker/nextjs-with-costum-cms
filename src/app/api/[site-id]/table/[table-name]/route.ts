@@ -11,6 +11,7 @@ export async function GET(
 
   try {
     const records = await genericRepository.getAll(siteId, table);
+    
     return NextResponse.json(records);
   } catch (error) {
     console.error(`Error fetching records from ${table}:`, error);
