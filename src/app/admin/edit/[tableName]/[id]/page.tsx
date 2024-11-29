@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { GenericEditForm } from "@/cmps/admin/GenericEditForm";
-import { tableApiService } from "@/services/client-api/tableApi";
+// import { tableApiService } from "@/services/client-api/tableApi";
+import { genericRepository } from "@/services/db/repositories/genericRepository";
 import { TableName } from "@/services/db/schema";
 
 type PageProps<T extends TableName> = {
@@ -15,7 +16,12 @@ export const revalidate = 5;
 export default async function Page<T extends TableName>({
   params,
 }: PageProps<T>) {
-  const record = await tableApiService.getRecordById(
+  // const record = await tableApiService.getRecordById(
+  //   params.tableName,
+  //   Number(params.id)
+  // );
+  const record = await genericRepository.getById(
+    process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1",
     params.tableName,
     Number(params.id)
   );

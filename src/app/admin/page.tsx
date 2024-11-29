@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { auth, signOut } from "@/services/auth";
-import { tableApiService } from "@/services/client-api/tableApi";
+// import { tableApiService } from "@/services/client-api/tableApi";
+import { genericRepository } from "@/services/db/repositories/genericRepository";
 
 import Link from "next/link";
 
@@ -10,7 +11,11 @@ export default async function AdminPage() {
   try {
     const session = await auth();
 
-    const pages: any = await tableApiService.getAllRecords("pagesTable");
+    // const pages: any = await tableApiService.getAllRecords("pagesTable");
+    const pages: any = await genericRepository.getAll(
+      process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1",
+      "pagesTable"
+    );
 
     return (
       <div className="min-h-screen flex flex-col items-center justify-center space-y-6 text-customNavy">

@@ -1,11 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BlogCard } from "../BlogCard";
 import Link from "next/link";
-import { tableApiService } from "@/services/client-api/tableApi";
+// import { tableApiService } from "@/services/client-api/tableApi";
+import { genericRepository } from "@/services/db/repositories/genericRepository";
 
 export const AdminPostsList = async () => {
   try {
-    const posts: any = await tableApiService.getAllRecords("blogsTable");
+    // const posts: any = await tableApiService.getAllRecords("blogsTable");
+    const posts: any = await genericRepository.getAll(
+      process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1",
+      "blogsTable"
+    );
 
     return (
       <>

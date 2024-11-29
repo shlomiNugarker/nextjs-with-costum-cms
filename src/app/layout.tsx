@@ -5,11 +5,16 @@ import { Footer } from "@/cmps/Footer";
 import { Header } from "@/cmps/Header";
 import { WhatsAppButton } from "@/cmps/WhatsAppButton";
 import { initialize } from "@/services/db/initializeDatabase";
-import { tableApiService } from "@/services/client-api/tableApi";
-import { siteInfoApiService } from "@/services/client-api/siteInfoApi";
+// import { tableApiService } from "@/services/client-api/tableApi";
+// import { siteInfoApiService } from "@/services/client-api/siteInfoApi";
+import { genericRepository } from "@/services/db/repositories/genericRepository";
+import { siteInfoRepository } from "@/services/db/repositories/siteInfoRepository";
+
+const siteId = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const siteInfo: any = await siteInfoApiService.getSiteInfo();
+  // const siteInfo: any = await siteInfoApiService.getSiteInfo();
+  const siteInfo: any = await siteInfoRepository.getSiteInfo(siteId || "1");
 
   return {
     title: siteInfo?.meta_title,
@@ -46,8 +51,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const siteInfo: any = await siteInfoApiService.getSiteInfo();
-  const pages: any = await tableApiService.getAllRecords("pagesTable");
+  // const siteInfo: any = await siteInfoApiService.getSiteInfo();
+  const siteInfo: any = await siteInfoRepository.getSiteInfo(siteId || "1");
+  // const pages: any = await tableApiService.getAllRecords("pagesTable");
+  const pages: any = await genericRepository.getAll(
+    process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1",
+    "pagesTable"
+  );
 
   const menuItems = pages?.map((page: { name: string; title: any }) => ({
     href: "/" + page.name,

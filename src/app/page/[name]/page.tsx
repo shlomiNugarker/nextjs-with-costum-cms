@@ -3,7 +3,8 @@ import { BlockRenderer } from "@/cmps/BlockRenderer";
 import { PostsList } from "@/cmps/blocks/PostsList";
 import { Contact } from "@/cmps/Contact";
 import { ProductsList } from "@/cmps/ProductsList";
-import { tableApiService } from "@/services/client-api/tableApi";
+// import { tableApiService } from "@/services/client-api/tableApi";
+import { genericRepository } from "@/services/db/repositories/genericRepository";
 import React from "react";
 
 interface Params {
@@ -16,7 +17,13 @@ interface Params {
 
 export default async function page({ params }: Params) {
   const { name } = params;
-  const page: any = await tableApiService.getRecordByField(
+  // const page: any = await tableApiService.getRecordByField(
+  //   "pagesTable",
+  //   "name",
+  //   name
+  // );
+  const page: any = await genericRepository.getByField(
+    process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1",
     "pagesTable",
     "name",
     name
@@ -26,10 +33,15 @@ export default async function page({ params }: Params) {
     return <div>דף לא נמצא</div>;
   }
 
-  const contentBlocks: any = await tableApiService.getAllRecordsWithFilter(
+  // const contentBlocks: any = await tableApiService.getAllRecordsWithFilter(
+  //   "contentBlocksTable",
+  //   "page_id",
+  //   page.id
+  // );
+  const contentBlocks: any = await genericRepository.getAllWithFilter(
+    process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1",
     "contentBlocksTable",
-    "page_id",
-    page.id
+    { page_id: page.id }
   );
 
   const sortedBlocks = contentBlocks?.sort(

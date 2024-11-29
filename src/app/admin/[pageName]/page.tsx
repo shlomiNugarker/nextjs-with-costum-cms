@@ -3,9 +3,10 @@ import { AdminPostsList } from "@/cmps/admin/AdminPostsList";
 import { AdminProductsList } from "@/cmps/admin/AdminProductsList";
 import { ContentBlockEditForm } from "@/cmps/admin/blocksEditors/ContentBlockEditForm";
 import { GenericEditForm } from "@/cmps/admin/GenericEditForm";
-import {
-  tableApiService
-} from "@/services/client-api/tableApi";
+// import {
+//   tableApiService
+// } from "@/services/client-api/tableApi";
+import { genericRepository } from "@/services/db/repositories/genericRepository";
 
 export const revalidate = 5;
 
@@ -15,14 +16,27 @@ interface Params {
   };
 }
 
+const siteId = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1";
+
 export default async function AdminEditPage({ params }: Params) {
   try {
     const { pageName } = params;
 
-    const page: any = await tableApiService.getRecordByField("pagesTable", "name", pageName);
+    // const page: any = await tableApiService.getRecordByField("pagesTable", "name", pageName);
+    const page: any = await genericRepository.getByField(
+      siteId,
+      "pagesTable",
+      "name",
+      pageName
+    );
 
+    // const contentBlocks: any = page?.id
+    //   ? await tableApiService.getAllRecordsWithFilter("contentBlocksTable", "page_id", page.id)
+    //   : null;
     const contentBlocks: any = page?.id
-      ? await tableApiService.getAllRecordsWithFilter("contentBlocksTable", "page_id", page.id)
+      ? await genericRepository.getAllWithFilter(siteId, "contentBlocksTable", {
+          page_id: page.id,
+        })
       : null;
 
     if (!page) {

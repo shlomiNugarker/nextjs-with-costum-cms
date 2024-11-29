@@ -2,13 +2,20 @@
 import { Gallery } from "@/cmps/Gallery";
 import { HeroImg } from "@/cmps/HeroImg";
 import { YouTubeVideo } from "@/cmps/YouTubeVideo";
-import { tableApiService } from "@/services/client-api/tableApi";
+// import { tableApiService } from "@/services/client-api/tableApi";
+import { genericRepository } from "@/services/db/repositories/genericRepository";
 
 export const revalidate = 5;
 
 export default async function Home() {
   try {
-    const homePage: any = await tableApiService.getRecordByField(
+    // const homePage: any = await tableApiService.getRecordByField(
+    //   "pagesTable",
+    //   "name",
+    //   "home"
+    // );
+    const homePage: any = await genericRepository.getByField(
+      process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1",
       "pagesTable",
       "name",
       "home"
@@ -18,10 +25,15 @@ export default async function Home() {
       return <div>דף הבית לא נמצא</div>;
     }
 
-    const contentBlocks: any = await tableApiService.getAllRecordsWithFilter(
+    // const contentBlocks: any = await tableApiService.getAllRecordsWithFilter(
+    //   "contentBlocksTable",
+    //   "page_id",
+    //   homePage.id
+    // );
+    const contentBlocks: any = await genericRepository.getAllWithFilter(
+      process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1",
       "contentBlocksTable",
-      "page_id",
-      homePage.id
+      { page_id: homePage.id }
     );
 
     const galleryImages = contentBlocks.find(
