@@ -3,9 +3,10 @@
 import { useCallback, useState } from "react";
 import Image from "next/image";
 import { uploadImageToCloudinary } from "@/services/client-api/clodinaryApi";
-import httpService from "@/services/httpService";
 import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+import { tableApiService } from "@/services/client-api/tableApi";
+import { siteInfoApiService } from "@/services/client-api/siteInfoApi";
 
 const MarkdownEditor = dynamic(() => import("@uiw/react-markdown-editor"), {
   ssr: false,
@@ -61,14 +62,11 @@ export const GenericEditForm = ({
     e.preventDefault();
     setIsSaving(true);
     try {
-      let url = `/table/${tableName}${data.id ? `/${data.id}` : ""}`;
-
       if (tableName === "siteInfo") {
-        url = `site-info/${data.id}`;
+        await siteInfoApiService.saveSiteInfo(data);
       }
 
-      const method = data.id ? "put" : "post";
-      await httpService[method](url, data);
+      await tableApiService.saveRecord(tableName, data);
       alert("השורה נשמרה בהצלחה");
     } catch (err) {
       console.error("Error saving row", err);
@@ -85,7 +83,7 @@ export const GenericEditForm = ({
     if (!confirmDelete) return;
 
     try {
-      await httpService.delete(`/table/${tableName}/${data.id}`);
+      await tableApiService.deleteRecord(tableName, data.id);
       alert("השורה נמחקה בהצלחה");
       router.push("/admin");
     } catch (err) {
