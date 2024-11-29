@@ -8,7 +8,10 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { Logo } from "./Logo";
-import { tableApiService } from "@/services/client-api/tableApi";
+// import { tableApiService } from "@/services/client-api/tableApi";
+import { genericRepository } from "@/services/db/repositories/genericRepository";
+
+const SITE_ID = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1";
 
 export const Footer = async ({ siteInfo, pageLinks }: any) => {
   const [city, street, houseNumber] = (siteInfo?.address || "site,info")
@@ -91,21 +94,25 @@ export const Footer = async ({ siteInfo, pageLinks }: any) => {
             הרשמו לניוזלטר שלנו:
           </div>
           <Form
-        action={async (formData: FormData) => {
-          "use server";
-          const email = formData.get("email") as string;
-        
-          try {
-            await tableApiService.saveRecord("newsletterSubscribers", {
-              email,
-            } as any);
-        
-            alert("נרשמת בהצלחה לניוזלטר!");
-          } catch (error) {
-            console.error("Failed to add subscriber to newsletter:", error);
-            alert("שגיאה בהרשמה לניוזלטר. נסה שוב מאוחר יותר.");
-          }
-        }}
+            action={async (formData: FormData) => {
+              "use server";
+              const email = formData.get("email") as string;
+
+              try {
+                // await tableApiService.saveRecord("newsletterSubscribers", {
+                //   email,
+                // } as any);
+                await genericRepository.addRecord(
+                  SITE_ID,
+                  "newsletterSubscribers",
+                  {
+                    email,
+                  }
+                );
+              } catch (error) {
+                console.error("Failed to add subscriber to newsletter:", error);
+              }
+            }}
             className="flex flex-col mb-4"
           >
             <input

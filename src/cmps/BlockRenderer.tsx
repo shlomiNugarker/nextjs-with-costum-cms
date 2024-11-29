@@ -46,9 +46,9 @@ export const BlockRenderer = async ({ block }: { block: Block }) => {
       return <Img src={block.content} />;
     case "textarea":
       return <TextArea block={block} />;
-      case 'video':
-        return <YouTubeVideo  videoId="" />    
-     
+    case "video":
+      return <YouTubeVideo videoId={block.content} />;
+
     default:
       return null;
   }
