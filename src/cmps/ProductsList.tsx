@@ -1,11 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { ProductCard } from "./ProductCard";
-import { tableApiService } from "@/services/client-api/tableApi";
+// import { tableApiService } from "@/services/client-api/tableApi";
+import { genericRepository } from "@/services/db/repositories/genericRepository";
 
 export const ProductsList = async () => {
   try {
-    const products: any = await tableApiService.getAllRecords("productsTable");
+    // const products: any = await tableApiService.getAllRecords("productsTable");
+    const products: any = await genericRepository.getAll(
+      process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1",
+      "productsTable"
+    );
 
     return (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">

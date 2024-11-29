@@ -2,11 +2,16 @@
 import React from "react";
 import { BlogCard } from "../BlogCard";
 import Link from "next/link";
-import { tableApiService } from "@/services/client-api/tableApi";
+// import { tableApiService } from "@/services/client-api/tableApi";
+import { genericRepository } from "@/services/db/repositories/genericRepository";
 
 export const PostsList = async () => {
   try {
-    const posts: any = await tableApiService.getAllRecords("blogsTable");
+    // const posts: any = await tableApiService.getAllRecords("blogsTable");
+    const posts: any = await genericRepository.getAll(
+      process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1",
+      "blogsTable"
+    );
 
     return (
       <div className="grid gap-4 justify-items-center sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 pb-10">
