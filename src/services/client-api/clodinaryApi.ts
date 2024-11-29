@@ -6,7 +6,7 @@ export async function uploadImageToCloudinary(file: File) {
 
   try {
     const response: { data: { url: string } } = await httpService.post(
-      "/api/cloudinary/upload",
+      "/cloudinary/upload",
       formData,
       {
         headers: {
@@ -24,7 +24,7 @@ export async function uploadImageToCloudinary(file: File) {
 export async function getAllImagesFromCloudinary(folder: string) {
   try {
     const response: { data: { images: string[] } } = await httpService.get(
-      `/api/cloudinary`,
+      `/cloudinary`,
       {
         params: { folder },
       }

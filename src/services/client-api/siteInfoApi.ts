@@ -9,7 +9,7 @@ const siteId = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1";
 
 async function getSiteInfo() {
   try {
-    const response = await httpService.get(`/api/site-info/` + siteId);
+    const response = await httpService.get(`/site-info/` + siteId);
     return response.data;
   } catch (error) {
     console.error("Error fetching site information:", error);
@@ -28,7 +28,7 @@ async function saveSiteInfo(info: {
 }) {
   try {
     const method = info.id ? "put" : "post";
-    const url = "/api/siteInfo" + (method === "put" ? `/${info.id}` : "");
+    const url = "/siteInfo" + (method === "put" ? `/${info.id}` : "");
 
     const response = await httpService[method](url, info);
     return response.data;

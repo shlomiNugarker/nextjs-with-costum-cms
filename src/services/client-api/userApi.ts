@@ -1,12 +1,12 @@
 import httpService from "../httpService";
 
-const siteId = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1";
+const siteId = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || '1';
 
 export const userApiService = { getUser, createUser };
 
 async function getUser(email: string) {
   try {
-    const response = await httpService.get(`/api/user/${email}`);
+    const response = await httpService.get(`/user/${email}`);
     return response.data;
   } catch (error) {
     console.error(`Failed to fetch record from users`, error);
@@ -25,7 +25,7 @@ async function createUser({
 }) {
   try {
     if (siteId) {
-      const response = await httpService.post(`/api/user/`, {
+      const response = await httpService.post(`/user/`, {
         email,
         password,
         username,
