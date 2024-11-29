@@ -5,18 +5,63 @@ import { Contact } from "@/cmps/Contact";
 import { ProductsList } from "@/cmps/ProductsList";
 // import { tableApiService } from "@/services/client-api/tableApi";
 import { genericRepository } from "@/services/db/repositories/genericRepository";
+import { Metadata } from "next";
 import React from "react";
 
 interface Params {
   params: {
-    name: string;
+    slug: string;
+  };
+}
+
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
+  const { slug } = params;
+  const page: any = await genericRepository.getByField(
+    process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1",
+    "pagesTable",
+    "slug",
+    slug
+  );
+
+  if (!page) {
+    return {
+      title: "דף לא נמצא",
+      description: "הדף שאתה מחפש לא קיים באתר."
+    };
+  }
+
+  return {
+    title: page.meta_title || page.title,
+    description: page.meta_description || page.description,
+    keywords: page.meta_keywords?.split(", ") || ["רכבים", "חדשות רכב", "ביקורות רכב", "תחזוקת רכב"],
+    openGraph: {
+      title: page.og_title || page.meta_title || page.title,
+      description: page.og_description || page.meta_description || page.description,
+      url: page.og_url || `https://my-site-data-api.vercel.app/${page.slug}`,
+      type: page.og_type || "website",
+      images: [
+        {
+          url: page.og_image || page.image_url || "https://my-site-data-api.vercel.app/default-og-image-car.jpg",
+          width: 800,
+          height: 600,
+          alt: page.og_title || page.title || "תמונה של עולם הרכב",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: "@carWorld",
+      title: page.meta_title || page.title,
+      description: page.og_description || page.meta_description || page.description,
+      images: [page.og_image || page.image_url || "https://example.com/default-twitter-image-car.jpg"],
+    },
   };
 }
 
 // export const revalidate = 60 * 60 * 60 * 24;
 
 export default async function page({ params }: Params) {
-  const { name } = params;
+  const { slug } = params;
   // const page: any = await tableApiService.getRecordByField(
   //   "pagesTable",
   //   "name",
@@ -25,8 +70,8 @@ export default async function page({ params }: Params) {
   const page: any = await genericRepository.getByField(
     process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1",
     "pagesTable",
-    "name",
-    name
+    "slug",
+    slug
   );
 
   if (!page) {
@@ -63,11 +108,11 @@ export default async function page({ params }: Params) {
           ))}
         </div>
 
-        {name === "blog" ? <PostsList /> : null}
+        {slug === "blog" ? <PostsList /> : null}
 
-        {name === "products" ? <ProductsList /> : null}
+        {slug === "products" ? <ProductsList /> : null}
 
-        {name === "contact" ? (
+        {slug === "contact" ? (
           <Contact
             title={page.title || "צור קשר"}
             description={page.description || "תיאור"}

@@ -21,8 +21,7 @@ export const initialBlocks = [
     page_id: 2,
     site_id: 1,
     block_type: "text",
-    content:
-      "ביקורות רכב: קראו את הדעות והסקירות שלנו על הדגמים החדשים ביותר.",
+    content: "ביקורות רכב: קראו את הדעות והסקירות שלנו על הדגמים החדשים ביותר.",
     position: 1,
   },
   {
@@ -30,7 +29,7 @@ export const initialBlocks = [
     site_id: 1,
     block_type: "image",
     content:
-      "https://images.unsplash.com/photo-1612463758848-f15415fc7b44?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=2070&auto=format&fit=crop",
     position: 2,
   },
   {

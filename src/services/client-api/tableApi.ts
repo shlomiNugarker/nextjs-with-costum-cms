@@ -11,12 +11,12 @@ export const tableApiService = {
   deleteRecord,
 };
 
-const siteId = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1";
+const SITE_ID = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1";
 
 async function getRecordById(tableName: string, recordId: number) {
   try {
     const response = await httpService.get(
-      `/${siteId}/table/${tableName}/${recordId}`
+      `/${SITE_ID}/table/${tableName}/${recordId}`
     );
     return response.data;
   } catch (error) {
@@ -28,7 +28,7 @@ async function getRecordById(tableName: string, recordId: number) {
 async function getEmptyRecord(tableName: string) {
   try {
     const response = await httpService.get(
-      `/${siteId}/table/${tableName}/get-empty-record`
+      `/${SITE_ID}/table/${tableName}/get-empty-record`
     );
     return response.data;
   } catch (error) {
@@ -44,7 +44,7 @@ async function getRecordByField(
 ) {
   try {
     const response = await httpService.get(
-      `/${siteId}/table/${tableName}/get-by-field/${field}/${value}`
+      `/${SITE_ID}/table/${tableName}/get-by-field/${field}/${value}`
     );
     return response.data;
   } catch (error) {
@@ -58,7 +58,7 @@ async function getRecordByField(
 
 async function getAllRecords(tableName: string) {
   try {
-    const response = await httpService.get(`/${siteId}/table/${tableName}`);
+    const response = await httpService.get(`/${SITE_ID}/table/${tableName}`);
     return response.data;
   } catch (error) {
     console.error(`Failed to fetch records from ${tableName}`, error);
@@ -73,7 +73,7 @@ async function getAllRecordsWithFilter(
 ) {
   try {
     const response = await httpService.get(
-      `/${siteId}/table/${tableName}/get-all-with-filter/${field}/${value}`
+      `/${SITE_ID}/table/${tableName}/get-all-with-filter/${field}/${value}`
     );
     return response.data;
   } catch (error) {
@@ -85,8 +85,8 @@ async function getAllRecordsWithFilter(
 async function saveRecord(tableName: string, recordData: any) {
   const method = recordData.id ? "put" : "post";
   const url = recordData.id
-    ? `/${siteId}/table/${tableName}/${recordData.id}`
-    : `/${siteId}/table/${tableName}`;
+    ? `/${SITE_ID}/table/${tableName}/${recordData.id}`
+    : `/${SITE_ID}/table/${tableName}`;
   try {
     const response = await httpService[method](url, recordData);
     return response.data;
@@ -99,7 +99,7 @@ async function saveRecord(tableName: string, recordData: any) {
 async function deleteRecord(tableName: string, recordId: number) {
   try {
     const response = await httpService.delete(
-      `/${siteId}/table/${tableName}/${recordId}`
+      `/${SITE_ID}/table/${tableName}/${recordId}`
     );
     return response.data;
   } catch (error) {

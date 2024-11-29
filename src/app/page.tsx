@@ -7,6 +7,9 @@ import { genericRepository } from "@/services/db/repositories/genericRepository"
 
 export const revalidate = 5;
 
+const SITE_ID = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1";
+
+
 export default async function Home() {
   try {
     // const homePage: any = await tableApiService.getRecordByField(
@@ -15,7 +18,7 @@ export default async function Home() {
     //   "home"
     // );
     const homePage: any = await genericRepository.getByField(
-      process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1",
+      SITE_ID,
       "pagesTable",
       "name",
       "home"
@@ -31,7 +34,7 @@ export default async function Home() {
     //   homePage.id
     // );
     const contentBlocks: any = await genericRepository.getAllWithFilter(
-      process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1",
+      SITE_ID,
       "contentBlocksTable",
       { page_id: homePage.id }
     );

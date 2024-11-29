@@ -5,11 +5,11 @@ export const siteInfoApiService = {
   saveSiteInfo,
 };
 
-const siteId = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1";
+const SITE_ID = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1";
 
 async function getSiteInfo() {
   try {
-    const response = await httpService.get(`/site-info/` + siteId);
+    const response = await httpService.get(`/site-info/` + SITE_ID);
     return response.data;
   } catch (error) {
     console.error("Error fetching site information:", error);
@@ -43,12 +43,3 @@ async function saveSiteInfo(info: {
   }
 }
 
-//  async function deleteSiteInfo(id: number) {
-//   try {
-//     const response = await httpService.delete(`/api/table/siteInfo/${id}`);
-//     console.log(`Site information with ID ${id} deleted successfully.`);
-//   } catch (error) {
-//     console.error(`Error deleting site information with ID ${id}:`, error);
-//     throw new Error("Unable to delete site information");
-//   }
-// }

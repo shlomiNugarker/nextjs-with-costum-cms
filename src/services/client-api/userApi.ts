@@ -1,6 +1,6 @@
 import httpService from "../httpService";
 
-const siteId = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || '1';
+const SITE_ID = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || '1';
 
 export const userApiService = { getUser, createUser };
 
@@ -24,12 +24,12 @@ async function createUser({
   username: string;
 }) {
   try {
-    if (siteId) {
+    if (SITE_ID) {
       const response = await httpService.post(`/user/`, {
         email,
         password,
         username,
-        site_id: siteId,
+        site_id: SITE_ID,
       });
       return response.data;
     }
