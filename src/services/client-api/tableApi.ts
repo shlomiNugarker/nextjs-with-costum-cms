@@ -73,7 +73,7 @@ async function getAllRecordsWithFilter(
 ) {
   try {
     const response = await httpService.get(
-      `api/${siteId}/table/${tableName}/get-all-with-filter/${field}/${value}`
+      `/${siteId}/table/${tableName}/get-all-with-filter/${field}/${value}`
     );
     return response.data;
   } catch (error) {
@@ -85,8 +85,8 @@ async function getAllRecordsWithFilter(
 async function saveRecord(tableName: string, recordData: any) {
   const method = recordData.id ? "put" : "post";
   const url = recordData.id
-    ? `api/${siteId}/table/${tableName}/${recordData.id}`
-    : `api/${siteId}/table/${tableName}`;
+    ? `/${siteId}/table/${tableName}/${recordData.id}`
+    : `/${siteId}/table/${tableName}`;
   try {
     const response = await httpService[method](url, recordData);
     return response.data;
@@ -99,7 +99,7 @@ async function saveRecord(tableName: string, recordData: any) {
 async function deleteRecord(tableName: string, recordId: number) {
   try {
     const response = await httpService.delete(
-      `api/${siteId}/table/${tableName}/${recordId}`
+      `/${siteId}/table/${tableName}/${recordId}`
     );
     return response.data;
   } catch (error) {
