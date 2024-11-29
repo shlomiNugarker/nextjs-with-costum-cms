@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BlockRenderer } from "@/cmps/BlockRenderer";
-import { PostsList } from "@/cmps/blocks/PostsList";
 import { Contact } from "@/cmps/Contact";
+import { PostsList } from "@/cmps/PostsList";
 import { ProductsList } from "@/cmps/ProductsList";
 // import { tableApiService } from "@/services/client-api/tableApi";
 import { genericRepository } from "@/services/db/repositories/genericRepository";

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
-import { BlogCard } from "../BlogCard";
 import Link from "next/link";
 // import { tableApiService } from "@/services/client-api/tableApi";
 import { genericRepository } from "@/services/db/repositories/genericRepository";
+import { BlogCard } from "./BlogCard";
 
 export const PostsList = async () => {
   try {
@@ -18,7 +18,7 @@ export const PostsList = async () => {
         {posts.map((post: any) => (
           <div
             key={post.id}
-            className="p-6 mb-9 bg-white rounded-lg shadow-lg border border-gray-200 transition-transform hover:scale-105 hover:shadow-xl max-w-[450px] animate-float"
+            className="p-6 mb-9 bg-white rounded-lg shadow-lg border border-gray-200 transition-transform hover:scale-105 hover:shadow-xl max-w-[450px]"
           >
             <BlogCard post={post} />
             <Link
