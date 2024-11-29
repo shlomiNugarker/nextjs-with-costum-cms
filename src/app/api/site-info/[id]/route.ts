@@ -18,13 +18,8 @@ export async function GET(
   }
 }
 
-export async function PUT(
-  request: NextRequest,
-  { params }: { params: { id: string } }
-) {
+export async function PUT(request: NextRequest) {
   try {
-    console.log({ params });
-
     const updatedData = await request.json();
 
     await siteInfoRepository.updateSiteInfo(updatedData);

@@ -6,11 +6,13 @@ import { siteInfoRepository } from "@/services/db/repositories/siteInfoRepositor
 
 export const revalidate = 5;
 
+const SITE_ID = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID!;
+
 const Page = async () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   // const siteInfo: any = await siteInfoApiService.getSiteInfo();
   const siteInfo: any = await siteInfoRepository.getSiteInfo(
-    process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1"
+    SITE_ID
   );
 
   if (!siteInfo) {

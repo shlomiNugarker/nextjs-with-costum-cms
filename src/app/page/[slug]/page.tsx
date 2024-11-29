@@ -8,6 +8,7 @@ import { genericRepository } from "@/services/db/repositories/genericRepository"
 import { Metadata } from "next";
 import React from "react";
 
+const SITE_ID = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID!;
 interface Params {
   params: {
     slug: string;
@@ -17,7 +18,7 @@ interface Params {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = params;
   const page: any = await genericRepository.getByField(
-    process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1",
+    SITE_ID,
     "pagesTable",
     "slug",
     slug
@@ -26,22 +27,31 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   if (!page) {
     return {
       title: "דף לא נמצא",
-      description: "הדף שאתה מחפש לא קיים באתר."
+      description: "הדף שאתה מחפש לא קיים באתר.",
     };
   }
 
   return {
     title: page.meta_title || page.title,
     description: page.meta_description || page.description,
-    keywords: page.meta_keywords?.split(", ") || ["רכבים", "חדשות רכב", "ביקורות רכב", "תחזוקת רכב"],
+    keywords: page.meta_keywords?.split(", ") || [
+      "רכבים",
+      "חדשות רכב",
+      "ביקורות רכב",
+      "תחזוקת רכב",
+    ],
     openGraph: {
       title: page.og_title || page.meta_title || page.title,
-      description: page.og_description || page.meta_description || page.description,
+      description:
+        page.og_description || page.meta_description || page.description,
       url: page.og_url || `https://my-site-data-api.vercel.app/${page.slug}`,
       type: page.og_type || "website",
       images: [
         {
-          url: page.og_image || page.image_url || "https://my-site-data-api.vercel.app/default-og-image-car.jpg",
+          url:
+            page.og_image ||
+            page.image_url ||
+            "https://my-site-data-api.vercel.app/default-og-image-car.jpg",
           width: 800,
           height: 600,
           alt: page.og_title || page.title || "תמונה של עולם הרכב",
@@ -52,13 +62,18 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       card: "summary_large_image",
       site: "@carWorld",
       title: page.meta_title || page.title,
-      description: page.og_description || page.meta_description || page.description,
-      images: [page.og_image || page.image_url || "https://example.com/default-twitter-image-car.jpg"],
+      description:
+        page.og_description || page.meta_description || page.description,
+      images: [
+        page.og_image ||
+          page.image_url ||
+          "https://example.com/default-twitter-image-car.jpg",
+      ],
     },
   };
 }
 
-// export const revalidate = 60 * 60 * 60 * 24;
+export const revalidate = 100;
 
 export default async function page({ params }: Params) {
   const { slug } = params;
@@ -68,7 +83,7 @@ export default async function page({ params }: Params) {
   //   name
   // );
   const page: any = await genericRepository.getByField(
-    process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1",
+    SITE_ID,
     "pagesTable",
     "slug",
     slug
@@ -84,7 +99,7 @@ export default async function page({ params }: Params) {
   //   page.id
   // );
   const contentBlocks: any = await genericRepository.getAllWithFilter(
-    process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1",
+    SITE_ID,
     "contentBlocksTable",
     { page_id: page.id }
   );

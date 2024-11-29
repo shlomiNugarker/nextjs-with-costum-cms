@@ -9,7 +9,7 @@ export default function Login() {
         <div className="flex flex-col items-center justify-center space-y-3 border-b px-6 py-8 text-center sm:px-12">
           <h3 className="text-2xl font-bold text-customNavy">התחברות</h3>
           <p className="text-sm text-gray-600">
-            השתמש באימייל ובסיסמה שלך כדי להיכנס{" "}
+            השתמש באימייל ובסיסמה שלך כדי להיכנס
           </p>
         </div>
         <Form

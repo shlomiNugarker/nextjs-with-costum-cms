@@ -5,6 +5,8 @@ import { genericRepository } from "@/services/db/repositories/genericRepository"
 
 import Link from "next/link";
 
+const SITE_ID = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID!;
+
 export const revalidate = 5;
 
 export default async function AdminPage() {
@@ -12,10 +14,7 @@ export default async function AdminPage() {
     const session = await auth();
 
     // const pages: any = await tableApiService.getAllRecords("pagesTable");
-    const pages: any = await genericRepository.getAll(
-      process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1",
-      "pagesTable"
-    );
+    const pages: any = await genericRepository.getAll(SITE_ID, "pagesTable");
 
     return (
       <div className="min-h-screen flex flex-col items-center justify-center space-y-6 text-customNavy">

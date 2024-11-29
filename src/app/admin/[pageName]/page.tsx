@@ -16,7 +16,7 @@ interface Params {
   };
 }
 
-const siteId = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1";
+const SITE_ID = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID!;
 
 export default async function AdminEditPage({ params }: Params) {
   try {
@@ -24,7 +24,7 @@ export default async function AdminEditPage({ params }: Params) {
 
     // const page: any = await tableApiService.getRecordByField("pagesTable", "name", pageName);
     const page: any = await genericRepository.getByField(
-      siteId,
+      SITE_ID,
       "pagesTable",
       "name",
       pageName
@@ -34,9 +34,13 @@ export default async function AdminEditPage({ params }: Params) {
     //   ? await tableApiService.getAllRecordsWithFilter("contentBlocksTable", "page_id", page.id)
     //   : null;
     const contentBlocks: any = page?.id
-      ? await genericRepository.getAllWithFilter(siteId, "contentBlocksTable", {
-          page_id: page.id,
-        })
+      ? await genericRepository.getAllWithFilter(
+          SITE_ID,
+          "contentBlocksTable",
+          {
+            page_id: page.id,
+          }
+        )
       : null;
 
     if (!page) {

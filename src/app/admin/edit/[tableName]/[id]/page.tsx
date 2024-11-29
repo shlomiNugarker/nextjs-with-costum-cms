@@ -4,6 +4,8 @@ import { GenericEditForm } from "@/cmps/admin/GenericEditForm";
 import { genericRepository } from "@/services/db/repositories/genericRepository";
 import { TableName } from "@/services/db/schema";
 
+const SITE_ID = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID!;
+
 type PageProps<T extends TableName> = {
   params: {
     tableName: T;
@@ -21,7 +23,7 @@ export default async function Page<T extends TableName>({
   //   Number(params.id)
   // );
   const record = await genericRepository.getById(
-    process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1",
+    SITE_ID,
     params.tableName,
     Number(params.id)
   );

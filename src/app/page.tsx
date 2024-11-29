@@ -7,8 +7,7 @@ import { genericRepository } from "@/services/db/repositories/genericRepository"
 
 export const revalidate = 5;
 
-const SITE_ID = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1";
-
+const SITE_ID = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID!;
 
 export default async function Home() {
   try {
@@ -20,7 +19,7 @@ export default async function Home() {
     const homePage: any = await genericRepository.getByField(
       SITE_ID,
       "pagesTable",
-      "name",
+      "slug",
       "home"
     );
 
@@ -51,11 +50,12 @@ export default async function Home() {
               {homePage.title}
             </h1>
             <br />
-            <p className="text-2xl">{homePage.description}</p>
+            <p className="text-2xl text-center">{homePage.description}</p>
           </div>
           <div className="mt-8 md:mt-0 md:ml-8 flex justify-center animate-fade-in">
             <HeroImg
               href={
+                homePage.hero_image_url ||
                 "https://images.unsplash.com/photo-1488459716781-31db52582fe9?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               }
             />

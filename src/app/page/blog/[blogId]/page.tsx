@@ -6,6 +6,8 @@ import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import { Metadata } from "next";
 
+const SITE_ID = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID!;
+
 interface Params {
   params: {
     slug: string;
@@ -18,7 +20,7 @@ export const revalidate = 5;
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { blogId } = params;
   const post: any = await genericRepository.getById(
-    process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1",
+    SITE_ID,
     "blogsTable",
     Number(blogId)
   );
@@ -79,7 +81,7 @@ export default async function Page({ params }: Params) {
   //   Number(blogId)
   // );
   const post: any = await genericRepository.getById(
-    process.env.NEXT_PUBLIC_POSTGRES_SITE_ID || "1",
+    SITE_ID,
     "blogsTable",
     Number(blogId)
   );
