@@ -63,8 +63,8 @@ export default async function AdminEditPage({ params }: Params) {
           <ContentBlockEditForm contentBlocks={contentBlocks || []} />
         )}
 
-        {page.name === "blog" ? <AdminPostsList /> : null}
-        {page.name === "weekly-produce" ? <AdminProductsList /> : null}
+        {page.slug === "blog" ? <AdminPostsList /> : null}
+        {page.slug === "products" ? <AdminProductsList /> : null}
       </div>
     );
   } catch (error) {

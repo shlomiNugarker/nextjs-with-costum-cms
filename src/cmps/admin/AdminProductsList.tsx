@@ -22,7 +22,7 @@ export const AdminProductsList = async () => {
           </Link>
         </div>
         <div className="pb-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
-          {products.map((product: any) => (
+          {products?.map((product: any) => (
             <div key={product.id} className="relative w-full max-w-xs">
               <ProductCard product={product} />
               <Link href={`/admin/edit/productsTable/${product.id}`}>

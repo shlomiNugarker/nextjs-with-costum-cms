@@ -64,9 +64,10 @@ export const GenericEditForm = ({
     try {
       if (tableName === "siteInfo") {
         await siteInfoApiService.saveSiteInfo(data);
+      } else {
+        await tableApiService.saveRecord(tableName, data);
       }
 
-      await tableApiService.saveRecord(tableName, data);
       alert("השורה נשמרה בהצלחה");
     } catch (err) {
       console.error("Error saving row", err);

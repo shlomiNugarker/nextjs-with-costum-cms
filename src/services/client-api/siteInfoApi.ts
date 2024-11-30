@@ -17,18 +17,11 @@ async function getSiteInfo() {
   }
 }
 
-async function saveSiteInfo(info: {
-  id?: number;
-  site_name: string;
-  description?: string;
-  address?: string;
-  contact_email?: string;
-  phone_number?: string;
-  opening_hours?: string;
-}) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function saveSiteInfo(info: any) {
   try {
     const method = info.id ? "put" : "post";
-    const url = "/siteInfo" + (method === "put" ? `/${info.id}` : "");
+    const url = "/site-info" + (method === "put" ? `/${info.id}` : "");
 
     const response = await httpService[method](url, info);
     return response.data;
@@ -42,4 +35,3 @@ async function saveSiteInfo(info: {
     );
   }
 }
-
