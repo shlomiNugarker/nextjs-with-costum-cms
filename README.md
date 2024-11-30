@@ -132,5 +132,5 @@ Feel free to contribute, open issues, or suggest improvements!
 
 ---
 
-Thank you for exploring the Haginabapardes project! 🌿
+Thank you for exploring the Next.js Application with Content Management System project! 🌿
 
