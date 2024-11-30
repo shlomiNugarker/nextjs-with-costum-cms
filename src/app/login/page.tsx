@@ -2,7 +2,7 @@ import { SubmitButton } from "@/cmps/submit-button";
 import { signIn } from "@/services/auth";
 import { Form } from "@/cmps/Form";
 
-export default function Login() {
+export default async function Login() {
   return (
     <div className="pb-12 px-4 max-w-screen-lg mx-auto  min-h-[calc(100vh-70px)] justify-center items-center flex flex-col pt-5">
       <div className="z-10 w-full max-w-md overflow-hidden rounded-2xl border border-gray-300 shadow-xl bg-white">
@@ -15,6 +15,7 @@ export default function Login() {
         <Form
           action={async (formData: FormData) => {
             "use server";
+
             await signIn("credentials", {
               redirectTo: "/admin",
               email: formData.get("email") as string,
