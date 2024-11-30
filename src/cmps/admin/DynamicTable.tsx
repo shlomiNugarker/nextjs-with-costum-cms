@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 interface DynamicTableProps {
   data: Record<string, unknown>[];
@@ -35,14 +35,18 @@ export const DynamicTable: React.FC<DynamicTableProps> = ({
     setSortConfig(null);
   };
 
-  const processedData = React.useMemo(() => {
-    const filtered = data.filter((row) => {
-      return Object.keys(filters).every(
-        (key) =>
-          filters[key] === "" ||
-          String(row[key]).toLowerCase().includes(filters[key].toLowerCase())
+  const processedData = useMemo(() => {
+    let filtered = data;
+
+    if (filters) {
+      filtered = data.filter((row) =>
+        Object.keys(filters).every(
+          (key) =>
+            filters[key] === "" ||
+            String(row[key]).toLowerCase().includes(filters[key].toLowerCase())
+        )
       );
-    });
+    }
 
     if (sortConfig) {
       filtered.sort((a, b) => {
@@ -64,6 +68,10 @@ export const DynamicTable: React.FC<DynamicTableProps> = ({
   }, [data, filters, sortConfig]);
 
   const headers = data.length > 0 ? Object.keys(data[0]) : [];
+
+  if (data.length === 0) {
+    return <div>אין נתונים להצגה.</div>;
+  }
 
   return (
     <div className="container mx-auto p-4 sm:p-6 bg-customPeach rounded-lg shadow-md text-center">
@@ -100,7 +108,9 @@ export const DynamicTable: React.FC<DynamicTableProps> = ({
               {[...headers, "Edit"].map((key) => (
                 <th
                   key={key}
-                  className="px-2 sm:px-4 py-3 border-b border-customNavy cursor-pointer"
+                  className={`px-2 sm:px-4 py-3 border-b border-customNavy cursor-pointer ${
+                    sortConfig?.key === key ? "font-bold" : ""
+                  }`}
                   onClick={() => handleSort(key)}
                 >
                   {sortConfig?.key === key && (
