@@ -1,12 +1,6 @@
-# 🌱 Haginabapardes - Organic Farm and Nursery Website
+#  Next.js Application with Content Management System
 
-Welcome to **Haginabapardes**, the website for our organic farm and nursery. Built with **Next.js**, **TypeScript**, and **PostgreSQL**, this project aims to provide visitors with detailed information about the farm, an extensive product catalog, and easy ways to get in touch. Below, you will find all the essential information needed to run and understand the features of this project.
-
-login page to the cms: https://haginabapardes.vercel.app/login.
-
-admin email for login: **israel@example.com**
-
-password: **password123**
+ a comprehensive platform designed to manage and promote our organic farm. Built with modern web technologies, it provides detailed product information, ordering options, and effective content management for administrators. Built with **Next.js**, **TypeScript**, and **PostgreSQL**, this project aims to provide visitors with detailed information about the farm, an extensive product catalog, and easy ways to get in touch. Below, you will find all the essential information needed to run and understand the features of this project.
 
 ## 🛠️ Overview
 
@@ -35,6 +29,8 @@ Haginabapardes-main/
 │   ├── services/            # Configuration, database setup, and services
 │   └── services/db/seed/    # Initial data (blogs, products, pages)
 ├── .eslintrc.json           # Linting configuration
+├── Dockerfile               # Docker configuration for containerization
+├── docker-compose.yml       # Docker Compose for multi-container setup
 ├── next.config.js           # Next.js configuration
 ├── tailwind.config.ts       # Tailwind configuration
 ├── tsconfig.json            # TypeScript configuration
@@ -59,6 +55,7 @@ The database uses **PostgreSQL** and includes migration and seeding scripts to h
 - **Database**: PostgreSQL for secure and efficient data management
 - **Styling**: Tailwind CSS for a modern, consistent look throughout the application
 - **Hosting**: Deployed on Vercel for smooth and hassle-free hosting
+- **Containerization**: Docker and Docker Compose for development and production consistency
 
 ## 🛠️ Installation Instructions
 
@@ -129,9 +126,11 @@ This project is licensed under the MIT License. For more information, see the [L
 
 - **Authentication**: Middleware is implemented to protect sensitive routes, especially admin-related actions.
 - **CMS Functionalities**: The admin panel allows dynamic management of pages like `Delivery` and `Contact Us`, providing easy content customization.
+- **Docker Support**: Docker and Docker Compose are included to facilitate development and ensure a consistent environment for deployment.
 
 Feel free to contribute, open issues, or suggest improvements!
 
 ---
 
 Thank you for exploring the Haginabapardes project! 🌿
+
