@@ -4,7 +4,7 @@
 
 ## 🛠️ Overview
 
-Haginabapardes is a dynamic web application designed for an organic farm and nursery. It allows users to explore a wide variety of organic products, get in touch with the farm, and even place orders for nursery items and weekly produce. The platform also includes an admin panel, enabling the farm administrators to manage products, blog posts, pages, and other dynamic content seamlessly.
+Dynamic web application designed for an organic farm and nursery. It allows users to explore a wide variety of organic products, get in touch with the farm, and even place orders for nursery items and weekly produce. The platform also includes an admin panel, enabling the farm administrators to manage products, blog posts, pages, and other dynamic content seamlessly.
 
 ## 🛍️ Key Features
 
@@ -20,7 +20,7 @@ Haginabapardes is a dynamic web application designed for an organic farm and nur
 The project is organized as follows:
 
 ```
-Haginabapardes-main/
+nextjs-with-costum-cms-main/
 ├── public/                  # Static assets (images, icons)
 ├── src/
 │   ├── app/                 # Main app pages and routes
@@ -64,8 +64,8 @@ To get started with the Haginabapardes project, follow these steps:
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/shlomiNugarker/Haginabapardes.git
-   cd Haginabapardes-main
+   git clone https://github.com/shlomiNugarker/nextjs-with-costum-cms.git
+   cd nextjs-with-custom-cms-main
    ```
 
 2. **Install dependencies**
