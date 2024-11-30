@@ -12,7 +12,7 @@ export const revalidate = 5;
 
 interface Params {
   params: {
-    pageName: string;
+    "slug-page": string;
   };
 }
 
@@ -20,14 +20,12 @@ const SITE_ID = process.env.NEXT_PUBLIC_POSTGRES_SITE_ID!;
 
 export default async function AdminEditPage({ params }: Params) {
   try {
-    const { pageName } = params;
-
     // const page: any = await tableApiService.getRecordByField("pagesTable", "name", pageName);
     const page: any = await genericRepository.getByField(
       SITE_ID,
       "pagesTable",
-      "name",
-      pageName
+      "slug",
+      params["slug-page"]
     );
 
     // const contentBlocks: any = page?.id
@@ -54,7 +52,7 @@ export default async function AdminEditPage({ params }: Params) {
     return (
       <div className="pb-12 px-4 max-w-screen-lg mx-auto min-h-[calc(100vh-70px)] justify-center items-center flex flex-col pt-5 text-customNavy">
         <h1 className="text-3xl font-semibold text-center mb-6 mt-6">
-          ערוך עמוד {pageName}
+          ערוך עמוד {params["slug-page"]}
         </h1>
         <GenericEditForm
           fields={pageFields}
@@ -65,8 +63,8 @@ export default async function AdminEditPage({ params }: Params) {
           <ContentBlockEditForm contentBlocks={contentBlocks || []} />
         )}
 
-        {pageName === "blog" ? <AdminPostsList /> : null}
-        {pageName === "weekly-produce" ? <AdminProductsList /> : null}
+        {page.name === "blog" ? <AdminPostsList /> : null}
+        {page.name === "weekly-produce" ? <AdminProductsList /> : null}
       </div>
     );
   } catch (error) {

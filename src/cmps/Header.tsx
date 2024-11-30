@@ -46,7 +46,7 @@ export const Header = ({ menuItems, siteName }: HeaderProps) => {
   }, []);
 
   return (
-    <header className="z-10 bg-white bg-opacity-80  transition-all  text-customNavy w-full fixed top-0 mx-auto flex flex-col px-4 py-4 lg:flex-row lg:items-center border-b border-b-customNavy">
+    <header className="z-10 bg-white transition-all  text-customNavy w-full fixed top-0 mx-auto flex flex-col px-4 py-4 lg:flex-row lg:items-center border-b border-b-customNavy">
       <Link
         href="/"
         className="flex items-center justify-center whitespace-nowrap text-2xl text-[40px] font-black text-customGreen"
