@@ -38,7 +38,7 @@ export default async function AdminPage() {
           <h3>עריכה של דפים עם בלוקים משוייכים:</h3>
 
           {pages?.map((page: any) => (
-            <Link key={page.id} href={`/admin/${page.name}`}>
+            <Link key={page.id} href={`/admin/${page.slug}`}>
               <button className="w-full py-2 px-6 bg-customGreen text-white font-bold rounded-lg hover:bg-opacity-90 transition mb-4">
                 עריכה והוספה לדף {page.name}
               </button>
