@@ -10,7 +10,7 @@ const initialUsers = [
     username: "Shlomi Nugarker",
     site_id: 1,
     email: "shlomin1231@gmail.com",
-    password: "854350",
+    password: "12345678",
     profile_image_url: default_image_url,
   },
   {

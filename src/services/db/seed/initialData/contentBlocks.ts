@@ -83,4 +83,22 @@ export const initialBlocks = [
     }),
     position: 2,
   },
+  {
+    page_id: 1,
+    site_id: 1,
+    block_type: "text",
+    content:
+      "ברוכים הבאים לעולם הרכב! כאן תוכלו למצוא את כל החדשות והעדכונים החשובים ביותר.",
+    position: 1,
+  },
+  {
+    page_id: 1,
+    site_id: 1,
+    block_type: "gallery",
+    content: JSON.stringify([
+      "https://images.unsplash.com/photo-1605733160314-4fc7dac4bb16",
+      "https://images.unsplash.com/photo-1617137968423-502b77a197a5",
+    ]),
+    position: 2,
+  },
 ];
